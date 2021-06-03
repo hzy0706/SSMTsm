@@ -7,6 +7,6 @@ import javax.annotation.Resource;
 
 @RestController
 public class StorageexpenditureController {
-    
+
 
 }
