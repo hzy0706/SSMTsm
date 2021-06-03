@@ -1,0 +1,18 @@
+POST http://localhost:8080/Training/addBook
+Content-Type: application/json
+
+{
+ "bookname":"钢琴初级教材",
+  "booksprice":60,
+  "bookjprice":45,
+  "safestock":20,
+  "press":"韬睿出版社",
+  "addname":"胡志远",
+  "courseId":6
+}
+
+###
+GET http://localhost:8080/Training/selectAllBook
+Accept: application/json
+
+###

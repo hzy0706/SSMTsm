@@ -1,0 +1,38 @@
+GET http://localhost:8080/Training/selectByFaqKey/13
+Accept: application/json
+
+###
+GET http://localhost:8080/Training/selectAllFaqs/1/4
+Accept: application/json
+
+###
+POST http://localhost:8080/Training/addFaq
+Content-Type: application/json
+
+{
+  "problem": "4号测试数据",
+  "answer": "4号测试数据",
+  "addname": "胡志远"
+}
+
+###
+###
+PUT http://localhost:8080/Training/updateFaq
+Content-Type: application/json
+
+{
+  "faqId": 39,
+  "problem": "测试数据",
+  "answer": "测试数据",
+  "updatename": "蔡锦康"
+}
+
+###
+###
+PUT http://localhost:8080/Training/deleteByFaqKey
+Content-Type: application/json
+
+{
+  "faqId": 39,
+  "deletename": "焦凡超"
+}

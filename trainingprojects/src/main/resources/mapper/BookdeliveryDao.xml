@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.BookdeliveryDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.BookdeliveryVo">
+    <id column="BookDelivery_Id" jdbcType="INTEGER" property="bookdeliveryId" />
+    <result column="SaleNumber" jdbcType="VARCHAR" property="salenumber" />
+    <result column="Total" jdbcType="DECIMAL" property="total" />
+    <result column="DeliveryTime" jdbcType="TIMESTAMP" property="deliverytime" />
+    <result column="DeliveryType" jdbcType="VARCHAR" property="deliverytype" />
+    <result column="Approval" jdbcType="INTEGER" property="approval" />
+    <result column="AppName" jdbcType="VARCHAR" property="appname" />
+    <result column="AppTime" jdbcType="TIMESTAMP" property="apptime" />
+    <result column="Revoke_AppName" jdbcType="VARCHAR" property="revokeAppname" />
+    <result column="Revoke_AppTime" jdbcType="TIMESTAMP" property="revokeApptime" />
+    <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    b.BookDelivery_Id, b.SaleNumber, b.Total, b.DeliveryTime, b.DeliveryType, b.Approval, b.AppName,
+    b.AppTime, b.Revoke_AppName, b.Revoke_AppTime, b.AddName, b.DeleteName, b.DeleteTime, b.TimeLiness,
+    b.Emp_Id
+  </sql>
+  <select id="selectByBookdeliveryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from bookdelivery b
+    inner join emp e on e.Emp_Id=b.Emp_Id
+    where BookDelivery_Id = #{bookdeliveryId,jdbcType=INTEGER} and TimeLiness=0
+  </select>
+  <select id="selectAllBookdeliverys" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from bookdelivery b
+    inner join emp e on e.Emp_Id=b.Emp_Id
+    where TimeLiness=0
+  </select>
+  <insert id="addBookdelivery" keyColumn="BookDelivery_Id" keyProperty="bookdeliveryId" parameterType="com.trkj.trainingprojects.vo.BookdeliveryVo" useGeneratedKeys="true">
+    insert into bookdelivery (SaleNumber, Total, DeliveryTime, 
+      DeliveryType, AppName,
+      AppTime, Revoke_AppName, Revoke_AppTime, 
+      AddName, DeleteName, DeleteTime, Emp_Id)
+    values (#{salenumber,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, #{deliverytime,jdbcType=TIMESTAMP}, 
+      #{deliverytype,jdbcType=VARCHAR},  #{appname,jdbcType=VARCHAR},
+      #{apptime,jdbcType=TIMESTAMP}, #{revokeAppname,jdbcType=VARCHAR}, #{revokeApptime,jdbcType=TIMESTAMP}, 
+      #{addname,jdbcType=VARCHAR}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
+      #{empId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByBookdeliveryKeySelective" parameterType="com.trkj.trainingprojects.vo.BookdeliveryVo">
+    update bookdelivery
+    <set>
+      <if test="salenumber != null">
+        SaleNumber = #{salenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        Total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverytime != null">
+        DeliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytype != null">
+        DeliveryType = #{deliverytype,jdbcType=VARCHAR},
+      </if>
+      <if test="approval != null">
+        Approval = #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="appname != null">
+        AppName = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="apptime != null">
+        AppTime = #{apptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revokeAppname != null">
+        Revoke_AppName = #{revokeAppname,jdbcType=VARCHAR},
+      </if>
+      <if test="revokeApptime != null">
+        Revoke_AppTime = #{revokeApptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addname != null">
+        AddName = #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        Emp_Id = #{empId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where BookDelivery_Id = #{bookdeliveryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByBookdeliveryKey" parameterType="com.trkj.trainingprojects.vo.BookdeliveryVo">
+    update bookdelivery
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where BookDelivery_Id = #{bookdeliveryId,jdbcType=INTEGER}
+  </update>
+</mapper>

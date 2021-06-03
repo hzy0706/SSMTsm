@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.BookDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.BookVo">
+    <id column="Book_Id" jdbcType="INTEGER" property="bookId" />
+    <result column="BookName" jdbcType="VARCHAR" property="bookname" />
+    <result column="DeliveryCount" jdbcType="INTEGER" property="deliverycount" />
+    <result column="BookSprice" jdbcType="DECIMAL" property="booksprice" />
+    <result column="BookJprice" jdbcType="DECIMAL" property="bookjprice" />
+    <result column="SafeStock" jdbcType="INTEGER" property="safestock" />
+    <result column="Press" jdbcType="VARCHAR" property="press" />
+    <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Storage" jdbcType="INTEGER" property="storage" />
+    <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
+    <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
+      <result column="Course_Id" jdbcType="VARCHAR" property="courseId" />
+      <result column="Course_Name" jdbcType="VARCHAR" property="courseName" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    b.Book_Id, b.BookName, b.DeliveryCount, b.BookSprice, b.BookJprice, b.SafeStock, b.Press, b.AddName,
+    b.AddTime, b.UpdateName, b.UpdateTime, b.DeleteName, b.DeleteTime, b.TimeLiness, b.`Storage`
+  </sql>
+  <select id="selectByBookKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,c.Course_Id,c.Course_Name
+    from book b
+    inner join course c on b.Course_Id=c.Course_Id
+    where b.Book_Id = #{bookId,jdbcType=INTEGER} and b.TimeLiness=0
+  </select>
+  <select id="selectAllBooks" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,c.Course_Id,c.Course_Name
+    from book b
+    inner join course c on b.Course_Id=c.Course_Id
+    where b.TimeLiness=0 order by b.AddTime desc
+  </select>
+  <delete id="deleteByBookKey" parameterType="java.lang.Integer">
+    delete from book
+    where Book_Id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Book_Id" keyProperty="bookId" parameterType="com.trkj.trainingprojects.entity.Book" useGeneratedKeys="true">
+    insert into book (BookName, BookSprice,BookJprice, SafeStock, Press, AddName,UpdateName,UpdateTime, DeleteName, DeleteTime, Course_Id
+      )
+    values (#{bookname,jdbcType=VARCHAR},  #{booksprice,jdbcType=DECIMAL},
+      #{bookjprice,jdbcType=DECIMAL}, #{safestock,jdbcType=INTEGER}, #{press,jdbcType=VARCHAR}, 
+      #{addname,jdbcType=VARCHAR}, #{updatename,jdbcType=VARCHAR},
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{courseId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="Book_Id" keyProperty="bookId" parameterType="com.trkj.trainingprojects.entity.Book" useGeneratedKeys="true">
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookname != null">
+        BookName,
+      </if>
+      <if test="deliverycount != null">
+        DeliveryCount,
+      </if>
+      <if test="booksprice != null">
+        BookSprice,
+      </if>
+      <if test="bookjprice != null">
+        BookJprice,
+      </if>
+      <if test="safestock != null">
+        SafeStock,
+      </if>
+      <if test="press != null">
+        Press,
+      </if>
+      <if test="addname != null">
+        AddName,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="updatename != null">
+        UpdateName,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="deletename != null">
+        DeleteName,
+      </if>
+      <if test="deletetime != null">
+        DeleteTime,
+      </if>
+      <if test="timeliness != null">
+        TimeLiness,
+      </if>
+      <if test="storage != null">
+        `Storage`,
+      </if>
+      <if test="courseId != null">
+        Course_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookname != null">
+        #{bookname,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverycount != null">
+        #{deliverycount,jdbcType=INTEGER},
+      </if>
+      <if test="booksprice != null">
+        #{booksprice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookjprice != null">
+        #{bookjprice,jdbcType=DECIMAL},
+      </if>
+      <if test="safestock != null">
+        #{safestock,jdbcType=INTEGER},
+      </if>
+      <if test="press != null">
+        #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="storage != null">
+        #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByBookKeySelective" parameterType="com.trkj.trainingprojects.entity.Book">
+    update book
+    <set>
+      <if test="bookname != null">
+        BookName = #{bookname,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverycount != null">
+        DeliveryCount = #{deliverycount,jdbcType=INTEGER},
+      </if>
+      <if test="booksprice != null">
+        BookSprice = #{booksprice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookjprice != null">
+        BookJprice = #{bookjprice,jdbcType=DECIMAL},
+      </if>
+      <if test="safestock != null">
+        SafeStock = #{safestock,jdbcType=INTEGER},
+      </if>
+      <if test="press != null">
+        Press = #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        AddName = #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="storage != null">
+        `Storage` = #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        Course_Id = #{courseId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Book_Id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByBookKey" parameterType="com.trkj.trainingprojects.entity.Book">
+    update book
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Book_Id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,16 @@
+GET http://localhost:8080/Training/selectByMemorandumKey/2
+Accept: application/json
+
+###
+POST http://localhost:8080/Training/addMemorandum
+Content-Type: application/json
+
+{
+  "memorandumTitle":"1234",
+  "memorandumContent":"456",
+  "memorandumType":"789",
+  "empId":9
+}
+
+
+###

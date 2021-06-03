@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.MemorandumDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.MemorandumVo">
+    <id column="Memorandum_Id" jdbcType="INTEGER" property="memorandumId" />
+    <result column="Memorandum_Title" jdbcType="VARCHAR" property="memorandumTitle" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="Memorandum_Content" jdbcType="VARCHAR" property="memorandumContent" />
+    <result column="Memorandum_Type" jdbcType="VARCHAR" property="memorandumType" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    m.Memorandum_Id, m.Memorandum_Title, m.AddTime, m.Memorandum_Content, m.Memorandum_Type, m.DeleteTime,
+    m.TimeLiness, m.Emp_Id
+  </sql>
+  <select id="selectByMemorandumKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from memorandum m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    where m.Memorandum_Id = #{memorandumId,jdbcType=INTEGER} and m.TimeLiness=0
+  </select>
+  <select id="selectByMemorandumEmpId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from memorandum m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    where m.Emp_Id = #{empId,jdbcType=INTEGER} and m.TimeLiness=0
+  </select>
+  <insert id="addMemorandum" keyColumn="Memorandum_Id" keyProperty="memorandumId" parameterType="com.trkj.trainingprojects.vo.MemorandumVo" useGeneratedKeys="true">
+    insert into memorandum (Memorandum_Title, Memorandum_Content,
+      Memorandum_Type, DeleteTime,
+      Emp_Id)
+    values (#{memorandumTitle,jdbcType=VARCHAR}, #{memorandumContent,jdbcType=VARCHAR},
+      #{memorandumType,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
+      #{empId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByMemorandumKeySelective" parameterType="com.trkj.trainingprojects.vo.MemorandumVo">
+    update memorandum
+    <set>
+      <if test="memorandumTitle != null">
+        Memorandum_Title = #{memorandumTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memorandumContent != null">
+        Memorandum_Content = #{memorandumContent,jdbcType=VARCHAR},
+      </if>
+      <if test="memorandumType != null">
+        Memorandum_Type = #{memorandumType,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        Emp_Id = #{empId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Memorandum_Id = #{memorandumId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByMemorandumKey" parameterType="com.trkj.trainingprojects.vo.MemorandumVo">
+    update memorandum
+    set
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Memorandum_Id = #{memorandumId,jdbcType=INTEGER}
+  </update>
+</mapper>
