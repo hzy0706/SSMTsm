@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 
 @RestController
 public class StorageexpenditureController {
-    @Resource
-    private StorageexpenditureService storageexpenditureService;
+    
 
 }
