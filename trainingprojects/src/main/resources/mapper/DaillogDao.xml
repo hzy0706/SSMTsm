@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.DaillogDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.DaillogVo">
+    <id column="DailLog_Id" jdbcType="INTEGER" property="daillogId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="PlanBeginTime" jdbcType="TIMESTAMP" property="planbegintime" />
+    <result column="PlanEndTime" jdbcType="TIMESTAMP" property="planendtime" />
+    <result column="BeginTime" jdbcType="TIMESTAMP" property="begintime" />
+    <result column="EndTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="Postponement" jdbcType="VARCHAR" property="postponement" />
+    <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    d.DailLog_Id, d.title, d.content, d.PlanBeginTime, d.PlanEndTime, d.BeginTime, d.EndTime, d.`State`,
+    d.Postponement, d.AddName, d.AddTime, d.UpdateName, d.UpdateTime, d.DeleteName, d.DeleteTime, d.TimeLiness,
+    d.Emp_Id
+  </sql>
+  <select id="selectByDaillogKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from daillog d
+    inner join emp e on e.Emp_Id=d.Emp_Id
+    where d.DailLog_Id = #{daillogId,jdbcType=INTEGER} and d.TimeLiness=0
+  </select>
+  <select id="selectByDaillogEmpId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from daillog d
+    inner join emp e on e.Emp_Id=d.Emp_Id
+    where d.Emp_Id = #{empId,jdbcType=INTEGER} and d.TimeLiness=0
+  </select>
+  <insert id="addDaillog" keyColumn="DailLog_Id" keyProperty="daillogId" parameterType="com.trkj.trainingprojects.vo.DaillogVo" useGeneratedKeys="true">
+    insert into daillog (title, content, PlanBeginTime, 
+      PlanEndTime, BeginTime, EndTime, 
+      Postponement, AddName,
+      UpdateName, UpdateTime,
+      DeleteName, DeleteTime,
+      Emp_Id)
+    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{planbegintime,jdbcType=TIMESTAMP}, 
+      #{planendtime,jdbcType=TIMESTAMP}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{postponement,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
+      #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
+      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
+      #{empId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByDaillogKeySelective" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
+    update daillog
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="planbegintime != null">
+        PlanBeginTime = #{planbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planendtime != null">
+        PlanEndTime = #{planendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begintime != null">
+        BeginTime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        EndTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        `State` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="postponement != null">
+        Postponement = #{postponement,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        AddName = #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        Emp_Id = #{empId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where DailLog_Id = #{daillogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByDaillogKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
+    update daillog
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where DailLog_Id = #{daillogId,jdbcType=INTEGER}
+  </update>
+</mapper>

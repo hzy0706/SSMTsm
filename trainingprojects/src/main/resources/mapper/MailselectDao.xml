@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.MailselectDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.MailselectVo">
+    <id column="MailSelect_Id" jdbcType="INTEGER" property="mailselectId" />
+    <result column="ReadTime" jdbcType="TIMESTAMP" property="readtime" />
+    <result column="ReadState" jdbcType="INTEGER" property="readstate" />
+    <result column="Mail_Id" jdbcType="INTEGER" property="mailId" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+    <association property="mailVo" javaType="com.trkj.trainingprojects.vo.MailVo">
+      <result column="Mile_Title" jdbcType="VARCHAR" property="mailTitle" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    m.MailSelect_Id, m.ReadTime, m.ReadState, m.Mail_Id, m.Emp_Id
+  </sql>
+  <select id="selectByMailselectKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,ma.Mail_Title,e.Emp_Name
+    from mailselect m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    inner join mail ma on ma.Mail_Id=m.Mail_Id
+    where m.MailSelect_Id = #{mailselectId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByMailselectMailId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,ma.Mail_Title,e.Emp_Name
+    from mailselect m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    inner join mail ma on ma.Mail_Id=m.Mail_Id
+    where m.Mail_Id = #{mailId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByMailselectEmpId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,ma.Mail_Title,e.Emp_Name
+    from mailselect m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    inner join mail ma on ma.Mail_Id=m.Mail_Id
+    where m.Emp_Id = #{empId,jdbcType=INTEGER}
+  </select>
+  <insert id="addMailselect" keyColumn="MailSelect_Id" keyProperty="mailselectId" parameterType="com.trkj.trainingprojects.vo.MailselectVo" useGeneratedKeys="true">
+    insert into mailselect (ReadTime, Mail_Id,
+      Emp_Id)
+    values (#{readtime,jdbcType=TIMESTAMP}, #{mailId,jdbcType=INTEGER},
+      #{empId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByMailselectKey" parameterType="com.trkj.trainingprojects.vo.MailselectVo">
+    update mailselect
+    set ReadTime = #{readtime,jdbcType=TIMESTAMP},
+      ReadState = #{readstate,jdbcType=INTEGER}
+    where MailSelect_Id = #{mailselectId,jdbcType=INTEGER}
+  </update>
+</mapper>
