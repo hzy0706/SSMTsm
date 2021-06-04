@@ -1,7 +1,8 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.PositionDao;
 import com.trkj.trainingprojects.entity.Position;
+import com.trkj.trainingprojects.service.PositionService;
 import com.trkj.trainingprojects.util.BeanCopyUtil;
 import com.trkj.trainingprojects.vo.PositionVo;
 import org.springframework.stereotype.Service;

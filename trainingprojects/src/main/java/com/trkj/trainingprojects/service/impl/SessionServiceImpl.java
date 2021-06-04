@@ -1,6 +1,7 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.SessionDao;
+import com.trkj.trainingprojects.service.SessionService;
 import com.trkj.trainingprojects.vo.SessionVo;
 import org.springframework.stereotype.Service;
 

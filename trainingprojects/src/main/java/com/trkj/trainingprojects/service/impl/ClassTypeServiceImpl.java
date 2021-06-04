@@ -1,7 +1,8 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.ClassTypeDao;
 import com.trkj.trainingprojects.entity.ClassType;
+import com.trkj.trainingprojects.service.ClassTypeService;
 import com.trkj.trainingprojects.vo.ClassTypeVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

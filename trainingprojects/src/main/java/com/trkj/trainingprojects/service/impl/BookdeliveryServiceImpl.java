@@ -1,6 +1,7 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.BookdeliveryDao;
+import com.trkj.trainingprojects.service.BookdeliveryService;
 import com.trkj.trainingprojects.vo.BookdeliveryVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

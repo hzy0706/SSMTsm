@@ -1,6 +1,7 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.DaillogDao;
+import com.trkj.trainingprojects.service.DaillogService;
 import com.trkj.trainingprojects.vo.DaillogVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
