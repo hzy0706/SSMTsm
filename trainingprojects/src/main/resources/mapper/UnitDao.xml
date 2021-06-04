@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.UnitDao">
+
+    <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.UnitVo">
+        <!--@Table unit-->
+        <result property="unitId" column="Unit_Id" jdbcType="INTEGER"/>
+        <result property="unitName" column="Unit_Name" jdbcType="VARCHAR"/>
+        <result property="unitLevel" column="Unit_Level" jdbcType="VARCHAR"/>
+        <result property="director" column="Director" jdbcType="VARCHAR"/>
+        <result property="unitAddress" column="Unit_Address" jdbcType="VARCHAR"/>
+        <result property="mailcode" column="MailCode" jdbcType="VARCHAR"/>
+        <result property="unitPhone" column="Unit_Phone" jdbcType="VARCHAR"/>
+        <result property="email" column="Email" jdbcType="VARCHAR"/>
+        <result property="profile" column="Profile" jdbcType="VARCHAR"/>
+        <result property="remarks" column="Remarks" jdbcType="VARCHAR"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="unittypeId" column="UnitType_Id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+          Unit_Id, Unit_Name, Unit_Level, Director, Unit_Address, MailCode, Unit_Phone, Email, Profile, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, UnitType_Id
+        from tr01904.unit
+        where Unit_Id = #{unitId} where timeliness=0
+    </select>
+
+    <!--查询所有-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+          Unit_Id, Unit_Name, Unit_Level, Director, Unit_Address, MailCode, Unit_Phone, Email, Profile, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, UnitType_Id
+        from tr01904.unit
+        where timeliness=0
+    </select>
+
+    <!--新增所有列-->
+    <insert id="addUnit" keyProperty="unitId" useGeneratedKeys="true" parameterType="com.trkj.trainingprojects.vo.UnitVo">
+        insert into tr01904.unit(Unit_Name, Unit_Level, Director, Unit_Address, MailCode, Unit_Phone, Email, Profile, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, UnitType_Id)
+        values (#{unitName}, #{unitLevel}, #{director}, #{unitAddress}, #{mailcode}, #{unitPhone}, #{email}, #{profile}, #{remarks}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{unittypeId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update" parameterType="com.trkj.trainingprojects.vo.UnitVo">
+        update tr01904.unit
+        <set>
+            <if test="unitName != null and unitName != ''">
+                Unit_Name = #{unitName},
+            </if>
+            <if test="unitLevel != null and unitLevel != ''">
+                Unit_Level = #{unitLevel},
+            </if>
+            <if test="director != null and director != ''">
+                Director = #{director},
+            </if>
+            <if test="unitAddress != null and unitAddress != ''">
+                Unit_Address = #{unitAddress},
+            </if>
+            <if test="mailcode != null and mailcode != ''">
+                MailCode = #{mailcode},
+            </if>
+            <if test="unitPhone != null and unitPhone != ''">
+                Unit_Phone = #{unitPhone},
+            </if>
+            <if test="email != null and email != ''">
+                Email = #{email},
+            </if>
+            <if test="profile != null and profile != ''">
+                Profile = #{profile},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                Remarks = #{remarks},
+            </if>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                AddTime = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="unittypeId != null">
+                UnitType_Id = #{unittypeId},
+            </if>
+        </set>
+        where Unit_Id = #{unitId}
+    </update>
+
+</mapper>

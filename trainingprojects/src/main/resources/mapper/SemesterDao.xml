@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.SemesterDao">
+
+    <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.Semester">
+        <!--@Table semester-->
+        <result property="semesterId" column="Semester_Id" jdbcType="INTEGER"/>
+        <result property="semesterName" column="Semester_Name" jdbcType="VARCHAR"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+          Semester_Id, Semester_Name, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness
+        from tr01904.semester
+        where Semester_Id = #{semesterId} and TimeLiness=0
+    </select>
+    <!-- 查询所有可用的-->
+    <select id="selectALL" resultMap="BaseResultMap">
+        select
+          Semester_Id, Semester_Name, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness
+        from tr01904.semester
+        where  TimeLiness=0;
+    </select>
+    <!--新增所有列-->
+    <insert id="addsemester" keyProperty="semesterId" useGeneratedKeys="true">
+        insert into tr01904.semester(Semester_Name, AddName, UpdateName, UpdateTime, DeleteName, DeleteTime)
+        values (#{semesterName}, #{addname}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tr01904.semester
+        <set>
+            <if test="semesterName != null and semesterName != ''">
+                Semester_Name = #{semesterName},
+            </if>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                AddTime = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+        </set>
+        where Semester_Id = #{semesterId}
+    </update>
+
+
+
+</mapper>

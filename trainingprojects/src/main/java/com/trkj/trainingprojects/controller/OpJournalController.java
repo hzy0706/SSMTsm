@@ -18,7 +18,6 @@ public class OpJournalController {
     @GetMapping("/selectAllOpjournal")
     public PageInfo<OpjournalVo> selectAllOpjournal(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
-        System.out.println(currentPage+"-----------------"+pageSize);
         List<OpjournalVo> list = opJournalService.selectAllOpjournal();
         PageInfo<OpjournalVo> pageInfo = new PageInfo<>(list);
         return  pageInfo;

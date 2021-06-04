@@ -1,7 +1,5 @@
 package com.trkj.trainingprojects.dao;
 
-import com.trkj.trainingprojects.entity.FaqQuestions;
-import com.trkj.trainingprojects.vo.FaqVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,34 +1,25 @@
 package com.trkj.trainingprojects.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
- * faq_questions
+ * suggest
  * @author 
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class FaqQuestions implements Serializable {
+public class Suggest implements Serializable {
     /**
-     * FAQ编号
+     * 意见箱编号
      */
-    private Integer faqId;
+    private Integer suggestId;
 
     /**
-     * 问题
+     * 意见箱名称
      */
-    private String problem;
-
-    /**
-     * 回答
-     */
-    private String answer;
+    private String suggestName;
 
     /**
      * 增加人
@@ -61,15 +52,14 @@ public class FaqQuestions implements Serializable {
     private Date deletetime;
 
     /**
-     * 点击量
-     */
-    private Integer clickcount;
-
-    /**
      * 时效性
      */
     private Integer timeliness;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 部门编号
+     */
+    private Integer deptId;
 
+    private static final long serialVersionUID = 1L;
 }
