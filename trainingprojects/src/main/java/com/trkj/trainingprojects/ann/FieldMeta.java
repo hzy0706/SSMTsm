@@ -1,4 +1,4 @@
-package com.trkj.trainingprojects.entity;
+package com.trkj.trainingprojects.ann;
 
 import java.lang.annotation.*;
 
