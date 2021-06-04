@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("SessionService")
+@Service
 public class SessionServiceImpl implements SessionService {
     @Resource
     SessionDao sessionDao;

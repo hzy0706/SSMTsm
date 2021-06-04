@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("SemesterService")
+@Service
 public class SemesterServiceImpl implements SemesterService {
     @Resource
     private SemesterDao semesterDao;
