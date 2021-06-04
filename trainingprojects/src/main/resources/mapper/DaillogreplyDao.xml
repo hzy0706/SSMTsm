@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.DaillogreplyDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.DaillogreplyVo">
+    <id column="DailLogReply_Id" jdbcType="INTEGER" property="daillogreplyId" />
+    <result column="ReplierName" jdbcType="VARCHAR" property="repliername" />
+    <result column="ReplierTime" jdbcType="TIMESTAMP" property="repliertime" />
+    <result column="ReplierContent" jdbcType="VARCHAR" property="repliercontent" />
+    <result column="DailLog_Id" jdbcType="INTEGER" property="daillogId" />
+    <association property="daillogVo" javaType="com.trkj.trainingprojects.vo.DaillogVo">
+      <result column="title" jdbcType="VARCHAR" property="title"></result>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    di.DailLogReply_Id, di.ReplierName, di.ReplierTime, di.ReplierContent, di.DailLog_Id
+  </sql>
+  <select id="selectByDaillogreplyKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />, d.title
+    from daillogreply di
+    inner join daillog d on d.DailLog_Id=di.DailLog_Id
+    where di.DailLogReply_Id = #{daillogreplyId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByDaillogreplyDaillogId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />, d.title
+    from daillogreply di
+    inner join daillog d on d.DailLog_Id=di.DailLog_Id
+    where di.DailLog_Id = #{daillogId,jdbcType=INTEGER}
+  </select>
+
+  <insert id="addDaillogreply" keyColumn="DailLogReply_Id" keyProperty="daillogreplyId" parameterType="com.trkj.trainingprojects.vo.DaillogreplyVo" useGeneratedKeys="true">
+    insert into daillogreply (ReplierName, ReplierTime, ReplierContent, 
+      DailLog_Id)
+    values (#{repliername,jdbcType=VARCHAR}, #{repliertime,jdbcType=TIMESTAMP}, #{repliercontent,jdbcType=VARCHAR}, 
+      #{daillogId,jdbcType=INTEGER})
+  </insert>
+</mapper>

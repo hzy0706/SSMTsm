@@ -1,0 +1,25 @@
+PUT http://localhost:8080/Training/deleteByMailKey
+Content-Type: application/json
+
+{
+  "mailId": 1,
+  "deletename": "胡志远",
+  "timeliness": 1
+}
+
+###
+GET http://localhost:8080/Training/selectByMailKey/1
+Accept: application/json
+
+###
+POST http://localhost:8080/Training/addMail
+Content-Type: application/json
+
+{
+  "empId": 1,
+  "mailTitle": "杀人行动",
+  "mailContent": "撒谎法国卡噶",
+  "isdraft": "1"
+}
+
+###

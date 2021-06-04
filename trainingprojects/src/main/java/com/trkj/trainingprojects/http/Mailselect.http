@@ -1,0 +1,32 @@
+PUT http://localhost:8080/Training/updateByMailselectKey
+Content-Type: application/json
+
+{
+  "mailselectId":1,
+  "readstate": "1"
+}
+
+###
+GET http://localhost:8080/Training/selectByMailselectEmpId/1
+Accept: application/json
+
+###
+GET http://localhost:8080/Training/selectByMailselectMailId/1
+Accept: application/json
+
+
+###
+GET http://localhost:8080/Training/selectByMailselectKey/1
+Accept: application/json
+
+
+###
+POST http://localhost:8080/Training/addMailselect
+Content-Type: application/json
+
+{
+  "mailId":1,
+  "empId":1
+}
+
+###

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.MailDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.MailVo">
+    <id column="Mail_Id" jdbcType="INTEGER" property="mailId" />
+    <result column="Mail_Title" jdbcType="VARCHAR" property="mailTitle" />
+    <result column="SendTime" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="Mail_Content" jdbcType="VARCHAR" property="mailContent" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="isDraft" jdbcType="INTEGER" property="isdraft" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    m.Mail_Id, m.Mail_Title, m.SendTime, m.Mail_Content, m.DeleteName, m.DeleteTime, m.isDraft, m.TimeLiness,
+    m.Emp_Id
+  </sql>
+  <select id="selectByMailKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from mail m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    where m.Mail_Id = #{mailId,jdbcType=INTEGER} and m.TimeLiness=0
+  </select>
+  <select id="selectByMailEmpId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from mail m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    where m.Emp_Id = #{empId,jdbcType=INTEGER} and m.TimeLiness=0
+  </select>
+  <insert id="addMail" keyColumn="Mail_Id" keyProperty="mailId" parameterType="com.trkj.trainingprojects.vo.MailVo" useGeneratedKeys="true">
+    insert into mail (Mail_Title, SendTime, Mail_Content, 
+      DeleteName, DeleteTime, isDraft, 
+      Emp_Id)
+    values (#{mailTitle,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{mailContent,jdbcType=VARCHAR}, 
+      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{isdraft,jdbcType=INTEGER},
+      #{empId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByMailKey" parameterType="com.trkj.trainingprojects.vo.MailVo">
+    update mail
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Mail_Id = #{mailId,jdbcType=INTEGER}
+  </update>
+</mapper>
