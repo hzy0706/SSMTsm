@@ -21,7 +21,6 @@ public class AnLogAspect<faqVoClass> {
 
     @Pointcut("execution(* com.trkj.trainingprojects.service..*.*(..))")
     public void x(){
-        
     }
     /*@Before("execution(* com.trkj.service..IEmpService.*(..))")
     public void logBefore(){
