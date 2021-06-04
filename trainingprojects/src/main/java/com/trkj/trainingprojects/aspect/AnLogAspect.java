@@ -1,7 +1,7 @@
 package com.trkj.trainingprojects.aspect;
 
 import com.trkj.trainingprojects.Opservice.OpJournalService;
-import com.trkj.trainingprojects.entity.ClassMeta;
+import com.trkj.trainingprojects.ann.ClassMeta;
 import com.trkj.trainingprojects.entity.Opjournal;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

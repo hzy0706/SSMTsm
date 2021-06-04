@@ -1,7 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
-import com.trkj.trainingprojects.entity.ClassMeta;
-import com.trkj.trainingprojects.entity.FieldMeta;
+import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
