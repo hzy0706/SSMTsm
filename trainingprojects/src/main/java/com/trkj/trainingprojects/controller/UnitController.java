@@ -34,7 +34,6 @@ public class UnitController {
      */
     @GetMapping("selectall")
     public PageInfo<UnitVo> selectall(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
-        System.out.println(currentPage+"-----"+pageSize);
         PageHelper.startPage(currentPage,pageSize);
         List<UnitVo> list=this.unitService.selectAll();
         PageInfo<UnitVo> pageInfo = new PageInfo<>(list);
