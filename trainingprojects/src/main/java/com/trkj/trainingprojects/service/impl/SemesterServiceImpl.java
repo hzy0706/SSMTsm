@@ -1,7 +1,8 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.SemesterDao;
 import com.trkj.trainingprojects.entity.Semester;
+import com.trkj.trainingprojects.service.SemesterService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

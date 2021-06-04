@@ -1,7 +1,8 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.EnterpriseDao;
 import com.trkj.trainingprojects.entity.Enterprise;
+import com.trkj.trainingprojects.service.EnterpriseService;
 import com.trkj.trainingprojects.util.BeanCopyUtil;
 import com.trkj.trainingprojects.vo.EnterpriseVo;
 import org.springframework.stereotype.Service;

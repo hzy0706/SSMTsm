@@ -1,0 +1,33 @@
+PUT http://localhost:8080/Training/deleteByClassType
+Content-Type: application/json
+
+{
+  "classtypeId": 20,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateClassType
+Content-Type: application/json
+
+{
+  "classtypeId": 2,
+  "classtypeName": "物理学",
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addClassType
+Content-Type: application/json
+
+{
+  "classtypeName": "化学",
+  "addname": "蔡锦康"
+}
+
+###
+GET http://localhost:8080/Training/selectAllClassTypes
+Accept: application/json
+
+###

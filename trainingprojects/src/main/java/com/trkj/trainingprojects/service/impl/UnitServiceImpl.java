@@ -1,6 +1,7 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.UnitDao;
+import com.trkj.trainingprojects.service.UnitService;
 import com.trkj.trainingprojects.vo.UnitVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
