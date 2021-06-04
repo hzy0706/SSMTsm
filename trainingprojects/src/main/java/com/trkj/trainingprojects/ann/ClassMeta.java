@@ -10,5 +10,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})//定义注解的作用目标**作用范围字段、枚举的常量/方法
 @Documented//说明该注解将被包含在javadoc中
 public @interface ClassMeta {
+    
     String className() default "";
 }
