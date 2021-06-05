@@ -1,5 +1,6 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 import com.trkj.trainingprojects.dao.BookstockDao;
+import com.trkj.trainingprojects.service.BookstockService;
 import com.trkj.trainingprojects.vo.BookstockVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

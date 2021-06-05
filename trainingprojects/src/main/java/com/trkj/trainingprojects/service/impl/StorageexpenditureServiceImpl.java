@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class StorageexpenditureServiceImpl implements StorageexpenditureService {
@@ -24,7 +25,7 @@ public class StorageexpenditureServiceImpl implements StorageexpenditureService 
     }
 
     @Override
-    public StorageexpenditureVo selectByStorageexpenditureApproval(Integer approval) {
+    public List<StorageexpenditureVo> selectByStorageexpenditureApproval(Integer approval) {
         return storageexpenditureDao.selectByStorageexpenditureApproval(approval);
     }
 

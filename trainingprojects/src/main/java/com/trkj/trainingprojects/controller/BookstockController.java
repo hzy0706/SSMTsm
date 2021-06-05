@@ -40,13 +40,13 @@ public class BookstockController {
     }
 
     @PutMapping("/updateByBookstockKeySelective")
-    public int updateByBookstockKeySelective(BookstockVo bookstockVo) {
+    public int updateByBookstockKeySelective(@RequestBody @Valid BookstockVo bookstockVo) {
         bookstockVo.setUpdatetime(new Date());
         return bookstockService.updateByBookstockKeySelective(bookstockVo);
     }
 
     @PutMapping("/deleteByBookstockKey")
-    public int deleteByBookstockKey(BookstockVo bookstockVo) {
+    public int deleteByBookstockKey(@RequestBody @Valid BookstockVo bookstockVo) {
         bookstockVo.setDeletetime(new Date());
         return bookstockService.deleteByBookstockKey(bookstockVo);
     }

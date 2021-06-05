@@ -3,6 +3,8 @@ package com.trkj.trainingprojects.dao;
 import com.trkj.trainingprojects.vo.StorageexpenditureVo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface StorageexpenditureDao {
 
@@ -10,7 +12,7 @@ public interface StorageexpenditureDao {
 
     StorageexpenditureVo selectByStorageexpenditureKey(Integer storageexpenditureId);
 
-    StorageexpenditureVo selectByStorageexpenditureApproval(Integer approval);
+    List<StorageexpenditureVo> selectByStorageexpenditureApproval(Integer approval);
 
     int updateByStorageexpenditureKeySelective(StorageexpenditureVo record);
 
