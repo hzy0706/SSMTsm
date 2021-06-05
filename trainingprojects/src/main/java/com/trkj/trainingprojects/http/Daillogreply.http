@@ -1,0 +1,18 @@
+GET http://localhost:8080/Training/selectByDaillogreplyDaillogId/1
+Accept: application/json
+
+###
+GET http://localhost:8080/Training/selectByDaillogreplyKey/1
+Accept: application/json
+
+###
+POST http://localhost:8080/Training/addDaillogreply
+Content-Type: application/json
+
+{
+  "daillogId": 1,
+  "repliername": "胡志远",
+  "repliercontent": "sdjhfkdahah"
+}
+
+###

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.MailenclosureDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.MailenclosureVo">
+    <id column="MailEnclosure_Id" jdbcType="INTEGER" property="mailenclosureId" />
+    <result column="Enclosure" jdbcType="VARCHAR" property="enclosure" />
+    <result column="Mail_Id" jdbcType="INTEGER" property="mailId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MailEnclosure_Id, Enclosure, Mail_Id
+  </sql>
+  <select id="selectByMailenclosureKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mailenclosure
+    where MailEnclosure_Id = #{mailenclosureId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByMailenclosureMailId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mailenclosure
+    where Mail_Id = #{mailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByMailKey" parameterType="java.lang.Integer">
+    delete from mailenclosure
+    where Mail_Id = #{mailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addMailenclosure" keyColumn="MailEnclosure_Id" keyProperty="mailenclosureId" parameterType="com.trkj.trainingprojects.vo.MailenclosureVo" useGeneratedKeys="true">
+    insert into mailenclosure (Enclosure, Mail_Id)
+    values (#{enclosure,jdbcType=VARCHAR}, #{mailId,jdbcType=INTEGER})
+  </insert>
+</mapper>

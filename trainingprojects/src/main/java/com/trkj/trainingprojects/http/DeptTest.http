@@ -2,9 +2,9 @@ POST http://localhost:8080/Training/addDept
 Content-Type: application/json
 
 {
-  "deptName": "财务部",
-  "deptSortnumber": "CW",
-  "deptDescribe": "公司管理财务部门",
+  "deptName": "测试100",
+  "deptSortnumber": "测试",
+  "deptDescribe": "测试",
   "addname": "蔡锦康"
 }
 

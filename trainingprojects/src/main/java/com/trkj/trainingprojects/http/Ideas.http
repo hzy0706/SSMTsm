@@ -1,0 +1,37 @@
+PUT http://localhost:8080/Training/deleteByIdeasKey
+Content-Type: application/json
+
+{
+  "ideasId": 1,
+  "deletename": "胡志远",
+  "timeliness": 1
+}
+
+###
+PUT http://localhost:8080/Training/updateByIdeasKeySelective
+Content-Type: application/json
+
+{
+  "ideasId": 1,
+  "suggestId": 1,
+  "ideasTitle": "可不可以放假",
+  "ideasContent": "当然可以！！"
+}
+
+###
+GET http://localhost:8080/Training/selectByIdeasKey/1
+Accept: application/json
+
+###
+POST http://localhost:8080/Training/addIdeas
+Content-Type: application/json
+
+{
+  "suggestId": 1,
+  "ideasTitle": "可不可以放假",
+  "ideasContent": "当然不行，想都别想！！！"
+}
+
+
+
+
