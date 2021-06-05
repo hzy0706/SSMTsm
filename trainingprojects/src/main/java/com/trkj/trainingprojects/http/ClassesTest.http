@@ -1,0 +1,38 @@
+PUT http://localhost:8080/Training/deleteByClasses
+Content-Type: application/json
+
+{
+  "classesId": 3,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateClassesKey
+Content-Type: application/json
+
+{
+  "classesId": 3,
+  "classesName": "舞蹈二班",
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addClasses
+Content-Type: application/json
+
+{
+  "classesName": "舞蹈一班",
+  "classesOpen": 0,
+  "addname": "蔡锦康",
+  "courseId": 1,
+  "empId": 1,
+  "teacherId": 2,
+  "coursedetailsId":1
+}
+
+###
+GET http://localhost:8080/Training/selectAllClasses/1/3
+Accept: application/json
+
+###

@@ -1,0 +1,36 @@
+PUT http://localhost:8080/Training/deleteByItemBank
+Content-Type: application/json
+
+{
+  "itembankId": 7,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByItemBankKey
+Content-Type: application/json
+
+{
+  "itembankId": 7,
+  "itembankType": "问答题",
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addItemBank
+Content-Type: application/json
+
+{
+  "itembankId":2,
+  "itembankType":"判断题",
+  "itembankContent":"java基础学习了吗？",
+  "addname": "蔡锦康",
+  "courseId":3
+}
+
+###
+GET http://localhost:8080/Training/selectAllItemBanks/1/1
+Accept: application/json
+
+###

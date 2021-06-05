@@ -1,0 +1,38 @@
+PUT http://localhost:8080/Training/deleteByClassRoom
+Content-Type: application/json
+
+{
+  "classroomId": 3,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByClassRoomKey
+Content-Type: application/json
+
+{
+  "classroomId": 3,
+  "catacity": 26,
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addClassRoom
+Content-Type: application/json
+
+{
+  "classroomId": 2,
+  "classroomName": "TK0002",
+  "classroomState": 0,
+  "catacity": "25",
+  "place": "株洲",
+  "addname": "蔡锦康",
+  "timeliness": 0
+}
+
+###
+GET http://localhost:8080/Training/selectAllClassRooms/1/3
+Accept: application/json
+
+###

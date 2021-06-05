@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.AwardsDao">
+    <resultMap type="com.trkj.trainingprojects.vo.AwardsVo" id="AwardsMap">
+        <id property="awardsId" column="Awards_Id" jdbcType="INTEGER"/>
+        <result property="awardscontent" column="AwardsContent" jdbcType="VARCHAR"/>
+        <result property="awardsdate" column="AwardsDate" jdbcType="TIMESTAMP"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+        <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+        <collection property="studentVoList" ofType="com.trkj.trainingprojects.vo.StudentVo">
+            <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+            <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
+            <result property="studentState" column="Student_State" jdbcType="INTEGER"/>
+            <result property="sex" column="Sex" jdbcType="VARCHAR"/>
+            <result property="studentPhone" column="Student_Phone" jdbcType="VARCHAR"/>
+            <result property="address" column="Address" jdbcType="VARCHAR"/>
+            <result property="imgaddress" column="ImgAddress" jdbcType="VARCHAR"/>
+            <result property="parentname" column="ParentName" jdbcType="VARCHAR"/>
+            <result property="parentphone" column="ParentPhone" jdbcType="VARCHAR"/>
+            <result property="studentNumber" column="Student_Number" jdbcType="VARCHAR"/>
+            <result property="entrance" column="Entrance" jdbcType="VARCHAR"/>
+            <result property="studytime" column="StudyTime" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
+            <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
+        </collection>
+        <collection property="classesVoList" ofType="com.trkj.trainingprojects.vo.ClassesVo">
+            <id property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="classesName" column="Classes_Name" jdbcType="VARCHAR"/>
+            <result property="classesOpen" column="Classes_Open" jdbcType="INTEGER"/>
+            <result property="starteddate" column="StartedDate" jdbcType="TIMESTAMP"/>
+            <result property="enddate" column="EndDate" jdbcType="TIMESTAMP"/>
+            <result property="lastdate" column="LastDate" jdbcType="TIMESTAMP"/>
+            <result property="manylessons" column="ManyLessons" jdbcType="INTEGER"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="empId" column="Emp_Id" jdbcType="INTEGER"/>
+            <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      Awards_Id, AwardsContent, AwardsDate, AddName, ADDTIME,
+      UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness,
+      Student_Id, Classes_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllAwards" resultMap="AwardsMap">
+        select
+        <include refid="Base_Column_List" />
+        from awards a
+        inner join student s on a.Student_Id=s.Student_Id
+        inner join classes c on a.Classes_Id=c.Classes_Id
+        where a.TimeLiness = 0
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AwardsMap">
+        select
+          Awards_Id, AwardsContent, AwardsDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id
+        from tr01904.awards
+        where Awards_Id = #{awardsId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AwardsMap">
+        select
+          Awards_Id, AwardsContent, AwardsDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id
+        from tr01904.awards
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="AwardsMap">
+        select
+        Awards_Id, AwardsContent, AwardsDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime,
+        TimeLiness, Student_Id, Classes_Id
+        from tr01904.awards
+        <where>
+            <if test="awardsId != null">
+                and Awards_Id = #{awardsId}
+            </if>
+            <if test="awardscontent != null and awardscontent != ''">
+                and AwardsContent = #{awardscontent}
+            </if>
+            <if test="awardsdate != null">
+                and AwardsDate = #{awardsdate}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and ADDTIME = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="studentId != null">
+                and Student_Id = #{studentId}
+            </if>
+            <if test="classesId != null">
+                and Classes_Id = #{classesId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="awardsId" useGeneratedKeys="true">
+        insert into tr01904.awards(AwardsContent, AwardsDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id)
+        values (#{awardscontent}, #{awardsdate}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{classesId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="awardsId" useGeneratedKeys="true">
+        insert into tr01904.awards(AwardsContent, AwardsDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName,
+        DeleteTime, TimeLiness, Student_Id, Classes_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.awardscontent}, #{entity.awardsdate}, #{entity.addname}, #{entity.addtime}, #{entity.updatename},
+            #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime}, #{entity.timeliness}, #{entity.studentId},
+            #{entity.classesId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="awardsId" useGeneratedKeys="true">
+        insert into tr01904.awards(AwardsContent, AwardsDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName,
+        DeleteTime, TimeLiness, Student_Id, Classes_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.awardscontent}, #{entity.awardsdate}, #{entity.addname}, #{entity.addtime}, #{entity.updatename},
+            #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime}, #{entity.timeliness}, #{entity.studentId},
+            #{entity.classesId})
+        </foreach>
+        on duplicate key update
+        AwardsContent = values(AwardsContent) , AwardsDate = values(AwardsDate) , AddName = values(AddName) , ADDTIME =
+        values(ADDTIME) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime) , DeleteName =
+        values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness = values(TimeLiness) , Student_Id =
+        values(Student_Id) , Classes_Id = values(Classes_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateByAwardsKey">
+        update tr01904.awards
+        <set>
+            <if test="awardscontent != null">
+                AwardsContent = #{awardscontent},
+            </if>
+            <if test="awardsdate != null">
+                AwardsDate = #{awardsdate},
+            </if>
+            <if test="addname != null">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime},
+            </if>
+            <if test="updatename != null">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="studentId != null">
+                Student_Id = #{studentId},
+            </if>
+            <if test="classesId != null">
+                Classes_Id = #{classesId},
+            </if>
+        </set>
+        where Awards_Id = #{awardsId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.awards where Awards_Id = #{awardsId}
+    </delete>
+
+    <!--修改删除人与时效性-->
+    <update id="deleteByAwards" parameterType="com.trkj.trainingprojects.entity.Awards">
+        update tr01904.awards
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where Awards_Id = #{awardsId}
+    </update>
+
+</mapper>
+

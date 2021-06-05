@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.ItemBankDao">
+    <resultMap type="com.trkj.trainingprojects.entity.ItemBank" id="ItembankMap">
+        <id property="itembankId" column="ItemBank_Id" jdbcType="INTEGER"/>
+        <result property="itembankType" column="ItemBank_Type" jdbcType="VARCHAR"/>
+        <result property="itembankContent" column="ItemBank_Content" jdbcType="VARCHAR"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        <association property="course" javaType="com.trkj.trainingprojects.vo.CourseVo">
+            <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
+            <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
+            <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
+            <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
+            <result property="commission" column="Commission" jdbcType="NUMERIC"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="stopname" column="StopName" jdbcType="VARCHAR"/>
+            <result property="stoptime" column="StopTime" jdbcType="TIMESTAMP"/>
+            <result property="beginname" column="BeginName" jdbcType="VARCHAR"/>
+            <result property="begintime" column="BeginTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      ib.ItemBank_Id, ib.ItemBank_Type, ib.ItemBank_Content, ib.AddName, ib.ADDTIME, ib.UpdateName,
+      ib.UpdateTime, ib.DeleteName, ib.DeleteTime, ib.TimeLiness, ib.Course_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllItemBanks" resultMap="ItembankMap">
+        select
+        <include refid="Base_Column_List" />,c.Course_Name
+        from itembank ib
+        inner join course c on ib.Course_Id=c.Course_Id
+        where ib.TimeLiness = 0
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ItembankMap">
+        select
+          ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id
+        from tr01904.itembank
+        where ItemBank_Id = #{itembankId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ItembankMap">
+        select
+          ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id
+        from tr01904.itembank
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ItembankMap">
+        select
+        ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime,
+        TimeLiness, Course_Id
+        from tr01904.itembank
+        <where>
+            <if test="itembankId != null">
+                and ItemBank_Id = #{itembankId}
+            </if>
+            <if test="itembankType != null and itembankType != ''">
+                and ItemBank_Type = #{itembankType}
+            </if>
+            <if test="itembankContent != null and itembankContent != ''">
+                and ItemBank_Content = #{itembankContent}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and ADDTIME = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="courseId != null">
+                and Course_Id = #{courseId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="itembankId" useGeneratedKeys="true">
+        insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, TimeLiness, Course_Id)
+        values (#{itembankType}, #{itembankContent}, #{addname}, #{addtime}, #{timeliness}, #{courseId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="itembankId" useGeneratedKeys="true">
+        insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Course_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.itembankType}, #{entity.itembankContent}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.courseId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="itembankId" useGeneratedKeys="true">
+        insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Course_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.itembankType}, #{entity.itembankContent}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.courseId})
+        </foreach>
+        on duplicate key update
+        ItemBank_Type = values(ItemBank_Type) , ItemBank_Content = values(ItemBank_Content) , AddName = values(AddName)
+        , ADDTIME = values(ADDTIME) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime) , DeleteName =
+        values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness = values(TimeLiness) , Course_Id =
+        values(Course_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateByItemBankKey">
+        update tr01904.itembank
+        <set>
+            <if test="itembankType != null">
+                ItemBank_Type = #{itembankType},
+            </if>
+            <if test="itembankContent != null">
+                ItemBank_Content = #{itembankContent},
+            </if>
+            <if test="addname != null">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime},
+            </if>
+            <if test="updatename != null">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="courseId != null">
+                Course_Id = #{courseId},
+            </if>
+        </set>
+        where ItemBank_Id = #{itembankId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.itembank where ItemBank_Id = #{itembankId}
+    </delete>
+
+    <!--修改删除人与时效性-->
+    <update id="deleteByItemBank" parameterType="com.trkj.trainingprojects.entity.ItemBank">
+        update tr01904.itembank
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where ItemBank_Id = #{itembankId}
+    </update>
+
+</mapper>
+

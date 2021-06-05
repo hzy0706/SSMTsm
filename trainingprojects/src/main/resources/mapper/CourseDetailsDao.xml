@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.CourseDetailsDao">
+    <resultMap type="com.trkj.trainingprojects.entity.CourseDetails" id="CoursedetailsMap">
+        <id property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+        <result property="coursedetailsName" column="CourseDetails_Name" jdbcType="VARCHAR"/>
+        <result property="coursesequence" column="CourseSequence" jdbcType="INTEGER"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        <association property="course" javaType="com.trkj.trainingprojects.vo.CourseVo">
+            <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
+            <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
+            <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
+            <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
+            <result property="commission" column="Commission" jdbcType="NUMERIC"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="stopname" column="StopName" jdbcType="VARCHAR"/>
+            <result property="stoptime" column="StopTime" jdbcType="TIMESTAMP"/>
+            <result property="beginname" column="BeginName" jdbcType="VARCHAR"/>
+            <result property="begintime" column="BeginTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      CourseDetails_Id, CourseDetails_Name, CourseSequence, AddName, ADDTIME, UpdateName,
+       UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllCourseDetails" resultMap="CoursedetailsMap">
+        select
+        <include refid="Base_Column_List" />
+        from coursedetails
+        where TimeLiness = 0
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CoursedetailsMap">
+        select
+          CourseDetails_Id, CourseDetails_Name, CourseSequence, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id
+        from tr01904.coursedetails
+        where CourseDetails_Id = #{coursedetailsId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CoursedetailsMap">
+        select
+          CourseDetails_Id, CourseDetails_Name, CourseSequence, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id
+        from tr01904.coursedetails
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="CoursedetailsMap">
+        select
+        CourseDetails_Id, CourseDetails_Name, CourseSequence, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName,
+        DeleteTime, TimeLiness, Course_Id
+        from tr01904.coursedetails
+        <where>
+            <if test="coursedetailsId != null">
+                and CourseDetails_Id = #{coursedetailsId}
+            </if>
+            <if test="coursedetailsName != null and coursedetailsName != ''">
+                and CourseDetails_Name = #{coursedetailsName}
+            </if>
+            <if test="coursesequence != null">
+                and CourseSequence = #{coursesequence}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and ADDTIME = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="courseId != null">
+                and Course_Id = #{courseId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="coursedetailsId" useGeneratedKeys="true">
+        insert into tr01904.coursedetails(CourseDetails_Name, CourseSequence, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id)
+        values (#{coursedetailsName}, #{coursesequence}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{courseId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="coursedetailsId" useGeneratedKeys="true">
+        insert into tr01904.coursedetails(CourseDetails_Name, CourseSequence, AddName, ADDTIME, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Course_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.coursedetailsName}, #{entity.coursesequence}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.courseId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="coursedetailsId" useGeneratedKeys="true">
+        insert into tr01904.coursedetails(CourseDetails_Name, CourseSequence, AddName, ADDTIME, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Course_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.coursedetailsName}, #{entity.coursesequence}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.courseId})
+        </foreach>
+        on duplicate key update
+        CourseDetails_Name = values(CourseDetails_Name) , CourseSequence = values(CourseSequence) , AddName =
+        values(AddName) , ADDTIME = values(ADDTIME) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime)
+        , DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness = values(TimeLiness) ,
+        Course_Id = values(Course_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateCourseDetailsKey">
+        update tr01904.coursedetails
+        <set>
+            <if test="coursedetailsName != null and coursedetailsName != ''">
+                CourseDetails_Name = #{coursedetailsName},
+            </if>
+            <if test="coursesequence != null">
+                CourseSequence = #{coursesequence},
+            </if>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="courseId != null">
+                Course_Id = #{courseId},
+            </if>
+        </set>
+        where CourseDetails_Id = #{coursedetailsId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.coursedetails where CourseDetails_Id = #{coursedetailsId}
+    </delete>
+
+    <!--修改删除人与时效性-->
+    <update id="deleteByCourseDetails" parameterType="com.trkj.trainingprojects.entity.CourseDetails">
+        update tr01904.coursedetails
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where CourseDetails_Id = #{coursedetailsId}
+    </update>
+
+</mapper>
+

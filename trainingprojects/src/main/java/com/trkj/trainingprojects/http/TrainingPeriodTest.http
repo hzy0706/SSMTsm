@@ -1,0 +1,34 @@
+PUT http://localhost:8080/Training/deleteByTrainingPeriod
+Content-Type: application/json
+
+{
+  "periodId": 1,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByTrainingPeriodKey
+Content-Type: application/json
+
+{
+  "periodId": 1,
+  "period": "下午",
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addTrainingPeriod
+Content-Type: application/json
+
+{
+  "period": "上午",
+  "addname": "蔡锦康",
+  "timeliness": 0
+}
+
+###
+GET http://localhost:8080/Training/selectAllTrainingPeriod/1/3
+Accept: application/json
+
+###

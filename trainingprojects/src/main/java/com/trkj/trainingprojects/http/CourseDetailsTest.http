@@ -1,0 +1,36 @@
+PUT http://localhost:8080/Training/deleteByCourseDetails
+Content-Type: application/json
+
+{
+  "coursedetailsId": 1,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByCourseDetailsKey
+Content-Type: application/json
+
+{
+  "coursedetailsId": 3,
+  "coursedetailsName": "恰恰1",
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addCourseDetailsService
+Content-Type: application/json
+
+{
+  "coursedetailsName": "恰恰4",
+  "coursesequence":4,
+  "addname":"蔡锦康",
+  "courseId": 3,
+  "timeliness": 1
+}
+
+###
+GET http://localhost:8080/Training/selectAllCourseDetails/1/3
+Accept: application/json
+
+###

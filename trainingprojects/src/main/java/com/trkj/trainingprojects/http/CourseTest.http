@@ -1,0 +1,38 @@
+PUT http://localhost:8080/Training/deleteByCourse
+Content-Type: application/json
+
+{
+  "courseId": 3,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByCourseKey
+Content-Type: application/json
+
+{
+  "courseId": 3,
+  "classhours": 24,
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addCourses
+Content-Type: application/json
+
+{
+  "courseId": "2",
+  "courseName": "拉丁舞",
+  "classhours": 30,
+  "courseMoney": 14000,
+  "commission": "1200",
+  "addname": "蔡锦康",
+  "classtypeId": 6
+}
+
+###
+GET http://localhost:8080/Training/selectAllCourses/1/4
+Accept: application/json
+
+###

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.ExaminationContentDao">
+    <resultMap type="com.trkj.trainingprojects.vo.ExaminationContentVo" id="ExaminationcontentMap">
+        <id property="examinationcId" column="ExaminationC_Id" jdbcType="INTEGER"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="itembankId" column="ItemBank_Id" jdbcType="INTEGER"/>
+        <result property="examinationId" column="Examination_Id" jdbcType="INTEGER"/>
+        <association property="examinationVo" javaType="com.trkj.trainingprojects.vo.ExaminationVo">
+            <id property="examinationId" column="Examination_Id" jdbcType="INTEGER"/>
+            <result property="examinationname" column="ExaminationName" jdbcType="VARCHAR"/>
+            <result property="average" column="Average" jdbcType="VARCHAR"/>
+            <result property="highestscore" column="HighestScore" jdbcType="VARCHAR"/>
+            <result property="lowestscore" column="LowestScore" jdbcType="VARCHAR"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        </association>
+        <collection property="itemBankVoList" ofType="com.trkj.trainingprojects.vo.ItemBankVo">
+            <id property="itembankId" column="ItemBank_Id" jdbcType="INTEGER"/>
+            <result property="itembankType" column="ItemBank_Type" jdbcType="VARCHAR"/>
+            <result property="itembankContent" column="ItemBank_Content" jdbcType="VARCHAR"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      ExaminationC_Id, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName,
+      DeleteTime, TimeLiness, ItemBank_Id, Examination_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllExaminationContent" resultMap="ExaminationcontentMap">
+        select
+        <include refid="Base_Column_List" />
+        from examinationcontent e
+        inner join itembank ib on e.ItemBank_Id=ib.ItemBank_Id
+        inner join examination ex on e.Examination_Id=ex.Examination_Id
+        where e.TimeLiness = 0
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ExaminationcontentMap">
+        select
+          ExaminationC_Id, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, ItemBank_Id, Examination_Id
+        from tr01904.examinationcontent
+        where ExaminationC_Id = #{examinationcId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ExaminationcontentMap">
+        select
+          ExaminationC_Id, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, ItemBank_Id, Examination_Id
+        from tr01904.examinationcontent
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ExaminationcontentMap">
+        select
+        ExaminationC_Id, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, ItemBank_Id,
+        Examination_Id
+        from tr01904.examinationcontent
+        <where>
+            <if test="examinationcId != null">
+                and ExaminationC_Id = #{examinationcId}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and ADDTIME = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="itembankId != null">
+                and ItemBank_Id = #{itembankId}
+            </if>
+            <if test="examinationId != null">
+                and Examination_Id = #{examinationId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="examinationcId" useGeneratedKeys="true">
+        insert into tr01904.examinationcontent(AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, ItemBank_Id, Examination_Id)
+        values (#{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{itembankId}, #{examinationId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="examinationcId" useGeneratedKeys="true">
+        insert into tr01904.examinationcontent(AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime,
+        TimeLiness, ItemBank_Id, Examination_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.addname}, #{entity.addtime}, #{entity.updatename}, #{entity.updatetime}, #{entity.deletename},
+            #{entity.deletetime}, #{entity.timeliness}, #{entity.itembankId}, #{entity.examinationId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="examinationcId" useGeneratedKeys="true">
+        insert into tr01904.examinationcontent(AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime,
+        TimeLiness, ItemBank_Id, Examination_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.addname}, #{entity.addtime}, #{entity.updatename}, #{entity.updatetime}, #{entity.deletename},
+            #{entity.deletetime}, #{entity.timeliness}, #{entity.itembankId}, #{entity.examinationId})
+        </foreach>
+        on duplicate key update
+        AddName = values(AddName) , ADDTIME = values(ADDTIME) , UpdateName = values(UpdateName) , UpdateTime =
+        values(UpdateTime) , DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness =
+        values(TimeLiness) , ItemBank_Id = values(ItemBank_Id) , Examination_Id = values(Examination_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateByExaminationContentKey">
+        update tr01904.examinationcontent
+        <set>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="itembankId != null">
+                ItemBank_Id = #{itembankId},
+            </if>
+            <if test="examinationId != null">
+                Examination_Id = #{examinationId},
+            </if>
+        </set>
+        where ExaminationC_Id = #{examinationcId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.examinationcontent where ExaminationC_Id = #{examinationcId}
+    </delete>
+
+    <!--修改删除人与时效性-->
+    <update id="deleteByExaminationContent" parameterType="com.trkj.trainingprojects.entity.ExaminationContent">
+        update tr01904.examinationcontent
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where ExaminationC_Id = #{examinationcId}
+    </update>
+
+</mapper>
+

@@ -1,246 +1,269 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.CourseDao">
-  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.Course">
-    <id column="Course_Id" jdbcType="INTEGER" property="courseId" />
-    <result column="Course_Name" jdbcType="VARCHAR" property="courseName" />
-    <result column="Course_State" jdbcType="INTEGER" property="courseState" />
-    <result column="Classhours" jdbcType="INTEGER" property="classhours" />
-    <result column="Course_Money" jdbcType="DECIMAL" property="courseMoney" />
-    <result column="Commission" jdbcType="DECIMAL" property="commission" />
-    <result column="AddName" jdbcType="VARCHAR" property="addname" />
-    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
-    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
-    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="StopName" jdbcType="VARCHAR" property="stopname" />
-    <result column="StopTime" jdbcType="TIMESTAMP" property="stoptime" />
-    <result column="BeginName" jdbcType="VARCHAR" property="beginname" />
-    <result column="BeginTime" jdbcType="TIMESTAMP" property="begintime" />
-    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
-    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
-    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
-    <result column="ClassType_Id" jdbcType="INTEGER" property="classtypeId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Course_Id, Course_Name, Course_State, Classhours, Course_Money, Commission, AddName, 
-    AddTime, UpdateName, UpdateTime, StopName, StopTime, BeginName, BeginTime, DeleteName, 
-    DeleteTime, TimeLiness, ClassType_Id
-  </sql>
-  <select id="selectByCourseKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from course
-    where Course_Id = #{courseId,jdbcType=INTEGER} and TimeLiness=0
-  </select>
-  <select id="selectAllCourse" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from course
-    where TimeLiness=0 and Course_State=0
-  </select>
-  <delete id="deleteByCourseKey" parameterType="java.lang.Integer">
-    delete from course
-    where Course_Id = #{courseId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="Course_Id" keyProperty="courseId" parameterType="com.trkj.trainingprojects.entity.Course" useGeneratedKeys="true">
-    insert into course (Course_Name, Course_State, Classhours, 
-      Course_Money, Commission, AddName, 
-      AddTime, UpdateName, UpdateTime, 
-      StopName, StopTime, BeginName, 
-      BeginTime, DeleteName, DeleteTime, 
-      TimeLiness, ClassType_Id)
-    values (#{courseName,jdbcType=VARCHAR}, #{courseState,jdbcType=INTEGER}, #{classhours,jdbcType=INTEGER}, 
-      #{courseMoney,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL}, #{addname,jdbcType=VARCHAR}, 
-      #{addtime,jdbcType=TIMESTAMP}, #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{stopname,jdbcType=VARCHAR}, #{stoptime,jdbcType=TIMESTAMP}, #{beginname,jdbcType=VARCHAR}, 
-      #{begintime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
-      #{timeliness,jdbcType=INTEGER}, #{classtypeId,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" keyColumn="Course_Id" keyProperty="courseId" parameterType="com.trkj.trainingprojects.entity.Course" useGeneratedKeys="true">
-    insert into course
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="courseName != null">
-        Course_Name,
-      </if>
-      <if test="courseState != null">
-        Course_State,
-      </if>
-      <if test="classhours != null">
-        Classhours,
-      </if>
-      <if test="courseMoney != null">
-        Course_Money,
-      </if>
-      <if test="commission != null">
-        Commission,
-      </if>
-      <if test="addname != null">
-        AddName,
-      </if>
-      <if test="addtime != null">
-        AddTime,
-      </if>
-      <if test="updatename != null">
-        UpdateName,
-      </if>
-      <if test="updatetime != null">
-        UpdateTime,
-      </if>
-      <if test="stopname != null">
-        StopName,
-      </if>
-      <if test="stoptime != null">
-        StopTime,
-      </if>
-      <if test="beginname != null">
-        BeginName,
-      </if>
-      <if test="begintime != null">
-        BeginTime,
-      </if>
-      <if test="deletename != null">
-        DeleteName,
-      </if>
-      <if test="deletetime != null">
-        DeleteTime,
-      </if>
-      <if test="timeliness != null">
-        TimeLiness,
-      </if>
-      <if test="classtypeId != null">
-        ClassType_Id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="courseName != null">
-        #{courseName,jdbcType=VARCHAR},
-      </if>
-      <if test="courseState != null">
-        #{courseState,jdbcType=INTEGER},
-      </if>
-      <if test="classhours != null">
-        #{classhours,jdbcType=INTEGER},
-      </if>
-      <if test="courseMoney != null">
-        #{courseMoney,jdbcType=DECIMAL},
-      </if>
-      <if test="commission != null">
-        #{commission,jdbcType=DECIMAL},
-      </if>
-      <if test="addname != null">
-        #{addname,jdbcType=VARCHAR},
-      </if>
-      <if test="addtime != null">
-        #{addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatename != null">
-        #{updatename,jdbcType=VARCHAR},
-      </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="stopname != null">
-        #{stopname,jdbcType=VARCHAR},
-      </if>
-      <if test="stoptime != null">
-        #{stoptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="beginname != null">
-        #{beginname,jdbcType=VARCHAR},
-      </if>
-      <if test="begintime != null">
-        #{begintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deletename != null">
-        #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timeliness != null">
-        #{timeliness,jdbcType=INTEGER},
-      </if>
-      <if test="classtypeId != null">
-        #{classtypeId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByCourseKeySelective" parameterType="com.trkj.trainingprojects.entity.Course">
-    update course
-    <set>
-      <if test="courseName != null">
-        Course_Name = #{courseName,jdbcType=VARCHAR},
-      </if>
-      <if test="courseState != null">
-        Course_State = #{courseState,jdbcType=INTEGER},
-      </if>
-      <if test="classhours != null">
-        Classhours = #{classhours,jdbcType=INTEGER},
-      </if>
-      <if test="courseMoney != null">
-        Course_Money = #{courseMoney,jdbcType=DECIMAL},
-      </if>
-      <if test="commission != null">
-        Commission = #{commission,jdbcType=DECIMAL},
-      </if>
-      <if test="addname != null">
-        AddName = #{addname,jdbcType=VARCHAR},
-      </if>
-      <if test="addtime != null">
-        AddTime = #{addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatename != null">
-        UpdateName = #{updatename,jdbcType=VARCHAR},
-      </if>
-      <if test="updatetime != null">
-        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="stopname != null">
-        StopName = #{stopname,jdbcType=VARCHAR},
-      </if>
-      <if test="stoptime != null">
-        StopTime = #{stoptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="beginname != null">
-        BeginName = #{beginname,jdbcType=VARCHAR},
-      </if>
-      <if test="begintime != null">
-        BeginTime = #{begintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deletename != null">
-        DeleteName = #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timeliness != null">
-        TimeLiness = #{timeliness,jdbcType=INTEGER},
-      </if>
-      <if test="classtypeId != null">
-        ClassType_Id = #{classtypeId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where Course_Id = #{courseId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByCourseKey" parameterType="com.trkj.trainingprojects.entity.Course">
-    update course
-    set Course_Name = #{courseName,jdbcType=VARCHAR},
-      Course_State = #{courseState,jdbcType=INTEGER},
-      Classhours = #{classhours,jdbcType=INTEGER},
-      Course_Money = #{courseMoney,jdbcType=DECIMAL},
-      Commission = #{commission,jdbcType=DECIMAL},
-      AddName = #{addname,jdbcType=VARCHAR},
-      AddTime = #{addtime,jdbcType=TIMESTAMP},
-      UpdateName = #{updatename,jdbcType=VARCHAR},
-      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
-      StopName = #{stopname,jdbcType=VARCHAR},
-      StopTime = #{stoptime,jdbcType=TIMESTAMP},
-      BeginName = #{beginname,jdbcType=VARCHAR},
-      BeginTime = #{begintime,jdbcType=TIMESTAMP},
-      DeleteName = #{deletename,jdbcType=VARCHAR},
-      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
-      TimeLiness = #{timeliness,jdbcType=INTEGER},
-      ClassType_Id = #{classtypeId,jdbcType=INTEGER}
-    where Course_Id = #{courseId,jdbcType=INTEGER}
-  </update>
+    <resultMap type="com.trkj.trainingprojects.vo.CourseVo" id="CourseMap">
+        <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
+        <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
+        <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
+        <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
+        <result property="commission" column="Commission" jdbcType="NUMERIC"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="stopname" column="StopName" jdbcType="VARCHAR"/>
+        <result property="stoptime" column="StopTime" jdbcType="TIMESTAMP"/>
+        <result property="beginname" column="BeginName" jdbcType="VARCHAR"/>
+        <result property="begintime" column="BeginTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+        <association property="classTypeVo" javaType="com.trkj.trainingprojects.vo.ClassTypeVo">
+            <id property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+            <result property="classtypeName" column="ClassType_Name" jdbcType="VARCHAR"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        </association>
+        <collection property="coursedetailsVos" ofType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+            <id property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsName" column="CourseDetails_Name" jdbcType="VARCHAR"/>
+            <result property="coursesequence" column="CourseSequence" jdbcType="INTEGER"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        </collection>
+        <collection property="itemBanks" ofType="com.trkj.trainingprojects.vo.ItemBankVo">
+            <id property="itembankId" column="ItemBank_Id" jdbcType="INTEGER"/>
+            <result property="itembankType" column="ItemBank_Type" jdbcType="VARCHAR"/>
+            <result property="itembankContent" column="ItemBank_Content" jdbcType="VARCHAR"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      c.Course_Id, c.Course_Name, c.Course_State, c.Classhours, c.Course_Money, c.Commission, c.AddName,
+       c.ADDTIME, c.UpdateName, c.UpdateTime, c.StopName, c.StopTime, c.BeginName, c.BeginTime, c.DeleteName,
+        c.DeleteTime, c.TimeLiness, c.ClassType_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllCourses" resultMap="CourseMap">
+        select
+        <include refid="Base_Column_List" />,ct.ClassType_Name
+        from course c inner join classtype ct on c.Course_Id=ct.ClassType_Id
+        where c.TimeLiness = 0
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CourseMap">
+        select
+          Course_Id, Course_Name, Course_State, Classhours, Course_Money, Commission, AddName, ADDTIME, UpdateName, UpdateTime, StopName, StopTime, BeginName, BeginTime, DeleteName, DeleteTime, TimeLiness, ClassType_Id
+        from tr01904.course
+        where Course_Id = #{courseId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CourseMap">
+        select
+          Course_Id, Course_Name, Course_State, Classhours, Course_Money, Commission, AddName, ADDTIME, UpdateName, UpdateTime, StopName, StopTime, BeginName, BeginTime, DeleteName, DeleteTime, TimeLiness, ClassType_Id
+        from tr01904.course
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="CourseMap">
+        select
+        Course_Id, Course_Name, Course_State, Classhours, Course_Money, Commission, AddName, ADDTIME, UpdateName,
+        UpdateTime, StopName, StopTime, BeginName, BeginTime, DeleteName, DeleteTime, TimeLiness, ClassType_Id
+        from tr01904.course
+        <where>
+            <if test="courseId != null">
+                and Course_Id = #{courseId}
+            </if>
+            <if test="courseName != null and courseName != ''">
+                and Course_Name = #{courseName}
+            </if>
+            <if test="courseState != null">
+                and Course_State = #{courseState}
+            </if>
+            <if test="classhours != null">
+                and Classhours = #{classhours}
+            </if>
+            <if test="courseMoney != null">
+                and Course_Money = #{courseMoney}
+            </if>
+            <if test="commission != null">
+                and Commission = #{commission}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and ADDTIME = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="stopname != null and stopname != ''">
+                and StopName = #{stopname}
+            </if>
+            <if test="stoptime != null">
+                and StopTime = #{stoptime}
+            </if>
+            <if test="beginname != null and beginname != ''">
+                and BeginName = #{beginname}
+            </if>
+            <if test="begintime != null">
+                and BeginTime = #{begintime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="classtypeId != null">
+                and ClassType_Id = #{classtypeId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="courseId" useGeneratedKeys="true">
+        insert into tr01904.course(Course_Name, Course_State, Classhours, Course_Money, Commission, AddName, ADDTIME, UpdateName, UpdateTime, StopName, StopTime, BeginName, BeginTime, DeleteName, DeleteTime, TimeLiness, ClassType_Id)
+        values (#{courseName}, #{courseState}, #{classhours}, #{courseMoney}, #{commission}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{stopname}, #{stoptime}, #{beginname}, #{begintime}, #{deletename}, #{deletetime}, #{timeliness}, #{classtypeId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="courseId" useGeneratedKeys="true">
+        insert into tr01904.course(Course_Name, Course_State, Classhours, Course_Money, Commission, AddName, ADDTIME,
+        UpdateName, UpdateTime, StopName, StopTime, BeginName, BeginTime, DeleteName, DeleteTime, TimeLiness,
+        ClassType_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.courseName}, #{entity.courseState}, #{entity.classhours}, #{entity.courseMoney},
+            #{entity.commission}, #{entity.addname}, #{entity.addtime}, #{entity.updatename}, #{entity.updatetime},
+            #{entity.stopname}, #{entity.stoptime}, #{entity.beginname}, #{entity.begintime}, #{entity.deletename},
+            #{entity.deletetime}, #{entity.timeliness}, #{entity.classtypeId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="courseId" useGeneratedKeys="true">
+        insert into tr01904.course(Course_Name, Course_State, Classhours, Course_Money, Commission, AddName, ADDTIME,
+        UpdateName, UpdateTime, StopName, StopTime, BeginName, BeginTime, DeleteName, DeleteTime, TimeLiness,
+        ClassType_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.courseName}, #{entity.courseState}, #{entity.classhours}, #{entity.courseMoney},
+            #{entity.commission}, #{entity.addname}, #{entity.addtime}, #{entity.updatename}, #{entity.updatetime},
+            #{entity.stopname}, #{entity.stoptime}, #{entity.beginname}, #{entity.begintime}, #{entity.deletename},
+            #{entity.deletetime}, #{entity.timeliness}, #{entity.classtypeId})
+        </foreach>
+        on duplicate key update
+        Course_Name = values(Course_Name) , Course_State = values(Course_State) , Classhours = values(Classhours) ,
+        Course_Money = values(Course_Money) , Commission = values(Commission) , AddName = values(AddName) , ADDTIME =
+        values(ADDTIME) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime) , StopName =
+        values(StopName) , StopTime = values(StopTime) , BeginName = values(BeginName) , BeginTime = values(BeginTime) ,
+        DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness = values(TimeLiness) ,
+        ClassType_Id = values(ClassType_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateByCourseKey" parameterType="com.trkj.trainingprojects.entity.Course">
+        update tr01904.course
+        <set>
+            <if test="courseName != null">
+                Course_Name = #{courseName},
+            </if>
+            <if test="courseState != null">
+                Course_State = #{courseState},
+            </if>
+            <if test="classhours != null">
+                Classhours = #{classhours},
+            </if>
+            <if test="courseMoney != null">
+                Course_Money = #{courseMoney},
+            </if>
+            <if test="commission != null">
+                Commission = #{commission},
+            </if>
+            <if test="addname != null">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime},
+            </if>
+            <if test="updatename != null">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="stopname != null">
+                StopName = #{stopname},
+            </if>
+            <if test="stoptime != null">
+                StopTime = #{stoptime},
+            </if>
+            <if test="beginname != null">
+                BeginName = #{beginname},
+            </if>
+            <if test="begintime != null">
+                BeginTime = #{begintime},
+            </if>
+            <if test="deletename != null">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="classtypeId != null">
+                ClassType_Id = #{classtypeId},
+            </if>
+        </set>
+        where Course_Id = #{courseId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.course where Course_Id = #{courseId}
+    </delete>
+
+    <!--修改删除人与时效性-->
+    <update id="deleteByCourse" parameterType="com.trkj.trainingprojects.entity.Course">
+        update tr01904.course
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where Course_Id = #{courseId}
+    </update>
 </mapper>
+

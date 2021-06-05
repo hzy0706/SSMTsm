@@ -1,0 +1,35 @@
+PUT http://localhost:8080/Training/deleteByExaminationScore
+Content-Type: application/json
+
+{
+  "examinationscoreId": 1,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByExaminationScoreKey
+Content-Type: application/json
+
+{
+  "examinationscoreId": 1,
+  "score": 70,
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addExaminationScore
+Content-Type: application/json
+
+{
+  "score": 88,
+  "addname": "蔡锦康",
+  "studentId": 1,
+  "examinationId": 1
+}
+
+###
+GET http://localhost:8080/Training/examinationscoreService/1/3
+Accept: application/json
+
+###

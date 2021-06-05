@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.ExaminationsCoreDao">
+    <resultMap type="com.trkj.trainingprojects.vo.ExaminationScoreVo" id="ExaminationscoreMap">
+        <id property="examinationscoreId" column="ExaminationScore_Id" jdbcType="INTEGER"/>
+        <result property="score" column="Score" jdbcType="VARCHAR"/>
+        <result property="examinationstatus" column="ExaminationStatus" jdbcType="INTEGER"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+        <result property="examinationId" column="Examination_Id" jdbcType="INTEGER"/>
+        <association property="examinationVo" javaType="com.trkj.trainingprojects.vo.ExaminationVo">
+            <id property="examinationId" column="Examination_Id" jdbcType="INTEGER"/>
+            <result property="examinationname" column="ExaminationName" jdbcType="VARCHAR"/>
+            <result property="average" column="Average" jdbcType="VARCHAR"/>
+            <result property="highestscore" column="HighestScore" jdbcType="VARCHAR"/>
+            <result property="lowestscore" column="LowestScore" jdbcType="VARCHAR"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        </association>
+        <collection property="studentVos" ofType="com.trkj.trainingprojects.vo.StudentVo">
+            <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+            <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
+            <result property="studentState" column="Student_State" jdbcType="INTEGER"/>
+            <result property="sex" column="Sex" jdbcType="VARCHAR"/>
+            <result property="studentPhone" column="Student_Phone" jdbcType="VARCHAR"/>
+            <result property="address" column="Address" jdbcType="VARCHAR"/>
+            <result property="imgaddress" column="ImgAddress" jdbcType="VARCHAR"/>
+            <result property="parentname" column="ParentName" jdbcType="VARCHAR"/>
+            <result property="parentphone" column="ParentPhone" jdbcType="VARCHAR"/>
+            <result property="studentNumber" column="Student_Number" jdbcType="VARCHAR"/>
+            <result property="entrance" column="Entrance" jdbcType="VARCHAR"/>
+            <result property="studytime" column="StudyTime" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
+            <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      ec.ExaminationScore_Id, ec.Score, ec.ExaminationStatus, ec.AddName,
+      ec.ADDTIME, ec.UpdateName, ec.UpdateTime, ec.DeleteName, ec.DeleteTime, ec.TimeLiness,
+      ec.Student_Id, ec.Examination_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllExaminationScore" resultMap="ExaminationscoreMap">
+        select
+        <include refid="Base_Column_List" />
+        from examinationscore ec
+        inner join student s on ec.Student_Id =s.Student_Id
+        inner join examination e on ec.Examination_Id=e.Examination_Id
+        where ec.TimeLiness = 0
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ExaminationscoreMap">
+        select
+          ExaminationScore_Id, Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id
+        from tr01904.examinationscore
+        where ExaminationScore_Id = #{examinationscoreId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ExaminationscoreMap">
+        select
+          ExaminationScore_Id, Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id
+        from tr01904.examinationscore
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ExaminationscoreMap">
+        select
+        ExaminationScore_Id, Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime,
+        TimeLiness, Student_Id, Examination_Id
+        from tr01904.examinationscore
+        <where>
+            <if test="examinationscoreId != null">
+                and ExaminationScore_Id = #{examinationscoreId}
+            </if>
+            <if test="score != null">
+                and Score = #{score}
+            </if>
+            <if test="examinationstatus != null">
+                and ExaminationStatus = #{examinationstatus}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and ADDTIME = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="studentId != null">
+                and Student_Id = #{studentId}
+            </if>
+            <if test="examinationId != null">
+                and Examination_Id = #{examinationId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="examinationscoreId" useGeneratedKeys="true">
+        insert into tr01904.examinationscore(Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id)
+        values (#{score}, #{examinationstatus}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{examinationId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="examinationscoreId" useGeneratedKeys="true">
+        insert into tr01904.examinationscore(Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.score}, #{entity.examinationstatus}, #{entity.addname}, #{entity.addtime}, #{entity.updatename},
+            #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime}, #{entity.timeliness}, #{entity.studentId},
+            #{entity.examinationId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="examinationscoreId" useGeneratedKeys="true">
+        insert into tr01904.examinationscore(Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.score}, #{entity.examinationstatus}, #{entity.addname}, #{entity.addtime}, #{entity.updatename},
+            #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime}, #{entity.timeliness}, #{entity.studentId},
+            #{entity.examinationId})
+        </foreach>
+        on duplicate key update
+        Score = values(Score) , ExaminationStatus = values(ExaminationStatus) , AddName = values(AddName) , ADDTIME =
+        values(ADDTIME) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime) , DeleteName =
+        values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness = values(TimeLiness) , Student_Id =
+        values(Student_Id) , Examination_Id = values(Examination_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateByExaminationScoreKey">
+        update tr01904.examinationscore
+        <set>
+            <if test="score != null">
+                Score = #{score},
+            </if>
+            <if test="examinationstatus != null">
+                ExaminationStatus = #{examinationstatus},
+            </if>
+            <if test="addname != null">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime},
+            </if>
+            <if test="updatename != null">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="studentId != null">
+                Student_Id = #{studentId},
+            </if>
+            <if test="examinationId != null">
+                Examination_Id = #{examinationId},
+            </if>
+        </set>
+        where ExaminationScore_Id = #{examinationscoreId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.examinationscore where ExaminationScore_Id = #{examinationscoreId}
+    </delete>
+
+    <!--修改删除人与时效性-->
+    <update id="deleteByExaminationScore" parameterType="com.trkj.trainingprojects.entity.Examination">
+        update tr01904.examinationscore
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where ExaminationScore_Id = #{examinationscoreId}
+    </update>
+
+</mapper>
+

@@ -1,0 +1,35 @@
+PUT http://localhost:8080/Training/deleteByExaminationContent
+Content-Type: application/json
+
+{
+  "examinationcId": 3,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByExaminationContentKey
+Content-Type: application/json
+
+{
+  "examinationcId": 2,
+  "itembankId": 7,
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addExaminationContent
+Content-Type: application/json
+
+{
+  "itembankId": 1,
+  "addname": "蔡锦康",
+  "examinationId": 1,
+  "timeliness": 0
+}
+
+###
+GET http://localhost:8080/Training/selectAllExaminationContent/1
+Accept: application/json
+
+###

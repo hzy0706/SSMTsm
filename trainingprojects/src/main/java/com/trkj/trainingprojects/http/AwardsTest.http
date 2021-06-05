@@ -1,0 +1,36 @@
+PUT http://localhost:8080/Training/deleteByAwards
+Content-Type: application/json
+
+{
+  "awardsId": 1,
+  "deletename": "蔡锦康"
+}
+
+###
+
+PUT http://localhost:8080/Training/updateByAwardsKey
+Content-Type: application/json
+
+{
+  "awardsId": 1,
+  "awardscontent": "二等奖",
+  "updatename": "蔡锦康"
+}
+
+###
+POST http://localhost:8080/Training/addAwards
+Content-Type: application/json
+
+{
+  "timeliness": 0,
+  "awardscontent": "一等奖",
+  "addname": "蔡锦康",
+  "studentId": 1,
+  "classesId": 1
+}
+
+###
+GET http://localhost:8080/Training/selectAllAwards/1/3
+Accept: application/json
+
+###
