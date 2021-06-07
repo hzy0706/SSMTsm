@@ -29,6 +29,6 @@ public class SuggestServiceImpl implements SuggestService {
 
     @Override
     public List<SuggestVo> selectAll() {
-        return this.dao.selectAll();
+        return dao.selectAll();
     }
 }
