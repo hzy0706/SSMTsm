@@ -104,5 +104,8 @@
         </set>
         where Unit_Id = #{unitId}
     </update>
-
+    <update id="delUnitById">
+         update tr01904.unit set DeleteTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
+         where Unit_Id = #{unitId}
+    </update>
 </mapper>

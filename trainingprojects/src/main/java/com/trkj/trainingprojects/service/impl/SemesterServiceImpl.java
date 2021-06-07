@@ -36,6 +36,6 @@ public class SemesterServiceImpl implements SemesterService {
 
     @Override
     public int delSemesterById(SemesterVo semesterVo) {
-        return 0;
+        return semesterDao.delSemesterById(semesterVo);
     }
 }

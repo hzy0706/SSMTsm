@@ -24,18 +24,18 @@ public interface UnitService {
     /**
      * 新增数据
      *
-     * @param unit 实例对象
+     * @param unitVo 实例对象
      * @return 影响行数
      */
-    int addUnit(UnitVo unit);
+    int addUnit(UnitVo unitVo);
 
     /**
      * 修改数据
      *
-     * @param unit 实例对象
+     * @param unitVo 实例对象
      * @return 影响行数
      */
-    int update(UnitVo unit);
+    int update(UnitVo unitVo);
 
 
     /**
@@ -43,4 +43,8 @@ public interface UnitService {
      *
      */
     List<UnitVo> selectAll();
+    /**
+     * 删除
+     */
+    int delUnitById(UnitVo unitVo);
 }

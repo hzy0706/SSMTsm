@@ -4,13 +4,12 @@ package com.trkj.trainingprojects.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.UnitService;
+import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.UnitVo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -39,5 +38,33 @@ public class UnitController {
         PageInfo<UnitVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+    /**
+     * 新增
+     * @param unitVo
+     * @return
+     */
+    @PostMapping("/addSemesterALL")
+    public AjaxResponse addUnitALL(@RequestBody @Valid UnitVo unitVo){
+        unitService.addUnit(unitVo);
+        return AjaxResponse.success(unitVo);
+    }
 
+    /**
+     * 修改
+     * @param unitVo
+     * @return
+     */
+    @PutMapping("/updateUnitById")
+    public  AjaxResponse updateUnitById(@RequestBody @Valid UnitVo unitVo){
+        unitService.update(unitVo);
+        return AjaxResponse.success(unitVo);
+    }
+    /**
+     * 删除
+     */
+    @PutMapping("/delUnitById")
+    public AjaxResponse delSemesterById(@RequestBody @Valid UnitVo unitVo){
+        unitService.delUnitById(unitVo);
+        return AjaxResponse.success(unitVo);
+    }
 }

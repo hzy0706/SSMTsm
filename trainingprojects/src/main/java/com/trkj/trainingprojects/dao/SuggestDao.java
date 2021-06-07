@@ -21,28 +21,35 @@ public interface SuggestDao {
      * @param suggestId 主键
      * @return 实例对象
      */
-    SuggestVo queryById(Integer suggestId);
+    SuggestVo selectSuggestById(Integer suggestId);
 
     /**
      * 新增数据
      *
-     * @param suggest 实例对象
+     * @param
      * @return 影响行数
      */
-    int addSuggest(SuggestVo suggest);
+    int addSuggest(SuggestVo suggestVo);
 
     /**
      * 修改数据
      *
-     * @param suggest 实例对象
+     * @param
      * @return 影响行数
      */
-    int update(SuggestVo suggest);
+    int update(SuggestVo suggestVo);
 
     /**
      * 查询所有
      */
     List<SuggestVo> selectAll();
+
+    /**
+     * 根据id删除
+     * @param suggestVo
+     * @return
+     */
+    int delSuggestById(SuggestVo suggestVo);
 }
 
 
