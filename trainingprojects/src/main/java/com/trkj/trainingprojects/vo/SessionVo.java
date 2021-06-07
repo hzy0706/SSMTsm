@@ -10,7 +10,7 @@ import java.util.Date;
  * @since 2021-06-02 18:52:09
  */
 
-public class SessionVo implements Serializable {
+public class SessionVo {
     private static final long serialVersionUID = -15357388774898277L;
     /**
     * 年届编号
