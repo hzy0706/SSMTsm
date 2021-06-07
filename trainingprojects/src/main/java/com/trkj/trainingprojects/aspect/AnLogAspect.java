@@ -15,25 +15,13 @@ import javax.annotation.Resource;
 @Slf4j
 @Component
 @Aspect
-public class AnLogAspect<faqVoClass> {
+public class AnLogAspect{
     @Resource
     private OpJournalService opJournalService;
 
     @Pointcut("execution(* com.trkj.trainingprojects.service..*.*(..))")
     public void x(){
     }
-    /*@Before("execution(* com.trkj.service..IEmpService.*(..))")
-    public void logBefore(){
-        log.debug("开始做日志");
-    }
-    @Before("x()")
-    public void logBeforeLogInfo(JoinPoint joinPoint){
-        log.debug("即将进入到{}类的{}方法",joinPoint.getTarget().getClass(),joinPoint.getSignature());
-    }
-    @After("x()")
-    public void logAfter(JoinPoint joinPoint){
-        log.debug("完成{}类的{}方法执行",joinPoint.getTarget().getClass(),joinPoint.getSignature());
-    }*/
     @Around("x()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>即将进入到{}类的{}方法",joinPoint.getTarget().getClass().getName(),joinPoint.getSignature());
