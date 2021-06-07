@@ -1,6 +1,5 @@
 package com.trkj.trainingprojects.entity;
 
-
 import java.util.Date;
 import java.io.Serializable;
 
@@ -10,7 +9,8 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-06-04 17:11:12
  */
-public class Suggest{
+
+public class Suggest {
     private static final long serialVersionUID = 223706187829308346L;
     /**
      * 意见箱编号

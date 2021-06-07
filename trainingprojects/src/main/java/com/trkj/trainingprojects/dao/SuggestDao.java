@@ -1,10 +1,8 @@
 package com.trkj.trainingprojects.dao;
 
-
-
 import com.trkj.trainingprojects.vo.SuggestVo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -15,6 +13,7 @@ import java.util.List;
  */
 @Mapper
 public interface SuggestDao {
+
 
     /**
      * 通过ID查询单条数据
