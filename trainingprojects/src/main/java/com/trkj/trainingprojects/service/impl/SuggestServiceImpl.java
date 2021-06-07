@@ -1,7 +1,8 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.SuggestDao;
 import com.trkj.trainingprojects.entity.Suggest;
+import com.trkj.trainingprojects.service.SuggestService;
 import com.trkj.trainingprojects.vo.SuggestVo;
 import org.springframework.stereotype.Service;
 

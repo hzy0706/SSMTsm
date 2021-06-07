@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.StudentDao">
+    <resultMap type="com.trkj.trainingprojects.entity.Student" id="StudentMap">
+        <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+        <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
+        <result property="studentState" column="Student_State" jdbcType="INTEGER"/>
+        <result property="sex" column="Sex" jdbcType="VARCHAR"/>
+        <result property="studentPhone" column="Student_Phone" jdbcType="VARCHAR"/>
+        <result property="address" column="Address" jdbcType="VARCHAR"/>
+        <result property="imgaddress" column="ImgAddress" jdbcType="VARCHAR"/>
+        <result property="parentname" column="ParentName" jdbcType="VARCHAR"/>
+        <result property="parentphone" column="ParentPhone" jdbcType="VARCHAR"/>
+        <result property="studentNumber" column="Student_Number" jdbcType="VARCHAR"/>
+        <result property="entrance" column="Entrance" jdbcType="VARCHAR"/>
+        <result property="studytime" column="StudyTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+        <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
+        <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentMap">
+        select
+          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
+        from tr01904.student
+        where Student_Id = #{studentId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentMap">
+        select
+          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
+        from tr01904.student
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StudentMap">
+        select
+        Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone,
+        Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id,
+        Source_Id, Register_Id
+        from tr01904.student
+        <where>
+            <if test="studentId != null">
+                and Student_Id = #{studentId}
+            </if>
+            <if test="studentName != null and studentName != ''">
+                and Student_Name = #{studentName}
+            </if>
+            <if test="studentState != null">
+                and Student_State = #{studentState}
+            </if>
+            <if test="sex != null and sex != ''">
+                and Sex = #{sex}
+            </if>
+            <if test="studentPhone != null and studentPhone != ''">
+                and Student_Phone = #{studentPhone}
+            </if>
+            <if test="address != null and address != ''">
+                and Address = #{address}
+            </if>
+            <if test="imgaddress != null and imgaddress != ''">
+                and ImgAddress = #{imgaddress}
+            </if>
+            <if test="parentname != null and parentname != ''">
+                and ParentName = #{parentname}
+            </if>
+            <if test="parentphone != null and parentphone != ''">
+                and ParentPhone = #{parentphone}
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                and Student_Number = #{studentNumber}
+            </if>
+            <if test="entrance != null and entrance != ''">
+                and Entrance = #{entrance}
+            </if>
+            <if test="studytime != null">
+                and StudyTime = #{studytime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="classesId != null">
+                and Classes_Id = #{classesId}
+            </if>
+            <if test="sourceId != null">
+                and Source_Id = #{sourceId}
+            </if>
+            <if test="registerId != null">
+                and Register_Id = #{registerId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="studentId" useGeneratedKeys="true">
+        insert into tr01904.student(Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id)
+        values (#{studentName}, #{studentState}, #{sex}, #{studentPhone}, #{address}, #{imgaddress}, #{parentname}, #{parentphone}, #{studentNumber}, #{entrance}, #{studytime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{classesId}, #{sourceId}, #{registerId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="studentId" useGeneratedKeys="true">
+        insert into tr01904.student(Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName,
+        ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness,
+        Classes_Id, Source_Id, Register_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.studentName}, #{entity.studentState}, #{entity.sex}, #{entity.studentPhone}, #{entity.address},
+            #{entity.imgaddress}, #{entity.parentname}, #{entity.parentphone}, #{entity.studentNumber},
+            #{entity.entrance}, #{entity.studytime}, #{entity.updatename}, #{entity.updatetime}, #{entity.deletename},
+            #{entity.deletetime}, #{entity.timeliness}, #{entity.classesId}, #{entity.sourceId}, #{entity.registerId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="studentId" useGeneratedKeys="true">
+        insert into tr01904.student(Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName,
+        ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness,
+        Classes_Id, Source_Id, Register_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.studentName}, #{entity.studentState}, #{entity.sex}, #{entity.studentPhone}, #{entity.address},
+            #{entity.imgaddress}, #{entity.parentname}, #{entity.parentphone}, #{entity.studentNumber},
+            #{entity.entrance}, #{entity.studytime}, #{entity.updatename}, #{entity.updatetime}, #{entity.deletename},
+            #{entity.deletetime}, #{entity.timeliness}, #{entity.classesId}, #{entity.sourceId}, #{entity.registerId})
+        </foreach>
+        on duplicate key update
+        Student_Name = values(Student_Name) , Student_State = values(Student_State) , Sex = values(Sex) , Student_Phone
+        = values(Student_Phone) , Address = values(Address) , ImgAddress = values(ImgAddress) , ParentName =
+        values(ParentName) , ParentPhone = values(ParentPhone) , Student_Number = values(Student_Number) , Entrance =
+        values(Entrance) , StudyTime = values(StudyTime) , UpdateName = values(UpdateName) , UpdateTime =
+        values(UpdateTime) , DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness =
+        values(TimeLiness) , Classes_Id = values(Classes_Id) , Source_Id = values(Source_Id) , Register_Id =
+        values(Register_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tr01904.student
+        <set>
+            <if test="studentName != null and studentName != ''">
+                Student_Name = #{studentName},
+            </if>
+            <if test="studentState != null">
+                Student_State = #{studentState},
+            </if>
+            <if test="sex != null and sex != ''">
+                Sex = #{sex},
+            </if>
+            <if test="studentPhone != null and studentPhone != ''">
+                Student_Phone = #{studentPhone},
+            </if>
+            <if test="address != null and address != ''">
+                Address = #{address},
+            </if>
+            <if test="imgaddress != null and imgaddress != ''">
+                ImgAddress = #{imgaddress},
+            </if>
+            <if test="parentname != null and parentname != ''">
+                ParentName = #{parentname},
+            </if>
+            <if test="parentphone != null and parentphone != ''">
+                ParentPhone = #{parentphone},
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                Student_Number = #{studentNumber},
+            </if>
+            <if test="entrance != null and entrance != ''">
+                Entrance = #{entrance},
+            </if>
+            <if test="studytime != null">
+                StudyTime = #{studytime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="classesId != null">
+                Classes_Id = #{classesId},
+            </if>
+            <if test="sourceId != null">
+                Source_Id = #{sourceId},
+            </if>
+            <if test="registerId != null">
+                Register_Id = #{registerId},
+            </if>
+        </set>
+        where Student_Id = #{studentId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.student where Student_Id = #{studentId}
+    </delete>
+
+</mapper>
+
