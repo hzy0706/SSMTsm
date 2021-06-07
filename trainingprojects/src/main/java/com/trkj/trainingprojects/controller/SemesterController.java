@@ -3,11 +3,11 @@ package com.trkj.trainingprojects.controller;
 import com.trkj.trainingprojects.entity.Semester;
 import com.trkj.trainingprojects.service.SemesterService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.trkj.trainingprojects.vo.SemesterVo;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -27,14 +27,49 @@ public class SemesterController {
 
     /**
      * 查询所有
-     *
-     * @param
-     * @return 单条数据
+     * @return
      */
-
-    @GetMapping("selectall")
+    @GetMapping("/selectall")
     public AjaxResponse selectall(){
-        List <Semester> list=this.semesterService.selectALL();
+        List <SemesterVo> list=this.semesterService.selectALL();
         return AjaxResponse.success(list);
+    }
+    /**
+     * 根据id查询单条
+     * @return
+     */
+    @GetMapping("/selectById")
+    public AjaxResponse selectById(@RequestParam("id")int id){
+        return AjaxResponse.success(id);
+    }
+
+    /**
+     * 新增
+     * @param semesterVo
+     * @return
+     */
+    @PostMapping("/addSemesterALL")
+    public AjaxResponse addSemesterALL(@RequestBody @Valid SemesterVo semesterVo){
+        semesterService.addSemesterALL(semesterVo);
+        return AjaxResponse.success(semesterVo);
+    }
+
+    /**
+     * 修改
+     * @param semesterVo
+     * @return
+     */
+    @PutMapping("/updateSemesterById")
+    public  AjaxResponse updateSemesterById(@RequestBody @Valid SemesterVo semesterVo){
+        semesterService.updateSemesterById(semesterVo);
+        return AjaxResponse.success(semesterVo);
+    }
+    /**
+     * 删除
+     */
+    @PutMapping("/delSemesterById")
+    public AjaxResponse delSemesterById(@RequestBody @Valid SemesterVo semesterVo){
+        semesterService.delSemesterById(semesterVo);
+        return AjaxResponse.success(semesterVo);
     }
 }

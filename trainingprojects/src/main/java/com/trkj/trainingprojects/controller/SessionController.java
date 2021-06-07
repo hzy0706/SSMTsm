@@ -3,13 +3,12 @@ package com.trkj.trainingprojects.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.SessionService;
+import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.SessionVo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class SessionController {
      * 查询所有可用
      *
      *
-     * @return 单条数据
+     * @return
      */
     @GetMapping("selectall")
     public PageInfo<SessionVo> selectall(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
@@ -40,6 +39,44 @@ public class SessionController {
         List<SessionVo> list=this.sessionService.selectAll();
         PageInfo<SessionVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+    /**
+     * 根据id查询单条
+     * @return
+     */
+    @GetMapping("/selectById")
+    public AjaxResponse selectById(@RequestParam("id")int id){
+        return AjaxResponse.success(id);
+    }
+
+    /**
+     * 新增
+     * @param sessionVo
+     * @return
+     */
+    @PostMapping("/addSessionALL")
+    public AjaxResponse addSemesterALL(@RequestBody @Valid SessionVo sessionVo){
+        sessionService.addSession(sessionVo);
+        return AjaxResponse.success(sessionVo);
+    }
+
+    /**
+     * 修改
+     * @param sessionVo
+     * @return
+     */
+    @PutMapping("/update")
+    public  AjaxResponse updateSemesterById(@RequestBody @Valid SessionVo sessionVo){
+        sessionService.update(sessionVo);
+        return AjaxResponse.success(sessionVo);
+    }
+    /**
+     * 删除
+     */
+    @PutMapping("/delsessionById")
+    public AjaxResponse delSessionById(@RequestBody @Valid SessionVo sessionVo){
+        sessionService.delSessionById(sessionVo);
+        return AjaxResponse.success(sessionVo);
     }
 
 }

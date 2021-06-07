@@ -67,5 +67,11 @@
         </set>
         where Session_Id = #{sessionId}
     </update>
-
+    <!--删除单条-->
+    <update id="delSessionById">
+        update Session
+        set
+        UpdateTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
+        where Session_Id=#{semesterId}
+    </update>
 </mapper>

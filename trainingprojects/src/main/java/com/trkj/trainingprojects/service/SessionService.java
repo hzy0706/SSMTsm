@@ -28,7 +28,7 @@ public interface SessionService {
      * @param session 实例对象
      * @return 实例对象
      */
-    SessionVo addSession(SessionVo session);
+    int addSession(SessionVo session);
 
     /**
      * 修改数据
@@ -36,7 +36,7 @@ public interface SessionService {
      * @param session 实例对象
      * @return 实例对象
      */
-    SessionVo update(SessionVo session);
+    int update(SessionVo session);
 
     /**
      * 查询所有
@@ -45,4 +45,11 @@ public interface SessionService {
      * @return 对象列表
      */
     List<SessionVo> selectAll();
+
+    /**
+     * 根据id删除
+     * @param
+     * @return
+     */
+    int delSessionById(SessionVo sessionVo);
 }

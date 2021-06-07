@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.entity.Semester;
+import com.trkj.trainingprojects.vo.SemesterVo;
 
 import java.util.List;
 
@@ -12,31 +13,40 @@ import java.util.List;
  */
 
 public interface SemesterService {
-
     /**
-     * 通过ID查询单条数据
+     * 通过实体作为筛选条件查询
      *
-     * @param semesterId 主键
-     * @return 实例对象
+     * @param semester 实例对象
+     * @return 对象列表
      */
-    Semester selectById(Integer semesterId);
-
+    SemesterVo selectById(SemesterVo semester);
 
     /**
      * 新增数据
      *
      * @param semester 实例对象
-     * @return 实例对象
+     * @return 影响行数
      */
-    Semester addsemester(Semester semester);
+    int addSemesterALL(SemesterVo semester);
 
     /**
-     * 修改数据
+     *
+     * 通过主键修改数据
      *
      * @param semester 实例对象
-     * @return 实例对象
+     * @return 影响行数
      */
-    Semester update(Semester semester);
+    int updateSemesterById(SemesterVo semester);
 
-    List<Semester> selectALL();
+    /**
+     * 查询所有
+     */
+    List<SemesterVo> selectALL();
+
+    /**
+     * 根据id删除
+     * @param
+     * @return
+     */
+    int delSemesterById(SemesterVo semesterVo);
 }

@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.dao;
 
-import com.trkj.trainingprojects.entity.Semester;
+
+import com.trkj.trainingprojects.vo.SemesterVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface SemesterDao {
      * @param semester 实例对象
      * @return 对象列表
      */
-    List<Semester> selectById(Semester semester);
+    SemesterVo selectById(SemesterVo semester);
 
     /**
      * 新增数据
@@ -27,21 +28,26 @@ public interface SemesterDao {
      * @param semester 实例对象
      * @return 影响行数
      */
-    int addsemester(Semester semester);
+    int addSemesterALL(SemesterVo semester);
 
     /**
-     * 修改数据
+     *
+     * 通过主键修改数据
      *
      * @param semester 实例对象
      * @return 影响行数
      */
-    int update(Semester semester);
+    int updateSemesterById(SemesterVo semester);
+
     /**
      * 查询所有
-     *
-
-     * @return 对象列表
      */
-    List<Semester> selectALL();
+    List<SemesterVo> selectALL();
 
+    /**
+     * 根据id删除
+     * @param
+     * @return
+     */
+    int delSemesterById(SemesterVo semesterVo);
 }

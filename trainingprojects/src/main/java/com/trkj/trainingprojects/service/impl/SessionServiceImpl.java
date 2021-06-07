@@ -14,21 +14,28 @@ public class SessionServiceImpl implements SessionService {
     SessionDao sessionDao;
     @Override
     public SessionVo selectById(Integer sessionId) {
-        return null;
+        return sessionDao.selectById(sessionId);
     }
 
     @Override
-    public SessionVo addSession(SessionVo session) {
-        return null;
+    public int addSession(SessionVo sessionVo) {
+        return sessionDao.addSession(sessionVo);
     }
+
     @Override
-    public SessionVo update(SessionVo session) {
-        return null;
+    public int update(SessionVo sessionVo) {
+        return sessionDao.update(sessionVo);
     }
+
 
     @Override
     public List<SessionVo> selectAll() {
         return this.sessionDao.selectAll();
+    }
+
+    @Override
+    public int delSessionById(SessionVo sessionVo) {
+        return sessionDao.delSessionById(sessionVo);
     }
 
 

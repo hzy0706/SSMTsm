@@ -28,18 +28,18 @@ public interface SessionDao {
     /**
      * 新增数据
      *
-     * @param session 实例对象
+     * @param
      * @return 影响行数
      */
-    int addSession(SessionVo session);
+    int addSession(SessionVo sessionVo);
 
     /**
      * 修改数据
      *
-     * @param session 实例对象
+     * @param
      * @return 影响行数
      */
-    int update(SessionVo session);
+    int update(SessionVo sessionVo);
 
     /**
      * 通过主键删除数据
@@ -55,4 +55,8 @@ public interface SessionDao {
      * @return 对象列表
      */
     List<SessionVo> selectAll();
+    /**
+     *
+     */
+    int delSessionById(SessionVo sessionVo);
 }

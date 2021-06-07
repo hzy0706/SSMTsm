@@ -1,6 +1,6 @@
 package com.trkj.trainingprojects.entity;
 
-<<<<<<< HEAD
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -10,47 +10,47 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-06-04 17:11:12
  */
-public class Suggest implements Serializable {
+public class Suggest{
     private static final long serialVersionUID = 223706187829308346L;
     /**
-    * 意见箱编号
-    */
+     * 意见箱编号
+     */
     private Integer suggestId;
     /**
-    * 意见箱名称
-    */
+     * 意见箱名称
+     */
     private String suggestName;
     /**
-    * 增加人
-    */
+     * 增加人
+     */
     private String addname;
     /**
-    * 增加时间
-    */
+     * 增加时间
+     */
     private Date addtime;
     /**
-    * 最后修改人
-    */
+     * 最后修改人
+     */
     private String updatename;
     /**
-    * 最后修改时间
-    */
+     * 最后修改时间
+     */
     private Date updatetime;
     /**
-    * 删除人
-    */
+     * 删除人
+     */
     private String deletename;
     /**
-    * 删除时间
-    */
+     * 删除时间
+     */
     private Date deletetime;
     /**
-    * 时效性
-    */
+     * 时效性
+     */
     private Integer timeliness;
     /**
-    * 部门编号
-    */
+     * 部门编号
+     */
     private Integer deptId;
 
 
@@ -134,68 +134,4 @@ public class Suggest implements Serializable {
         this.deptId = deptId;
     }
 
-=======
-import lombok.Data;
-
-import java.io.Serializable;
-import java.util.Date;
-
-/**
- * suggest
- * @author 
- */
-@Data
-public class Suggest implements Serializable {
-    /**
-     * 意见箱编号
-     */
-    private Integer suggestId;
-
-    /**
-     * 意见箱名称
-     */
-    private String suggestName;
-
-    /**
-     * 增加人
-     */
-    private String addname;
-
-    /**
-     * 增加时间
-     */
-    private Date addtime;
-
-    /**
-     * 最后修改人
-     */
-    private String updatename;
-
-    /**
-     * 最后修改时间
-     */
-    private Date updatetime;
-
-    /**
-     * 删除人
-     */
-    private String deletename;
-
-    /**
-     * 删除时间
-     */
-    private Date deletetime;
-
-    /**
-     * 时效性
-     */
-    private Integer timeliness;
-
-    /**
-     * 部门编号
-     */
-    private Integer deptId;
-
-    private static final long serialVersionUID = 1L;
->>>>>>> c649abe70ff4d67687954119f8437cdbd1c9bc3e
 }
