@@ -1,5 +1,11 @@
 package com.trkj.trainingprojects.vo;
 
+import com.trkj.trainingprojects.ann.ClassMeta;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,7 +15,11 @@ import java.util.Date;
  * @author makejava
  * @since 2021-06-02 18:52:09
  */
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Validated
+@ClassMeta(className = "年届表")
 public class SessionVo {
     private static final long serialVersionUID = -15357388774898277L;
     /**

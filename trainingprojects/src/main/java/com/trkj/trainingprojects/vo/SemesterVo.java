@@ -1,6 +1,11 @@
 package com.trkj.trainingprojects.vo;
 
+import com.trkj.trainingprojects.ann.ClassMeta;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +16,12 @@ import java.util.Date;
  * @author makejava
  * @since 2021-06-02 16:24:12
  */
-public class SemesterVo implements Serializable {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Validated
+@ClassMeta(className = "学期表")
+public class SemesterVo{
     private static final long serialVersionUID = -89672233692078935L;
     /**
     * 学期编号
@@ -53,77 +63,5 @@ public class SemesterVo implements Serializable {
     */
     private Integer timeliness;
 
-
-    public Integer getSemesterId() {
-        return semesterId;
-    }
-
-    public void setSemesterId(Integer semesterId) {
-        this.semesterId = semesterId;
-    }
-
-    public String getSemesterName() {
-        return semesterName;
-    }
-
-    public void setSemesterName(String semesterName) {
-        this.semesterName = semesterName;
-    }
-
-    public String getAddname() {
-        return addname;
-    }
-
-    public void setAddname(String addname) {
-        this.addname = addname;
-    }
-
-    public Date getAddtime() {
-        return addtime;
-    }
-
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
-    }
-
-    public String getUpdatename() {
-        return updatename;
-    }
-
-    public void setUpdatename(String updatename) {
-        this.updatename = updatename;
-    }
-
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public void setDeletename(String deletename) {
-        this.deletename = deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public void setDeletetime(Date deletetime) {
-        this.deletetime = deletetime;
-    }
-
-    public Integer getTimeliness() {
-        return timeliness;
-    }
-
-    public void setTimeliness(Integer timeliness) {
-        this.timeliness = timeliness;
-    }
 
 }

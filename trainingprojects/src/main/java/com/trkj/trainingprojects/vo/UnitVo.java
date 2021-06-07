@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Validated
 @ClassMeta(className = "单位表")
-public class UnitVo implements Serializable {
+public class UnitVo{
     private static final long serialVersionUID = 716394578968926959L;
     /**
     * 单位编号
