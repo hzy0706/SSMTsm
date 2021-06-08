@@ -36,14 +36,19 @@ public class BookstorageVo {
     private Date storagetime;
 
     /**
-     * 审批
+     * 后勤审批
      */
     private Integer approval;
 
     /**
+     * 财务审批
+     */
+    private Integer cwapproval;
+
+    /**
      * 审批人
      */
-    private String appname;
+    public String appname;
 
     /**
      * 审批时间
@@ -53,7 +58,7 @@ public class BookstorageVo {
     /**
      * 撤销审批人
      */
-    private String revokeAppname;
+    public String revokeAppname;
 
     /**
      * 撤销审批时间

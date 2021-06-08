@@ -7,6 +7,7 @@
     <result column="TotalPrice" jdbcType="DECIMAL" property="totalprice" />
     <result column="StorageTime" jdbcType="TIMESTAMP" property="storagetime" />
     <result column="Approval" jdbcType="INTEGER" property="approval" />
+    <result column="CWApproval" jdbcType="INTEGER" property="cwapproval" />
     <result column="AppName" jdbcType="VARCHAR" property="appname" />
     <result column="AppTime" jdbcType="TIMESTAMP" property="apptime" />
     <result column="Revoke_AppName" jdbcType="VARCHAR" property="revokeAppname" />
@@ -27,7 +28,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    bt.BookStorage_Id, bt.StorageCount, bt.TotalPrice, bt.StorageTime, bt.Approval, bt.AppName, bt.AppTime,
+    bt.BookStorage_Id, bt.StorageCount, bt.TotalPrice, bt.StorageTime, bt.Approval,bt.CWApproval,bt.AppName, bt.AppTime,
     bt.Revoke_AppName, bt.Revoke_AppTime, bt.AddName, bt.UpdateName, bt.UpdateTime, bt.DeleteName, bt.DeleteTime,
     bt.TimeLiness, bt.Book_Id, bt.Emp_Id
   </sql>
@@ -46,17 +47,17 @@
     where bt.TimeLiness=0 order by bt.StorageTime desc
   </select>
   <insert id="insert" keyColumn="BookStorage_Id" keyProperty="bookstorageId" parameterType="com.trkj.trainingprojects.vo.BookstorageVo" useGeneratedKeys="true">
-    insert into bookstorage (StorageCount, TotalPrice, StorageTime, 
-      Approval, AppName, AppTime, 
+    insert into bookstorage (StorageCount, TotalPrice,
+      AppName, AppTime,
       Revoke_AppName, Revoke_AppTime, AddName, 
       UpdateName, UpdateTime, DeleteName, 
-      DeleteTime, TimeLiness, Book_Id, 
+      DeleteTime,Book_Id,
       Emp_Id)
-    values (#{storagecount,jdbcType=INTEGER}, #{totalprice,jdbcType=DECIMAL}, #{storagetime,jdbcType=TIMESTAMP}, 
-      #{approval,jdbcType=INTEGER}, #{appname,jdbcType=VARCHAR}, #{apptime,jdbcType=TIMESTAMP}, 
+    values (#{storagecount,jdbcType=INTEGER}, #{totalprice,jdbcType=DECIMAL},
+      #{appname,jdbcType=VARCHAR}, #{apptime,jdbcType=TIMESTAMP},
       #{revokeAppname,jdbcType=VARCHAR}, #{revokeApptime,jdbcType=TIMESTAMP}, #{addname,jdbcType=VARCHAR}, 
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, 
-      #{deletetime,jdbcType=TIMESTAMP}, #{timeliness,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{bookId,jdbcType=INTEGER},
       #{empId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="BookStorage_Id" keyProperty="bookstorageId" parameterType="com.trkj.trainingprojects.vo.BookstorageVo" useGeneratedKeys="true">
