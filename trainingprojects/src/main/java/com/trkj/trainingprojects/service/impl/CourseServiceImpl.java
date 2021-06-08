@@ -63,4 +63,9 @@ public class CourseServiceImpl implements CourseService {
     public int deleteByCourse(CourseVo courseVo) {
         return courseDao.deleteByCourse(courseVo);
     }
+
+    @Override
+    public int updateByCoursePel(CourseVo courseVo) {
+        return courseDao.updateByCoursePel(courseVo);
+    }
 }
