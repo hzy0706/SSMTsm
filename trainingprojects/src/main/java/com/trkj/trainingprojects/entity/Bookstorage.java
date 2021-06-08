@@ -42,6 +42,11 @@ public class Bookstorage implements Serializable {
     private Integer approval;
 
     /**
+     * 财务审批
+     */
+    private Integer cwapproval;
+
+    /**
      * 审批人
      */
     private String appname;
