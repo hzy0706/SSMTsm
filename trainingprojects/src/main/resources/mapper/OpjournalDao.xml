@@ -15,6 +15,11 @@
     <include refid="Base_Column_List" />
     from opjournal where 1=1 order by OpTime desc
   </select>
+  <select id="selectAllOpjournalByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from opjournal where OpContent like #{choice,jdbcType=VARCHAR} order by OpTime desc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from opjournal
     where OpJournal_Id = #{opjournalId,jdbcType=INTEGER}

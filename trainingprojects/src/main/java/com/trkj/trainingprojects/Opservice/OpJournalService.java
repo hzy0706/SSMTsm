@@ -8,4 +8,5 @@ import java.util.List;
 public interface OpJournalService {
     public void addOpJournal(Opjournal opjournal);
     public List<OpjournalVo> selectAllOpjournal();
+    public List<OpjournalVo> selectAllOpjournalByType(String choice);
 }

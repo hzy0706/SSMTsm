@@ -16,6 +16,8 @@ public interface OpjournalDao {
 
     List<OpjournalVo> selectAllOpjournal();
 
+    List<OpjournalVo> selectAllOpjournalByType(String choice);
+
     int updateByPrimaryKeySelective(Opjournal record);
 
     int updateByPrimaryKey(Opjournal record);

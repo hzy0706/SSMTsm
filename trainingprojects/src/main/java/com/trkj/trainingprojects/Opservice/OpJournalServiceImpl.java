@@ -25,4 +25,9 @@ public class OpJournalServiceImpl implements OpJournalService {
     public List<OpjournalVo> selectAllOpjournal() {
         return opjournalDao.selectAllOpjournal();
     }
+
+    @Override
+    public List<OpjournalVo> selectAllOpjournalByType(String choice) {
+        return opjournalDao.selectAllOpjournalByType(choice);
+    }
 }

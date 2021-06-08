@@ -22,4 +22,11 @@ public class OpJournalController {
         PageInfo<OpjournalVo> pageInfo = new PageInfo<>(list);
         return  pageInfo;
     }
+    @GetMapping("/selectAllOpjournalByType")
+    public PageInfo<OpjournalVo> selectAllOpjournalByType(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize,@RequestParam("choice")String choice){
+        PageHelper.startPage(currentPage,pageSize);
+        List<OpjournalVo> list = opJournalService.selectAllOpjournalByType("%"+choice+"%");
+        PageInfo<OpjournalVo> pageInfo = new PageInfo<>(list);
+        return  pageInfo;
+    }
 }
