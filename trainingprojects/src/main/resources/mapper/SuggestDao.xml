@@ -18,11 +18,11 @@
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="BaseResultMap">
+    <select id="selectSuggestById" resultMap="BaseResultMap">
         select
           Suggest_Id, Suggest_Name, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Dept_Id
         from tr01904.suggest
-        where Suggest_Id = #{suggestId}
+        where Suggest_Id = #{suggestId} and TimeLiness=0
     </select>
     <!--查询所有 -->
     <select id="selectAll" resultMap="BaseResultMap">
@@ -71,5 +71,9 @@
         </set>
         where Suggest_Id = #{suggestId}
     </update>
-
+    <!--通过主键删除数据-->
+    <update id="delSuggestById">
+        update tr01904.suggest set DeleteTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
+        where Session_Id=#{semesterId}
+    </update>
 </mapper>

@@ -34,4 +34,9 @@ public class UnitServiceImpl implements UnitService {
     public List<UnitVo> selectAll() {
         return dao.selectAll();
     }
+
+    @Override
+    public int delUnitById(UnitVo unitVo) {
+        return dao.delUnitById(unitVo);
+    }
 }

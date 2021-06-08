@@ -1,6 +1,6 @@
 package com.trkj.trainingprojects.service;
 
-import com.trkj.trainingprojects.entity.Suggest;
+
 import com.trkj.trainingprojects.vo.SuggestVo;
 
 import java.util.List;
@@ -19,28 +19,32 @@ public interface SuggestService {
      * @param suggestId 主键
      * @return 实例对象
      */
-    Suggest queryById(Integer suggestId);
+    SuggestVo addSuggest(Integer suggestId);
 
 
     /**
      * 新增数据
      *
-     * @param suggest 实例对象
+     * @param suggestVo 实例对象
      * @return 实例对象
      */
-    Suggest insert(Suggest suggest);
+    SuggestVo selectSuggestById(SuggestVo suggestVo);
 
     /**
      * 修改数据
      *
-     * @param suggest 实例对象
+     * @param suggestVo 实例对象
      * @return 实例对象
      */
-    Suggest update(Suggest suggest);
+    SuggestVo update(SuggestVo suggestVo);
 
 
     /**
      * 查询所有
      */
     List<SuggestVo> selectAll();
+    /**
+     * 删除
+     */
+    int delSuggestById(SuggestVo suggestVo);
 }
