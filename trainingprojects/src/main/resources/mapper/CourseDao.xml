@@ -69,7 +69,7 @@
     <select id="selectAllCourses" resultMap="CourseMap">
         select
         <include refid="Base_Column_List" />,ct.ClassType_Name
-        from course c inner join classtype ct on c.Course_Id=ct.ClassType_Id
+        from course c inner join classtype ct on c.ClassType_Id=ct.ClassType_Id
         where c.TimeLiness = 0
     </select>
 

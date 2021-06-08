@@ -25,12 +25,28 @@ public class CourseController {
     @Resource
     private CourseService courseService;
 
+    /**
+     * 分页查询
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/selectAllCourses")
     public PageInfo<CourseVo> selectAllCourses(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<CourseVo> list = courseService.selectAllCourses();
         PageInfo<CourseVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    /**
+     * 不分页查询
+     * @return
+     */
+    @GetMapping("/selectAllCourse")
+    public List<CourseVo> selectAllCourse(){
+        List<CourseVo> list = courseService.selectAllCourses();
+        return list;
     }
 
     @PostMapping("/addCourses")
