@@ -2,10 +2,10 @@ POST http://localhost:8080/Training/addDept
 Content-Type: application/json
 
 {
-  "deptName": "测试100",
+  "deptName": "测试1001",
   "deptSortnumber": "测试",
   "deptDescribe": "测试",
-  "addname": "蔡锦康"
+  "addname": "刘莹莹"
 }
 
 ###
