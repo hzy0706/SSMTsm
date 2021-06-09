@@ -22,4 +22,5 @@ public interface CourseService {
     public void addCourse(CourseVo courseVo);
     public int updateByCourseKey(CourseVo courseVo);
     public int deleteByCourse(CourseVo courseVo);
+    public int updateByCoursePel(CourseVo courseVo);
 }

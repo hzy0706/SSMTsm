@@ -32,5 +32,6 @@ public interface CourseDao {
     int deleteByCourse(CourseVo courseVo);  //删除
     int updateByCourseKey(CourseVo courseVo);   //修改
     int insert(CourseVo courseVo);    //添加
+    int updateByCoursePel(CourseVo courseVo);
 }
 

@@ -265,5 +265,16 @@
           TimeLiness = #{timeliness}
         where Course_Id = #{courseId}
     </update>
+
+    <!--修改为停报与停保办理人-->
+    <update id="updateByCoursePel" parameterType="com.trkj.trainingprojects.entity.Course">
+        update tr01904.course
+        set
+          Course_State = #{courseState},
+          StopName = #{stopname},
+          StopTime = #{stoptime}
+        where Course_Id = #{courseId}
+    </update>
+
 </mapper>
 

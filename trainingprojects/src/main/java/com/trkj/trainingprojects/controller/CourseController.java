@@ -72,4 +72,12 @@ public class CourseController {
         return AjaxResponse.success(courseVo);
     }
 
+    @PutMapping("/updateByCoursePel")
+    public AjaxResponse updateByCoursePel(@RequestBody @Valid CourseVo courseVo){
+        Date date = new Date();
+        courseVo.setStoptime(date);
+        courseService.updateByCoursePel(courseVo);
+        return  AjaxResponse.success(courseVo);
+    }
+
 }
