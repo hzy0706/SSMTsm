@@ -1,11 +1,16 @@
+GET http://localhost:8080/Training/selectAllDept
+Accept: application/json
+
+###
 POST http://localhost:8080/Training/addDept
 Content-Type: application/json
 
 {
   "deptName": "测试100",
-  "deptSortnumber": "测试",
-  "deptDescribe": "测试",
+  "deptSortnumber": "测试100",
+  "deptDescribe": "测试100",
   "addname": "蔡锦康"
 }
 
 ###
+
