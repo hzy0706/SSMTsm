@@ -21,6 +21,8 @@ public interface SemesterService {
      */
     SemesterVo selectById(SemesterVo semester);
 
+    void add(String uname,String adname);
+
     /**
      * 新增数据
      *

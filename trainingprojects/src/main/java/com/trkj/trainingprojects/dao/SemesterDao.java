@@ -30,6 +30,7 @@ public interface SemesterDao {
      */
     int addSemesterALL(SemesterVo semester);
 
+    void add(String uname,String adname);
     /**
      *
      * 通过主键修改数据
