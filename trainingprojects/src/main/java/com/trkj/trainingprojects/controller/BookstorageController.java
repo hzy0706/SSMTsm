@@ -49,6 +49,10 @@ public class  BookstorageController {
     public AjaxResponse updateBookstorage(@RequestBody @Valid BookstorageVo bookstorageVo){
         Date date = new Date();
         bookstorageVo.setUpdatetime(date);
+        BookVo bookVo = bookService.selectByBookKey(bookstorageVo.getBookId());
+        BigDecimal count = new BigDecimal(bookstorageVo.getStoragecount());
+        BigDecimal totalprice =count.multiply(bookVo.getBookjprice());
+        bookstorageVo.setTotalprice(totalprice);
         bookstorageService.updateByBookstorageKeySelective(bookstorageVo);
         return AjaxResponse.success(bookstorageVo);
     }
