@@ -88,12 +88,12 @@ public class StorageexpenditureVo {
     /**
      * 财务部审核时间
      */
-    private Date appname;
+    private Date apptime;
 
     /**
      * 财务部审核人
      */
-    public String apptime;
+    public String appname;
 
     /**
      * 财务部撤销审核时间

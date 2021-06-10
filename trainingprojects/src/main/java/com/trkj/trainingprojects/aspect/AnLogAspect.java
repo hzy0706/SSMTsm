@@ -55,6 +55,15 @@ public class AnLogAspect{
             opjournal.setEmpName(deleteName);
             opjournal.setOpcontent("删除"+tableName+"数据");
             opJournalService.addOpJournal(opjournal);
+        }else if(className.equals("app")){
+            Class faqVoClass = args[0].getClass();
+            ClassMeta fieldMeta = (ClassMeta)faqVoClass.getAnnotation(ClassMeta.class);
+            String tableName = fieldMeta.className();
+            String deleteName =  args[0].getClass().getDeclaredField("appname").get(args[0]).toString();
+            Opjournal opjournal = new Opjournal();
+            opjournal.setEmpName(deleteName);
+            opjournal.setOpcontent("审核"+tableName+"数据");
+            opJournalService.addOpJournal(opjournal);
         }
         log.debug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<完成{}类的{}方法执行",joinPoint.getTarget().getClass().getName(),joinPoint.getSignature());
         return obj;
