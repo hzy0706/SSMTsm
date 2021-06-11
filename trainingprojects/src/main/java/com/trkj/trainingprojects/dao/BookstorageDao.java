@@ -13,7 +13,9 @@ public interface BookstorageDao {
 
     BookstorageVo selectByBookstorageKey(Integer bookstorageId);
 
-    List<BookstorageVo> selectAllBookstorages();
+    List<BookstorageVo> selectAllBookstorages(String value);
+
+    List<BookstorageVo> selectAllBookstoragesByStatus(Integer approval,Integer cwapproval,String value);
 
     int updateByBookstorageKeySelective(BookstorageVo record);
 

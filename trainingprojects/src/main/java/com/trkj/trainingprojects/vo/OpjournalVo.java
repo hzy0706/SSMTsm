@@ -33,5 +33,10 @@ public class OpjournalVo {
      */
     private String empName;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    public Date getOptime() {
+        return optime;
+    }
+
     private static final long serialVersionUID = 1L;
 }

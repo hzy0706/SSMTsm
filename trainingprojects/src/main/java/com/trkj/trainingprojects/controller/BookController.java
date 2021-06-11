@@ -2,6 +2,7 @@ package com.trkj.trainingprojects.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.trkj.trainingprojects.exception.CustomError;
 import com.trkj.trainingprojects.service.BookService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.BookVo;
@@ -49,7 +50,8 @@ public class BookController {
         Date date = new Date();
         bookVo.setDeletetime(date);
         bookVo.setTimeliness(1);
-        bookService.deleteByBookKey(bookVo);
+        int i =bookService.deleteByBookKey(bookVo);
         return AjaxResponse.success(bookVo);
+
     }
 }
