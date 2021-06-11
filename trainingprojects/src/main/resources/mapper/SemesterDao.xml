@@ -26,15 +26,19 @@
     <select id="selectALL" resultMap="BaseResultMap">
         select
           Semester_Id, Semester_Name, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness
-        from tr01904.semester
+        from semester
         where  TimeLiness=0;
     </select>
     <!--新增所有列-->
-    <insert id="addSemesterALL" keyProperty="semesterId" useGeneratedKeys="true">
-        insert into tr01904.semester(Semester_Name, AddName, UpdateName, UpdateTime, DeleteName, DeleteTime)
-        values (#{semesterName}, #{addname}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime})
+    <insert id="addSemesterALL">
+        insert into tr01904.semester(Semester_Name, AddName)
+        values (#{semesterName}, #{addname})
     </insert>
 
+    <insert id="add">
+        insert into semester(Semester_Name, AddName)
+        values (#{param1}, #{param2})
+    </insert>
     <!--通过主键修改数据-->
     <update id="updateSemesterById">
         update tr01904.semester

@@ -17,5 +17,9 @@ public interface BookstorageDao {
 
     int updateByBookstorageKeySelective(BookstorageVo record);
 
+    int appBookstorage(BookstorageVo record);
+
     int updateByBookstorageKey(BookstorageVo record);
+
+    int updateByBookstorageApp(BookstorageVo record);
 }

@@ -56,6 +56,11 @@ public class  BookstorageController {
         bookstorageService.updateByBookstorageKeySelective(bookstorageVo);
         return AjaxResponse.success(bookstorageVo);
     }
+    @PutMapping("/appBookstorage")
+    public AjaxResponse appBookstorage(@RequestBody @Valid BookstorageVo bookstorageVo){
+        bookstorageService.appBookstorage(bookstorageVo);
+        return AjaxResponse.success(bookstorageVo);
+    }
 
     @PutMapping("/deleteByBookstorageKey")
     public AjaxResponse deleteByBookstorageKey(@RequestBody @Valid BookstorageVo bookstorageVo){

@@ -13,5 +13,7 @@ public interface BookstorageService {
 
     int updateByBookstorageKeySelective(BookstorageVo record);
 
+    void appBookstorage(BookstorageVo record);
+
     int deleteByBookstorageKey(BookstorageVo record);
 }

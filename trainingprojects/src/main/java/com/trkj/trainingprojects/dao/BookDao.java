@@ -19,4 +19,6 @@ public interface BookDao {
     int updateByBookKeySelective(BookVo record);
 
     int updateByBookKey(BookVo record);
+
+    int updateBookCount(BookVo record);
 }

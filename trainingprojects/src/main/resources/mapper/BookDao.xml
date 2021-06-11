@@ -210,4 +210,11 @@
       TimeLiness = #{timeliness,jdbcType=INTEGER}
     where Book_Id = #{bookId,jdbcType=INTEGER}
   </update>
+  <update id="updateBookCount" parameterType="com.trkj.trainingprojects.entity.Book">
+    update book
+    set
+      DeliveryCount = #{deliverycount,jdbcType=INTEGER},
+      Storage = #{storage,jdbcType=INTEGER}
+    where Book_Id = #{bookId,jdbcType=INTEGER}
+  </update>
 </mapper>

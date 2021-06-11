@@ -17,4 +17,6 @@ public interface StorageexpenditureDao {
     int updateByStorageexpenditureKeySelective(StorageexpenditureVo record);
 
     int updateByStorageexpenditureKey(StorageexpenditureVo record);
+
+    int updateByStorageexpenditureAppKey(StorageexpenditureVo record);
 }

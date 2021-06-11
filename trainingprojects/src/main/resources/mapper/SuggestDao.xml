@@ -28,7 +28,7 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select
           s.Suggest_Id,s.Suggest_Name,s.AddName,s.AddTime,s.UpdateName,s.UpdateTime,s.Dept_Id,d.Dept_Name,s.DeleteName,s.DeleteTime
-        from  Suggest s left join Dept d on s.Dept_Id = d.Dept_Id
+        from  suggest s left join dept d on s.Dept_Id = d.Dept_Id
         where s.TimeLiness=0
     </select>
     <!--新增所有列-->

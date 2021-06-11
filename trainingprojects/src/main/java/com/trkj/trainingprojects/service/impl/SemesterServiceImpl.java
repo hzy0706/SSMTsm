@@ -4,6 +4,7 @@ import com.trkj.trainingprojects.dao.SemesterDao;
 import com.trkj.trainingprojects.service.SemesterService;
 import com.trkj.trainingprojects.vo.SemesterVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,6 +21,13 @@ public class SemesterServiceImpl implements SemesterService {
     }
 
     @Override
+
+    public void add(String uname, String adname) {
+        this.semesterDao.add(uname,adname);
+    }
+
+    @Override
+    @Transactional
     public int addSemesterALL(SemesterVo semester) {
         return this.semesterDao.addSemesterALL(semester);
     }
