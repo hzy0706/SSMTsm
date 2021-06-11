@@ -25,15 +25,24 @@ public class BookController {
     }
 
     @GetMapping("/selectAllBooks")
-    public PageInfo<BookVo> selectAllBooks(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
-        PageHelper.startPage(currentPage,pageSize);
-        List<BookVo> list = bookService.selectAllBooks();
-        PageInfo<BookVo> pageInfo = new PageInfo<>(list);
-        return pageInfo;
+    public PageInfo<BookVo> selectAllBooks(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize,
+                                           @RequestParam("value")String value,@RequestParam("courseId")String courseId){
+        if(courseId.equals("") || courseId.equals("0")){
+            PageHelper.startPage(currentPage,pageSize);
+            List<BookVo> list = bookService.selectAllBooks(value);
+            PageInfo<BookVo> pageInfo = new PageInfo<>(list);
+            return pageInfo;
+        }else{
+            PageHelper.startPage(currentPage,pageSize);
+            List<BookVo> list = bookService.selectAllBooksByCourseId(value,Integer.parseInt(courseId));
+            PageInfo<BookVo> pageInfo = new PageInfo<>(list);
+            return pageInfo;
+        }
+
     }
     @GetMapping("/selectAllBook")
     public List<BookVo> selectAllBook(){
-        List<BookVo> list = bookService.selectAllBooks();
+        List<BookVo> list = bookService.selectAllBooks2();
         return list;
     }
 

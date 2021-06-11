@@ -15,18 +15,20 @@ import java.util.List;
 public class OpJournalController {
     @Resource
     private OpJournalService opJournalService;
-    @GetMapping("/selectAllOpjournal")
-    public PageInfo<OpjournalVo> selectAllOpjournal(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
-        PageHelper.startPage(currentPage,pageSize);
-        List<OpjournalVo> list = opJournalService.selectAllOpjournal();
-        PageInfo<OpjournalVo> pageInfo = new PageInfo<>(list);
-        return  pageInfo;
-    }
     @GetMapping("/selectAllOpjournalByType")
-    public PageInfo<OpjournalVo> selectAllOpjournalByType(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize,@RequestParam("choice")String choice){
-        PageHelper.startPage(currentPage,pageSize);
-        List<OpjournalVo> list = opJournalService.selectAllOpjournalByType("%"+choice+"%");
-        PageInfo<OpjournalVo> pageInfo = new PageInfo<>(list);
-        return  pageInfo;
+    public PageInfo<OpjournalVo> selectAllOpjournalByType(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize,
+                                                          @RequestParam("value")String value,@RequestParam("type")String type){
+        if(type.equals("所有方式")){
+            PageHelper.startPage(currentPage,pageSize);
+            List<OpjournalVo> list = opJournalService.selectAllOpjournalByType("%"+value+"%");
+            PageInfo<OpjournalVo> pageInfo = new PageInfo<>(list);
+            return  pageInfo;
+        }else{
+            PageHelper.startPage(currentPage,pageSize);
+            List<OpjournalVo> list = opJournalService.selectAllOpjournalByType2("%"+value+"%","%"+type+"%");
+            PageInfo<OpjournalVo> pageInfo = new PageInfo<>(list);
+            return  pageInfo;
+        }
+
     }
 }
