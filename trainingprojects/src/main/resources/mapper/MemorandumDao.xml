@@ -25,6 +25,15 @@
     inner join emp e on e.Emp_Id=m.Emp_Id
     where m.Memorandum_Id = #{memorandumId,jdbcType=INTEGER} and m.TimeLiness=0
   </select>
+
+  <select id="selectByMemorandums" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from memorandum m
+    inner join emp e on e.Emp_Id=m.Emp_Id
+    where m.TimeLiness=0
+  </select>
+
   <select id="selectByMemorandumEmpId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />,e.Emp_Name

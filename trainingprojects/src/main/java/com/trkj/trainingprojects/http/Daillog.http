@@ -30,6 +30,7 @@ Content-Type: application/json
 {
   "title": "打架",
   "content": "杀人放火",
+  "daillogType": 1,
   "planbegintime": "2021-05-17",
   "postponement": "asdfsfjsdn,dsajdklsjklda",
   "planendtime": "2021-11-11",

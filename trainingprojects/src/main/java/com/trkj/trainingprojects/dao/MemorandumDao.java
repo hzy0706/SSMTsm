@@ -17,4 +17,6 @@ public interface MemorandumDao {
     int updateByMemorandumKey(MemorandumVo record);
 
     List<MemorandumVo> selectByMemorandumEmpId(Integer empId);
+
+    List<MemorandumVo> selectByMemorandums();
 }

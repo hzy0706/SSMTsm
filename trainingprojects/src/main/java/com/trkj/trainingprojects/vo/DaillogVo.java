@@ -30,6 +30,11 @@ public class DaillogVo {
     private String content;
 
     /**
+     *日程类型
+     */
+    private Integer daillogType;
+
+    /**
      * 计划开始日期
      */
     private Date planbegintime;
