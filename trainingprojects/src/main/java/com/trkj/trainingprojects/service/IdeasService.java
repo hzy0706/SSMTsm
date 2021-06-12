@@ -1,6 +1,8 @@
-package com.trkj.trainingprojects.Opservice;
+package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.vo.IdeasVo;
+
+import java.util.List;
 
 public interface IdeasService {
 
@@ -11,4 +13,6 @@ public interface IdeasService {
     int updateByIdeasKeySelective(IdeasVo record);
 
     int deleteByIdeasKey(IdeasVo record);
+
+    List<IdeasVo> selectByIdeasEmpId(Integer empId);
 }

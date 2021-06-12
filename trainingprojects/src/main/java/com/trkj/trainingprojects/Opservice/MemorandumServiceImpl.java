@@ -38,4 +38,9 @@ public class MemorandumServiceImpl implements MemorandumService {
     public List<MemorandumVo> selectByMemorandumEmpId(Integer empId) {
         return memorandumDao.selectByMemorandumEmpId(empId);
     }
+
+    @Override
+    public List<MemorandumVo> selectByMemorandums() {
+        return memorandumDao.selectByMemorandums();
+    }
 }

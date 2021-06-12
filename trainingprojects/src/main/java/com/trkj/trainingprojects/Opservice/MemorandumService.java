@@ -14,4 +14,6 @@ public interface MemorandumService {
     int deleteByMemorandumKey(MemorandumVo record);
 
     List<MemorandumVo> selectByMemorandumEmpId(Integer empId);
+
+    List<MemorandumVo> selectByMemorandums();
 }

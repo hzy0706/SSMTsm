@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -55,6 +56,10 @@ public class Ideas implements Serializable {
      * 发表时间
      */
     private Date timeofpublication;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    public Date gettimeofpublication(){
+        return timeofpublication;
+    }
 
     /**
      * 删除人

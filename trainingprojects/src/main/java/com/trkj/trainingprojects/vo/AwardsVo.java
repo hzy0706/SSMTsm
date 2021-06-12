@@ -65,7 +65,6 @@ public class AwardsVo {
      * 班级编号
      */
     private Integer classesId;
-
     private List<StudentVo> studentVoList;
     private List<ClassesVo> classesVoList;
     private static final long serialVersionUID = 1L;

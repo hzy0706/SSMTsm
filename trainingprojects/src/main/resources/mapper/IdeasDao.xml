@@ -6,7 +6,7 @@
     <result column="Ideas_Title" jdbcType="VARCHAR" property="ideasTitle" />
     <result column="Ideas_Content" jdbcType="VARCHAR" property="ideasContent" />
     <result column="State" jdbcType="INTEGER" property="state" />
-    <result column="Ename" jdbcType="VARCHAR" property="ename" />
+    <result column="Ename" jdbcType="VARCHAR" property="addname" />
     <result column="Reply" jdbcType="VARCHAR" property="reply" />
     <result column="RevoveryTime" jdbcType="TIMESTAMP" property="revoverytime" />
     <result column="RevoveryContent" jdbcType="VARCHAR" property="revoverycontent" />
@@ -27,14 +27,22 @@
     from ideas
     where Ideas_Id = #{ideasId,jdbcType=INTEGER} and TimeLiness=0
   </select>
+
+  <select id="selectByIdeasEmpId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ideas
+    where Emp_Id = #{empId,jdbcType=INTEGER} and TimeLiness=0
+  </select>
+
   <insert id="addIdeas" keyColumn="Ideas_Id" keyProperty="ideasId" parameterType="com.trkj.trainingprojects.vo.IdeasVo" useGeneratedKeys="true">
     insert into ideas (Ideas_Title, Ideas_Content,
-      Ename, Reply, RevoveryTime, 
+      Ename, Reply, RevoveryTime,
       RevoveryContent, TimeOfPublication, DeleteName, 
       DeleteTime, Suggest_Id,
       Emp_Id)
     values (#{ideasTitle,jdbcType=VARCHAR}, #{ideasContent,jdbcType=VARCHAR},
-      #{ename,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, #{revoverytime,jdbcType=TIMESTAMP}, 
+      #{addname,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, #{revoverytime,jdbcType=TIMESTAMP},
       #{revoverycontent,jdbcType=VARCHAR}, #{timeofpublication,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, 
       #{deletetime,jdbcType=TIMESTAMP}, #{suggestId,jdbcType=INTEGER},
       #{empId,jdbcType=INTEGER})
@@ -51,8 +59,8 @@
       <if test="state != null">
         `State` = #{state,jdbcType=INTEGER},
       </if>
-      <if test="ename != null">
-        Ename = #{ename,jdbcType=VARCHAR},
+      <if test="addname != null">
+        Ename = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="reply != null">
         Reply = #{reply,jdbcType=VARCHAR},
