@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -106,6 +107,11 @@ public class BookstorageVo {
      */
     private Integer empId;
     private EmpVo empVo;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    public Date getStoragetime() {
+        return storagetime;
+    }
 
     private static final long serialVersionUID = 1L;
 }

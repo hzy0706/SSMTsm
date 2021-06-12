@@ -15,10 +15,19 @@
     <include refid="Base_Column_List" />
     from opjournal where 1=1 order by OpTime desc
   </select>
-  <select id="selectAllOpjournalByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectAllOpjournalByType"  resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from opjournal where OpContent like #{choice,jdbcType=VARCHAR} order by OpTime desc
+    from opjournal
+    where Emp_Name like #{choice} or OpContent like #{choice}
+    order by OpTime desc
+  </select>
+  <select id="selectAllOpjournalByType2"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from opjournal
+    where OpContent like #{param2} and (Emp_Name like #{param1} or OpContent like #{param1})
+    order by OpTime desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from opjournal

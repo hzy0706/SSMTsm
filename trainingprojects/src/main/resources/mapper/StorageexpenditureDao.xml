@@ -43,7 +43,7 @@
     <include refid="Base_Column_List" />,b.BookName
     from storageexpenditure s
     inner join book b on b.Book_Id=s.Book_Id
-    where s.Approval = #{approval,jdbcType=INTEGER} and s.TimeLiness=0
+    where s.Approval = #{approval,jdbcType=INTEGER} and s.TimeLiness=0 order by s.Refund_Date desc
   </select>
   <insert id="addStorageexpenditure" keyColumn="StorageExpenditure_Id" keyProperty="storageexpenditureId" parameterType="com.trkj.trainingprojects.vo.StorageexpenditureVo" useGeneratedKeys="true">
     insert into storageexpenditure (Storage_Number,Refund_details,

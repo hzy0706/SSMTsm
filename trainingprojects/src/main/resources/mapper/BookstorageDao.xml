@@ -44,8 +44,21 @@
     from bookstorage bt
     inner join book b on b.Book_Id=bt.Book_Id
     inner join emp e on e.Emp_Id=bt.Emp_Id
-    where bt.TimeLiness=0 order by bt.StorageTime desc
+    where bt.TimeLiness=0 and (b.BookName like #{param1} or e.Emp_Name like #{param1})
+    order by bt.StorageTime desc
   </select>
+
+  <select id="selectAllBookstoragesByStatus" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,b.BookName,e.Emp_Name
+    from bookstorage bt
+    inner join book b on b.Book_Id=bt.Book_Id
+    inner join emp e on e.Emp_Id=bt.Emp_Id
+    where (bt.TimeLiness=0 and bt.Approval=#{param1} and bt.CWApproval=#{param2})
+     and (b.BookName like #{param3} or e.Emp_Name like #{param3})
+     order by bt.StorageTime desc
+  </select>
+
   <insert id="insert" keyColumn="BookStorage_Id" keyProperty="bookstorageId" parameterType="com.trkj.trainingprojects.vo.BookstorageVo" useGeneratedKeys="true">
     insert into bookstorage (StorageCount, TotalPrice,
       AppName, AppTime,

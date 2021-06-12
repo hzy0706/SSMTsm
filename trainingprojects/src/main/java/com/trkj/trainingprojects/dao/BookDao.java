@@ -14,7 +14,10 @@ public interface BookDao {
 
     BookVo selectByBookKey(Integer bookId);
 
-    List<BookVo> selectAllBooks();
+    List<BookVo> selectAllBooks(String value);
+    List<BookVo> selectAllBooksByCourseId(String value,Integer courseId);
+
+    List<BookVo> selectAllBooks2();
 
     int updateByBookKeySelective(BookVo record);
 

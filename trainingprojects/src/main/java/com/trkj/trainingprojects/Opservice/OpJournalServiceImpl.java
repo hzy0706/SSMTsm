@@ -30,4 +30,9 @@ public class OpJournalServiceImpl implements OpJournalService {
     public List<OpjournalVo> selectAllOpjournalByType(String choice) {
         return opjournalDao.selectAllOpjournalByType(choice);
     }
+
+    @Override
+    public List<OpjournalVo> selectAllOpjournalByType2(String value, String type) {
+        return opjournalDao.selectAllOpjournalByType2(value,type);
+    }
 }

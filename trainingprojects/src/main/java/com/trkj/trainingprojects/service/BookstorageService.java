@@ -9,7 +9,8 @@ public interface BookstorageService {
 
     BookstorageVo selectByBookstorageKey(Integer bookstorageId);
 
-    List<BookstorageVo> selectAllBookstorages();
+    List<BookstorageVo> selectAllBookstorages(String value);
+    List<BookstorageVo> selectAllBookstoragesByStatus(int status,String value);
 
     int updateByBookstorageKeySelective(BookstorageVo record);
 
