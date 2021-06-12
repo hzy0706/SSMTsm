@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +28,13 @@ public class BookbackVo {
     /**
      * 破损处理时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date storagetime;
+
+    /**
+     * 破损数量
+     */
+    private Integer bookbackCount;
 
     /**
      * 审批
@@ -37,7 +44,7 @@ public class BookbackVo {
     /**
      * 审批人
      */
-    private String appname;
+    public String appname;
 
     /**
      * 审批时间

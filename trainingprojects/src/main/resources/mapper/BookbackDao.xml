@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.BookbackVo">
     <id column="BookBack_Id" jdbcType="INTEGER" property="bookbackId" />
     <result column="CauseOfDamage" jdbcType="VARCHAR" property="causeofdamage" />
+    <result column="BookBack_Count" jdbcType="INTEGER" property="bookbackCount" />
     <result column="StorageTime" jdbcType="TIMESTAMP" property="storagetime" />
     <result column="Approval" jdbcType="INTEGER" property="approval" />
     <result column="AppName" jdbcType="VARCHAR" property="appname" />
@@ -26,7 +27,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    bb.BookBack_Id, bb.CauseOfDamage, bb.StorageTime, bb.Approval, bb.AppName, bb.AppTime, bb.Revoke_AppName,
+    bb.BookBack_Id,bb.BookBack_Count,bb.CauseOfDamage, bb.StorageTime, bb.Approval, bb.AppName, bb.AppTime, bb.Revoke_AppName,
     bb.Revoke_AppTime, bb.AddName, bb.UpdateName, bb.UpdateTime, bb.DeleteName, bb.DeleteTime, bb.TimeLiness,
     bb.Book_Id, bb.Emp_Id
   </sql>
@@ -44,25 +45,40 @@
     from bookback bb
     inner join book b on b.Book_Id=bb.Book_Id
     inner join emp e on e.Emp_Id=bb.Emp_Id
-    where TimeLiness=0
+    where bb.TimeLiness=0 order by bb.StorageTime desc
   </select>
+
+
+  <select id="selectAllBookBackByFind" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,b.BookName,e.Emp_Name
+    from bookback bb
+    inner join book b on b.Book_Id=bb.Book_Id
+    inner join emp e on e.Emp_Id=bb.Emp_Id
+    where bb.TimeLiness=0 and bb.Approval=#{param1} and (bb.CauseOfDamage like #{param2} or b.BookName like #{param2})
+    order by bb.StorageTime desc
+  </select>
+
   <insert id="insert" keyColumn="BookBack_Id" keyProperty="bookbackId" parameterType="com.trkj.trainingprojects.vo.BookbackVo" useGeneratedKeys="true">
-    insert into bookback (CauseOfDamage, StorageTime, Approval, 
+    insert into bookback (CauseOfDamage,BookBack_Count,
       AppName, AppTime, Revoke_AppName, 
-      Revoke_AppTime, AddName, UpdateName, 
+      Revoke_AppTime, AddName, UpdateName,
       UpdateTime, DeleteName, DeleteTime, 
-      TimeLiness, Book_Id, Emp_Id
+      Book_Id, Emp_Id
       )
-    values (#{causeofdamage,jdbcType=VARCHAR}, #{storagetime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, 
+    values (#{causeofdamage,jdbcType=VARCHAR}, #{bookbackCount,jdbcType=INTEGER},
       #{appname,jdbcType=VARCHAR}, #{apptime,jdbcType=TIMESTAMP}, #{revokeAppname,jdbcType=VARCHAR}, 
       #{revokeApptime,jdbcType=TIMESTAMP}, #{addname,jdbcType=VARCHAR}, #{updatename,jdbcType=VARCHAR}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
-      #{timeliness,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}
+      #{bookId,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}
       )
   </insert>
   <update id="updateByBookbackKeySelective" parameterType="com.trkj.trainingprojects.vo.BookbackVo">
     update bookback
     <set>
+      <if test="bookbackCount != null">
+        BookBack_Count = #{bookbackCount,jdbcType=INTEGER},
+      </if>
       <if test="causeofdamage != null">
         CauseOfDamage = #{causeofdamage,jdbcType=VARCHAR},
       </if>
@@ -111,6 +127,16 @@
     </set>
     where BookBack_Id = #{bookbackId,jdbcType=INTEGER}
   </update>
+
+  <update id="appBookback" parameterType="com.trkj.trainingprojects.vo.BookbackVo">
+    update bookback
+    set
+      Approval = #{approval,jdbcType=INTEGER},
+      AppName = #{appname,jdbcType=VARCHAR},
+      AppTime = #{apptime,jdbcType=TIMESTAMP}
+    where BookBack_Id = #{bookbackId,jdbcType=INTEGER}
+  </update>
+
   <update id="updateByBookbackKey" parameterType="com.trkj.trainingprojects.vo.BookbackVo">
     update bookback
     set

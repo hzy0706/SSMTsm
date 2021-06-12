@@ -11,7 +11,11 @@ public interface BookbackService {
 
     List<BookbackVo> selectAllBookbacks();
 
+    List<BookbackVo> selectAllBookBackByFind(Integer status,String value);
+
     int updateByBookbackKeySelective(BookbackVo record);
+
+    void appBookback(BookbackVo record);
 
     int deleteByBookbackKey(BookbackVo record);
 }
