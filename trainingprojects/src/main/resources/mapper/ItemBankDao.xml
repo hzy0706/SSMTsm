@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.ItemBankDao">
-    <resultMap type="com.trkj.trainingprojects.entity.ItemBank" id="ItembankMap">
+    <resultMap type="com.trkj.trainingprojects.vo.ItemBankVo" id="ItembankMap">
         <id property="itembankId" column="ItemBank_Id" jdbcType="INTEGER"/>
         <result property="itembankType" column="ItemBank_Type" jdbcType="VARCHAR"/>
         <result property="itembankContent" column="ItemBank_Content" jdbcType="VARCHAR"/>
@@ -13,7 +13,7 @@
         <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
         <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
         <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
-        <association property="course" javaType="com.trkj.trainingprojects.vo.CourseVo">
+        <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
             <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
             <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
             <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
@@ -46,7 +46,7 @@
         <include refid="Base_Column_List" />,c.Course_Name
         from itembank ib
         inner join course c on ib.Course_Id=c.Course_Id
-        where ib.TimeLiness = 0
+        where ib.TimeLiness = 0 order by ib.ItemBank_Id DESC
     </select>
 
     <!--查询单个-->

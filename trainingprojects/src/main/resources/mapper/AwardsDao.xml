@@ -14,7 +14,7 @@
         <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
         <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
         <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
-        <collection property="studentVoList" ofType="com.trkj.trainingprojects.vo.StudentVo">
+        <association property="studentVoList" javaType="com.trkj.trainingprojects.vo.StudentVo">
             <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
             <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
             <result property="studentState" column="Student_State" jdbcType="INTEGER"/>
@@ -35,8 +35,8 @@
             <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
             <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
             <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
-        </collection>
-        <collection property="classesVoList" ofType="com.trkj.trainingprojects.vo.ClassesVo">
+        </association>
+        <association property="classesVoList" javaType="com.trkj.trainingprojects.vo.ClassesVo">
             <id property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
             <result property="classesName" column="Classes_Name" jdbcType="VARCHAR"/>
             <result property="classesOpen" column="Classes_Open" jdbcType="INTEGER"/>
@@ -55,19 +55,20 @@
             <result property="empId" column="Emp_Id" jdbcType="INTEGER"/>
             <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
             <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
-        </collection>
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">
-      Awards_Id, AwardsContent, AwardsDate, AddName, ADDTIME,
-      UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness,
-      Student_Id, Classes_Id
+      a.Awards_Id, a.AwardsContent, a.AwardsDate, a.AddName, a.ADDTIME,
+      a.UpdateName, a.UpdateTime, a.DeleteName, a.DeleteTime, a.TimeLiness,
+      a.Student_Id, a.Classes_Id
     </sql>
 
     <!--查询所有-->
     <select id="selectAllAwards" resultMap="AwardsMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,s.Student_Id,s.Student_Name,c.Classes_Id,
+        c.Classes_Name
         from awards a
         inner join student s on a.Student_Id=s.Student_Id
         inner join classes c on a.Classes_Id=c.Classes_Id

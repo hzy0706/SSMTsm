@@ -91,6 +91,16 @@ public class BookVo {
      * 总入库量
      */
     private Integer storage;
+
+    /**
+     * 总出库量
+     */
+    private Integer outbound;
+
+    /**
+     * 总破损量
+     */
+    private Integer damage;
     /**
      * 课程编号
      */

@@ -20,4 +20,5 @@ public interface ClassTypeService {
     public void addClassType(ClassTypeVo classtypeVo);
     public int updateByClassTypeKey(ClassTypeVo classTypeVo);
     public int deleteByClassType(ClassTypeVo classTypeVo);
+    public List<ClassTypeVo> selectAllClassTypes2();
 }

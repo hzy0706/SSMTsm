@@ -17,6 +17,8 @@
     <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
     <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
     <result column="Storage" jdbcType="INTEGER" property="storage" />
+    <result column="Outbound" jdbcType="INTEGER" property="outbound" />
+    <result column="Damage" jdbcType="INTEGER" property="damage" />
     <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
     <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
       <result column="Course_Id" jdbcType="VARCHAR" property="courseId" />
@@ -25,7 +27,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     b.Book_Id, b.BookName, b.DeliveryCount, b.BookSprice, b.BookJprice, b.SafeStock, b.Press, b.AddName,
-    b.AddTime, b.UpdateName, b.UpdateTime, b.DeleteName, b.DeleteTime, b.TimeLiness, b.`Storage`
+    b.AddTime, b.UpdateName, b.UpdateTime, b.DeleteName, b.DeleteTime, b.TimeLiness, b.`Storage`,b.`Outbound`,b.`Damage`
   </sql>
   <select id="selectByBookKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -116,6 +118,12 @@
       <if test="storage != null">
         `Storage`,
       </if>
+      <if test="outbound != null">
+        `Outbound`,
+      </if>
+      <if test="damage != null">
+        `Damage`,
+      </if>
       <if test="courseId != null">
         Course_Id,
       </if>
@@ -162,6 +170,12 @@
       </if>
       <if test="storage != null">
         #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="outbound != null">
+        #{outbound,jdbcType=INTEGER},
+      </if>
+      <if test="damage != null">
+        #{damage,jdbcType=INTEGER},
       </if>
       <if test="courseId != null">
         #{courseId,jdbcType=INTEGER},
@@ -213,6 +227,12 @@
       <if test="storage != null">
         `Storage` = #{storage,jdbcType=INTEGER},
       </if>
+      <if test="outbound != null">
+        `Outbound` = #{outbound,jdbcType=INTEGER},
+      </if>
+      <if test="damage != null">
+        `Damage` = #{damage,jdbcType=INTEGER},
+      </if>
       <if test="courseId != null">
         Course_Id = #{courseId,jdbcType=INTEGER},
       </if>
@@ -231,7 +251,9 @@
     update book
     set
       DeliveryCount = #{deliverycount,jdbcType=INTEGER},
-      Storage = #{storage,jdbcType=INTEGER}
+      Storage = #{storage,jdbcType=INTEGER},
+      Outbound = #{outbound,jdbcType=INTEGER},
+      Damage = #{damage,jdbcType=INTEGER}
     where Book_Id = #{bookId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import com.trkj.trainingprojects.entity.ItemBank;
 import lombok.AllArgsConstructor;
@@ -30,8 +31,10 @@ public class CourseVo {
     public String updatename;
     private Date updatetime;
     private String stopname;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date stoptime;
     private String beginname;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date begintime;
     public String deletename;
     private Date deletetime;

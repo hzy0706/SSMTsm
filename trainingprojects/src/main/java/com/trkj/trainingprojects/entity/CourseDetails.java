@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "course")
+@ToString(exclude = "course,classes")
 public class CourseDetails implements Serializable {
     /**
      * 课程详细编号
@@ -65,5 +65,6 @@ public class CourseDetails implements Serializable {
     private Integer courseId;
 
     private Course course;
+    private Classes classes;
     private static final long serialVersionUID = 1L;
 }

@@ -25,12 +25,12 @@ public interface SemesterDao {
     /**
      * 新增数据
      *
-     * @param semester 实例对象
+     * @param semesterVo 实例对象
      * @return 影响行数
      */
-    int addSemesterALL(SemesterVo semester);
+    int addSemesterALL(SemesterVo semesterVo);
 
-    void add(String uname,String adname);
+
     /**
      *
      * 通过主键修改数据

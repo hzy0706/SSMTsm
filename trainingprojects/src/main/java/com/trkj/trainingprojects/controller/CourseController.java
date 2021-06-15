@@ -25,12 +25,6 @@ public class CourseController {
     @Resource
     private CourseService courseService;
 
-    /**
-     * 分页查询
-     * @param currentPage
-     * @param pageSize
-     * @return
-     */
     @GetMapping("/selectAllCourses")
     public PageInfo<CourseVo> selectAllCourses(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
@@ -39,18 +33,13 @@ public class CourseController {
         return pageInfo;
     }
 
-    /**
-     * 不分页查询
-     * @return
-     */
-    @GetMapping("/selectAllCourse")
-    public List<CourseVo> selectAllCourse(){
-        List<CourseVo> list = courseService.selectAllCourses();
-        return list;
-    }
-
     @PostMapping("/addCourses")
     public AjaxResponse addCourse(@RequestBody @Valid CourseVo courseVo){
+        Date date = new Date();
+        courseVo.setAddtime(date);
+        courseVo.setCourseState(0);
+        courseVo.setTimeliness(0);
+        courseVo.setStopname(null);
         courseService.addCourse(courseVo);
         return AjaxResponse.success(courseVo);
     }
@@ -74,10 +63,20 @@ public class CourseController {
 
     @PutMapping("/updateByCoursePel")
     public AjaxResponse updateByCoursePel(@RequestBody @Valid CourseVo courseVo){
-        Date date = new Date();
-        courseVo.setStoptime(date);
-        courseService.updateByCoursePel(courseVo);
+        if (courseVo.getStoptime()!=null){
+            Date date = new Date();
+            courseVo.setStoptime(date);
+            courseService.updateByCoursePel(courseVo);
+        } else if (courseVo.getStoptime()==null){
+            courseService.updateByCoursePel(courseVo);
+        }
         return  AjaxResponse.success(courseVo);
+    }
+
+    @GetMapping("/selectAllCourseList")
+    public List<CourseVo> selectAllCourseList(){
+        List<CourseVo> list = courseService.selectAllCourses2();
+        return list;
     }
 
 }

@@ -63,4 +63,9 @@ public class ClassesServiceImpl implements ClassesService {
     public int updateClassesKey(ClassesVo classesVo) {
         return classesDao.updateClassesKey(classesVo);
     }
+
+    @Override
+    public List<ClassesVo> selectAllClassesByState() {
+        return classesDao.selectAllClassesByState();
+    }
 }

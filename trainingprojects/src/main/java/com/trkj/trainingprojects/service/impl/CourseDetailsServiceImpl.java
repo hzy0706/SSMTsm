@@ -63,4 +63,9 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
     public int deleteByCourseDetails(CourseDetailsVo coursedetailsVo) {
         return coursedetailsDao.deleteByCourseDetails(coursedetailsVo);
     }
+
+    @Override
+    public List<CourseDetailsVo> selectAllCourseDetails2() {
+        return coursedetailsDao.selectAllCourseDetails2();
+    }
 }

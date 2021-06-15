@@ -1,40 +1,49 @@
 package com.trkj.trainingprojects.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@Validated
 @AllArgsConstructor
 @NoArgsConstructor
-@ClassMeta(className = "教材破损表")
-public class BookbackVo {
+@Validated
+@ClassMeta(className = "教材出库总表(班级)")
+public class ClassesdeliveryVo {
     /**
-     * 教材破损编号
+     * 教材出库总表编号（班级）
      */
-    private Integer bookbackId;
+    private Integer classesdeliveryId;
 
     /**
-     * 破损原因描述
+     * 出库销售编号
      */
-    private String causeofdamage;
+    private String salenumber;
 
     /**
-     * 破损处理时间
+     * 总价格
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date storagetime;
+    private BigDecimal total;
 
     /**
-     * 破损数量
+     * 出库时间
      */
-    private Integer bookbackCount;
+    private Date deliverytime;
+
+    /**
+     * 出库类型
+     */
+    private String deliverytype;
+
+    /**
+     * 出库数量
+     */
+    private Integer classesdeliveryCount;
 
     /**
      * 审批
@@ -54,7 +63,7 @@ public class BookbackVo {
     /**
      * 撤销审批人
      */
-    private String revokeAppname;
+    public String revokeAppname;
 
     /**
      * 撤销审批时间
@@ -62,7 +71,7 @@ public class BookbackVo {
     private Date revokeApptime;
 
     /**
-     * 增加人
+     * 新增人员
      */
     public String addname;
 
@@ -92,16 +101,22 @@ public class BookbackVo {
     private Integer timeliness;
 
     /**
-     * 教材编号
+     * 职工编号
+     */
+    private Integer empId;
+    private EmpVo empVo;
+
+    /**
+     * 书籍编号
      */
     private Integer bookId;
     private BookVo bookVo;
 
     /**
-     * 职工编号
+     * 班级编号
      */
-    private Integer empId;
-    private EmpVo empVo;
+    private Integer classesId;
+    private ClassesVo classesVo;
 
     private static final long serialVersionUID = 1L;
 }

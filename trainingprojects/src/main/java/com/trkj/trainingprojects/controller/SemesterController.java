@@ -1,8 +1,7 @@
 package com.trkj.trainingprojects.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.trkj.trainingprojects.entity.Semester;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.SemesterService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.SemesterVo;
@@ -32,10 +31,20 @@ public class SemesterController {
      * @return
      */
     @GetMapping("/selectall")
-    public AjaxResponse selectall(){
+    public PageInfo<SemesterVo> selectall(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        System.out.println(currentPage+"-----"+pageSize);
+        PageHelper.startPage(currentPage,pageSize);
         List <SemesterVo> list=this.semesterService.selectALL();
-        return AjaxResponse.success(list);
+        PageInfo<SemesterVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
+//    public PageInfo<SessionVo> selectall(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
+//        System.out.println(currentPage+"-----"+pageSize);
+//        PageHelper.startPage(currentPage,pageSize);
+//        List<SessionVo> list=this.sessionService.selectAll();
+//        PageInfo<SessionVo> pageInfo = new PageInfo<>(list);
+//        return pageInfo;
+//    }
     /**
      * 根据id查询单条
      * @return
@@ -51,32 +60,11 @@ public class SemesterController {
      * @return
      */
     @PostMapping("/addSemesterALL")
-    public AjaxResponse addSemesterALL(@RequestBody String semesterVo){
-        JSONObject jsonObject = JSON.parseObject(semesterVo);
-        System.out.println("json::"+jsonObject);
-        String one = jsonObject.getString("semesterVo");
-        System.out.println(one);
-        SemesterVo a = JSON.parseObject(one,SemesterVo.class);
-        a.setAddname("军");
-        System.out.println("aaa::"+a.getSemesterName());
-        this.semesterService.addSemesterALL(a);
-        return AjaxResponse.success("新增成功");
+    public AjaxResponse addSemesterALL(@RequestBody @Valid SemesterVo semesterVo){
+        semesterService.addSemesterALL(semesterVo);
+        return AjaxResponse.success(semesterVo);
     }
 
-    @PostMapping("/add")
-    public AjaxResponse add(@RequestBody String semesterVo){
-        JSONObject jsonObject = JSON.parseObject(semesterVo);
-        System.out.println("json::"+jsonObject);
-        String one = jsonObject.getString("semesterVo");
-        System.out.println(one);
-        SemesterVo a = JSON.parseObject(one,SemesterVo.class);
-        a.setAddname("军");
-        System.out.println("aaa::"+a.getSemesterName());
-        String uname=a.getSemesterName();
-        String adname=a.getAddname();
-        this.semesterService.add(uname,adname);
-        return AjaxResponse.success("新增成功");
-    }
     /**
      * 修改
      * @param semesterVo
@@ -92,6 +80,7 @@ public class SemesterController {
      */
     @PutMapping("/delSemesterById")
     public AjaxResponse delSemesterById(@RequestBody @Valid SemesterVo semesterVo){
+
         semesterService.delSemesterById(semesterVo);
         return AjaxResponse.success(semesterVo);
     }

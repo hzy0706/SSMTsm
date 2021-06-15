@@ -96,7 +96,11 @@
     <!--查询所有-->
     <select id="selectAllExamination" resultMap="ExaminationMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,cl.Classes_Id, cl.Classes_Name, cl.Classes_Open, cl.StartedDate, cl.EndDate, cl.LastDate,cl.ManyLessons,
+        cl.AddName, cl.ADDTIME, cl.UpdateName, cl.UpdateTime, cl.DeleteName, cl.DeleteTime, cl.TimeLiness,
+        cl.Course_Id, cl.Emp_Id, cl.Teacher_Id, cl.CourseDetails_Id,e.Emp_Name,co.Course_Id, co.Course_Name, co.Course_State, co.Classhours,
+        co.Course_Money, co.Commission, co.AddName,co.ADDTIME, co.UpdateName, co.UpdateTime, co.StopName, co.StopTime, co.BeginName, co.BeginTime,
+        co.DeleteName,co.DeleteTime, co.TimeLiness, co.ClassType_Id
         from examination ex
         inner join classes cl on ex.Classes_Id =cl.Classes_Id
         inner join emp e on ex.Teacher_Id=e.Emp_Id

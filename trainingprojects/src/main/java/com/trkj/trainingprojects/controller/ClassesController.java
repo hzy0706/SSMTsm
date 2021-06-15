@@ -30,6 +30,9 @@ public class ClassesController {
     public PageInfo<ClassesVo> selectAllClasses(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<ClassesVo> list = classesService.selectAllClasses();
+        /*for(ClassesVo classesVo:list){
+            System.out.println("----------------"+classesVo.toString());
+        }*/
         PageInfo<ClassesVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
@@ -37,16 +40,13 @@ public class ClassesController {
     @PostMapping("/addClasses")
     public AjaxResponse addClasses(@RequestBody @Valid ClassesVo classesVo){
         Date date = new Date();
-        classesVo.setStarteddate(date);
-        classesVo.setLastdate(date);
-        classesVo.setEnddate(date);
+        classesVo.setAddtime(date);
         classesService.addClasses(classesVo);
         return AjaxResponse.success(classesVo);
     }
 
     @PutMapping("/updateClassesKey")
     public AjaxResponse updateClassesKey(@RequestBody @Valid ClassesVo classesVo){
-        /*System.out.println(classTypeVo+"-------------------");*/
         Date date = new Date();
         classesVo.setUpdatetime(date);
         classesService.updateClassesKey(classesVo);
@@ -60,6 +60,12 @@ public class ClassesController {
         classesVo.setTimeliness(1);
         classesService.deleteByClasses(classesVo);
         return AjaxResponse.success(classesVo);
+    }
+
+    @GetMapping("/selectAllClassesByState")
+    public List<ClassesVo> selectAllClassesByState(){
+        List<ClassesVo> list = classesService.selectAllClassesByState();
+        return list;
     }
 
 }

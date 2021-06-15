@@ -45,7 +45,10 @@ public class BookController {
         List<BookVo> list = bookService.selectAllBooks2();
         return list;
     }
-
+    @GetMapping("/selectByBookKey/{id}")
+    public BookVo selectByBookKey(@PathVariable("id") int id){
+        return bookService.selectByBookKey(id);
+    }
     @PutMapping("/updateBook")
     public AjaxResponse updateBook(@RequestBody @Valid BookVo bookVo){
         Date date = new Date();

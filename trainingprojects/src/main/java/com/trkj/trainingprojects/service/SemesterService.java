@@ -21,15 +21,14 @@ public interface SemesterService {
      */
     SemesterVo selectById(SemesterVo semester);
 
-    void add(String uname,String adname);
 
     /**
      * 新增数据
      *
-     * @param semester 实例对象
+     * @param semesterVo 实例对象
      * @return 影响行数
      */
-    int addSemesterALL(SemesterVo semester);
+    public void addSemesterALL(SemesterVo semesterVo);
 
     /**
      *

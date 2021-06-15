@@ -1,7 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
 import com.trkj.trainingprojects.ann.ClassMeta;
-import com.trkj.trainingprojects.entity.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -62,6 +61,6 @@ public class ItemBankVo {
      */
     private Integer courseId;
 
-    private Course course;
+    private CourseVo courseVo;
     private static final long serialVersionUID = 1L;
 }

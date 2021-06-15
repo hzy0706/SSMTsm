@@ -28,7 +28,7 @@
       select
           Session_Id, Session_Name, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness
         from `session`
-        where TimeLiness=0
+        where TimeLiness=0 ORDER BY Session_Id desc
     </select>
     <!--新增所有列-->
     <insert id="addSession" keyProperty="sessionId" useGeneratedKeys="true">
@@ -39,39 +39,17 @@
     <!--通过主键修改数据-->
     <update id="update">
         update tr01904.session
-        <set>
-            <if test="sessionName != null and sessionName != ''">
+        set
                 Session_Name = #{sessionName},
-            </if>
-            <if test="addname != null and addname != ''">
-                AddName = #{addname},
-            </if>
-            <if test="addtime != null">
-                AddTime = #{addtime},
-            </if>
-            <if test="updatename != null and updatename != ''">
                 UpdateName = #{updatename},
-            </if>
-            <if test="updatetime != null">
-                UpdateTime = #{updatetime},
-            </if>
-            <if test="deletename != null and deletename != ''">
-                DeleteName = #{deletename},
-            </if>
-            <if test="deletetime != null">
-                DeleteTime = #{deletetime},
-            </if>
-            <if test="timeliness != null">
-                TimeLiness = #{timeliness},
-            </if>
-        </set>
+                UpdateTime = CURRENT_TIMESTAMP
         where Session_Id = #{sessionId}
     </update>
     <!--删除单条-->
     <update id="delSessionById">
-        update Session
+        update session
         set
         UpdateTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
-        where Session_Id=#{semesterId}
+        where Session_Id = #{sessionId}
     </update>
 </mapper>
