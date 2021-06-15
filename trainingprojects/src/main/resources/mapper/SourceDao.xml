@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.SourceDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.Source">
+    <id column="Source_Id" jdbcType="INTEGER" property="sourceId" />
+    <result column="Source_Name" jdbcType="VARCHAR" property="sourceName" />
+    <result column="Already" jdbcType="INTEGER" property="already" />
+    <result column="Potential" jdbcType="INTEGER" property="potential" />
+    <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    <result column="ADDTIME" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Source_Id, Source_Name, Already, Potential, AddName, ADDTIME, UpdateName, UpdateTime, 
+    DeleteName, DeleteTime, TimeLiness
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from source
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </select>
+<!--查询所有-->
+<select id="findSource" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from source
+  where Timeliness=0
+</select>
+<!--  模糊查询-->
+<select id="mohuSource" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from source
+  where Timeliness=0 and Source_Id= #{sourceId,jdbcType=INTEGER}
+ </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from source
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Source_Id" keyProperty="sourceId" parameterType="com.trkj.trainingprojects.entity.Source" useGeneratedKeys="true">
+    insert into source (Source_Name, Already, Potential, 
+      AddName, ADDTIME, UpdateName, 
+      UpdateTime, DeleteName, DeleteTime, 
+      TimeLiness)
+    values (#{sourceName,jdbcType=VARCHAR}, #{already,jdbcType=INTEGER}, #{potential,jdbcType=INTEGER}, 
+      #{addname,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{updatename,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
+      #{timeliness,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="Source_Id" keyProperty="sourceId" parameterType="com.trkj.trainingprojects.entity.Source" useGeneratedKeys="true">
+    insert into source
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sourceName != null">
+        Source_Name,
+      </if>
+      <if test="already != null">
+        Already,
+      </if>
+      <if test="potential != null">
+        Potential,
+      </if>
+      <if test="addname != null">
+        AddName,
+      </if>
+      <if test="addtime != null">
+        ADDTIME,
+      </if>
+      <if test="updatename != null">
+        UpdateName,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="deletename != null">
+        DeleteName,
+      </if>
+      <if test="deletetime != null">
+        DeleteTime,
+      </if>
+      <if test="timeliness != null">
+        TimeLiness,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sourceName != null">
+        #{sourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="already != null">
+        #{already,jdbcType=INTEGER},
+      </if>
+      <if test="potential != null">
+        #{potential,jdbcType=INTEGER},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        #{timeliness,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateBySourceKey" parameterType="com.trkj.trainingprojects.entity.Source">
+    update source
+    <set>
+      <if test="sourceName != null">
+        Source_Name = #{sourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="already != null">
+        Already = #{already,jdbcType=INTEGER},
+      </if>
+      <if test="potential != null">
+        Potential = #{potential,jdbcType=INTEGER},
+      </if>
+      <if test="addname != null">
+        AddName = #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </update>
+  <update id="delBySourceKey" parameterType="com.trkj.trainingprojects.entity.Source">
+    update source
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Source_Id = #{sourceId,jdbcType=INTEGER}
+  </update>
+</mapper>

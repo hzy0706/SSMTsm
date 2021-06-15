@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.RegisterDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.RegisterVo">
+    <id column="Register_Id" jdbcType="INTEGER" property="registerId" />
+    <result column="ConsultAnt" jdbcType="VARCHAR" property="consultant" />
+    <result column="Sex" jdbcType="VARCHAR" property="sex" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="AttentState" jdbcType="INTEGER" property="attentstate" />
+    <result column="PayState" jdbcType="INTEGER" property="paystate" />
+    <result column="ConsultContent" jdbcType="VARCHAR" property="consultcontent" />
+    <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    <result column="ADDTIME" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Source_Id" jdbcType="INTEGER" property="sourceId" />
+    <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+<!--    外键-->
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+<!--      查找外键名字，其他不查-->
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+    <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
+      <result column="Course_Name" jdbcType="VARCHAR" property="courseName" />
+    </association>
+    <association property="sourceVo" javaType="com.trkj.trainingprojects.vo.SourceVo">
+      <result column="Source_Name" jdbcType="VARCHAR" property="sourceName" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    b.Register_Id, b.ConsultAnt, b.Sex, b.Phone, b.AttentState, b.PayState, b.ConsultContent, b.AddName,
+    b.ADDTIME, b.UpdateName, b.UpdateTime, b.DeleteName, b.DeleteTime, b.TimeLiness, b.Source_Id, b.Course_Id,
+    b.Emp_Id
+  </sql>
+  <select id="selectByRegisterKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,e.Emp_Name,co.Course_Name,s.Source_Name
+    from register b
+    inner join source s on s.Source_Id=b.Source_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join emp e on e.Emp_Id=b.Emp_Id
+    where Register_Id = #{registerId,jdbcType=INTEGER} and b.TimeLiness=0
+  </select>
+<!--  模糊查询-->
+<select id="mohuRegister" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from register b
+  where
+  <if test="value!=null">
+    b.ConsultAnt like CONCAT(CONCAT('%',#{value},'%'))
+  </if>
+  and b.TimeLiness=0
+</select>
+
+  <!--查询所有-->
+  <select id="findRegister" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name,co.Course_Name,s.Source_Name
+    from register b
+    inner join source s on s.Source_Id=b.Source_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join emp e on e.Emp_Id=b.Emp_Id
+    where b.TimeLiness=0
+
+  </select>
+  <select id="findRegister2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name,co.Course_Name,s.Source_Name
+    from register b
+    inner join source s on s.Source_Id=b.Source_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join emp e on e.Emp_Id=b.Emp_Id
+    where b.TimeLiness=0
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from register
+    where Register_Id = #{registerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="Register_Id" keyProperty="registerId" parameterType="com.trkj.trainingprojects.entity.Register" useGeneratedKeys="true">
+    insert into register (ConsultAnt, Sex, Phone, ConsultContent,
+      AddName, ADDTIME, UpdateName, 
+      UpdateTime, DeleteName, DeleteTime, 
+      TimeLiness, Source_Id, Course_Id, 
+      Emp_Id)
+    values (#{consultant,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{consultcontent,jdbcType=VARCHAR},
+      #{addname,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{updatename,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
+      #{timeliness,jdbcType=INTEGER}, #{sourceId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{empId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="Register_Id" keyProperty="registerId" parameterType="com.trkj.trainingprojects.entity.Register" useGeneratedKeys="true">
+    insert into register
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consultant != null">
+        ConsultAnt,
+      </if>
+      <if test="sex != null">
+        Sex,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="attentstate != null">
+        AttentState,
+      </if>
+      <if test="paystate != null">
+        PayState,
+      </if>
+      <if test="consultcontent != null">
+        ConsultContent,
+      </if>
+      <if test="addname != null">
+        AddName,
+      </if>
+      <if test="addtime != null">
+        ADDTIME,
+      </if>
+      <if test="updatename != null">
+        UpdateName,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="deletename != null">
+        DeleteName,
+      </if>
+      <if test="deletetime != null">
+        DeleteTime,
+      </if>
+      <if test="timeliness != null">
+        TimeLiness,
+      </if>
+      <if test="sourceId != null">
+        Source_Id,
+      </if>
+      <if test="courseId != null">
+        Course_Id,
+      </if>
+      <if test="empId != null">
+        Emp_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consultant != null">
+        #{consultant,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="attentstate != null">
+        #{attentstate,jdbcType=INTEGER},
+      </if>
+      <if test="paystate != null">
+        #{paystate,jdbcType=INTEGER},
+      </if>
+      <if test="consultcontent != null">
+        #{consultcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null">
+        #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByRegisterKey" parameterType="com.trkj.trainingprojects.entity.Register">
+    update register
+    <set>
+      <if test="consultant != null">
+        ConsultAnt = #{consultant,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        Sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="attentstate != null">
+        AttentState = #{attentstate,jdbcType=INTEGER},
+      </if>
+      <if test="paystate != null">
+        PayState = #{paystate,jdbcType=INTEGER},
+      </if>
+      <if test="consultcontent != null">
+        ConsultContent = #{consultcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        AddName = #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null">
+        Source_Id = #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        Course_Id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        Emp_Id = #{empId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Register_Id = #{registerId,jdbcType=INTEGER}
+  </update>
+  <update id="delByRegisterKey" parameterType="com.trkj.trainingprojects.entity.Register">
+    update register
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = 1
+    where Register_Id = #{registerId,jdbcType=INTEGER}
+  </update>
+</mapper>

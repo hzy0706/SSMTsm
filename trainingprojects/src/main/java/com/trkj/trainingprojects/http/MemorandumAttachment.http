@@ -1,0 +1,29 @@
+PUT http://localhost:8080/Training/delMemorandumattachment
+Content-Type: application/json
+
+{
+  "memorandumattachmentId": 1
+}
+
+###
+PUT http://localhost:8080/Training/updateMemorandumattachment
+Content-Type: application/json
+
+{
+  "registerId": "1",
+  "memorandumattachmentId": "1"
+}
+
+###
+POST http://localhost:8080/Training/addMemorandumattachment
+Content-Type: application/json
+
+{
+  "registerId": "1"
+}
+
+###
+GET http://localhost:8080/Training/fingMemorandumAttachment/1/3
+Accept: application/json
+
+###
