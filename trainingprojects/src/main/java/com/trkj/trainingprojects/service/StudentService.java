@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.entity.Student;
+import com.trkj.trainingprojects.vo.StudentVo;
 
 import java.util.List;
 
@@ -12,8 +13,6 @@ import java.util.List;
  */
 public interface StudentService {
 
-    Student queryById(Integer studentId);
-
     List<Student> queryAllByLimit(int offset, int limit);
 
     Student insert(Student student);
@@ -22,4 +21,5 @@ public interface StudentService {
 
     boolean deleteById(Integer studentId);
 
+    List<StudentVo> SelectStudentByClassId(int classId);
 }

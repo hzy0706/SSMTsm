@@ -33,6 +33,12 @@ public class ClassTypeController {
         return pageInfo;
     }
 
+    @GetMapping("/selectAllClassTypesByList")
+    public List<ClassTypeVo> selectAllClassTypesByList(){
+        List<ClassTypeVo> list = classtypeService.selectAllClassTypes2();
+        return list;
+    }
+
     @PostMapping("/addClassType")
     public AjaxResponse addClassType(@RequestBody @Valid ClassTypeVo classtypeVo){
         classtypeService.addClassType(classtypeVo);

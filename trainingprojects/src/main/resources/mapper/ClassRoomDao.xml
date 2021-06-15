@@ -25,7 +25,7 @@
         select
         <include refid="Base_Column_List" />
         from classroom
-        where TimeLiness = 0
+        where TimeLiness = 0 ORDER BY CONVERT(ClassRoom_Name USING gbk) ASC
     </select>
 
     <!--查询单个-->

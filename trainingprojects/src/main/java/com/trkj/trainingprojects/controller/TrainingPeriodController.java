@@ -36,6 +36,8 @@ public class TrainingPeriodController {
 
     @PostMapping("/addTrainingPeriod")
     public AjaxResponse addTrainingPeriod(@RequestBody @Valid TrainingPeriodVo trainingPeriodVo){
+        Date date = new Date();
+        trainingPeriodVo.setAddtime(date);
         trainingperiodService.addTrainingPeriod(trainingPeriodVo);
         return AjaxResponse.success(trainingPeriodVo);
     }

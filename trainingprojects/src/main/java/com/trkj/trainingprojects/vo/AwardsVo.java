@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +9,6 @@ import lombok.ToString;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
-import java.util.List;
 
 @Validated
 @Data
@@ -28,6 +28,7 @@ public class AwardsVo {
     /**
      * 获奖日期
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date awardsdate;
     /**
      * 增加人
@@ -65,8 +66,9 @@ public class AwardsVo {
      * 班级编号
      */
     private Integer classesId;
-    private List<StudentVo> studentVoList;
-    private List<ClassesVo> classesVoList;
+
+    private StudentVo studentVoList;
+    private ClassesVo classesVoList;
     private static final long serialVersionUID = 1L;
 
 }

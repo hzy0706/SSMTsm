@@ -65,12 +65,20 @@
         c.DeleteTime, c.TimeLiness, c.ClassType_Id
     </sql>
 
-    <!--查询所有-->
+    <!--查询所有[分页]-->
     <select id="selectAllCourses" resultMap="CourseMap">
         select
         <include refid="Base_Column_List" />,ct.ClassType_Name
         from course c inner join classtype ct on c.ClassType_Id=ct.ClassType_Id
-        where c.TimeLiness = 0
+        where c.TimeLiness = 0 order by c.Course_Id DESC
+    </select>
+
+    <!--查询所有[不分页]-->
+    <select id="selectAllCourses2" resultMap="CourseMap">
+        select
+        <include refid="Base_Column_List" />,ct.ClassType_Name
+        from course c inner join classtype ct on c.ClassType_Id=ct.ClassType_Id
+        where c.TimeLiness = 0 order by c.Course_Id DESC
     </select>
 
     <!--查询单个-->
@@ -275,6 +283,5 @@
           StopTime = #{stoptime}
         where Course_Id = #{courseId}
     </update>
-
 </mapper>
 

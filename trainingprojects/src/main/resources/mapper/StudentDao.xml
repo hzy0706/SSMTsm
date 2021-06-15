@@ -25,11 +25,11 @@
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="StudentMap">
+    <select id="SelectStudentByClassId" resultMap="StudentMap">
         select
           Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
         from tr01904.student
-        where Student_Id = #{studentId}
+        where Classes_Id = #{classesId} and TimeLiness = 0
     </select>
 
     <!--查询指定行数据-->

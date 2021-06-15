@@ -34,5 +34,6 @@ public interface CourseDetailsDao {
 
     List<CourseDetailsVo> selectAllCourseDetails();
     int deleteByCourseDetails(CourseDetailsVo courseDetailsVo);
+    List<CourseDetailsVo> selectAllCourseDetails2();
 }
 
