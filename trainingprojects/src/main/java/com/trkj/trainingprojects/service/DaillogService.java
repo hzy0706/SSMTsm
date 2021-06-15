@@ -14,5 +14,7 @@ public interface DaillogService {
 
     int deleteByDaillogKey(DaillogVo record);
 
+    int updateStateByKey (DaillogVo record);
+
     List<DaillogVo> selectByDaillogEmpId(Integer empId);
 }

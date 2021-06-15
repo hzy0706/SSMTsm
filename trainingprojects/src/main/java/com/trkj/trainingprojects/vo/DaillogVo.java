@@ -1,15 +1,17 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor  
 @NoArgsConstructor
 @Validated
 @ClassMeta(className = "日程表")
@@ -32,22 +34,37 @@ public class DaillogVo {
     /**
      *日程类型
      */
-    private Integer daillogType;
+    private String daillogType;
 
     /**
      * 计划开始日期
      */
     private Date planbegintime;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public Date getPlanbegintime(){
+        return planbegintime;
+    }
+
 
     /**
      * 计划结束日期
      */
+
     private Date planendtime;
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public Date getPlanendtime(){
+        return planendtime;
+    }
+
 
     /**
      * 正式开始日期
      */
     private Date begintime;
+
 
     /**
      * 正式结束日期
@@ -73,6 +90,12 @@ public class DaillogVo {
      * 新增时间
      */
     private Date addtime;
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public Date getAddtime(){
+        return addtime;
+    }
 
     /**
      * 最后修改人

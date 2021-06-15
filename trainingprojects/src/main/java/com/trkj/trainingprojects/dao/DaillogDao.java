@@ -16,5 +16,7 @@ public interface DaillogDao {
 
     int updateByDaillogKey(DaillogVo record);
 
+    int updateStateByKey (DaillogVo record);
+
     List<DaillogVo> selectByDaillogEmpId(Integer empId);
 }

@@ -3,6 +3,7 @@ package com.trkj.trainingprojects.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,6 @@ public class Memorandum implements Serializable {
      * 备忘录创建时间
      */
     private Date addtime;
-
     /**
      * 备忘录内容
      */

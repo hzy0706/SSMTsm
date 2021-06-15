@@ -19,7 +19,7 @@ public class DaillogController {
 
    @PostMapping("/addDaillog")
     public AjaxResponse addDaillog(@RequestBody @Valid DaillogVo daillogVo){
-       daillogVo.setAddtime(new Date());
+       System.out.println("==================我在这"+daillogVo.toString());
        daillogService.addDaillog(daillogVo);
        return AjaxResponse.success(daillogVo);
    }
@@ -52,7 +52,10 @@ public class DaillogController {
         return AjaxResponse.success(daillogVo);
     }
 
-
-
-
+    @PutMapping("/updateStateByKey")
+    public AjaxResponse updateStateByKey(@RequestBody @Valid DaillogVo daillogVo){
+       daillogVo.setEndtime(new Date());
+        daillogService.updateStateByKey(daillogVo);
+        return AjaxResponse.success(daillogVo);
+    }
 }

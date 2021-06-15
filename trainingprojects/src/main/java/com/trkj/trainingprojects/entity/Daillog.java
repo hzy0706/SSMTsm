@@ -30,7 +30,7 @@ public class Daillog implements Serializable {
     /**
      *日程类型
      */
-    private Integer daillogType;
+    private String daillogType;
 
     /**
      * 计划开始日期
@@ -46,10 +46,7 @@ public class Daillog implements Serializable {
      * 正式开始日期
      */
     private Date begintime;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    public Date getbegintime(){
-        return begintime;
-    }
+
 
     /**
      * 正式结束日期
