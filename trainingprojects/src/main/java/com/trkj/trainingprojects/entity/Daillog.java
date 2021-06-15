@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -27,6 +28,11 @@ public class Daillog implements Serializable {
     private String content;
 
     /**
+     *日程类型
+     */
+    private Integer daillogType;
+
+    /**
      * 计划开始日期
      */
     private Date planbegintime;
@@ -40,6 +46,10 @@ public class Daillog implements Serializable {
      * 正式开始日期
      */
     private Date begintime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    public Date getbegintime(){
+        return begintime;
+    }
 
     /**
      * 正式结束日期

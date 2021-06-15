@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.ClassesdeliveryDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.ClassesdeliveryVo">
+    <id column="ClassesDelivery_Id" jdbcType="INTEGER" property="classesdeliveryId" />
+    <result column="SaleNumber" jdbcType="VARCHAR" property="salenumber" />
+    <result column="Total" jdbcType="DECIMAL" property="total" />
+    <result column="DeliveryTime" jdbcType="TIMESTAMP" property="deliverytime" />
+    <result column="DeliveryType" jdbcType="VARCHAR" property="deliverytype" />
+    <result column="ClassesDelivery_Count" jdbcType="INTEGER" property="classesdeliveryCount" />
+    <result column="Approval" jdbcType="INTEGER" property="approval" />
+    <result column="AppName" jdbcType="VARCHAR" property="appname" />
+    <result column="AppTime" jdbcType="TIMESTAMP" property="apptime" />
+    <result column="Revoke_AppName" jdbcType="VARCHAR" property="revokeAppname" />
+    <result column="Revoke_AppTime" jdbcType="TIMESTAMP" property="revokeApptime" />
+    <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <result column="Book_Id" jdbcType="INTEGER" property="bookId" />
+    <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+    <association property="bookVo" javaType="com.trkj.trainingprojects.vo.BookVo">
+      <result column="BookName" jdbcType="VARCHAR" property="bookname" />
+    </association>
+    <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <result property="classesName" column="Classes_Name" jdbcType="VARCHAR"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    cd.ClassesDelivery_Id, cd.SaleNumber, cd.Total, cd.DeliveryTime, cd.DeliveryType, cd.ClassesDelivery_Count,
+    cd.Approval, cd.AppName, cd.AppTime, cd.Revoke_AppName, cd.Revoke_AppTime, cd.AddName, cd.UpdateName,
+    cd.UpdateTime, cd.DeleteName,cd.DeleteTime, cd.TimeLiness, cd.Emp_Id, cd.Book_Id, cd.Classes_Id
+  </sql>
+  <select id="selectByClassesdeliveryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,e.Emp_Name,b.BookName,c.Classes_Name
+    from classesdelivery cd
+    inner join emp e on e.Emp_Id=cd.Emp_Id
+    inner join book b on b.Book_Id=cd.Book_Id
+    inner join classes c on c.Classes_Id=cd.Classes_Id
+    where cd.ClassesDelivery_Id = #{classesdeliveryId,jdbcType=INTEGER} and TimeLiness=0
+  </select>
+  <select id="selectAllClassesdeliverys" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name,b.BookName,c.Classes_Name
+    from classesdelivery cd
+    inner join emp e on e.Emp_Id=cd.Emp_Id
+    inner join book b on b.Book_Id=cd.Book_Id
+    inner join classes c on c.Classes_Id=cd.Classes_Id
+    where cd.TimeLiness=0 and cd.Approval=#{param1} and (e.Emp_Name like #{param2} or b.BookName like #{param2} or c.Classes_Name like #{param2})
+  </select>
+  <insert id="addClassesdelivery" keyColumn="ClassesDelivery_Id" keyProperty="classesdeliveryId" parameterType="com.trkj.trainingprojects.vo.ClassesdeliveryVo" useGeneratedKeys="true">
+    insert into classesdelivery (SaleNumber, Total,
+      DeliveryType, ClassesDelivery_Count,UpdateName,UpdateTime,
+      AppName, AppTime, Revoke_AppName,
+      Revoke_AppTime, AddName, DeleteName, 
+      DeleteTime,Emp_Id,
+      Book_Id, Classes_Id)
+    values (#{salenumber,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL},
+      #{deliverytype,jdbcType=VARCHAR}, #{classesdeliveryCount,jdbcType=INTEGER},#{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
+      #{appname,jdbcType=VARCHAR}, #{apptime,jdbcType=TIMESTAMP}, #{revokeAppname,jdbcType=VARCHAR}, 
+      #{revokeApptime,jdbcType=TIMESTAMP}, #{addname,jdbcType=VARCHAR}, #{deletename,jdbcType=VARCHAR}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{empId,jdbcType=INTEGER},
+      #{bookId,jdbcType=INTEGER}, #{classesId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByClassesdeliveryKeySelective" parameterType="com.trkj.trainingprojects.vo.ClassesdeliveryVo">
+    update classesdelivery
+    <set>
+      <if test="salenumber != null">
+        SaleNumber = #{salenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        Total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverytime != null">
+        DeliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytype != null">
+        DeliveryType = #{deliverytype,jdbcType=VARCHAR},
+      </if>
+      <if test="classesdeliveryCount != null">
+        ClassesDelivery_Count = #{classesdeliveryCount,jdbcType=INTEGER},
+      </if>
+      <if test="approval != null">
+        Approval = #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="appname != null">
+        AppName = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="apptime != null">
+        AppTime = #{apptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revokeAppname != null">
+        Revoke_AppName = #{revokeAppname,jdbcType=VARCHAR},
+      </if>
+      <if test="revokeApptime != null">
+        Revoke_AppTime = #{revokeApptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addname != null">
+        AddName = #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        Emp_Id = #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null">
+        Book_Id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="classesId != null">
+        Classes_Id = #{classesId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ClassesDelivery_Id = #{classesdeliveryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByClassesdeliveryKey" parameterType="com.trkj.trainingprojects.vo.ClassesdeliveryVo">
+    update classesdelivery
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where ClassesDelivery_Id = #{classesdeliveryId,jdbcType=INTEGER}
+  </update>
+  <update id="appByClassesdeliveryKey" parameterType="com.trkj.trainingprojects.vo.ClassesdeliveryVo">
+    update classesdelivery
+    set
+      Approval = #{approval,jdbcType=INTEGER},
+      AppName = #{appname,jdbcType=VARCHAR},
+      AppTime = #{apptime,jdbcType=TIMESTAMP}
+    where ClassesDelivery_Id = #{classesdeliveryId,jdbcType=INTEGER}
+  </update>
+</mapper>

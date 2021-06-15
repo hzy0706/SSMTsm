@@ -14,4 +14,6 @@ public interface StorageexpenditureService {
     int updateByStorageexpenditureKeySelective(StorageexpenditureVo record);
 
     int deleteByStorageexpenditureKey(StorageexpenditureVo record);
+
+    void appStorageexpenditure(StorageexpenditureVo record);
 }

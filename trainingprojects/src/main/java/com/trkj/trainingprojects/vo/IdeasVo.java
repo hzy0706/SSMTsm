@@ -37,7 +37,7 @@ public class IdeasVo {
     /**
      * 发布意见人
      */
-    private String ename;
+    public String addname;
 
     /**
      * 回复人
@@ -62,7 +62,7 @@ public class IdeasVo {
     /**
      * 删除人
      */
-    private String deletename;
+    public String deletename;
 
     /**
      * 删除时间

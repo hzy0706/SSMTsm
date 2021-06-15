@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.dao;
 
 import com.trkj.trainingprojects.entity.Student;
+import com.trkj.trainingprojects.vo.StudentVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,6 +31,8 @@ public interface StudentDao {
     int update(Student student);
 
     int deleteById(Integer studentId);
+
+    List<StudentVo> SelectStudentByClassId(int classId);
 
 }
 

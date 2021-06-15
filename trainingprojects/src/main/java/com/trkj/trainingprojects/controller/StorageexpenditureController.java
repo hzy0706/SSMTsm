@@ -3,6 +3,7 @@ package com.trkj.trainingprojects.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.StorageexpenditureService;
+import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.StorageexpenditureVo;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +46,10 @@ public class StorageexpenditureController {
     public int deleteByStorageexpenditureKey(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo) {
         storageexpenditureVo.setDeletetime(new Date());
         return storageexpenditureService.deleteByStorageexpenditureKey(storageexpenditureVo);
+    }
+    @PutMapping("/appStorageexpenditure")
+    public AjaxResponse appStorageexpenditure(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo){
+        storageexpenditureService.appStorageexpenditure(storageexpenditureVo);
+        return AjaxResponse.success();
     }
 }

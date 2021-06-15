@@ -3,6 +3,7 @@ package com.trkj.trainingprojects.service.impl;
 import com.trkj.trainingprojects.dao.StudentDao;
 import com.trkj.trainingprojects.entity.Student;
 import com.trkj.trainingprojects.service.StudentService;
+import com.trkj.trainingprojects.vo.StudentVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,6 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Resource
     private StudentDao studentDao;
-    @Override
-    public Student queryById(Integer studentId) {
-        return null;
-    }
 
     @Override
     public List<Student> queryAllByLimit(int offset, int limit) {
@@ -37,5 +34,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public boolean deleteById(Integer studentId) {
         return false;
+    }
+
+    @Override
+    public List<StudentVo> SelectStudentByClassId(int classId) {
+        return studentDao.SelectStudentByClassId(classId);
     }
 }

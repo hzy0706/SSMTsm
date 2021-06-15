@@ -13,7 +13,11 @@ public interface BookbackDao {
 
     List<BookbackVo> selectAllBookbacks();
 
+    List<BookbackVo> selectAllBookBackByFind(Integer status,String value);
+
     int updateByBookbackKeySelective(BookbackVo record);
+
+    int appBookback(BookbackVo record);
 
     int updateByBookbackKey(BookbackVo record);
 }

@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +30,11 @@ public class StorageexpenditureVo {
      * 收支日期
      */
     private Date refundDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    public Date getRefundDate() {
+        return refundDate;
+    }
 
     /**
      * 收支明细
@@ -88,12 +94,12 @@ public class StorageexpenditureVo {
     /**
      * 财务部审核时间
      */
-    private Date appname;
+    private Date apptime;
 
     /**
      * 财务部审核人
      */
-    public String apptime;
+    public String appname;
 
     /**
      * 财务部撤销审核时间

@@ -8,7 +8,6 @@ import lombok.ToString;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
-import java.util.List;
 
 @Validated
 @Data
@@ -66,7 +65,7 @@ public class ExaminationScoreVo {
      */
     private Integer examinationId;
 
-    private List<StudentVo> studentVos;
+    private StudentVo studentVos;
     private ExaminationVo examinationVo;
     private static final long serialVersionUID = 1L;
 }

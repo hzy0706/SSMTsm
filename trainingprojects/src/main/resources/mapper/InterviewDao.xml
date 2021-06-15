@@ -96,7 +96,8 @@
     <!--查询所有-->
     <select id="selectAllInterview" resultMap="InterviewMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,s.Student_Id,s.Student_Name,
+        cl.Classes_Id,cl.Classes_Name,e.Emp_Id,e.Emp_Name
         from interview iv
         inner join classes cl on iv.Classes_Id =cl.Classes_Id
         inner join emp e on iv.Emp_Id=e.Emp_Id

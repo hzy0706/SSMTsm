@@ -22,10 +22,11 @@ public class BookbackController {
         return AjaxResponse.success(bookbackVo);
     }
 
-    @GetMapping("/selectAllBookbacks")
-    public PageInfo<BookbackVo> selectAllBookbacks(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectAllBookBackByFind")
+    public PageInfo<BookbackVo> selectAllBookBackByFind(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize
+                                                    , @RequestParam("status")String status, @RequestParam("value")String value){
         PageHelper.startPage(currentPage,pageSize);
-        List<BookbackVo> list = bookbackService.selectAllBookbacks();
+        List<BookbackVo> list = bookbackService.selectAllBookBackByFind(Integer.parseInt(status),"%"+value+"%");
         PageInfo<BookbackVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
@@ -42,7 +43,11 @@ public class BookbackController {
         bookbackService.updateByBookbackKeySelective(bookbackVo);
         return AjaxResponse.success(bookbackVo);
     }
-
+    @PutMapping("/appBookback")
+    public AjaxResponse appBookback(@RequestBody @Valid BookbackVo bookbackVo){
+        bookbackService.appBookback(bookbackVo);
+        return AjaxResponse.success(bookbackVo);
+    }
     @PutMapping("/deleteByBookbackKey")
     public AjaxResponse deleteByBookbackKey(@RequestBody @Valid BookbackVo bookbackVo){
         Date date = new Date();

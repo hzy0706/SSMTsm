@@ -12,9 +12,10 @@ import java.util.List;
 public class EmpController {
     @Resource
     private EmpService empService;
-    @GetMapping("/selectAllIncumbencyEmp")
+    @GetMapping("/selectAllEmpList")
     public List<EmpVo> selectAllIncumbencyEmp(){
         List<EmpVo> list = empService.selectAllIncumbencyEmps();
         return list;
     }
+
 }

@@ -51,8 +51,16 @@
         limit #{offset}, #{limit}
     </select>
 
-    <!--查询所有-->
+    <!--查询所有[分页]-->
     <select id="selectAllClassTypes" resultMap="ClasstypeMap">
+        select
+        <include refid="Base_Column_List" />
+        from classtype
+        where TimeLiness = 0 order by ClassType_Id DESC
+    </select>
+
+    <!--查询所有[所有]-->
+    <select id="selectAllClassTypes2" resultMap="ClasstypeMap">
         select
         <include refid="Base_Column_List" />
         from classtype

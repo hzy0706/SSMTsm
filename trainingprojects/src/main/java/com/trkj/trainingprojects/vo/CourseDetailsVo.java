@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ClassMeta(className = "课程详细表")
-@ToString(exclude = "courseVo")
+@ToString(exclude = "courseVo,classesVo")
 public class CourseDetailsVo {
     /**
      * 课程详细编号
@@ -62,5 +62,6 @@ public class CourseDetailsVo {
     private Integer courseId;
 
     private CourseVo courseVo;
+    private ClassesVo classesVo;
     private static final long serialVersionUID = 1L;
 }

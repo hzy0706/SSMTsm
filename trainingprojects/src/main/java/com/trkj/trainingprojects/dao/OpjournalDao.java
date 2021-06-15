@@ -18,6 +18,8 @@ public interface OpjournalDao {
 
     List<OpjournalVo> selectAllOpjournalByType(String choice);
 
+    List<OpjournalVo> selectAllOpjournalByType2(String value,String type);
+
     int updateByPrimaryKeySelective(Opjournal record);
 
     int updateByPrimaryKey(Opjournal record);

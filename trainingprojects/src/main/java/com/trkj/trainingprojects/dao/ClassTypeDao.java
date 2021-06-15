@@ -26,5 +26,6 @@ public interface ClassTypeDao {
     int deleteById(Integer classTypeId);
     List<ClassTypeVo> selectAllClassTypes();
     int deleteByClassType(ClassTypeVo classTypeVo);
+    List<ClassTypeVo> selectAllClassTypes2();
 }
 

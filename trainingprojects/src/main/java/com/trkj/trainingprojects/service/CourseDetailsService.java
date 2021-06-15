@@ -22,4 +22,5 @@ public interface CourseDetailsService {
     public void addCourseDetailsService(CourseDetailsVo coursedetailsVo);
     public int updateByCourseDetailsKey(CourseDetailsVo coursedetailsVo);
     public int deleteByCourseDetails(CourseDetailsVo coursedetailsVo);
+    public List<CourseDetailsVo> selectAllCourseDetails2();
 }

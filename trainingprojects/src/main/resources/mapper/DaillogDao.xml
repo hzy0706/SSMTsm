@@ -5,6 +5,7 @@
     <id column="DailLog_Id" jdbcType="INTEGER" property="daillogId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="daillogType" jdbcType="INTEGER"  property="daillogType" />
     <result column="PlanBeginTime" jdbcType="TIMESTAMP" property="planbegintime" />
     <result column="PlanEndTime" jdbcType="TIMESTAMP" property="planendtime" />
     <result column="BeginTime" jdbcType="TIMESTAMP" property="begintime" />
@@ -24,7 +25,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    d.DailLog_Id, d.title, d.content, d.PlanBeginTime, d.PlanEndTime, d.BeginTime, d.EndTime, d.`State`,
+    d.DailLog_Id, d.title, d.content, d.daillogType, d.PlanBeginTime, d.PlanEndTime, d.BeginTime, d.EndTime, d.`State`,
     d.Postponement, d.AddName, d.AddTime, d.UpdateName, d.UpdateTime, d.DeleteName, d.DeleteTime, d.TimeLiness,
     d.Emp_Id
   </sql>
@@ -43,13 +44,13 @@
     where d.Emp_Id = #{empId,jdbcType=INTEGER} and d.TimeLiness=0
   </select>
   <insert id="addDaillog" keyColumn="DailLog_Id" keyProperty="daillogId" parameterType="com.trkj.trainingprojects.vo.DaillogVo" useGeneratedKeys="true">
-    insert into daillog (title, content, PlanBeginTime, 
+    insert into daillog (title, content, daillogType, PlanBeginTime,
       PlanEndTime, BeginTime, EndTime, 
       Postponement, AddName,
       UpdateName, UpdateTime,
       DeleteName, DeleteTime,
       Emp_Id)
-    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{planbegintime,jdbcType=TIMESTAMP}, 
+    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{daillogType,jdbcType=INTEGER}, #{planbegintime,jdbcType=TIMESTAMP},
       #{planendtime,jdbcType=TIMESTAMP}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
       #{postponement,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
@@ -64,6 +65,9 @@
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="daillogType != null">
+        daillogType = #{daillogType,jdbcType=INTEGER},
       </if>
       <if test="planbegintime != null">
         PlanBeginTime = #{planbegintime,jdbcType=TIMESTAMP},

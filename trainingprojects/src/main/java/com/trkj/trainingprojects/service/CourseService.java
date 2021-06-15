@@ -23,4 +23,5 @@ public interface CourseService {
     public int updateByCourseKey(CourseVo courseVo);
     public int deleteByCourse(CourseVo courseVo);
     public int updateByCoursePel(CourseVo courseVo);
+    List<CourseVo> selectAllCourses2();
 }

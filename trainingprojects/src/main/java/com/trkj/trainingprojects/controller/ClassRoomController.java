@@ -36,6 +36,8 @@ public class ClassRoomController {
 
     @PostMapping("/addClassRoom")
     public AjaxResponse addClassRoom(@RequestBody @Valid ClassRoomVo classRoomVo){
+        Date date = new Date();
+        classRoomVo.setAddtime(date);
         classroomService.addClassRoom(classRoomVo);
         return AjaxResponse.success(classRoomVo);
     }

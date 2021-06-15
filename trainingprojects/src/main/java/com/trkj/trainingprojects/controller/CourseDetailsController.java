@@ -56,4 +56,25 @@ public class CourseDetailsController {
         return AjaxResponse.success(courseDetailsVo);
     }
 
+    @GetMapping("/selectAllCourseDetailList")
+    public List<CourseDetailsVo> selectAllCourseDetailList(){
+        List<CourseDetailsVo> list = coursedetailsService.selectAllCourseDetails();
+        return list;
+    }
+
+    @PutMapping("/deleteByCourseDetailsKey/{ids}/{deleteName}")
+    public AjaxResponse deleteByDeptKey(@PathVariable("ids") String ids, @PathVariable("deleteName") String deleteName){
+        Date date = new Date();
+        String[] id= ids.split(",");
+        for (String s:id){
+            CourseDetailsVo courseDetailsVo = new CourseDetailsVo();
+            courseDetailsVo.setDeletename(deleteName);
+            courseDetailsVo.setDeletetime(date);
+            courseDetailsVo.setTimeliness(1);
+            courseDetailsVo.setCoursedetailsId(Integer.parseInt(s));
+            coursedetailsService.deleteByCourseDetails(courseDetailsVo);
+        }
+        return  AjaxResponse.success(id);
+    }
+
 }

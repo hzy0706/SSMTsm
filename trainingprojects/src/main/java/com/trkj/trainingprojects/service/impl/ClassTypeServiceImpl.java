@@ -46,6 +46,11 @@ public class ClassTypeServiceImpl implements ClassTypeService {
     }
 
     @Override
+    public List<ClassTypeVo> selectAllClassTypes2() {
+        return classtypeDao.selectAllClassTypes2();
+    }
+
+    @Override
     public boolean deleteById(Integer classtypeId) {
         return false;
     }

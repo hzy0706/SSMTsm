@@ -16,8 +16,8 @@
     <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
     <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
     <result column="Approval" jdbcType="INTEGER" property="approval" />
-    <result column="AppName" jdbcType="TIMESTAMP" property="appname" />
-    <result column="AppTime" jdbcType="VARCHAR" property="apptime" />
+    <result column="AppName" jdbcType="VARCHAR" property="appname" />
+    <result column="AppTime" jdbcType="TIMESTAMP" property="apptime" />
     <result column="RevokeAppTime" jdbcType="TIMESTAMP" property="revokeapptime" />
     <result column="RevokeAppName" jdbcType="VARCHAR" property="revokeappname" />
     <result column="BookStorage_Id" jdbcType="INTEGER" property="bookstorageId" />
@@ -40,21 +40,21 @@
   </select>
   <select id="selectByStorageexpenditureApproval" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />,b.BookName
     from storageexpenditure s
     inner join book b on b.Book_Id=s.Book_Id
-    where s.Approval = #{approval,jdbcType=INTEGER} and s.TimeLiness=0
+    where s.Approval = #{approval,jdbcType=INTEGER} and s.TimeLiness=0 order by s.Refund_Date desc
   </select>
   <insert id="addStorageexpenditure" keyColumn="StorageExpenditure_Id" keyProperty="storageexpenditureId" parameterType="com.trkj.trainingprojects.vo.StorageexpenditureVo" useGeneratedKeys="true">
-    insert into storageexpenditure (Storage_Number, Refund_Date, Refund_details, 
+    insert into storageexpenditure (Storage_Number,Refund_details,
       Storage_Count, TotalMoney, AddName,UpdateName, UpdateTime,
       DeleteName, DeleteTime,AppName, AppTime,
-      RevokeAppTime, RevokeAppName, BookStorage_Id, 
+      RevokeAppTime, RevokeAppName, BookStorage_Id,
       Book_Id)
-    values (#{storageNumber,jdbcType=VARCHAR}, #{refundDate,jdbcType=TIMESTAMP}, #{refundDetails,jdbcType=VARCHAR}, 
+    values (#{storageNumber,jdbcType=VARCHAR}, #{refundDetails,jdbcType=VARCHAR},
       #{storageCount,jdbcType=INTEGER}, #{totalmoney,jdbcType=DECIMAL}, #{addname,jdbcType=VARCHAR}, 
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
-      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{appname,jdbcType=TIMESTAMP}, #{apptime,jdbcType=VARCHAR},
+      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{appname,jdbcType=VARCHAR}, #{apptime,jdbcType=TIMESTAMP},
       #{revokeapptime,jdbcType=TIMESTAMP}, #{revokeappname,jdbcType=VARCHAR}, #{bookstorageId,jdbcType=INTEGER}, 
       #{bookId,jdbcType=INTEGER})
   </insert>
@@ -101,10 +101,10 @@
         Approval = #{approval,jdbcType=INTEGER},
       </if>
       <if test="appname != null">
-        AppName = #{appname,jdbcType=TIMESTAMP},
+        AppName = #{appname,jdbcType=VARCHAR},
       </if>
       <if test="apptime != null">
-        AppTime = #{apptime,jdbcType=VARCHAR},
+        AppTime = #{apptime,jdbcType=TIMESTAMP},
       </if>
       <if test="revokeapptime != null">
         RevokeAppTime = #{revokeapptime,jdbcType=TIMESTAMP},
@@ -127,6 +127,15 @@
       DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
       TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where StorageExpenditure_Id = #{storageexpenditureId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByStorageexpenditureAppKey" parameterType="com.trkj.trainingprojects.vo.StorageexpenditureVo">
+    update storageexpenditure
+    set
+      AppName = #{appname,jdbcType=VARCHAR},
+      AppTime = #{apptime,jdbcType=TIMESTAMP},
+      Approval = #{approval,jdbcType=INTEGER}
     where StorageExpenditure_Id = #{storageexpenditureId,jdbcType=INTEGER}
   </update>
 </mapper>

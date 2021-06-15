@@ -1,11 +1,13 @@
-package com.trkj.trainingprojects.Opservice;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.IdeasDao;
+import com.trkj.trainingprojects.service.IdeasService;
 import com.trkj.trainingprojects.vo.IdeasVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class IdeasServiceImpl implements IdeasService {
@@ -31,6 +33,12 @@ public class IdeasServiceImpl implements IdeasService {
     @Override
     @Transactional
     public int deleteByIdeasKey(IdeasVo record) {
+        System.out.println(record.toString());
         return ideasDao.updateByIdeasKey(record);
+    }
+
+    @Override
+    public List<IdeasVo> selectByIdeasEmpId(Integer empId) {
+        return ideasDao.selectByIdeasEmpId(empId);
     }
 }

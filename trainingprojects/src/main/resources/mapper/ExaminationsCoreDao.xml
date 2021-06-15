@@ -31,7 +31,7 @@
             <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
             <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
         </association>
-        <collection property="studentVos" ofType="com.trkj.trainingprojects.vo.StudentVo">
+        <association property="studentVos" javaType="com.trkj.trainingprojects.vo.StudentVo">
             <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
             <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
             <result property="studentState" column="Student_State" jdbcType="INTEGER"/>
@@ -52,7 +52,7 @@
             <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
             <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
             <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
-        </collection>
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -64,7 +64,8 @@
     <!--查询所有-->
     <select id="selectAllExaminationScore" resultMap="ExaminationscoreMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,s.Student_Name,s.Student_Id,
+        e.ExaminationName,e.Average,e.HighestScore,e.LowestScore
         from examinationscore ec
         inner join student s on ec.Student_Id =s.Student_Id
         inner join examination e on ec.Examination_Id=e.Examination_Id

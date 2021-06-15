@@ -45,8 +45,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-      ExaminationC_Id, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName,
-      DeleteTime, TimeLiness, ItemBank_Id, Examination_Id
+      e.ExaminationC_Id, e.AddName, e.ADDTIME, e.UpdateName, e.UpdateTime, e.DeleteName,
+      e.DeleteTime, e.TimeLiness, e.ItemBank_Id, e.Examination_Id
     </sql>
 
     <!--查询所有-->

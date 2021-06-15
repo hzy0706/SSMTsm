@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface BookService {
     int addBook(BookVo record);
-    List<BookVo> selectAllBooks();
+    List<BookVo> selectAllBooks(String value);
+    List<BookVo> selectAllBooks2();
+    List<BookVo> selectAllBooksByCourseId(String value,Integer courseId);
     BookVo selectByBookKey(Integer bookId);
     int updateByBookKeySelective(BookVo record);
     int deleteByBookKey(BookVo record);

@@ -33,15 +33,15 @@ public class  BookstorageController {
     }
 
     @GetMapping("/selectAllBookstorages")
-    public PageInfo<BookstorageVo> selectAllBookstorages(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    public PageInfo<BookstorageVo> selectAllBookstorages(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize,@RequestParam("value")String value){
         PageHelper.startPage(currentPage,pageSize);
-        List<BookstorageVo> list = bookstorageService.selectAllBookstorages();
+        List<BookstorageVo> list = bookstorageService.selectAllBookstorages(value);
         PageInfo<BookstorageVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
     @GetMapping("/selectAllBookstorage")
     public List<BookstorageVo> selectAllBookstorage(){
-        List<BookstorageVo> list = bookstorageService.selectAllBookstorages();
+        List<BookstorageVo> list = bookstorageService.selectAllBookstorages("");
         return list;
     }
 
@@ -56,6 +56,11 @@ public class  BookstorageController {
         bookstorageService.updateByBookstorageKeySelective(bookstorageVo);
         return AjaxResponse.success(bookstorageVo);
     }
+    @PutMapping("/appBookstorage")
+    public AjaxResponse appBookstorage(@RequestBody @Valid BookstorageVo bookstorageVo){
+        bookstorageService.appBookstorage(bookstorageVo);
+        return AjaxResponse.success(bookstorageVo);
+    }
 
     @PutMapping("/deleteByBookstorageKey")
     public AjaxResponse deleteByBookstorageKey(@RequestBody @Valid BookstorageVo bookstorageVo){
@@ -64,5 +69,12 @@ public class  BookstorageController {
         bookstorageVo.setTimeliness(1);
         bookstorageService.deleteByBookstorageKey(bookstorageVo);
         return AjaxResponse.success(bookstorageVo);
+    }
+    @GetMapping("/selectAllBookstoragesByStatus")
+    public PageInfo<BookstorageVo> selectAllBookstoragesByStatus(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize, @RequestParam("status")String status, @RequestParam("value")String value){
+        PageHelper.startPage(currentPage,pageSize);
+        List<BookstorageVo> list = bookstorageService.selectAllBookstoragesByStatus(Integer.parseInt(status),value);
+        PageInfo<BookstorageVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 }

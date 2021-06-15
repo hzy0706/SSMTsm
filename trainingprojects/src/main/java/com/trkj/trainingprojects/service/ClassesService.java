@@ -27,4 +27,5 @@ public interface ClassesService {
     public void addClasses(ClassesVo classesVo);
     public int deleteByClasses(ClassesVo classesVo);
     public int updateClassesKey(ClassesVo classesVo);
+    List<ClassesVo> selectAllClassesByState();
 }
