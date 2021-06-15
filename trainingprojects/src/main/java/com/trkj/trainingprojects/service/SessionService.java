@@ -28,7 +28,7 @@ public interface SessionService {
      * @param session 实例对象
      * @return 实例对象
      */
-    int addSession(SessionVo session);
+    public void addSession(SessionVo session);
 
     /**
      * 修改数据

@@ -33,7 +33,7 @@ public class SessionVo {
     /**
     * 增加人
     */
-    private String addname;
+    public String addname;
     /**
     * 增加时间
     */
@@ -41,7 +41,7 @@ public class SessionVo {
     /**
     * 最后修改人
     */
-    private String updatename;
+    public String updatename;
     /**
     * 最后修改时间
     */
@@ -49,7 +49,7 @@ public class SessionVo {
     /**
     * 删除人
     */
-    private String deletename;
+    public String deletename;
     /**
     * 删除时间
     */
@@ -59,5 +59,39 @@ public class SessionVo {
     */
     private Integer timeliness;
 
+    public Integer getSessionId() {
+        return sessionId;
+    }
 
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public String getAddname() {
+        return addname;
+    }
+
+    public Date getAddtime() {
+        return addtime;
+    }
+
+    public String getUpdatename() {
+        return updatename;
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public String getDeletename() {
+        return deletename;
+    }
+
+    public Date getDeletetime() {
+        return deletetime;
+    }
+
+    public Integer getTimeliness() {
+        return timeliness;
+    }
 }

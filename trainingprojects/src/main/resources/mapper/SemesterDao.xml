@@ -26,53 +26,26 @@
     <select id="selectALL" resultMap="BaseResultMap">
         select
           Semester_Id, Semester_Name, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness
-        from semester
-        where  TimeLiness=0;
+        from tr01904.semester
+        where  TimeLiness=0 ORDER BY Semester_Id desc
     </select>
     <!--新增所有列-->
     <insert id="addSemesterALL">
-        insert into tr01904.semester(Semester_Name, AddName)
-        values (#{semesterName}, #{addname})
-    </insert>
-
-    <insert id="add">
-        insert into semester(Semester_Name, AddName)
-        values (#{param1}, #{param2})
+        insert into tr01904.semester(Semester_Name, AddName,UpdateName, UpdateTime, DeleteName, DeleteTime)
+        values (#{semesterName}, #{addname}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime})
     </insert>
     <!--通过主键修改数据-->
     <update id="updateSemesterById">
         update tr01904.semester
-        <set>
-            <if test="semesterName != null and semesterName != ''">
+        set
                 Semester_Name = #{semesterName},
-            </if>
-            <if test="addname != null and addname != ''">
-                AddName = #{addname},
-            </if>
-            <if test="addtime != null">
-                AddTime = #{addtime},
-            </if>
-            <if test="updatename != null and updatename != ''">
                 UpdateName = #{updatename},
-            </if>
-            <if test="updatetime != null">
-                UpdateTime = #{updatetime},
-            </if>
-            <if test="deletename != null and deletename != ''">
-                DeleteName = #{deletename},
-            </if>
-            <if test="deletetime != null">
-                DeleteTime = #{deletetime},
-            </if>
-            <if test="timeliness != null">
-                TimeLiness = #{timeliness},
-            </if>
-        </set>
+                UpdateTime = CURRENT_TIMESTAMP
         where Semester_Id = #{semesterId}
     </update>
     <!--通过主键删除-->
     <update id="delSemesterById">
-        update Semester
+        update semester
         set
         UpdateTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
         where Semester_Id=#{semesterId}
