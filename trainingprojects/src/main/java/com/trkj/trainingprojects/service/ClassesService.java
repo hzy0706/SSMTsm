@@ -24,6 +24,9 @@ public interface ClassesService {
     boolean deleteById(Integer classesId);
 
     public List<ClassesVo> selectAllClasses();
+
+    List<ClassesVo> selectAllClassesByState();
+
     public void addClasses(ClassesVo classesVo);
     public int deleteByClasses(ClassesVo classesVo);
     public int updateClassesKey(ClassesVo classesVo);

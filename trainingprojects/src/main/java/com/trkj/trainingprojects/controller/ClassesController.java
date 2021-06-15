@@ -33,6 +33,15 @@ public class ClassesController {
         PageInfo<ClassesVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+    /**
+     * 查询所有开办状态为0或者1的班级信息（胡志远）
+     * @return
+     */
+    @GetMapping("/selectAllClassesByState")
+    public List<ClassesVo> selectAllClassesByState(){
+        List<ClassesVo> list = classesService.selectAllClassesByState();
+        return list;
+    }
 
     @PostMapping("/addClasses")
     public AjaxResponse addClasses(@RequestBody @Valid ClassesVo classesVo){

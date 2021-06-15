@@ -84,7 +84,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-      cl.Classes_Id, cl.Classes_Name, cl.Classes_Open, cl.StartedDate, cl.EndDate, cl.LastDate,cl.ManyLessons
+      cl.Classes_Id, cl.Classes_Name, cl.Classes_Open, cl.StartedDate, cl.EndDate, cl.LastDate,cl.ManyLessons,
       cl.AddName, cl.ADDTIME, cl.UpdateName, cl.UpdateTime, cl.DeleteName, cl.DeleteTime, cl.TimeLiness,
       cl.Course_Id, cl.Emp_Id, cl.Teacher_Id, cl.CourseDetails_Id
     </sql>
@@ -99,6 +99,18 @@
         inner join course co on cl.Course_Id=co.Course_Id
         inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
         where cl.TimeLiness = 0
+    </select>
+
+    <!--查询所有开办状态为0或者1的班级信息（胡志远）-->
+    <select id="selectAllClassesByState" resultMap="ClassesMap">
+        select
+        <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name,co.Course_Name,cs.CourseDetails_Name
+        from classes cl
+        inner join emp e1 on cl.Emp_Id=e1.Emp_Id
+        inner join emp e2 on cl.Teacher_Id=e2.Emp_Id
+        inner join course co on cl.Course_Id=co.Course_Id
+        inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
+        where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1)
     </select>
 
     <!--查询单个-->
