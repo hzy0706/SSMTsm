@@ -20,7 +20,7 @@
         <result property="empId" column="Emp_Id" jdbcType="INTEGER"/>
         <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
         <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
-        <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+        <association property="empVo1" javaType="com.trkj.trainingprojects.vo.EmpVo">
             <id property="empId" column="Emp_Id" jdbcType="INTEGER"/>
             <result property="jobnumber" column="JobNumber" jdbcType="VARCHAR"/>
             <result property="empName" column="Emp_Name" jdbcType="VARCHAR"/>
@@ -48,7 +48,35 @@
             <result property="deptId" column="Dept_Id" jdbcType="INTEGER"/>
             <result property="enterpriseId" column="Enterprise_Id" jdbcType="INTEGER"/>
         </association>
-        <collection property="courseList" ofType="com.trkj.trainingprojects.vo.CourseVo">
+        <association property="empVo2" javaType="com.trkj.trainingprojects.vo.EmpVo">
+            <id property="empId" column="cjk" jdbcType="INTEGER"/>
+            <result property="jobnumber" column="JobNumber" jdbcType="VARCHAR"/>
+            <result property="empName" column="hzy" jdbcType="VARCHAR"/>
+            <result property="userimg" column="UserImg" jdbcType="VARCHAR"/>
+            <result property="individualimg" column="IndividualImg" jdbcType="VARCHAR"/>
+            <result property="empSex" column="Emp_Sex" jdbcType="VARCHAR"/>
+            <result property="empPhone" column="Emp_Phone" jdbcType="VARCHAR"/>
+            <result property="eMail" column="E_mail" jdbcType="VARCHAR"/>
+            <result property="birthday" column="Birthday" jdbcType="TIMESTAMP"/>
+            <result property="remarks" column="Remarks" jdbcType="VARCHAR"/>
+            <result property="address" column="Address" jdbcType="VARCHAR"/>
+            <result property="workersstate" column="WorkersState" jdbcType="INTEGER"/>
+            <result property="password" column="Password" jdbcType="VARCHAR"/>
+            <result property="loginstate" column="LoginState" jdbcType="INTEGER"/>
+            <result property="education" column="Education" jdbcType="VARCHAR"/>
+            <result property="graduate" column="Graduate" jdbcType="VARCHAR"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="separationname" column="SeparationName" jdbcType="VARCHAR"/>
+            <result property="separationtime" column="SeparationTime" jdbcType="TIMESTAMP"/>
+            <result property="separationdate" column="SeparationDate" jdbcType="TIMESTAMP"/>
+            <result property="positionId" column="Position_Id" jdbcType="INTEGER"/>
+            <result property="deptId" column="Dept_Id" jdbcType="INTEGER"/>
+            <result property="enterpriseId" column="Enterprise_Id" jdbcType="INTEGER"/>
+        </association>
+        <association property="courseList" javaType="com.trkj.trainingprojects.vo.CourseVo">
             <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
             <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
             <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
@@ -67,8 +95,8 @@
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
             <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
-        </collection>
-        <collection property="courseDetailsList" ofType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+        </association>
+        <association property="courseDetailsList" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
             <id property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
             <result property="coursedetailsName" column="CourseDetails_Name" jdbcType="VARCHAR"/>
             <result property="coursesequence" column="CourseSequence" jdbcType="INTEGER"/>
@@ -80,7 +108,7 @@
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
             <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
-        </collection>
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -92,25 +120,14 @@
     <!--查询所有-->
     <select id="selectAllClasses" resultMap="ClassesMap">
         select
-        <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name,co.Course_Name,cs.CourseDetails_Name
+        <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name hzy,co.Course_Name,
+        cs.CourseDetails_Name,co.Classhours,co.Course_Money,e2.Emp_Id cjk
         from classes cl
         inner join emp e1 on cl.Emp_Id=e1.Emp_Id
         inner join emp e2 on cl.Teacher_Id=e2.Emp_Id
         inner join course co on cl.Course_Id=co.Course_Id
-        inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
-        where cl.TimeLiness = 0
-    </select>
-
-    <!--查询所有开办状态为0或者1的班级信息（胡志远）-->
-    <select id="selectAllClassesByState" resultMap="ClassesMap">
-        select
-        <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name,co.Course_Name,cs.CourseDetails_Name
-        from classes cl
-        inner join emp e1 on cl.Emp_Id=e1.Emp_Id
-        inner join emp e2 on cl.Teacher_Id=e2.Emp_Id
-        inner join course co on cl.Course_Id=co.Course_Id
-        inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
-        where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1)
+        inner join coursedetails cs on cl.CourseDetails_Id=cs.CourseDetails_Id
+        where cl.TimeLiness = 0 ORDER BY CONVERT(cl.Classes_Name USING gbk) DESC
     </select>
 
     <!--查询单个-->
@@ -127,6 +144,18 @@
           Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id
         from tr01904.classes
         limit #{offset}, #{limit}
+    </select>
+
+    <!--查询所有开办状态为0或者1的班级信息（胡志远）-->
+    <select id="selectAllClassesByState" resultMap="ClassesMap">
+        select
+        <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name,co.Course_Name,cs.CourseDetails_Name
+        from classes cl
+        inner join emp e1 on cl.Emp_Id=e1.Emp_Id
+        inner join emp e2 on cl.Teacher_Id=e2.Emp_Id
+        inner join course co on cl.Course_Id=co.Course_Id
+        inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
+        where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1)
     </select>
 
     <!--通过实体作为筛选条件查询-->

@@ -46,15 +46,6 @@ public class ClassesServiceImpl implements ClassesService {
         return classesDao.selectAllClasses();
     }
 
-    /**
-     * 查询所有开办状态为0或者1的班级信息（胡志远）
-     * @return
-     */
-    @Override
-    public List<ClassesVo> selectAllClassesByState() {
-        return classesDao.selectAllClassesByState();
-    }
-
     @Override
     @Transactional
     public void addClasses(ClassesVo classesVo) {
@@ -71,5 +62,10 @@ public class ClassesServiceImpl implements ClassesService {
     @Transactional
     public int updateClassesKey(ClassesVo classesVo) {
         return classesDao.updateClassesKey(classesVo);
+    }
+
+    @Override
+    public List<ClassesVo> selectAllClassesByState() {
+        return classesDao.selectAllClassesByState();
     }
 }

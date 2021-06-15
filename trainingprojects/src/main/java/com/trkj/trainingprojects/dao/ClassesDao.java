@@ -33,10 +33,7 @@ public interface ClassesDao {
     int deleteById(Integer classesId);
 
     List<ClassesVo> selectAllClasses();
-
-    //查询所有开办状态为0或者1的班级信息（胡志远）
-    List<ClassesVo> selectAllClassesByState();
-
     int deleteByClasses(ClassesVo classesVo);
+    List<ClassesVo> selectAllClassesByState();
 }
 
