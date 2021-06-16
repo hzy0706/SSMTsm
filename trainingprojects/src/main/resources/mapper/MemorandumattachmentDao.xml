@@ -198,6 +198,13 @@
      update memorandumattachment
      set JWIsExamine = #{jwisexamine,jdbcType=INTEGER},
       JWExamineTime = #{jwexaminetime,jdbcType=TIMESTAMP},
+      JWExamineName = #{jwexaminename,jdbcType=VARCHAR}
+    where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateJwChName" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment">
+     update memorandumattachment
+     set JWIsExamine = #{jwisexamine,jdbcType=INTEGER},
+      JWExamineTime = #{jwexaminetime,jdbcType=TIMESTAMP},
       JWExamineName = #{jwexaminename,jdbcType=VARCHAR},
       JWRevokeTime = #{jwrevoketime,jdbcType=TIMESTAMP},
       JWRevokeName = #{jwrevokename,jdbcType=VARCHAR}

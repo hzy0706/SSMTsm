@@ -23,4 +23,6 @@ public interface MemorandumattachmentDao {
     List<MemorandumattachmentVo> findMemorandumattachment();
 
     int updateJwName(MemorandumattachmentVo memorandumattachmentVo);
+    
+    int updateJwChName(MemorandumattachmentVo memorandumattachmentVo);
 }

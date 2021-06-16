@@ -15,4 +15,6 @@ public interface MemorandumattachmentService {
     public int delMemorandumattachment(MemorandumattachmentVo memorandumattachmentVo);
     //根据id修改教务的
     public int updateJwName(MemorandumattachmentVo memorandumattachmentVo);
+    //撤销审核
+    int updateJwChName(MemorandumattachmentVo memorandumattachmentVo);
 }

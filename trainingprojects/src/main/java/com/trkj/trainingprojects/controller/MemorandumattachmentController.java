@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -41,6 +42,22 @@ public class MemorandumattachmentController {
     @PutMapping("/delMemorandumattachment")
     public AjaxResponse delMemorandumattachment(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         memorandumattachmentService.delMemorandumattachment(memorandumattachmentVo);
+        return AjaxResponse.success(memorandumattachmentVo);
+    }
+
+    @PutMapping("/updateJwName")
+    public AjaxResponse updateJwName(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+        Date date = new Date();
+        memorandumattachmentVo.setJwexaminetime(date);
+        memorandumattachmentService.updateJwName(memorandumattachmentVo);
+        return AjaxResponse.success(memorandumattachmentVo);
+    }
+
+    @PutMapping("/updateJwChName")
+    public AjaxResponse updateJwChName(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+        Date date = new Date();
+        memorandumattachmentVo.setJwrevoketime(date);
+        memorandumattachmentService.updateJwChName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }
 }

@@ -44,4 +44,11 @@ public class MemorandumattachmentServiceImpl implements MemorandumattachmentServ
     public int updateJwName(MemorandumattachmentVo memorandumattachmentVo) {
         return memorandumattachmentDao.updateJwName(memorandumattachmentVo);
     }
+
+    @Override
+    @Transactional
+    public int updateJwChName(MemorandumattachmentVo memorandumattachmentVo) {
+        return memorandumattachmentDao.updateJwChName(memorandumattachmentVo);
+    }
+
 }
