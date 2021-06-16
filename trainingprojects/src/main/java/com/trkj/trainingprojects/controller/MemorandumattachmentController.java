@@ -45,18 +45,25 @@ public class MemorandumattachmentController {
         return AjaxResponse.success(memorandumattachmentVo);
     }
 
-    @PutMapping("/updateJwName")
-    public AjaxResponse updateJwName(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+    @PutMapping("/updateJwName/{id}/{name}")
+    public AjaxResponse updateJwName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         Date date = new Date();
         memorandumattachmentVo.setJwexaminetime(date);
+        memorandumattachmentVo.setMemorandumattachmentId(id);
+        memorandumattachmentVo.setJwexaminename(name);
+        memorandumattachmentVo.setJwisexamine(1);
         memorandumattachmentService.updateJwName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }
 
-    @PutMapping("/updateJwChName")
-    public AjaxResponse updateJwChName(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+    @PutMapping("/updateJwChName/{id}/{name}")
+    public AjaxResponse updateJwChName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         Date date = new Date();
         memorandumattachmentVo.setJwrevoketime(date);
+        memorandumattachmentVo.setMemorandumattachmentId(null);
+        memorandumattachmentVo.setJwexaminename(null);
+        memorandumattachmentVo.setZsrevokename(name);
+        memorandumattachmentVo.setMemorandumattachmentId(id);
         memorandumattachmentService.updateJwChName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }
