@@ -53,7 +53,7 @@ public class MemorandumattachmentServiceImpl implements MemorandumattachmentServ
     @Override
     @Transactional
     public int updateZsName(MemorandumattachmentVo memorandumattachmentVo) {
-        return memorandumattachmentDao.updateByMemorandumattachmentKey(memorandumattachmentVo);
+        return memorandumattachmentDao.updateZsName(memorandumattachmentVo);
     }
     //    撤销审核
     @Override
