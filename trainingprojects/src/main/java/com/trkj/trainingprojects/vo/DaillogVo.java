@@ -1,10 +1,13 @@
 package com.trkj.trainingprojects.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trkj.trainingprojects.ann.ClassMeta;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
@@ -39,9 +42,9 @@ public class DaillogVo {
     /**
      * 计划开始日期
      */
-    private Date planbegintime;
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date planbegintime;
     public Date getPlanbegintime(){
         return planbegintime;
     }
@@ -50,11 +53,9 @@ public class DaillogVo {
     /**
      * 计划结束日期
      */
-
-    private Date planendtime;
 //    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date planendtime;
     public Date getPlanendtime(){
         return planendtime;
     }
@@ -63,13 +64,22 @@ public class DaillogVo {
     /**
      * 正式开始日期
      */
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date begintime;
-
+    public Date getbegintime(){
+        return begintime;
+    }
 
     /**
      * 正式结束日期
      */
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date endtime;
+    public Date getendtime(){
+        return endtime;
+    }
 
     /**
      * 进度状态
@@ -89,13 +99,13 @@ public class DaillogVo {
     /**
      * 新增时间
      */
-    private Date addtime;
 //    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date addtime;
     public Date getAddtime(){
         return addtime;
     }
+
 
     /**
      * 最后修改人
@@ -105,6 +115,8 @@ public class DaillogVo {
     /**
      * 最后修改时间
      */
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatetime;
 
     /**
@@ -115,6 +127,8 @@ public class DaillogVo {
     /**
      * 删除时间
      */
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date deletetime;
 
     /**
@@ -126,6 +140,7 @@ public class DaillogVo {
      * 职员编号
      */
     private Integer empId;
+    @JsonIgnore
     private EmpVo empVo;
 
     private static final long serialVersionUID = 1L;
