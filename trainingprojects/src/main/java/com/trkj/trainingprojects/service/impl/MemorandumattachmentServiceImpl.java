@@ -39,4 +39,9 @@ public class MemorandumattachmentServiceImpl implements MemorandumattachmentServ
     public int delMemorandumattachment(MemorandumattachmentVo memorandumattachmentVo) {
         return memorandumattachmentDao.delByMemorandumattachmentKey(memorandumattachmentVo);
     }
+
+    @Override
+    public int updateJwName(MemorandumattachmentVo memorandumattachmentVo) {
+        return memorandumattachmentDao.updateJwName(memorandumattachmentVo);
+    }
 }

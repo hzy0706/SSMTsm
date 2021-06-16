@@ -21,4 +21,6 @@ public interface MemorandumattachmentDao {
     int delByMemorandumattachmentKey(MemorandumattachmentVo record);
 //    查询
     List<MemorandumattachmentVo> findMemorandumattachment();
+
+    int updateJwName(MemorandumattachmentVo memorandumattachmentVo);
 }
