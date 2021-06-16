@@ -210,4 +210,23 @@
       JWRevokeName = #{jwrevokename,jdbcType=VARCHAR}
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
+  <!--  根据id修改-->
+  <update id="updateZsName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
+    update memorandumattachment
+    set ZSIsExamine = #{zsisexamine,jdbcType=INTEGER},
+      ZSExamineTime = #{zsexaminetime,jdbcType=TIMESTAMP},
+      ZSExamineName = #{zsexaminename,jdbcType=VARCHAR}
+       where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+  </update>
+  <!--撤回审核-->
+  <update id="updateZsChName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
+    update memorandumattachment
+    set ZSIsExamine = #{zsisexamine,jdbcType=INTEGER},
+      ZSExamineTime = #{zsexaminetime,jdbcType=TIMESTAMP},
+      ZSExamineName = #{zsexaminename,jdbcType=VARCHAR},
+      ZSRevokeTime = #{zsrevoketime,jdbcType=TIMESTAMP},
+      ZSRevokeName = #{zsrevokename,jdbcType=VARCHAR}
+       where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+  </update>
+
 </mapper>

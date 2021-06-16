@@ -25,4 +25,8 @@ public interface MemorandumattachmentDao {
     int updateJwName(MemorandumattachmentVo memorandumattachmentVo);
     
     int updateJwChName(MemorandumattachmentVo memorandumattachmentVo);
+
+    int updateZsName(MemorandumattachmentVo memorandumattachmentVo);
+    //    撤销审核
+    int updateZsChName(MemorandumattachmentVo memorandumattachmentVo);
 }
