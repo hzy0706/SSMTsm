@@ -49,16 +49,16 @@
   <select id="findMemorandumattachment" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />,r.ConsultAnt
-    from Memorandumattachment m
+    from memorandumattachment m
     inner join Register r on m.Register_Id=r.Register_Id
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from memorandumattachment
+    delete from tr01904.memorandumattachment
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="MemorandumAttachment_Id" keyProperty="memorandumattachmentId" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment" useGeneratedKeys="true">
-    insert into memorandumattachment (ZSIsExamine, ZSExamineTime, ZSExamineName, 
+    insert into tr01904.memorandumattachment (ZSIsExamine, ZSExamineTime, ZSExamineName,
       ZSRevokeTime, ZSRevokeName, JWIsExamine, 
       JWExamineTime, JWExamineName, JWRevokeTime, 
       JWRevokeName, Register_Id)
@@ -68,7 +68,7 @@
       #{jwrevokename,jdbcType=VARCHAR}, #{registerId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="MemorandumAttachment_Id" keyProperty="memorandumattachmentId" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment" useGeneratedKeys="true">
-    insert into memorandumattachment
+    insert into tr01904.memorandumattachment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="zsisexamine != null">
         ZSIsExamine,
