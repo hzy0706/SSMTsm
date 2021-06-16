@@ -60,6 +60,10 @@ public class DaillogVo {
         return planendtime;
     }
 
+    /**
+     * 进行状态
+     */
+    private int conductType;
 
     /**
      * 正式开始日期

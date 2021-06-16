@@ -8,6 +8,7 @@
     <result column="daillogType" jdbcType="VARCHAR"  property="daillogType" />
     <result column="PlanBeginTime" jdbcType="TIMESTAMP" property="planbegintime" />
     <result column="PlanEndTime" jdbcType="TIMESTAMP" property="planendtime" />
+    <result column="ConductType" jdbcType="INTEGER" property="conductType" />
     <result column="BeginTime" jdbcType="TIMESTAMP" property="begintime" />
     <result column="EndTime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="State" jdbcType="INTEGER" property="state" />
@@ -25,7 +26,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    d.DailLog_Id, d.title, d.content, d.daillogType, d.PlanBeginTime, d.PlanEndTime, d.BeginTime, d.EndTime, d.`State`,
+    d.DailLog_Id, d.title, d.content, d.daillogType, d.PlanBeginTime, d.PlanEndTime, d.conductType, d.BeginTime, d.EndTime, d.`State`,
     d.Postponement, d.AddName, d.AddTime, d.UpdateName, d.UpdateTime, d.DeleteName, d.DeleteTime, d.TimeLiness,
     d.Emp_Id
   </sql>
@@ -45,13 +46,13 @@
   </select>
   <insert id="addDaillog" keyColumn="DailLog_Id" keyProperty="daillogId" parameterType="com.trkj.trainingprojects.vo.DaillogVo" useGeneratedKeys="true">
     insert into daillog (title, content, daillogType, PlanBeginTime,
-      PlanEndTime, BeginTime, EndTime, 
+      PlanEndTime, BeginTime, EndTime,
       Postponement, AddName,
       UpdateName, UpdateTime,
       DeleteName, DeleteTime,
       Emp_Id)
     values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{daillogType,jdbcType=VARCHAR}, #{planbegintime,jdbcType=TIMESTAMP},
-      #{planendtime,jdbcType=TIMESTAMP}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{planendtime,jdbcType=TIMESTAMP}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP},
       #{postponement,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
       #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
@@ -74,6 +75,9 @@
       </if>
       <if test="planendtime != null">
         PlanEndTime = #{planendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conductType != null">
+        ConductType = #{conductType,jdbcType=INTEGER},
       </if>
       <if test="begintime != null">
         BeginTime = #{begintime,jdbcType=TIMESTAMP},
@@ -127,6 +131,14 @@
     set
       State = #{state,jdbcType=INTEGER},
       EndTime = #{endtime,jdbcType=TIMESTAMP}
+    where DailLog_Id = #{daillogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateConductTypeByKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
+    update daillog
+    set
+      ConductType = #{conductType,jdbcType=INTEGER},
+      State = #{state,jdbcType=INTEGER},
+      BeginTime = #{begintime,jdbcType=TIMESTAMP}
     where DailLog_Id = #{daillogId,jdbcType=INTEGER}
   </update>
 </mapper>

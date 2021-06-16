@@ -43,6 +43,11 @@ public class Daillog implements Serializable {
     private Date planendtime;
 
     /**
+     * 进行状态
+     */
+    private int conductType;
+
+    /**
      * 正式开始日期
      */
     private Date begintime;
