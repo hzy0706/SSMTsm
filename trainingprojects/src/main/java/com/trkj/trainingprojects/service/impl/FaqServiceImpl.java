@@ -1,8 +1,10 @@
 package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.FaqQuestionsDao;
+import com.trkj.trainingprojects.service.FaqService;
 import com.trkj.trainingprojects.vo.FaqQuestionsVo;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
