@@ -1,4 +1,4 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.Opservice;
 
 import com.trkj.trainingprojects.vo.MemorandumattachmentVo;
 

@@ -1,7 +1,6 @@
-package com.trkj.trainingprojects.service.impl;
+package com.trkj.trainingprojects.Opservice;
 
 import com.trkj.trainingprojects.dao.MemorandumattachmentDao;
-import com.trkj.trainingprojects.service.MemorandumattachmentService;
 import com.trkj.trainingprojects.vo.MemorandumattachmentVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
