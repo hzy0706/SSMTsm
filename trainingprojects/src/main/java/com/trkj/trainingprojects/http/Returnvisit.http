@@ -1,0 +1,33 @@
+PUT http://localhost:8080/Training/delReturnvisit
+Content-Type: application/json
+
+{
+  "timeliness": 1,
+  "returnvisitId": 1
+}
+
+###
+PUT http://localhost:8080/Training/updateReturnvisit
+Content-Type: application/json
+
+{
+  "empId": 1,
+  "returnvisitId": 1
+}
+
+###
+POST http://localhost:8080/Training/addReturnvisit
+Content-Type: application/json
+
+{
+  "returnvisitmode": "得到",
+  "returncontent": "染发",
+  "addname": "山地车",
+  "registerId": 1
+}
+
+###
+GET http://localhost:8080/Training/findReturnvisit/1/3
+Accept: application/json
+
+###

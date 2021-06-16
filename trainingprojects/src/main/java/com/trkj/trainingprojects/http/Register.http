@@ -1,0 +1,49 @@
+
+###
+GET http://localhost:8080/Training/findRegisterList
+Accept: application/json
+
+###
+PUT http://localhost:8080/Training/updateRegister
+Content-Type: application/json
+
+{
+  "empId": 1,
+  "registerId":1
+}
+
+###
+PUT http://localhost:8080/Training/delRegister
+Content-Type: application/json
+
+{
+  "consultant": "蔡头",
+  "sex": "男",
+  "phone": "185690034783",
+  "consultcontent": "怎样增肥",
+  "addname": "老胡",
+  "sourceId": "1",
+  "courseId": "1",
+  "empId": "1"
+}
+
+###
+POST http://localhost:8080/Training/addRegister
+Content-Type: application/json
+
+{
+  "consultant": "蔡头",
+  "sex": "男",
+  "phone": "185690034783",
+  "consultcontent": "怎样增肥",
+  "addname": "老胡",
+  "sourceId": "1",
+  "courseId": "1",
+  "empId": "1"
+}
+
+###
+GET http://localhost:8080/Training/findRegister/2/2
+Accept: application/json
+
+###
