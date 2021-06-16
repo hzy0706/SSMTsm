@@ -2,7 +2,7 @@ package com.trkj.trainingprojects.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.trkj.trainingprojects.service.MemorandumattachmentService;
+import com.trkj.trainingprojects.Opservice.MemorandumattachmentService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.MemorandumattachmentVo;
 import lombok.extern.slf4j.Slf4j;
