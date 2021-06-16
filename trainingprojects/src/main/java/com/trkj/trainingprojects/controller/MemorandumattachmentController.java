@@ -64,6 +64,7 @@ public class MemorandumattachmentController {
         memorandumattachmentVo.setJwexaminename(null);
         memorandumattachmentVo.setZsrevokename(name);
         memorandumattachmentVo.setMemorandumattachmentId(id);
+        memorandumattachmentVo.setJwisexamine(0);
         memorandumattachmentService.updateJwChName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }
