@@ -3,6 +3,7 @@ package com.trkj.trainingprojects.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.StudentService;
+import com.trkj.trainingprojects.vo.ClassesVo;
 import com.trkj.trainingprojects.vo.StudentVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,9 +34,19 @@ public class StudentController {
         PageInfo<StudentVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+
     @GetMapping("/SelectStudentByState")
     public List<StudentVo> SelectStudentByState(){
         List<StudentVo> list = studentService.SelectStudentByState();
         return list;
     }
+
+    @GetMapping("/selectAllStudent")
+    public PageInfo<StudentVo> selectAllStudent(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        List<StudentVo> list = studentService.selectAllStudent();
+        PageInfo<StudentVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
 }

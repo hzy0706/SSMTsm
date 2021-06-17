@@ -94,6 +94,9 @@ public class StudentVo {
      * 咨询登记编号
      */
     private Integer registerId;
+    private ClassesVo classesVo;
+    private SourceVo sourceVo;
+    private RegisterVo registerVo;
 
     private static final long serialVersionUID = 1L;
 }

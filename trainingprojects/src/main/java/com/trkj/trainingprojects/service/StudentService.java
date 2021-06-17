@@ -24,4 +24,7 @@ public interface StudentService {
     List<StudentVo> SelectStudentByClassId(int classId);
 
     List<StudentVo> SelectStudentByState();
+
+    List<StudentVo> selectAllStudent();
+
 }

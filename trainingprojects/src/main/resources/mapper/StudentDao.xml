@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.StudentDao">
-    <resultMap type="com.trkj.trainingprojects.entity.Student" id="StudentMap">
+    <resultMap type="com.trkj.trainingprojects.vo.StudentVo" id="StudentMap">
         <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
         <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
         <result property="studentState" column="Student_State" jdbcType="INTEGER"/>
@@ -22,7 +22,77 @@
         <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
         <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
         <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
+        <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+            <id property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="classesName" column="Classes_Name" jdbcType="VARCHAR"/>
+            <result property="classesOpen" column="Classes_Open" jdbcType="INTEGER"/>
+            <result property="starteddate" column="StartedDate" jdbcType="TIMESTAMP"/>
+            <result property="enddate" column="EndDate" jdbcType="TIMESTAMP"/>
+            <result property="lastdate" column="LastDate" jdbcType="TIMESTAMP"/>
+            <result property="manylessons" column="ManyLessons" jdbcType="INTEGER"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="empId" column="Emp_Id" jdbcType="INTEGER"/>
+            <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+        </association>
+        <association property="sourceVo" javaType="com.trkj.trainingprojects.vo.SourceVo">
+            <id column="Source_Id" jdbcType="INTEGER" property="sourceId" />
+            <result column="Source_Name" jdbcType="VARCHAR" property="sourceName" />
+            <result column="Already" jdbcType="INTEGER" property="already" />
+            <result column="Potential" jdbcType="INTEGER" property="potential" />
+            <result column="AddName" jdbcType="VARCHAR" property="addname" />
+            <result column="ADDTIME" jdbcType="TIMESTAMP" property="addtime" />
+            <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+            <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+            <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+            <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+            <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+        </association>
+        <association property="registerVo" javaType="com.trkj.trainingprojects.vo.RegisterVo">
+            <id column="Register_Id" jdbcType="INTEGER" property="registerId" />
+            <result column="ConsultAnt" jdbcType="VARCHAR" property="consultant" />
+            <result column="Sex" jdbcType="VARCHAR" property="sex" />
+            <result column="Phone" jdbcType="VARCHAR" property="phone" />
+            <result column="AttentState" jdbcType="INTEGER" property="attentstate" />
+            <result column="PayState" jdbcType="INTEGER" property="paystate" />
+            <result column="ConsultContent" jdbcType="VARCHAR" property="consultcontent" />
+            <result column="AddName" jdbcType="VARCHAR" property="addname" />
+            <result column="ADDTIME" jdbcType="TIMESTAMP" property="addtime" />
+            <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+            <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+            <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+            <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+            <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+            <result column="Source_Id" jdbcType="INTEGER" property="sourceId" />
+            <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
+            <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+        </association>
     </resultMap>
+
+    <sql id="Base_Column_List">
+        st.Student_Id, st.Student_Name, st.Student_State, st.Sex, st.Student_Phone,
+         st.Address, st.ImgAddress, st.ParentName, st.ParentPhone, st.Student_Number,
+          st.Entrance, st.StudyTime, st.UpdateName, st.UpdateTime, st.DeleteName, st.DeleteTime,
+           st.TimeLiness, st.Classes_Id, st.Source_Id, st.Register_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllStudent" resultMap="StudentMap">
+        select
+        <include refid="Base_Column_List" />
+        from tr01904.student st
+        inner join classes cl on st.Classes_Id=cl.Classes_Id
+        inner join register re on st.Register_Id=re.Register_Id
+        inner join source so on st.Source_Id=so.Source_Id
+        where st.TimeLiness = 0 order by st.Student_Id desc
+    </select>
 
     <!--查询单个-->
     <select id="SelectStudentByClassId" resultMap="StudentMap">
