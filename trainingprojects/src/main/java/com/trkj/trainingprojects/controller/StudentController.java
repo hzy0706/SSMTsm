@@ -58,13 +58,6 @@ public class StudentController {
         studentVo.setStudentState(0);
         studentVo.setTimeliness(0);
         studentService.addStudents(studentVo);
-        StudentstatusVo studentstatusVo = new StudentstatusVo();
-        studentstatusVo.setStudentId(studentVo.getStudentId());
-        studentstatusVo.setStatus(0);
-        studentstatusVo.setApproval(0);
-        studentstatusVo.setAddtime(date);
-        studentstatusVo.setAppname(studentVo.getAddname());
-        studentstatusService.addStudentStatus(studentstatusVo);
         return AjaxResponse.success(studentVo);
     }
 
