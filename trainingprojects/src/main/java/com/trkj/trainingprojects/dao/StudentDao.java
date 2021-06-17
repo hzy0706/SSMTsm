@@ -20,7 +20,7 @@ public interface StudentDao {
 
     List<Student> queryAll(Student student);
 
-    int insert(Student student);
+    int insert(StudentVo studentVo);
 
     int insertBatch(@Param("entities") List<Student> entities);
 

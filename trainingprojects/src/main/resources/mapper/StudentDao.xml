@@ -14,6 +14,8 @@
         <result property="studentNumber" column="Student_Number" jdbcType="VARCHAR"/>
         <result property="entrance" column="Entrance" jdbcType="VARCHAR"/>
         <result property="studytime" column="StudyTime" jdbcType="TIMESTAMP"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
         <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
         <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
         <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
@@ -79,7 +81,7 @@
     <sql id="Base_Column_List">
         st.Student_Id, st.Student_Name, st.Student_State, st.Sex, st.Student_Phone,
          st.Address, st.ImgAddress, st.ParentName, st.ParentPhone, st.Student_Number,
-          st.Entrance, st.StudyTime, st.UpdateName, st.UpdateTime, st.DeleteName, st.DeleteTime,
+          st.Entrance, st.StudyTime, st.AddName, st.ADDTIME, st.UpdateName, st.UpdateTime, st.DeleteName, st.DeleteTime,
            st.TimeLiness, st.Classes_Id, st.Source_Id, st.Register_Id
     </sql>
 
@@ -97,14 +99,14 @@
     <!--查询单个-->
     <select id="SelectStudentByClassId" resultMap="StudentMap">
         select
-          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
+          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
         from tr01904.student
         where Classes_Id = #{classesId} and TimeLiness = 0
     </select>
 
     <select id="SelectStudentByState" resultMap="StudentMap">
         select
-          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
+          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
         from tr01904.student
         where Student_State = 0 and TimeLiness = 0
     </select>
@@ -190,8 +192,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="studentId" useGeneratedKeys="true">
-        insert into tr01904.student(Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id)
-        values (#{studentName}, #{studentState}, #{sex}, #{studentPhone}, #{address}, #{imgaddress}, #{parentname}, #{parentphone}, #{studentNumber}, #{entrance}, #{studytime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{classesId}, #{sourceId}, #{registerId})
+        insert into tr01904.student(Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id)
+        values (#{studentName}, #{studentState}, #{sex}, #{studentPhone}, #{address}, #{imgaddress}, #{parentname}, #{parentphone}, #{studentNumber}, #{entrance}, #{studytime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{classesId}, #{sourceId}, #{registerId})
     </insert>
 
     <insert id="insertBatch" keyProperty="studentId" useGeneratedKeys="true">
