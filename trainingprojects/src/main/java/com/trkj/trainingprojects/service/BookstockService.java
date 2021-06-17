@@ -14,4 +14,6 @@ public interface BookstockService {
     int updateByBookstockKeySelective(BookstockVo record);
 
     int deleteByBookstockKey(BookstockVo record);
+
+    void appByBookstockKey(BookstockVo bookstockVo);
 }
