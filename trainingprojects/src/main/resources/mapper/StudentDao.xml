@@ -80,7 +80,7 @@
 
     <sql id="Base_Column_List">
         st.Student_Id, st.Student_Name, st.Student_State, st.Sex, st.Student_Phone,
-         st.Address, st.ImgAddress, st.ParentName, st.ParentPhone, st.Student_Number,
+         st.Address, st.ImgAddress, st.ParentName, st.ParentPhone, LPAD(st.Student_Number,7,'0') Student_Number,
           st.Entrance, st.StudyTime, st.AddName, st.ADDTIME, st.UpdateName, st.UpdateTime, st.DeleteName, st.DeleteTime,
            st.TimeLiness, st.Classes_Id, st.Source_Id, st.Register_Id
     </sql>
@@ -90,7 +90,7 @@
         select
         <include refid="Base_Column_List" />
         from tr01904.student st
-        inner join classes cl on st.Classes_Id=cl.Classes_Id
+        /*inner join classes cl on st.Classes_Id=cl.Classes_Id*/
         inner join register re on st.Register_Id=re.Register_Id
         inner join source so on st.Source_Id=so.Source_Id
         where st.TimeLiness = 0 order by st.Student_Id desc
@@ -193,7 +193,7 @@
     <!--新增所有列-->
     <insert id="insert" keyProperty="studentId" useGeneratedKeys="true">
         insert into tr01904.student(Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id)
-        values (#{studentName}, #{studentState}, #{sex}, #{studentPhone}, #{address}, #{imgaddress}, #{parentname}, #{parentphone}, #{studentNumber}, #{entrance}, #{studytime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{classesId}, #{sourceId}, #{registerId})
+        values (#{studentName}, #{studentState}, #{sex}, #{studentPhone}, #{address}, #{imgaddress}, #{parentname}, #{parentphone}, (select max(Student_Number)+1 from student stu1), #{entrance}, #{studytime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{classesId}, #{sourceId}, #{registerId})
     </insert>
 
     <insert id="insertBatch" keyProperty="studentId" useGeneratedKeys="true">
