@@ -17,4 +17,6 @@ public interface RegisterService {
     public List<RegisterVo> selectAllRegister2();
 //    模糊查询
     public List<RegisterVo> mohuRegister(String registerName);
+
+    public int updateShRegister(RegisterVo registerVo);
 }
