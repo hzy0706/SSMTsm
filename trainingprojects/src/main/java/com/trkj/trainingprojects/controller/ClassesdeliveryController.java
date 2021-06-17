@@ -40,6 +40,7 @@ public class ClassesdeliveryController {
     @PutMapping("/updateByClassesdeliveryKeySelective")
     public AjaxResponse updateByClassesdeliveryKeySelective(@RequestBody @Valid ClassesdeliveryVo classesdeliveryVo){
         classesdeliveryVo.setUpdatetime(new Date());
+        System.out.println(classesdeliveryVo.toString()+"-----------");
         classesdeliveryService.updateByClassesdeliveryKeySelective(classesdeliveryVo);
         return AjaxResponse.success(classesdeliveryVo);
     }

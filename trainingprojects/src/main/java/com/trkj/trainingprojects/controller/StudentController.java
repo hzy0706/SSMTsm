@@ -33,4 +33,9 @@ public class StudentController {
         PageInfo<StudentVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+    @GetMapping("/SelectStudentByState")
+    public List<StudentVo> SelectStudentByState(){
+        List<StudentVo> list = studentService.SelectStudentByState();
+        return list;
+    }
 }

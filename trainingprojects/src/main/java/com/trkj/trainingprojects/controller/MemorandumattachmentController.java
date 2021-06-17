@@ -2,7 +2,7 @@ package com.trkj.trainingprojects.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.trkj.trainingprojects.service.MemorandumattachmentService;
+import com.trkj.trainingprojects.Opservice.MemorandumattachmentService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.MemorandumattachmentVo;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -41,6 +42,52 @@ public class MemorandumattachmentController {
     @PutMapping("/delMemorandumattachment")
     public AjaxResponse delMemorandumattachment(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         memorandumattachmentService.delMemorandumattachment(memorandumattachmentVo);
+        return AjaxResponse.success(memorandumattachmentVo);
+    }
+
+    @PutMapping("/updateJwName/{id}/{name}")
+    public AjaxResponse updateJwName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+        Date date = new Date();
+        memorandumattachmentVo.setJwexaminetime(date);
+        memorandumattachmentVo.setMemorandumattachmentId(id);
+        memorandumattachmentVo.setJwexaminename(name);
+        memorandumattachmentVo.setJwisexamine(1);
+        memorandumattachmentService.updateJwName(memorandumattachmentVo);
+        return AjaxResponse.success(memorandumattachmentVo);
+    }
+
+    @PutMapping("/updateJwChName/{id}/{name}")
+    public AjaxResponse updateJwChName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+        Date date = new Date();
+        memorandumattachmentVo.setJwrevoketime(date);
+        memorandumattachmentVo.setMemorandumattachmentId(null);
+        memorandumattachmentVo.setJwexaminename(null);
+        memorandumattachmentVo.setZsrevokename(name);
+        memorandumattachmentVo.setMemorandumattachmentId(id);
+        memorandumattachmentVo.setJwisexamine(0);
+        memorandumattachmentService.updateJwChName(memorandumattachmentVo);
+        return AjaxResponse.success(memorandumattachmentVo);
+    }
+    @PutMapping("updateZsName/{id}/{name}")
+    public AjaxResponse updateZsName(@PathVariable("id") int id,@PathVariable("name")String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+        Date data = new Date();
+        memorandumattachmentVo.setZsexaminetime(data);
+        memorandumattachmentVo.setZsexaminename(name);
+        memorandumattachmentVo.setZsisexamine(1);
+        memorandumattachmentService.updateZsName(memorandumattachmentVo);
+        return AjaxResponse.success(memorandumattachmentVo);
+    }
+    //    撤销审核
+    @PutMapping("updateZsChName/{id}/{name}")
+    public AjaxResponse updateZsChName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+        Date data = new Date();
+        memorandumattachmentVo.setZsexaminetime(data);
+        memorandumattachmentVo.setZsrevokename(name);
+        memorandumattachmentVo.setZsisexamine(0);
+//        撤销审核之后审核的时间和人为空
+        memorandumattachmentVo.setZsexaminetime(null);
+        memorandumattachmentVo.setZsexaminename(null);
+        memorandumattachmentService.updateZsChName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }
 }

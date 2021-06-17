@@ -1,4 +1,4 @@
-package com.trkj.trainingprojects.service;
+package com.trkj.trainingprojects.Opservice;
 
 import com.trkj.trainingprojects.vo.MemorandumattachmentVo;
 
@@ -13,4 +13,12 @@ public interface MemorandumattachmentService {
     public int updateMemorandumattachment(MemorandumattachmentVo memorandumattachmentVo);
 //    删除
     public int delMemorandumattachment(MemorandumattachmentVo memorandumattachmentVo);
+    //根据id修改教务的
+    public int updateJwName(MemorandumattachmentVo memorandumattachmentVo);
+    //撤销审核
+    int updateJwChName(MemorandumattachmentVo memorandumattachmentVo);
+
+    public int updateZsName(MemorandumattachmentVo memorandumattachmentVo);
+    //撤销审核
+    public int updateZsChName(MemorandumattachmentVo memorandumattachmentVo);
 }

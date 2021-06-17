@@ -22,4 +22,6 @@ public interface StudentService {
     boolean deleteById(Integer studentId);
 
     List<StudentVo> SelectStudentByClassId(int classId);
+
+    List<StudentVo> SelectStudentByState();
 }

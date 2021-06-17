@@ -49,7 +49,7 @@
     <include refid="Base_Column_List" />,c.Course_Id,c.Course_Name
     from book b
     inner join course c on b.Course_Id=c.Course_Id
-    where b.TimeLiness=0 order by b.AddTime desc
+    where b.TimeLiness=0 and b.DeliveryCount>0 order by b.AddTime desc
   </select>
 
   <select id="selectAllBooksByCourseId" resultMap="BaseResultMap">

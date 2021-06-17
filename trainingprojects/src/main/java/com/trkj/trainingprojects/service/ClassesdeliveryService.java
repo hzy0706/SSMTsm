@@ -15,5 +15,5 @@ public interface ClassesdeliveryService {
 
     int deleteByClassesdeliveryKey(ClassesdeliveryVo record);
 
-    int appByClassesdeliveryKey(ClassesdeliveryVo record);
+    void appByClassesdeliveryKey(ClassesdeliveryVo record);
 }
