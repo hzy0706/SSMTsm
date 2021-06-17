@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.dao;
 
 import com.trkj.trainingprojects.entity.Studentstatus;
+import com.trkj.trainingprojects.vo.StudentstatusVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,7 +22,7 @@ public interface StudentstatusDao {
 
     List<Studentstatus> queryAll(Studentstatus studentstatus);
 
-    int insert(Studentstatus studentstatus);
+    int insert(StudentstatusVo studentstatusVo);
 
     int insertBatch(@Param("entities") List<Studentstatus> entities);
 
@@ -31,5 +32,6 @@ public interface StudentstatusDao {
 
     int deleteById(Integer studentstatusId);
 
+    List<StudentstatusVo> selectAllStudentStatus();
 }
 
