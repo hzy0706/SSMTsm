@@ -36,10 +36,10 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @PostMapping("/addStudentStatus")
+    /*@PostMapping("/addStudentStatus")
     public AjaxResponse addStudentStatus(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusService.addStudentStatus(studentstatusVo);
         return AjaxResponse.success(studentstatusVo);
-    }
+    }*/
 
 }

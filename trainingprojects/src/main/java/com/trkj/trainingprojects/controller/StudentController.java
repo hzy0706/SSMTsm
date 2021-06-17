@@ -3,10 +3,8 @@ package com.trkj.trainingprojects.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.StudentService;
-import com.trkj.trainingprojects.vo.AjaxResponse;
-import com.trkj.trainingprojects.vo.ClassTypeVo;
-import com.trkj.trainingprojects.vo.ClassesVo;
-import com.trkj.trainingprojects.vo.StudentVo;
+import com.trkj.trainingprojects.service.StudentstatusService;
+import com.trkj.trainingprojects.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +25,8 @@ public class StudentController {
 
     @Resource
     private StudentService studentService;
+    @Resource
+    private StudentstatusService studentstatusService;
 
     @GetMapping("/SelectStudentByClassId/{id}")
     public PageInfo<StudentVo> SelectStudentByClassId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
@@ -58,6 +58,13 @@ public class StudentController {
         studentVo.setStudentState(0);
         studentVo.setTimeliness(0);
         studentService.addStudents(studentVo);
+        StudentstatusVo studentstatusVo = new StudentstatusVo();
+        studentstatusVo.setStudentId(studentVo.getStudentId());
+        studentstatusVo.setStatus(0);
+        studentstatusVo.setApproval(0);
+        studentstatusVo.setAddtime(date);
+        studentstatusVo.setAppname(studentVo.getAddname());
+        studentstatusService.addStudentStatus(studentstatusVo);
         return AjaxResponse.success(studentVo);
     }
 
