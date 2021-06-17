@@ -8,9 +8,19 @@
     <result column="Book_Id" jdbcType="INTEGER" property="bookId" />
     <result column="Student_Id" jdbcType="INTEGER" property="studentId" />
     <result column="BookDelivery_Id" jdbcType="INTEGER" property="bookdeliveryId" />
+    <association property="bookVo" javaType="com.trkj.trainingprojects.vo.BookVo">
+      <result column="BookName" jdbcType="VARCHAR" property="bookname" />
+    </association>
+    <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
+      <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
+    </association>
+    <association property="bookdeliveryVo" javaType="com.trkj.trainingprojects.vo.BookdeliveryVo">
+      <result column="SaleNumber" jdbcType="VARCHAR" property="salenumber" />
+      <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    DeliveryDdetails_Id, DeliveryCount, ReceivableMoney, Book_Id, Student_Id, BookDelivery_Id
+    dd.DeliveryDdetails_Id, dd.DeliveryCount, dd.ReceivableMoney, dd.Book_Id, dd.Student_Id, dd.BookDelivery_Id
   </sql>
   <select id="selectByDeliveryddetailsKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -18,9 +28,20 @@
     from deliveryddetails
     where DeliveryDdetails_Id = #{deliveryddetailsId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectDeliveryddetailsByBookDeliveryId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,b.BookName,s.Student_Name,bd.SaleNumber,bd.AddName
+    from deliveryddetails dd
+    inner join book b on dd.Book_Id=b.Book_Id
+    inner join student s on dd.Student_Id=s.Student_Id
+    inner join bookdelivery bd on dd.BookDelivery_Id=bd.BookDelivery_Id
+    where dd.BookDelivery_Id = #{id}
+  </select>
+
   <delete id="deleteByDeliveryddetailsKey" parameterType="java.lang.Integer">
     delete from deliveryddetails
-    where DeliveryDdetails_Id = #{deliveryddetailsId,jdbcType=INTEGER}
+    where BookDelivery_Id = #{bookdeliveryId,jdbcType=INTEGER}
   </delete>
   <insert id="addDeliveryddetails" keyColumn="DeliveryDdetails_Id" keyProperty="deliveryddetailsId" parameterType="com.trkj.trainingprojects.vo.DeliveryddetailsVo" useGeneratedKeys="true">
     insert into deliveryddetails (DeliveryCount, ReceivableMoney, Book_Id, 

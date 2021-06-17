@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class DeliveryddetailsServiceImpl implements DeliveryddetailsService {
@@ -20,13 +21,18 @@ public class DeliveryddetailsServiceImpl implements DeliveryddetailsService {
 
     @Override
     @Transactional
-    public int deleteByDeliveryddetailsKey(Integer deliveryddetailsId) {
-        return deliveryddetailsDao.deleteByDeliveryddetailsKey(deliveryddetailsId);
+    public int deleteByDeliveryddetailsKey(Integer bookdeliveryId) {
+        return deliveryddetailsDao.deleteByDeliveryddetailsKey(bookdeliveryId);
     }
 
     @Override
     public DeliveryddetailsVo selectByDeliveryddetailsKey(Integer deliveryddetailsId) {
         return deliveryddetailsDao.selectByDeliveryddetailsKey(deliveryddetailsId);
+    }
+
+    @Override
+    public List<DeliveryddetailsVo> selectDeliveryddetailsByBookDeliveryId(Integer id) {
+        return deliveryddetailsDao.selectDeliveryddetailsByBookDeliveryId(id);
     }
 
     @Override
