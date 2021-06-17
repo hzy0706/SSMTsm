@@ -34,5 +34,7 @@ public interface StudentDao {
 
     List<StudentVo> SelectStudentByClassId(int classId);
 
+    List<StudentVo> SelectStudentByState();
+
 }
 

@@ -61,7 +61,6 @@ public class StorageexpenditureServiceImpl implements StorageexpenditureService 
     public void appStorageexpenditure(StorageexpenditureVo record) {
         //修改教材入库收支表
         record.setApptime(new Date());
-        System.out.println("-----1-----------"+record);
         record.setApproval(1);
         storageexpenditureDao.updateByStorageexpenditureAppKey(record);
 
@@ -69,15 +68,12 @@ public class StorageexpenditureServiceImpl implements StorageexpenditureService 
         BookstorageVo bookstorageVo = new BookstorageVo();
         bookstorageVo.setCwapproval(1);
         bookstorageVo.setBookstorageId(record.getBookstorageId());
-        System.out.println("-----2-----------"+bookstorageVo);
         bookstorageDao.updateByBookstorageApp(bookstorageVo);
 
         //修改教材表
         BookVo bookVo = bookDao.selectByBookKey(record.getBookId());
-        System.out.println("---4-------------"+bookVo.toString());
         bookVo.setDeliverycount(bookVo.getDeliverycount()+record.getStorageCount());
         bookVo.setStorage(bookVo.getStorage()+record.getStorageCount());
-        System.out.println("-----3-----------"+bookVo);
         bookDao.updateBookCount(bookVo);
     }
 }

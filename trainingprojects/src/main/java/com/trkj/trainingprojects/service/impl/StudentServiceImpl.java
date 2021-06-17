@@ -40,4 +40,9 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentVo> SelectStudentByClassId(int classId) {
         return studentDao.SelectStudentByClassId(classId);
     }
+
+    @Override
+    public List<StudentVo> SelectStudentByState() {
+        return studentDao.SelectStudentByState();
+    }
 }
