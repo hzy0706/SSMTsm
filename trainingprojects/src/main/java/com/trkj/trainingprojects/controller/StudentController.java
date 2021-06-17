@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +52,10 @@ public class StudentController {
 
     @PostMapping("/addStudents")
     public AjaxResponse addStudents(@RequestBody @Valid StudentVo studentVo){
+        Date date = new Date();
+        studentVo.setStudytime(date);
+        studentVo.setStudentState(0);
+        studentVo.setTimeliness(0);
         studentService.addStudents(studentVo);
         return AjaxResponse.success(studentVo);
     }
