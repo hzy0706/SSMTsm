@@ -231,7 +231,7 @@
       ZSExamineName = #{zsexaminename,jdbcType=VARCHAR}
        where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
-  
+
   <!--撤回审核-->
   <update id="updateZsChName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
     update memorandumattachment
