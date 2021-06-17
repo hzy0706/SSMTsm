@@ -48,4 +48,9 @@ public class RegisterServiceImpl implements RegisterService {
     public List<RegisterVo> mohuRegister(String registerName) {
         return registerDao.mohuRegister(registerName);
     }
+
+    @Override
+    public int updateShRegister(RegisterVo registerVo) {
+        return registerDao.updateShRegister(registerVo);
+    }
 }
