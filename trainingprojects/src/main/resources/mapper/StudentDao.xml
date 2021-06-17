@@ -191,7 +191,7 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="studentId" useGeneratedKeys="true">
+    <insert id="insert" keyProperty="studentId" keyColumn="Student_Id" useGeneratedKeys="true">
         insert into tr01904.student(Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id)
         values (#{studentName}, #{studentState}, #{sex}, #{studentPhone}, #{address}, #{imgaddress}, #{parentname}, #{parentphone}, (select max(Student_Number)+1 from student stu1), #{entrance}, #{studytime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{classesId}, #{sourceId}, #{registerId})
     </insert>
