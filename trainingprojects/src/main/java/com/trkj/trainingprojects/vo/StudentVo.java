@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -61,11 +62,12 @@ public class StudentVo {
     /**
      * 就读时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date studytime;
     /**
      * 最后修改人
      */
-    private String updatename;
+    public String updatename;
     /**
      * 最后修改时间
      */
@@ -73,7 +75,7 @@ public class StudentVo {
     /**
      * 删除人
      */
-    private String deletename;
+    public String deletename;
     /**
      * 删除时间
      */
