@@ -20,6 +20,23 @@
         <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
         <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
     </resultMap>
+
+    <sql id="Base_Column_List">
+      sts.StudentStatus_Id, sts.Status, sts.AllotType, sts.Approval, sts.AppName, sts.AppTime,
+       sts.RevokeAppName, sts.RevokeAppTime, sts.AddName, sts.AddTime, sts.UpdateName, sts.UpdateTime,
+        sts.DeleteName, sts.DeleteTime, sts.TimeLiness, sts.Student_Id, sts.Classes_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllStudentStatus" resultMap="StudentstatusMap">
+        select
+        <include refid="Base_Column_List" />
+        from tr01904.studentstatus sts
+        /*inner join classes cl on sts.Classes_Id=cl.Classes_Id*/
+        inner join student stu on stu.Student_Id=sts.Student_Id
+        where sts.TimeLiness = 0 order by StudentStatus_Id DESC
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="StudentstatusMap">
         select
