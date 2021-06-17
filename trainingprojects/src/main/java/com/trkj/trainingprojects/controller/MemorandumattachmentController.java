@@ -81,7 +81,7 @@ public class MemorandumattachmentController {
     @PutMapping("updateZsChName/{id}/{name}")
     public AjaxResponse updateZsChName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         Date data = new Date();
-        memorandumattachmentVo.setZsexaminetime(data);
+        memorandumattachmentVo.setZsrevoketime(data);
         memorandumattachmentVo.setZsrevokename(name);
         memorandumattachmentVo.setZsisexamine(0);
         memorandumattachmentVo.setZsexaminetime(null);
