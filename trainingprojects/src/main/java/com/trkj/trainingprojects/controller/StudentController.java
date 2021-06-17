@@ -54,6 +54,7 @@ public class StudentController {
     public AjaxResponse addStudents(@RequestBody @Valid StudentVo studentVo){
         Date date = new Date();
         studentVo.setStudytime(date);
+        studentVo.setAddtime(date);
         studentVo.setStudentState(0);
         studentVo.setTimeliness(0);
         studentService.addStudents(studentVo);

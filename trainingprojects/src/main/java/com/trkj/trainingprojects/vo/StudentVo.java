@@ -65,6 +65,14 @@ public class StudentVo {
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date studytime;
     /**
+     * 增加人
+     */
+    public String addname;
+    /**
+     * 增加日期
+     */
+    private Date addtime;
+    /**
      * 最后修改人
      */
     public String updatename;
