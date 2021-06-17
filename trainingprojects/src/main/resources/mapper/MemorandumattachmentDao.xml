@@ -41,14 +41,14 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex
+    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex,r.PayState
     from memorandumattachment m
     inner join register r on m.Register_Id=r.Register_Id
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </select>
   <select id="findMemorandumattachment" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex
+    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex,r.PayState
     from memorandumattachment m
     inner join register r on m.Register_Id=r.Register_Id
   </select>
