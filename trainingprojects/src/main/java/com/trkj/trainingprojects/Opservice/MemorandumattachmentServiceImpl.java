@@ -1,7 +1,6 @@
-package com.trkj.trainingprojects.service.impl;
+package com.trkj.trainingprojects.Opservice;
 
 import com.trkj.trainingprojects.dao.MemorandumattachmentDao;
-import com.trkj.trainingprojects.service.MemorandumattachmentService;
 import com.trkj.trainingprojects.vo.MemorandumattachmentVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,4 +38,28 @@ public class MemorandumattachmentServiceImpl implements MemorandumattachmentServ
     public int delMemorandumattachment(MemorandumattachmentVo memorandumattachmentVo) {
         return memorandumattachmentDao.delByMemorandumattachmentKey(memorandumattachmentVo);
     }
+
+    @Override
+    @Transactional
+    public int updateJwName(MemorandumattachmentVo memorandumattachmentVo) {
+        return memorandumattachmentDao.updateJwName(memorandumattachmentVo);
+    }
+
+    @Override
+    @Transactional
+    public int updateJwChName(MemorandumattachmentVo memorandumattachmentVo) {
+        return memorandumattachmentDao.updateJwChName(memorandumattachmentVo);
+    }
+    @Override
+    @Transactional
+    public int updateZsName(MemorandumattachmentVo memorandumattachmentVo) {
+        return memorandumattachmentDao.updateZsName(memorandumattachmentVo);
+    }
+    //    撤销审核
+    @Override
+    @Transactional
+    public int updateZsChName(MemorandumattachmentVo memorandumattachmentVo) {
+        return memorandumattachmentDao.updateZsChName(memorandumattachmentVo);
+    }
+
 }

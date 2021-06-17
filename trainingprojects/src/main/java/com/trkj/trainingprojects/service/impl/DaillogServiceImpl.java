@@ -43,6 +43,12 @@ public class DaillogServiceImpl implements DaillogService {
     }
 
     @Override
+    @Transactional
+    public int updateConductTypeByKey(DaillogVo record) {
+        return daillogDao.updateConductTypeByKey(record);
+    }
+
+    @Override
     public List<DaillogVo> selectByDaillogEmpId(Integer empId) {
         return daillogDao.selectByDaillogEmpId(empId);
     }

@@ -41,16 +41,16 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />,r.ConsultAnt
+    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex
     from memorandumattachment m
     inner join register r on m.Register_Id=r.Register_Id
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </select>
   <select id="findMemorandumattachment" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,r.ConsultAnt
+    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex
     from memorandumattachment m
-    inner join Register r on m.Register_Id=r.Register_Id
+    inner join register r on m.Register_Id=r.Register_Id
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -194,4 +194,39 @@
       Register_Id = #{registerId,jdbcType=INTEGER}
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
+  <update id="updateJwName" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment">
+     update tr01904.memorandumattachment
+     set JWIsExamine = #{jwisexamine,jdbcType=INTEGER},
+      JWExamineTime = #{jwexaminetime,jdbcType=TIMESTAMP},
+      JWExamineName = #{jwexaminename,jdbcType=VARCHAR}
+    where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateJwChName" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment">
+     update tr01904.memorandumattachment
+     set JWIsExamine = #{jwisexamine,jdbcType=INTEGER},
+      JWExamineTime = #{jwexaminetime,jdbcType=TIMESTAMP},
+      JWExamineName = #{jwexaminename,jdbcType=VARCHAR},
+      JWRevokeTime = #{jwrevoketime,jdbcType=TIMESTAMP},
+      JWRevokeName = #{jwrevokename,jdbcType=VARCHAR}
+    where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+  </update>
+  <!--  根据id修改-->
+  <update id="updateZsName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
+    update memorandumattachment
+    set ZSIsExamine = #{zsisexamine,jdbcType=INTEGER},
+      ZSExamineTime = #{zsexaminetime,jdbcType=TIMESTAMP},
+      ZSExamineName = #{zsexaminename,jdbcType=VARCHAR}
+       where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+  </update>
+  <!--撤回审核-->
+  <update id="updateZsChName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
+    update memorandumattachment
+    set ZSIsExamine = #{zsisexamine,jdbcType=INTEGER},
+      ZSExamineTime = #{zsexaminetime,jdbcType=TIMESTAMP},
+      ZSExamineName = #{zsexaminename,jdbcType=VARCHAR},
+      ZSRevokeTime = #{zsrevoketime,jdbcType=TIMESTAMP},
+      ZSRevokeName = #{zsrevokename,jdbcType=VARCHAR}
+       where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+  </update>
+
 </mapper>

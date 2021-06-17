@@ -58,4 +58,11 @@ public class DaillogController {
         daillogService.updateStateByKey(daillogVo);
         return AjaxResponse.success(daillogVo);
     }
+
+    @PutMapping("/updateConductTypeByKey")
+    public AjaxResponse updateConductTypeByKey(@RequestBody @Valid DaillogVo daillogVo){
+        daillogVo.setBegintime(new Date());
+        daillogService.updateConductTypeByKey(daillogVo);
+        return AjaxResponse.success(daillogVo);
+    }
 }
