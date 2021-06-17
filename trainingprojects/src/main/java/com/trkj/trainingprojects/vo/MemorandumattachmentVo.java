@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
-@ClassMeta(className = "工作交接表")
+@ClassMeta(className = "学员交接表")
 @ToString(exclude = "registerVo")
 public class MemorandumattachmentVo {
     private Integer memorandumattachmentId;

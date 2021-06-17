@@ -40,15 +40,21 @@
     m.Register_Id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex
+    select
+    <include refid="Base_Column_List" />,r.Register_Id, r.ConsultAnt, r.Sex,
+     r.Phone, r.AttentState, r.PayState, r.ConsultContent, r.AddName,
+    r.ADDTIME, r.UpdateName, r.UpdateTime, r.DeleteName, r.DeleteTime,
+     r.TimeLiness, r.Source_Id, r.Course_Id, r.Emp_Id
     from memorandumattachment m
     inner join register r on m.Register_Id=r.Register_Id
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </select>
   <select id="findMemorandumattachment" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,r.ConsultAnt,r.Sex
+    <include refid="Base_Column_List" />,r.Register_Id, r.ConsultAnt, r.Sex,
+    r.Phone, r.AttentState, r.PayState, r.ConsultContent, r.AddName,
+    r.ADDTIME, r.UpdateName, r.UpdateTime, r.DeleteName, r.DeleteTime,
+    r.TimeLiness, r.Source_Id, r.Course_Id, r.Emp_Id
     from memorandumattachment m
     inner join register r on m.Register_Id=r.Register_Id
   </select>
@@ -57,6 +63,7 @@
     delete from tr01904.memorandumattachment
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" keyColumn="MemorandumAttachment_Id" keyProperty="memorandumattachmentId" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment" useGeneratedKeys="true">
     insert into tr01904.memorandumattachment (ZSIsExamine, ZSExamineTime, ZSExamineName,
       ZSRevokeTime, ZSRevokeName, JWIsExamine, 
@@ -67,6 +74,7 @@
       #{jwexaminetime,jdbcType=TIMESTAMP}, #{jwexaminename,jdbcType=VARCHAR}, #{jwrevoketime,jdbcType=TIMESTAMP}, 
       #{jwrevokename,jdbcType=VARCHAR}, #{registerId,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" keyColumn="MemorandumAttachment_Id" keyProperty="memorandumattachmentId" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment" useGeneratedKeys="true">
     insert into tr01904.memorandumattachment
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -140,6 +148,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByMemorandumattachmentKey" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment">
     update memorandumattachment
     <set>
@@ -179,6 +188,7 @@
     </set>
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
+
   <update id="delByMemorandumattachmentKey" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment">
     update memorandumattachment
     set ZSIsExamine = #{zsisexamine,jdbcType=INTEGER},
@@ -194,6 +204,7 @@
       Register_Id = #{registerId,jdbcType=INTEGER}
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
+
   <update id="updateJwName" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment">
      update tr01904.memorandumattachment
      set JWIsExamine = #{jwisexamine,jdbcType=INTEGER},
@@ -201,6 +212,7 @@
       JWExamineName = #{jwexaminename,jdbcType=VARCHAR}
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
+
   <update id="updateJwChName" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment">
      update tr01904.memorandumattachment
      set JWIsExamine = #{jwisexamine,jdbcType=INTEGER},
@@ -210,6 +222,7 @@
       JWRevokeName = #{jwrevokename,jdbcType=VARCHAR}
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
+
   <!--  根据id修改-->
   <update id="updateZsName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
     update memorandumattachment
@@ -218,6 +231,7 @@
       ZSExamineName = #{zsexaminename,jdbcType=VARCHAR}
        where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
   </update>
+
   <!--撤回审核-->
   <update id="updateZsChName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
     update memorandumattachment

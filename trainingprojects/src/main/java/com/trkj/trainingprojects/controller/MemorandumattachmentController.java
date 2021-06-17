@@ -84,7 +84,6 @@ public class MemorandumattachmentController {
         memorandumattachmentVo.setZsexaminetime(data);
         memorandumattachmentVo.setZsrevokename(name);
         memorandumattachmentVo.setZsisexamine(0);
-//        撤销审核之后审核的时间和人为空
         memorandumattachmentVo.setZsexaminetime(null);
         memorandumattachmentVo.setZsexaminename(null);
         memorandumattachmentService.updateZsChName(memorandumattachmentVo);

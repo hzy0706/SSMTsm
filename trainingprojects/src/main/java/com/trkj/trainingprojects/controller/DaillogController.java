@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.DaillogService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.DaillogVo;
+import com.trkj.trainingprojects.vo.MemorandumVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +20,6 @@ public class DaillogController {
 
    @PostMapping("/addDaillog")
     public AjaxResponse addDaillog(@RequestBody @Valid DaillogVo daillogVo){
-       System.out.println("==================我在这"+daillogVo.toString());
        daillogService.addDaillog(daillogVo);
        return AjaxResponse.success(daillogVo);
    }
@@ -45,11 +45,19 @@ public class DaillogController {
         return AjaxResponse.success(daillogVo);
     }
 
-    @PutMapping("/deleteByDaillogKey")
-    public AjaxResponse deleteByDaillogKey(@RequestBody @Valid DaillogVo daillogVo){
-        daillogVo.setDeletetime(new Date());
-        daillogService.deleteByDaillogKey(daillogVo);
-        return AjaxResponse.success(daillogVo);
+    @PutMapping("/deleteByDaillogKey/{id}/{deleteName}")
+    public AjaxResponse deleteByDaillogKey(@PathVariable("id") String id,@PathVariable("deleteName") String deleteName){
+        Date date = new Date();
+        String[] ids= id.split(",");
+        for (String s:ids){
+            DaillogVo daillogVo = new DaillogVo();
+            daillogVo.setDeletename(deleteName);
+            daillogVo.setDeletetime(date);
+            daillogVo.setTimeliness(1);
+            daillogVo.setDaillogId(Integer.parseInt(s));
+            daillogService.deleteByDaillogKey(daillogVo);
+        }
+        return AjaxResponse.success(ids);
     }
 
     @PutMapping("/updateStateByKey")

@@ -45,4 +45,13 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentVo> SelectStudentByState() {
         return studentDao.SelectStudentByState();
     }
+
+    public List<StudentVo> selectAllStudent() {
+        return studentDao.selectAllStudent();
+    }
+
+    @Override
+    public void addStudents(StudentVo studentVo) {
+        studentDao.insert(studentVo);
+    }
 }

@@ -21,7 +21,10 @@ public interface StudentService {
 
     boolean deleteById(Integer studentId);
 
-    List<StudentVo> SelectStudentByClassId(int classId);
+    public List<StudentVo> SelectStudentByClassId(int classId);
 
-    List<StudentVo> SelectStudentByState();
+    public List<StudentVo> SelectStudentByState();
+
+    public List<StudentVo> selectAllStudent();
+    public void addStudents(StudentVo studentVo);
 }
