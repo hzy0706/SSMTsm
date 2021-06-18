@@ -66,6 +66,14 @@ public class Student implements Serializable {
      */
     private Date studytime;
     /**
+     * 增加人
+     */
+    public String addname;
+    /**
+     * 增加日期
+     */
+    private Date addtime;
+    /**
      * 最后修改人
      */
     private String updatename;

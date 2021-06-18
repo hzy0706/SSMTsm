@@ -16,13 +16,11 @@ import java.util.List;
 @Mapper
 public interface StudentDao {
 
-    Student queryById(Integer studentId);
-
     List<Student> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
     List<Student> queryAll(Student student);
 
-    int insert(Student student);
+    int insert(StudentVo studentVo);
 
     int insertBatch(@Param("entities") List<Student> entities);
 
@@ -35,6 +33,8 @@ public interface StudentDao {
     List<StudentVo> SelectStudentByClassId(int classId);
 
     List<StudentVo> SelectStudentByState();
+
+    List<StudentVo> selectAllStudent();
 
 }
 
