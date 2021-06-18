@@ -341,5 +341,13 @@
         where Classes_Id = #{classesId}
     </update>
 
+    <!--修改班级的开班状态-->
+    <update id="deleteByOpenClasses" parameterType="com.trkj.trainingprojects.entity.Classes">
+        update tr01904.classes
+        set
+          Classes_Open = #{classesOpen}
+        where Classes_Id = #{classesId}
+    </update>
+
 </mapper>
 

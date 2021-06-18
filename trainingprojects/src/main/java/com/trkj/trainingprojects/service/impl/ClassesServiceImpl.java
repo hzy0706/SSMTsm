@@ -73,4 +73,9 @@ public class ClassesServiceImpl implements ClassesService {
     public List<ClassesVo> selectAllClassesByState2() {
         return classesDao.selectAllClassesByState2();
     }
+
+    @Override
+    public int deleteByOpenClasses(ClassesVo classesVo) {
+        return classesDao.deleteByOpenClasses(classesVo);
+    }
 }
