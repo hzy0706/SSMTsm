@@ -4,10 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.entity.Studentstatus;
 import com.trkj.trainingprojects.service.StudentstatusService;
-import com.trkj.trainingprojects.vo.AjaxResponse;
-import com.trkj.trainingprojects.vo.ClassesVo;
-import com.trkj.trainingprojects.vo.ItemBankVo;
-import com.trkj.trainingprojects.vo.StudentstatusVo;
+import com.trkj.trainingprojects.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +29,14 @@ public class StudentstatusController {
     public PageInfo<StudentstatusVo> selectAllStudentStatus(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectAllStudentStatus();
+        PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @GetMapping("/SelectStudentStatusByStudentId/{id}")
+    public PageInfo<StudentstatusVo> SelectStudentByClassId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        List<StudentstatusVo> list = studentstatusService.selectStudentStatusByStudentId(id);
         PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface StudentstatusService {
 
-    Studentstatus queryById(Integer studentstatusId);
+    List<StudentstatusVo> selectStudentStatusByStudentId(Integer studentstatusId);
 
     List<Studentstatus> queryAllByLimit(int offset, int limit);
 
