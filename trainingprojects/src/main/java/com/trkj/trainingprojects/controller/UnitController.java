@@ -31,10 +31,10 @@ public class UnitController {
      * 查询所有
      *
      */
-    @GetMapping("selectall")
-    public PageInfo<UnitVo> selectall(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
+    @GetMapping("selectAllUnit")
+    public PageInfo<UnitVo> selectAllUnit(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
         PageHelper.startPage(currentPage,pageSize);
-        List<UnitVo> list=this.unitService.selectAll();
+        List<UnitVo> list=this.unitService.selectAllUnit();
         PageInfo<UnitVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }

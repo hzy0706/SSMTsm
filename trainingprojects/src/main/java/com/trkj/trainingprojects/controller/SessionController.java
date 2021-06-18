@@ -32,11 +32,11 @@ public class SessionController {
      *
      * @return
      */
-    @GetMapping("selectall")
+    @GetMapping("selectAllSession")
     public PageInfo<SessionVo> selectall(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
         System.out.println(currentPage+"-----"+pageSize);
         PageHelper.startPage(currentPage,pageSize);
-        List<SessionVo> list=this.sessionService.selectAll();
+        List<SessionVo> list=this.sessionService.selectAllSession();
         PageInfo<SessionVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }

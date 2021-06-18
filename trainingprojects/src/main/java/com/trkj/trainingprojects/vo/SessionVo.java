@@ -1,12 +1,12 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -37,6 +37,7 @@ public class SessionVo {
     /**
     * 增加时间
     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addtime;
     /**
     * 最后修改人
@@ -45,6 +46,7 @@ public class SessionVo {
     /**
     * 最后修改时间
     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatetime;
     /**
     * 删除人
@@ -53,45 +55,12 @@ public class SessionVo {
     /**
     * 删除时间
     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date deletetime;
     /**
     * 时效性
     */
     private Integer timeliness;
 
-    public Integer getSessionId() {
-        return sessionId;
-    }
 
-    public String getSessionName() {
-        return sessionName;
-    }
-
-    public String getAddname() {
-        return addname;
-    }
-
-    public Date getAddtime() {
-        return addtime;
-    }
-
-    public String getUpdatename() {
-        return updatename;
-    }
-
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public Integer getTimeliness() {
-        return timeliness;
-    }
 }
