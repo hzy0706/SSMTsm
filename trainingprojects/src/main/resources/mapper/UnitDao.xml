@@ -42,7 +42,7 @@
            where u.TimeLiness=0
     </select>
 
-    <!--新增所有列-->
+    <!--新增所有列-->    
     <insert id="addUnit" keyProperty="unitId" useGeneratedKeys="true" parameterType="com.trkj.trainingprojects.vo.UnitVo">
         insert into tr01904.unit(Unit_Name, Unit_Level, Director, Unit_Address, MailCode, Unit_Phone, Email, Profile, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, UnitType_Id)
         values (#{unitName}, #{unitLevel}, #{director}, #{unitAddress}, #{mailcode}, #{unitPhone}, #{email}, #{profile}, #{remarks}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{unittypeId})
