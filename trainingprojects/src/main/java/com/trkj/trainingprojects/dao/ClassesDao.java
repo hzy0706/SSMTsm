@@ -35,5 +35,6 @@ public interface ClassesDao {
     List<ClassesVo> selectAllClasses();
     int deleteByClasses(ClassesVo classesVo);
     List<ClassesVo> selectAllClassesByState();
+    List<ClassesVo> selectAllClassesByState2();
 }
 

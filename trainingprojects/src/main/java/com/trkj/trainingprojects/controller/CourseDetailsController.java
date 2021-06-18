@@ -62,6 +62,12 @@ public class CourseDetailsController {
         return list;
     }
 
+    @GetMapping("/selectAllCourseDetails3/{courseId}")
+    public List<CourseDetailsVo> selectAllCourseDetails3(@PathVariable("courseId") String courseId){
+        List<CourseDetailsVo> list = coursedetailsService.selectAllCourseDetails3(Integer.parseInt(courseId));
+        return list;
+    }
+
     @PutMapping("/deleteByCourseDetailsKey/{ids}/{deleteName}")
     public AjaxResponse deleteByDeptKey(@PathVariable("ids") String ids, @PathVariable("deleteName") String deleteName){
         Date date = new Date();

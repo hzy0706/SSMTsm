@@ -137,6 +137,15 @@
         where cd.TimeLiness = 0 order by cd.CourseDetails_Id DESC
     </select>
 
+    <select id="selectAllCourseDetails3" resultMap="CoursedetailsMap">
+        select
+        <include refid="Base_Column_List" />,c.Course_Money,c.Classhours,
+        c.Course_Name,c.Course_Id,c.ClassType_Id
+        from tr01904.coursedetails cd
+        inner join course c on cd.Course_Id = c.Course_Id
+        where cd.TimeLiness = 0 and cd.Course_Id = #{Course_Id}
+    </select>
+
     <!--查询所有[不分页]-->
     <select id="selectAllCourseDetails2" resultMap="CoursedetailsMap">
         select

@@ -1,0 +1,13 @@
+POST http://localhost:8080/Training/addShift
+Content-Type: application/json
+
+{
+  "studentId": 1,
+  "courseId": 1,
+  "coursedetailsId": 1,
+  "classesId": 1,
+  "dropReason": "测试001",
+  "dropHandler": "JFC",
+  "ispay": 0,
+  "jwApproval": 0
+}

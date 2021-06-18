@@ -28,4 +28,5 @@ public interface ClassesService {
     public int deleteByClasses(ClassesVo classesVo);
     public int updateClassesKey(ClassesVo classesVo);
     List<ClassesVo> selectAllClassesByState();
+    List<ClassesVo> selectAllClassesByState2();
 }
