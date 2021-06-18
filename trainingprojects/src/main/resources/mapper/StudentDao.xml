@@ -99,7 +99,7 @@
     <!--查询单个-->
     <select id="SelectStudentByClassId" resultMap="StudentMap">
         select
-          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
+          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, LPAD(Student_Number,7,'0') Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
         from tr01904.student
         where Classes_Id = #{classesId} and TimeLiness = 0
     </select>
