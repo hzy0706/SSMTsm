@@ -1,56 +1,44 @@
-package com.trkj.trainingprojects.vo;
+package com.trkj.trainingprojects.entity;
 
-import com.trkj.trainingprojects.ann.ClassMeta;
-import com.trkj.trainingprojects.entity.Course;
-import com.trkj.trainingprojects.entity.Register;
-import com.trkj.trainingprojects.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
+import java.io.Serializable;
 
+/**
+ * 学员欠费补缴表(Studentoutstanding)实体类
+ *
+ * @author makejava
+ * @since 2021-06-18 23:11:32
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Validated
-@ClassMeta(className = "报班缴费表")
-@ToString(exclude = "registerVo,studentVo,courseVo")
-public class EntryfeesVo {
+@ToString(exclude = "register,student,entryfees")
+public class Studentoutstanding implements Serializable {
     /**
-     * 缴费编号
+     * 补缴编号
      */
-    private Integer feesId;
+    private Integer outstandingId;
     /**
-     * 缴费单据号
+     * 补缴单据号
      */
-    private String feesNumber;
+    private String outstandingNumber;
     /**
-     * 应收金额
+     * 补缴金额
      */
-    private Double feesReceivable;
+    private Double alongmoney;
     /**
-     * 缴费方式
+     * 补缴日期
      */
-    private String feesType;
-    /**
-     * 预缴金额
-     */
-    private Double feesAdvance;
-    /**
-     * 累计欠费金额
-     */
-    private Double accumulated;
-    /**
-     * 实收金额
-     */
-    private Double receipts;
+    private Date outstandingDate;
     /**
      * 最后修改人
      */
-    public String updatename;
+    private String updatename;
     /**
      * 最后修改时间
      */
@@ -58,7 +46,7 @@ public class EntryfeesVo {
     /**
      * 增加人
      */
-    public String addname;
+    private String addname;
     /**
      * 增加时间
      */
@@ -66,7 +54,7 @@ public class EntryfeesVo {
     /**
      * 删除人
      */
-    public String deletename;
+    private String deletename;
     /**
      * 删除时间
      */
@@ -78,7 +66,7 @@ public class EntryfeesVo {
     /**
      * 缴费状态
      */
-    private Integer feesState;
+    private Integer outstandingState;
     /**
      * 财务部审核时间
      */
@@ -104,12 +92,12 @@ public class EntryfeesVo {
      */
     private Integer studentId;
     /**
-     * 课程编号
+     * 报班缴费表
      */
-    private Integer courseId;
+    private Integer feesId;
 
-    private RegisterVo registerVo;
-    private StudentVo studentVo;
-    private CourseVo courseVo;
+    private Register register;
+    private Student student;
+    private Entryfees entryfees;
     private static final long serialVersionUID = 1L;
 }

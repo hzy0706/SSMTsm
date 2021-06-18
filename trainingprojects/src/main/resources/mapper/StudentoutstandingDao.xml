@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.trkj.trainingprojects.dao.EntryfeesDao">
-    <resultMap type="com.trkj.trainingprojects.vo.EntryfeesVo" id="EntryfeesMap">
-        <id property="feesId" column="Fees_Id" jdbcType="INTEGER"/>
-        <result property="feesNumber" column="Fees_Number" jdbcType="VARCHAR"/>
-        <result property="feesReceivable" column="Fees_Receivable" jdbcType="NUMERIC"/>
-        <result property="feesType" column="Fees_Type" jdbcType="VARCHAR"/>
-        <result property="feesAdvance" column="Fees_Advance" jdbcType="NUMERIC"/>
-        <result property="accumulated" column="Accumulated" jdbcType="NUMERIC"/>
-        <result property="receipts" column="Receipts" jdbcType="NUMERIC"/>
+<mapper namespace="com.trkj.trainingprojects.dao.StudentoutstandingDao">
+    <resultMap type="com.trkj.trainingprojects.vo.StudentoutstandingVo" id="StudentoutstandingMap">
+        <id property="outstandingId" column="outstanding_Id" jdbcType="INTEGER"/>
+        <result property="outstandingNumber" column="outstanding_Number" jdbcType="VARCHAR"/>
+        <result property="alongmoney" column="AlongMoney" jdbcType="NUMERIC"/>
+        <result property="outstandingDate" column="outstanding_Date" jdbcType="TIMESTAMP"/>
         <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
         <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
         <result property="addname" column="AddName" jdbcType="VARCHAR"/>
@@ -16,14 +13,14 @@
         <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
         <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
         <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
-        <result property="feesState" column="Fees_State" jdbcType="INTEGER"/>
+        <result property="outstandingState" column="outstanding_State" jdbcType="INTEGER"/>
         <result property="approvaltime" column="ApprovalTime" jdbcType="TIMESTAMP"/>
         <result property="approvalname" column="ApprovalName" jdbcType="VARCHAR"/>
         <result property="revokeapptime" column="RevokeAppTime" jdbcType="TIMESTAMP"/>
         <result property="revokeappname" column="RevokeAppName" jdbcType="VARCHAR"/>
         <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
         <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
-        <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        <result property="feesId" column="Fees_Id" jdbcType="INTEGER"/>
         <association property="registerVo" javaType="com.trkj.trainingprojects.vo.RegisterVo">
             <id column="Register_Id" jdbcType="INTEGER" property="registerId" />
             <result column="ConsultAnt" jdbcType="VARCHAR" property="consultant" />
@@ -67,90 +64,85 @@
             <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
             <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
         </association>
-        <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
-            <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
-            <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
-            <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
-            <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
-            <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
-            <result property="commission" column="Commission" jdbcType="NUMERIC"/>
-            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
-            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+        <association property="entryfeesVo" javaType="com.trkj.trainingprojects.vo.EntryfeesVo">
+            <id property="feesId" column="Fees_Id" jdbcType="INTEGER"/>
+            <result property="feesNumber" column="Fees_Number" jdbcType="VARCHAR"/>
+            <result property="feesReceivable" column="Fees_Receivable" jdbcType="NUMERIC"/>
+            <result property="feesType" column="Fees_Type" jdbcType="VARCHAR"/>
+            <result property="feesAdvance" column="Fees_Advance" jdbcType="NUMERIC"/>
+            <result property="accumulated" column="Accumulated" jdbcType="NUMERIC"/>
+            <result property="receipts" column="Receipts" jdbcType="NUMERIC"/>
             <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
             <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
-            <result property="stopname" column="StopName" jdbcType="VARCHAR"/>
-            <result property="stoptime" column="StopTime" jdbcType="TIMESTAMP"/>
-            <result property="beginname" column="BeginName" jdbcType="VARCHAR"/>
-            <result property="begintime" column="BeginTime" jdbcType="TIMESTAMP"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
             <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
-            <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+            <result property="feesState" column="Fees_State" jdbcType="INTEGER"/>
+            <result property="approvaltime" column="ApprovalTime" jdbcType="TIMESTAMP"/>
+            <result property="approvalname" column="ApprovalName" jdbcType="VARCHAR"/>
+            <result property="revokeapptime" column="RevokeAppTime" jdbcType="TIMESTAMP"/>
+            <result property="revokeappname" column="RevokeAppName" jdbcType="VARCHAR"/>
+            <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
+            <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
         </association>
     </resultMap>
 
     <sql id="Base_Column_List">
-      e.Fees_Id, e.Fees_Number, e.Fees_Receivable, e.Fees_Type, e.Fees_Advance,
-       e.Accumulated, e.Receipts, e.UpdateName, e.UpdateTime, e.AddName, e.AddTime,
-        e.DeleteName, e.DeleteTime, e.TimeLiness, e.Fees_State, e.ApprovalTime,
-         e.ApprovalName, e.RevokeAppTime, e.RevokeAppName, e.Register_Id, e.Student_Id, e.Course_Id
+      outstanding_Id, outstanding_Number, AlongMoney, outstanding_Date,
+       UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime,
+        TimeLiness, outstanding_State, ApprovalTime, ApprovalName, RevokeAppTime,
+         RevokeAppName, Register_Id, Student_Id, Fees_Id
     </sql>
 
     <!--查询所有-->
-    <select id="selectAllEntryFees" resultMap="EntryfeesMap">
+    <select id="selectAllStudentOutStanding" resultMap="StudentoutstandingMap">
         select
         <include refid="Base_Column_List" />
-        from entryfees e
-        inner join register r on e.Register_Id=r.Register_Id
-        inner join student s on e.Student_Id=s.Student_Id
-        inner join course co on e.Course_Id=co.Course_Id
-        where e.TimeLiness = 0 order by e.Fees_Id DESC
+        from studentoutstanding sts
+        inner join register r on sts.Register_Id=r.Register_Id
+        inner join student s on sts.Student_Id=s.Student_Id
+        inner join entryfees e on sts.Fees_Id=e.Fees_Id
+        where sts.TimeLiness = 0 order by sts.outstanding_Id DESC
     </select>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="EntryfeesMap">
+    <select id="queryById" resultMap="StudentoutstandingMap">
         select
-          Fees_Id, Fees_Number, Fees_Receivable, Fees_Type, Fees_Advance, Accumulated, Receipts, UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, Fees_State, ApprovalTime, ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Course_Id
-        from tr01904.entryfees
-        where Fees_Id = #{feesId}
+          outstanding_Id, outstanding_Number, AlongMoney, outstanding_Date, UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, outstanding_State, ApprovalTime, ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Fees_Id
+        from tr01904.studentoutstanding
+        where outstanding_Id = #{outstandingId}
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="EntryfeesMap">
+    <select id="queryAllByLimit" resultMap="StudentoutstandingMap">
         select
-          Fees_Id, Fees_Number, Fees_Receivable, Fees_Type, Fees_Advance, Accumulated, Receipts, UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, Fees_State, ApprovalTime, ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Course_Id
-        from tr01904.entryfees
+          outstanding_Id, outstanding_Number, AlongMoney, outstanding_Date, UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, outstanding_State, ApprovalTime, ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Fees_Id
+        from tr01904.studentoutstanding
         limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="EntryfeesMap">
+    <select id="queryAll" resultMap="StudentoutstandingMap">
         select
-        Fees_Id, Fees_Number, Fees_Receivable, Fees_Type, Fees_Advance, Accumulated, Receipts, UpdateName, UpdateTime,
-        AddName, AddTime, DeleteName, DeleteTime, TimeLiness, Fees_State, ApprovalTime, ApprovalName, RevokeAppTime,
-        RevokeAppName, Register_Id, Student_Id, Course_Id
-        from tr01904.entryfees
+        outstanding_Id, outstanding_Number, AlongMoney, outstanding_Date, UpdateName, UpdateTime, AddName, AddTime,
+        DeleteName, DeleteTime, TimeLiness, outstanding_State, ApprovalTime, ApprovalName, RevokeAppTime, RevokeAppName,
+        Register_Id, Student_Id, Fees_Id
+        from tr01904.studentoutstanding
         <where>
-            <if test="feesId != null">
-                and Fees_Id = #{feesId}
+            <if test="outstandingId != null">
+                and outstanding_Id = #{outstandingId}
             </if>
-            <if test="feesNumber != null and feesNumber != ''">
-                and Fees_Number = #{feesNumber}
+            <if test="outstandingNumber != null and outstandingNumber != ''">
+                and outstanding_Number = #{outstandingNumber}
             </if>
-            <if test="feesReceivable != null">
-                and Fees_Receivable = #{feesReceivable}
+            <if test="alongmoney != null">
+                and AlongMoney = #{alongmoney}
             </if>
-            <if test="feesType != null and feesType != ''">
-                and Fees_Type = #{feesType}
-            </if>
-            <if test="feesAdvance != null">
-                and Fees_Advance = #{feesAdvance}
-            </if>
-            <if test="accumulated != null">
-                and Accumulated = #{accumulated}
-            </if>
-            <if test="receipts != null">
-                and Receipts = #{receipts}
+            <if test="outstandingDate != null">
+                and outstanding_Date = #{outstandingDate}
             </if>
             <if test="updatename != null and updatename != ''">
                 and UpdateName = #{updatename}
@@ -173,8 +165,8 @@
             <if test="timeliness != null">
                 and TimeLiness = #{timeliness}
             </if>
-            <if test="feesState != null">
-                and Fees_State = #{feesState}
+            <if test="outstandingState != null">
+                and outstanding_State = #{outstandingState}
             </if>
             <if test="approvaltime != null">
                 and ApprovalTime = #{approvaltime}
@@ -194,75 +186,66 @@
             <if test="studentId != null">
                 and Student_Id = #{studentId}
             </if>
-            <if test="courseId != null">
-                and Course_Id = #{courseId}
+            <if test="feesId != null">
+                and Fees_Id = #{feesId}
             </if>
         </where>
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="feesId" useGeneratedKeys="true">
-        insert into tr01904.entryfees(Fees_Number, Fees_Receivable, Fees_Type, Fees_Advance, Accumulated, Receipts, UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, Fees_State, ApprovalTime, ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Course_Id)
-        values (#{feesNumber}, #{feesReceivable}, #{feesType}, #{feesAdvance}, #{accumulated}, #{receipts}, #{updatename}, #{updatetime}, #{addname}, #{addtime}, #{deletename}, #{deletetime}, #{timeliness}, #{feesState}, #{approvaltime}, #{approvalname}, #{revokeapptime}, #{revokeappname}, #{registerId}, #{studentId}, #{courseId})
+    <insert id="insert" keyProperty="outstandingId" useGeneratedKeys="true">
+        insert into tr01904.studentoutstanding(outstanding_Number, AlongMoney, outstanding_Date, UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, outstanding_State, ApprovalTime, ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Fees_Id)
+        values (#{outstandingNumber}, #{alongmoney}, #{outstandingDate}, #{updatename}, #{updatetime}, #{addname}, #{addtime}, #{deletename}, #{deletetime}, #{timeliness}, #{outstandingState}, #{approvaltime}, #{approvalname}, #{revokeapptime}, #{revokeappname}, #{registerId}, #{studentId}, #{feesId})
     </insert>
 
-    <insert id="insertBatch" keyProperty="feesId" useGeneratedKeys="true">
-        insert into tr01904.entryfees(Fees_Number, Fees_Receivable, Fees_Type, Fees_Advance, Accumulated, Receipts,
-        UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, Fees_State, ApprovalTime,
-        ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Course_Id)
+    <insert id="insertBatch" keyProperty="outstandingId" useGeneratedKeys="true">
+        insert into tr01904.studentoutstanding(outstanding_Number, AlongMoney, outstanding_Date, UpdateName, UpdateTime,
+        AddName, AddTime, DeleteName, DeleteTime, TimeLiness, outstanding_State, ApprovalTime, ApprovalName,
+        RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Fees_Id)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.feesNumber}, #{entity.feesReceivable}, #{entity.feesType}, #{entity.feesAdvance},
-            #{entity.accumulated}, #{entity.receipts}, #{entity.updatename}, #{entity.updatetime}, #{entity.addname},
-            #{entity.addtime}, #{entity.deletename}, #{entity.deletetime}, #{entity.timeliness}, #{entity.feesState},
-            #{entity.approvaltime}, #{entity.approvalname}, #{entity.revokeapptime}, #{entity.revokeappname},
-            #{entity.registerId}, #{entity.studentId}, #{entity.courseId})
+            (#{entity.outstandingNumber}, #{entity.alongmoney}, #{entity.outstandingDate}, #{entity.updatename},
+            #{entity.updatetime}, #{entity.addname}, #{entity.addtime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.outstandingState}, #{entity.approvaltime}, #{entity.approvalname},
+            #{entity.revokeapptime}, #{entity.revokeappname}, #{entity.registerId}, #{entity.studentId},
+            #{entity.feesId})
         </foreach>
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="feesId" useGeneratedKeys="true">
-        insert into tr01904.entryfees(Fees_Number, Fees_Receivable, Fees_Type, Fees_Advance, Accumulated, Receipts,
-        UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, Fees_State, ApprovalTime,
-        ApprovalName, RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Course_Id)
+    <insert id="insertOrUpdateBatch" keyProperty="outstandingId" useGeneratedKeys="true">
+        insert into tr01904.studentoutstanding(outstanding_Number, AlongMoney, outstanding_Date, UpdateName, UpdateTime,
+        AddName, AddTime, DeleteName, DeleteTime, TimeLiness, outstanding_State, ApprovalTime, ApprovalName,
+        RevokeAppTime, RevokeAppName, Register_Id, Student_Id, Fees_Id)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.feesNumber}, #{entity.feesReceivable}, #{entity.feesType}, #{entity.feesAdvance},
-            #{entity.accumulated}, #{entity.receipts}, #{entity.updatename}, #{entity.updatetime}, #{entity.addname},
-            #{entity.addtime}, #{entity.deletename}, #{entity.deletetime}, #{entity.timeliness}, #{entity.feesState},
-            #{entity.approvaltime}, #{entity.approvalname}, #{entity.revokeapptime}, #{entity.revokeappname},
-            #{entity.registerId}, #{entity.studentId}, #{entity.courseId})
+            (#{entity.outstandingNumber}, #{entity.alongmoney}, #{entity.outstandingDate}, #{entity.updatename},
+            #{entity.updatetime}, #{entity.addname}, #{entity.addtime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.outstandingState}, #{entity.approvaltime}, #{entity.approvalname},
+            #{entity.revokeapptime}, #{entity.revokeappname}, #{entity.registerId}, #{entity.studentId},
+            #{entity.feesId})
         </foreach>
         on duplicate key update
-        Fees_Number = values(Fees_Number) , Fees_Receivable = values(Fees_Receivable) , Fees_Type = values(Fees_Type) ,
-        Fees_Advance = values(Fees_Advance) , Accumulated = values(Accumulated) , Receipts = values(Receipts) ,
-        UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime) , AddName = values(AddName) , AddTime =
-        values(AddTime) , DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness =
-        values(TimeLiness) , Fees_State = values(Fees_State) , ApprovalTime = values(ApprovalTime) , ApprovalName =
-        values(ApprovalName) , RevokeAppTime = values(RevokeAppTime) , RevokeAppName = values(RevokeAppName) ,
-        Register_Id = values(Register_Id) , Student_Id = values(Student_Id) , Course_Id = values(Course_Id)
+        outstanding_Number = values(outstanding_Number) , AlongMoney = values(AlongMoney) , outstanding_Date =
+        values(outstanding_Date) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime) , AddName =
+        values(AddName) , AddTime = values(AddTime) , DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime)
+        , TimeLiness = values(TimeLiness) , outstanding_State = values(outstanding_State) , ApprovalTime =
+        values(ApprovalTime) , ApprovalName = values(ApprovalName) , RevokeAppTime = values(RevokeAppTime) ,
+        RevokeAppName = values(RevokeAppName) , Register_Id = values(Register_Id) , Student_Id = values(Student_Id) ,
+        Fees_Id = values(Fees_Id)
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update tr01904.entryfees
+        update tr01904.studentoutstanding
         <set>
-            <if test="feesNumber != null and feesNumber != ''">
-                Fees_Number = #{feesNumber},
+            <if test="outstandingNumber != null and outstandingNumber != ''">
+                outstanding_Number = #{outstandingNumber},
             </if>
-            <if test="feesReceivable != null">
-                Fees_Receivable = #{feesReceivable},
+            <if test="alongmoney != null">
+                AlongMoney = #{alongmoney},
             </if>
-            <if test="feesType != null and feesType != ''">
-                Fees_Type = #{feesType},
-            </if>
-            <if test="feesAdvance != null">
-                Fees_Advance = #{feesAdvance},
-            </if>
-            <if test="accumulated != null">
-                Accumulated = #{accumulated},
-            </if>
-            <if test="receipts != null">
-                Receipts = #{receipts},
+            <if test="outstandingDate != null">
+                outstanding_Date = #{outstandingDate},
             </if>
             <if test="updatename != null and updatename != ''">
                 UpdateName = #{updatename},
@@ -285,8 +268,8 @@
             <if test="timeliness != null">
                 TimeLiness = #{timeliness},
             </if>
-            <if test="feesState != null">
-                Fees_State = #{feesState},
+            <if test="outstandingState != null">
+                outstanding_State = #{outstandingState},
             </if>
             <if test="approvaltime != null">
                 ApprovalTime = #{approvaltime},
@@ -306,16 +289,16 @@
             <if test="studentId != null">
                 Student_Id = #{studentId},
             </if>
-            <if test="courseId != null">
-                Course_Id = #{courseId},
+            <if test="feesId != null">
+                Fees_Id = #{feesId},
             </if>
         </set>
-        where Fees_Id = #{feesId}
+        where outstanding_Id = #{outstandingId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from tr01904.entryfees where Fees_Id = #{feesId}
+        delete from tr01904.studentoutstanding where outstanding_Id = #{outstandingId}
     </delete>
 
 </mapper>

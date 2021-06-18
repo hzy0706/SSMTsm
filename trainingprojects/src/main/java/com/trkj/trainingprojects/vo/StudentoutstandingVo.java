@@ -1,9 +1,9 @@
 package com.trkj.trainingprojects.vo;
 
 import com.trkj.trainingprojects.ann.ClassMeta;
-import com.trkj.trainingprojects.entity.Course;
-import com.trkj.trainingprojects.entity.Register;
-import com.trkj.trainingprojects.entity.Student;
+import com.trkj.trainingprojects.vo.EntryfeesVo;
+import com.trkj.trainingprojects.vo.RegisterVo;
+import com.trkj.trainingprojects.vo.StudentVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,41 +12,29 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 
+@Validated
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Validated
-@ClassMeta(className = "报班缴费表")
-@ToString(exclude = "registerVo,studentVo,courseVo")
-public class EntryfeesVo {
+@ClassMeta(className = "欠费补缴表")
+@ToString(exclude = "registerVo,studentVo,entryfeesVo")
+public class StudentoutstandingVo {
     /**
-     * 缴费编号
+     * 补缴编号
      */
-    private Integer feesId;
+    private Integer outstandingId;
     /**
-     * 缴费单据号
+     * 补缴单据号
      */
-    private String feesNumber;
+    private String outstandingNumber;
     /**
-     * 应收金额
+     * 补缴金额
      */
-    private Double feesReceivable;
+    private Double alongmoney;
     /**
-     * 缴费方式
+     * 补缴日期
      */
-    private String feesType;
-    /**
-     * 预缴金额
-     */
-    private Double feesAdvance;
-    /**
-     * 累计欠费金额
-     */
-    private Double accumulated;
-    /**
-     * 实收金额
-     */
-    private Double receipts;
+    private Date outstandingDate;
     /**
      * 最后修改人
      */
@@ -78,7 +66,7 @@ public class EntryfeesVo {
     /**
      * 缴费状态
      */
-    private Integer feesState;
+    private Integer outstandingState;
     /**
      * 财务部审核时间
      */
@@ -104,12 +92,12 @@ public class EntryfeesVo {
      */
     private Integer studentId;
     /**
-     * 课程编号
+     * 报班缴费表
      */
-    private Integer courseId;
+    private Integer feesId;
 
     private RegisterVo registerVo;
     private StudentVo studentVo;
-    private CourseVo courseVo;
+    private EntryfeesVo entryfeesVo;
     private static final long serialVersionUID = 1L;
 }
