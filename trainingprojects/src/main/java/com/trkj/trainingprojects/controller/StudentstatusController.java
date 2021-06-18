@@ -33,7 +33,7 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @GetMapping("/SelectStudentStatusByStudentId/{id}")
+    @GetMapping("/selectStudentStatusByStudentId/{id}")
     public PageInfo<StudentstatusVo> SelectStudentByClassId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByStudentId(id);
