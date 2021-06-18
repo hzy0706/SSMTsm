@@ -17,4 +17,6 @@ public interface BookstockDao {
     int updateByBookstockKeySelective(BookstockVo record);
 
     int updateByBookstockKey(BookstockVo record);
+
+    int appByBookstockKey(BookstockVo bookstockVo);
 }

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.StudentstatusDao">
+    <resultMap type="com.trkj.trainingprojects.entity.Studentstatus" id="StudentstatusMap">
+        <result property="studentstatusId" column="StudentStatus_Id" jdbcType="INTEGER"/>
+        <result property="status" column="Status" jdbcType="INTEGER"/>
+        <result property="allottype" column="AllotType" jdbcType="VARCHAR"/>
+        <result property="approval" column="Approval" jdbcType="INTEGER"/>
+        <result property="appname" column="AppName" jdbcType="VARCHAR"/>
+        <result property="apptime" column="AppTime" jdbcType="TIMESTAMP"/>
+        <result property="revokeappname" column="RevokeAppName" jdbcType="VARCHAR"/>
+        <result property="revokeapptime" column="RevokeAppTime" jdbcType="TIMESTAMP"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+        <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      sts.StudentStatus_Id, sts.Status, sts.AllotType, sts.Approval, sts.AppName, sts.AppTime,
+       sts.RevokeAppName, sts.RevokeAppTime, sts.AddName, sts.AddTime, sts.UpdateName, sts.UpdateTime,
+        sts.DeleteName, sts.DeleteTime, sts.TimeLiness, sts.Student_Id, sts.Classes_Id
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAllStudentStatus" resultMap="StudentstatusMap">
+        select
+        <include refid="Base_Column_List" />
+        from tr01904.studentstatus sts
+        /*inner join classes cl on sts.Classes_Id=cl.Classes_Id*/
+        inner join student stu on stu.Student_Id=sts.Student_Id
+        where sts.TimeLiness = 0 order by StudentStatus_Id DESC
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentstatusMap">
+        select
+          StudentStatus_Id, Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id
+        from tr01904.studentstatus
+        where StudentStatus_Id = #{studentstatusId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentstatusMap">
+        select
+          StudentStatus_Id, Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id
+        from tr01904.studentstatus
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StudentstatusMap">
+        select
+        StudentStatus_Id, Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime,
+        UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id
+        from tr01904.studentstatus
+        <where>
+            <if test="studentstatusId != null">
+                and StudentStatus_Id = #{studentstatusId}
+            </if>
+            <if test="status != null">
+                and Status = #{status}
+            </if>
+            <if test="allottype != null and allottype != ''">
+                and AllotType = #{allottype}
+            </if>
+            <if test="approval != null">
+                and Approval = #{approval}
+            </if>
+            <if test="appname != null and appname != ''">
+                and AppName = #{appname}
+            </if>
+            <if test="apptime != null">
+                and AppTime = #{apptime}
+            </if>
+            <if test="revokeappname != null and revokeappname != ''">
+                and RevokeAppName = #{revokeappname}
+            </if>
+            <if test="revokeapptime != null">
+                and RevokeAppTime = #{revokeapptime}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and AddTime = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="studentId != null">
+                and Student_Id = #{studentId}
+            </if>
+            <if test="classesId != null">
+                and Classes_Id = #{classesId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="studentstatusId" useGeneratedKeys="true">
+        insert into tr01904.studentstatus(Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id)
+        values (#{status}, #{allottype}, #{approval}, #{appname}, #{apptime}, #{revokeappname}, #{revokeapptime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{classesId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="studentstatusId" useGeneratedKeys="true">
+        insert into tr01904.studentstatus(Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime,
+        AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.status}, #{entity.allottype}, #{entity.approval}, #{entity.appname}, #{entity.apptime},
+            #{entity.revokeappname}, #{entity.revokeapptime}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.studentId}, #{entity.classesId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="studentstatusId" useGeneratedKeys="true">
+        insert into tr01904.studentstatus(Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime,
+        AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.status}, #{entity.allottype}, #{entity.approval}, #{entity.appname}, #{entity.apptime},
+            #{entity.revokeappname}, #{entity.revokeapptime}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.studentId}, #{entity.classesId})
+        </foreach>
+        on duplicate key update
+        Status = values(Status) , AllotType = values(AllotType) , Approval = values(Approval) , AppName =
+        values(AppName) , AppTime = values(AppTime) , RevokeAppName = values(RevokeAppName) , RevokeAppTime =
+        values(RevokeAppTime) , AddName = values(AddName) , AddTime = values(AddTime) , UpdateName = values(UpdateName)
+        , UpdateTime = values(UpdateTime) , DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime) ,
+        TimeLiness = values(TimeLiness) , Student_Id = values(Student_Id) , Classes_Id = values(Classes_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tr01904.studentstatus
+        <set>
+            <if test="status != null">
+                Status = #{status},
+            </if>
+            <if test="allottype != null and allottype != ''">
+                AllotType = #{allottype},
+            </if>
+            <if test="approval != null">
+                Approval = #{approval},
+            </if>
+            <if test="appname != null and appname != ''">
+                AppName = #{appname},
+            </if>
+            <if test="apptime != null">
+                AppTime = #{apptime},
+            </if>
+            <if test="revokeappname != null and revokeappname != ''">
+                RevokeAppName = #{revokeappname},
+            </if>
+            <if test="revokeapptime != null">
+                RevokeAppTime = #{revokeapptime},
+            </if>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                AddTime = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="studentId != null">
+                Student_Id = #{studentId},
+            </if>
+            <if test="classesId != null">
+                Classes_Id = #{classesId},
+            </if>
+        </set>
+        where StudentStatus_Id = #{studentstatusId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.studentstatus where StudentStatus_Id = #{studentstatusId}
+    </delete>
+
+</mapper>
+

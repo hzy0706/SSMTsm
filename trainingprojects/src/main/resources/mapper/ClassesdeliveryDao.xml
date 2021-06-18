@@ -71,65 +71,13 @@
   </insert>
   <update id="updateByClassesdeliveryKeySelective" parameterType="com.trkj.trainingprojects.vo.ClassesdeliveryVo">
     update classesdelivery
-    <set>
-      <if test="salenumber != null">
-        SaleNumber = #{salenumber,jdbcType=VARCHAR},
-      </if>
-      <if test="total != null">
-        Total = #{total,jdbcType=DECIMAL},
-      </if>
-      <if test="deliverytime != null">
-        DeliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deliverytype != null">
-        DeliveryType = #{deliverytype,jdbcType=VARCHAR},
-      </if>
-      <if test="classesdeliveryCount != null">
-        ClassesDelivery_Count = #{classesdeliveryCount,jdbcType=INTEGER},
-      </if>
-      <if test="approval != null">
-        Approval = #{approval,jdbcType=INTEGER},
-      </if>
-      <if test="appname != null">
-        AppName = #{appname,jdbcType=VARCHAR},
-      </if>
-      <if test="apptime != null">
-        AppTime = #{apptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="revokeAppname != null">
-        Revoke_AppName = #{revokeAppname,jdbcType=VARCHAR},
-      </if>
-      <if test="revokeApptime != null">
-        Revoke_AppTime = #{revokeApptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="addname != null">
-        AddName = #{addname,jdbcType=VARCHAR},
-      </if>
-      <if test="updatename != null">
-        UpdateName = #{updatename,jdbcType=VARCHAR},
-      </if>
-      <if test="updatetime != null">
-        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deletename != null">
-        DeleteName = #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timeliness != null">
-        TimeLiness = #{timeliness,jdbcType=INTEGER},
-      </if>
-      <if test="empId != null">
-        Emp_Id = #{empId,jdbcType=INTEGER},
-      </if>
-      <if test="bookId != null">
-        Book_Id = #{bookId,jdbcType=INTEGER},
-      </if>
-      <if test="classesId != null">
-        Classes_Id = #{classesId,jdbcType=INTEGER},
-      </if>
-    </set>
+    set
+    Total = #{total,jdbcType=DECIMAL},
+    ClassesDelivery_Count = #{classesdeliveryCount,jdbcType=INTEGER},
+    UpdateName = #{updatename,jdbcType=VARCHAR},
+    UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+    Classes_Id = #{classesId,jdbcType=INTEGER},
+    Book_Id = #{bookId,jdbcType=INTEGER}
     where ClassesDelivery_Id = #{classesdeliveryId,jdbcType=INTEGER}
   </update>
   <update id="updateByClassesdeliveryKey" parameterType="com.trkj.trainingprojects.vo.ClassesdeliveryVo">

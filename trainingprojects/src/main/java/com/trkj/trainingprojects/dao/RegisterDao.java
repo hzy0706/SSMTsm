@@ -25,4 +25,6 @@ public interface RegisterDao {
     List<RegisterVo> findRegister2();
 //    模糊查询
     List<RegisterVo> mohuRegister(@Param("value") String registerName);
+
+    int updateShRegister(RegisterVo registerVo);
 }

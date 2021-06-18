@@ -8,6 +8,7 @@
     <result column="DeliveryTime" jdbcType="TIMESTAMP" property="deliverytime" />
     <result column="DeliveryType" jdbcType="VARCHAR" property="deliverytype" />
     <result column="Approval" jdbcType="INTEGER" property="approval" />
+    <result column="CWApproval" jdbcType="INTEGER" property="cwapproval" />
     <result column="AppName" jdbcType="VARCHAR" property="appname" />
     <result column="AppTime" jdbcType="TIMESTAMP" property="apptime" />
     <result column="Revoke_AppName" jdbcType="VARCHAR" property="revokeAppname" />
@@ -22,7 +23,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    b.BookDelivery_Id, b.SaleNumber, b.Total, b.DeliveryTime, b.DeliveryType, b.Approval, b.AppName,
+    b.BookDelivery_Id, b.SaleNumber, b.Total, b.DeliveryTime, b.DeliveryType, b.Approval,b.CWApproval, b.AppName,
     b.AppTime, b.Revoke_AppName, b.Revoke_AppTime, b.AddName, b.DeleteName, b.DeleteTime, b.TimeLiness,
     b.Emp_Id
   </sql>
@@ -38,14 +39,25 @@
     <include refid="Base_Column_List" />,e.Emp_Name
     from bookdelivery b
     inner join emp e on e.Emp_Id=b.Emp_Id
-    where TimeLiness=0
+    where TimeLiness=0 and e.Emp_Name like #{param1}
+    order by b.DeliveryTime desc
   </select>
+
+  <select id="selectAllBookdeliverysByState" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from bookdelivery b
+    inner join emp e on e.Emp_Id=b.Emp_Id
+    where b.TimeLiness=0 and b.Approval=#{param1} and b.CWApproval=#{param2} and e.Emp_Name like #{param3}
+    order by b.DeliveryTime desc
+  </select>
+
   <insert id="addBookdelivery" keyColumn="BookDelivery_Id" keyProperty="bookdeliveryId" parameterType="com.trkj.trainingprojects.vo.BookdeliveryVo" useGeneratedKeys="true">
-    insert into bookdelivery (SaleNumber, Total, DeliveryTime, 
+    insert into bookdelivery (SaleNumber, Total,
       DeliveryType, AppName,
-      AppTime, Revoke_AppName, Revoke_AppTime, 
+      AppTime, Revoke_AppName, Revoke_AppTime,
       AddName, DeleteName, DeleteTime, Emp_Id)
-    values (#{salenumber,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, #{deliverytime,jdbcType=TIMESTAMP}, 
+    values (#{salenumber,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL},
       #{deliverytype,jdbcType=VARCHAR},  #{appname,jdbcType=VARCHAR},
       #{apptime,jdbcType=TIMESTAMP}, #{revokeAppname,jdbcType=VARCHAR}, #{revokeApptime,jdbcType=TIMESTAMP}, 
       #{addname,jdbcType=VARCHAR}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
@@ -105,6 +117,20 @@
       DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
       TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where BookDelivery_Id = #{bookdeliveryId,jdbcType=INTEGER}
+  </update>
+  <update id="appBookdelivery" parameterType="com.trkj.trainingprojects.vo.BookdeliveryVo">
+    update bookdelivery
+    set
+      Approval = #{approval,jdbcType=INTEGER},
+      AppName = #{appname,jdbcType=VARCHAR},
+      AppTime = #{apptime,jdbcType=TIMESTAMP}
+    where BookDelivery_Id = #{bookdeliveryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateBookdeliveryApp" parameterType="com.trkj.trainingprojects.vo.BookstorageVo">
+    update bookdelivery
+    set
+      CWApproval=#{cwapproval,jdbcType=INTEGER}
     where BookDelivery_Id = #{bookdeliveryId,jdbcType=INTEGER}
   </update>
 </mapper>

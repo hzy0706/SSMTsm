@@ -49,7 +49,6 @@ public class IdeasController {
         Date date = new Date();
         String[] ids= id.split(",");
         for (String s:ids){
-            System.out.println(s+"-----------------");
             IdeasVo ideasVo = new IdeasVo();
             ideasVo.setDeletename(deleteName);
             ideasVo.setDeletetime(date);

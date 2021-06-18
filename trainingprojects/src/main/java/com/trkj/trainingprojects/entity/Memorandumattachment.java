@@ -17,7 +17,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString(exclude = "register")
 public class Memorandumattachment implements Serializable {
-
     private Integer memorandumattachmentId;
     private Integer zsisexamine;
     private Date zsexaminetime;

@@ -4,105 +4,88 @@ import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.validation.annotation.Validated;
 
-import java.math.BigDecimal;
 import java.util.Date;
-@Data
+
+@Validated
 @AllArgsConstructor
 @NoArgsConstructor
-@Validated
-@ClassMeta(className = "教材出库收支表")
-public class BookstockVo {
+@Data
+@ClassMeta(className = "学员分班表")
+@ToString(exclude = "studentVo,classesVo")
+public class StudentstatusVo {
     /**
-     * 出库收支编号
+     * 学员分班表编号
      */
-    private Integer stockId;
-
+    private Integer studentstatusId;
     /**
-     * 单据号
+     * 学员状态
      */
-    private String stockNumber;
-
+    private Integer status;
     /**
-     * 收支日期
+     * 报班类型
      */
-    private Date stockDate;
-
+    private String allottype;
     /**
-     * 收支明细
+     * 是否审批
      */
-    private String refundDetails;
-
+    private Integer approval;
     /**
-     * 收支金额
+     * 审批人员
      */
-    private BigDecimal totalmoney;
-
+    private String appname;
     /**
-     * 后勤部经办人
+     * 审批时间
+     */
+    private Date apptime;
+    /**
+     * 撤销审批人员
+     */
+    private String revokeappname;
+    /**
+     * RevokeAppTime
+     */
+    private Date revokeapptime;
+    /**
+     * 增加人
      */
     public String addname;
-
     /**
-     * 经办时间
+     * 增加日期
      */
     private Date addtime;
-
     /**
      * 最后修改人
      */
     public String updatename;
-
     /**
      * 最后修改时间
      */
     private Date updatetime;
-
     /**
      * 删除人
      */
     public String deletename;
-
     /**
      * 删除时间
      */
     private Date deletetime;
-
     /**
      * 时效性
      */
     private Integer timeliness;
-
     /**
-     * 财务是否审核
+     * 学员编号
      */
-    private Integer checkedby;
-
+    private Integer studentId;
     /**
-     * 财务部审核时间
+     * 班级编号
      */
-    private Date apptime;
+    private Integer classesId;
 
-    /**
-     * 财务部审核人
-     */
-    public String appname;
-
-    /**
-     * 财务部撤销审核时间
-     */
-    private Date revokeapptime;
-
-    /**
-     * 财务部撤销审核人
-     */
-    public String revokeappname;
-
-    /**
-     * 教材出库总编号
-     */
-    private Integer bookdeliveryId;
-
+    private StudentVo studentVo;
+    private ClassesVo classesVo;
     private static final long serialVersionUID = 1L;
 }

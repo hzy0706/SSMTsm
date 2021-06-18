@@ -81,10 +81,9 @@ public class MemorandumattachmentController {
     @PutMapping("updateZsChName/{id}/{name}")
     public AjaxResponse updateZsChName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         Date data = new Date();
-        memorandumattachmentVo.setZsexaminetime(data);
+        memorandumattachmentVo.setZsrevoketime(data);
         memorandumattachmentVo.setZsrevokename(name);
         memorandumattachmentVo.setZsisexamine(0);
-//        撤销审核之后审核的时间和人为空
         memorandumattachmentVo.setZsexaminetime(null);
         memorandumattachmentVo.setZsexaminename(null);
         memorandumattachmentService.updateZsChName(memorandumattachmentVo);

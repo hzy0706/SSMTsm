@@ -1,13 +1,17 @@
 package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.StudentDao;
+import com.trkj.trainingprojects.dao.StudentstatusDao;
 import com.trkj.trainingprojects.entity.Student;
 import com.trkj.trainingprojects.service.StudentService;
 import com.trkj.trainingprojects.vo.StudentVo;
+import com.trkj.trainingprojects.vo.StudentstatusVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,6 +19,8 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Resource
     private StudentDao studentDao;
+    @Resource
+    private StudentstatusDao studentstatusDao;
 
     @Override
     public List<Student> queryAllByLimit(int offset, int limit) {
@@ -39,5 +45,29 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentVo> SelectStudentByClassId(int classId) {
         return studentDao.SelectStudentByClassId(classId);
+    }
+
+    @Override
+    public List<StudentVo> SelectStudentByState() {
+        return studentDao.SelectStudentByState();
+    }
+    @Override
+    public List<StudentVo> selectAllStudent() {
+        return studentDao.selectAllStudent();
+    }
+
+    @Override
+    @Transactional
+    public int addStudents(StudentVo studentVo) {
+        studentDao.insert(studentVo);
+        Date date = new Date();
+        StudentstatusVo studentstatusVo = new StudentstatusVo();
+        studentstatusVo.setStudentId(studentVo.getStudentId());
+        studentstatusVo.setStatus(0);
+        studentstatusVo.setApproval(0);
+        studentstatusVo.setAddtime(date);
+        studentstatusVo.setAddname(studentVo.getAddname());
+        studentstatusDao.insert(studentstatusVo);
+        return 0;
     }
 }

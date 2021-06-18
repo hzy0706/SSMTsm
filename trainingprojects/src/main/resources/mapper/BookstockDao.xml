@@ -15,8 +15,8 @@
     <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
     <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
     <result column="CheckedBy" jdbcType="INTEGER" property="checkedby" />
-    <result column="AppName" jdbcType="TIMESTAMP" property="appname" />
-    <result column="AppTime" jdbcType="VARCHAR" property="apptime" />
+    <result column="AppName" jdbcType="VARCHAR" property="appname" />
+    <result column="AppTime" jdbcType="TIMESTAMP" property="apptime" />
     <result column="RevokeAppTime" jdbcType="TIMESTAMP" property="revokeapptime" />
     <result column="RevokeAppName" jdbcType="VARCHAR" property="revokeappname" />
     <result column="BookDelivery_Id" jdbcType="INTEGER" property="bookdeliveryId" />
@@ -37,19 +37,20 @@
     <include refid="Base_Column_List" />
     from bookstock
     where CheckedBy = #{checkedby,jdbcType=INTEGER} and TimeLiness=0
+    order by Stock_Date desc
   </select>
   <insert id="addBookstock" keyColumn="Stock_Id" keyProperty="stockId" parameterType="com.trkj.trainingprojects.vo.BookstockVo" useGeneratedKeys="true">
-    insert into bookstock (Stock_Number, Stock_Date, Refund_details, 
+    insert into bookstock (Stock_Number, Refund_details,
       TotalMoney, AddName,
-      UpdateName, UpdateTime, DeleteName, 
+      UpdateName, UpdateTime, DeleteName,
       DeleteTime,
-      AppName, AppTime, RevokeAppTime, 
+      AppName, AppTime, RevokeAppTime,
       RevokeAppName, BookDelivery_Id)
-    values (#{stockNumber,jdbcType=VARCHAR}, #{stockDate,jdbcType=TIMESTAMP}, #{refundDetails,jdbcType=VARCHAR}, 
+    values (#{stockNumber,jdbcType=VARCHAR}, #{refundDetails,jdbcType=VARCHAR},
       #{totalmoney,jdbcType=DECIMAL}, #{addname,jdbcType=VARCHAR},
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, 
       #{deletetime,jdbcType=TIMESTAMP},
-      #{appname,jdbcType=TIMESTAMP}, #{apptime,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP}, 
+      #{appname,jdbcType=VARCHAR}, #{apptime,jdbcType=TIMESTAMP}, #{revokeapptime,jdbcType=TIMESTAMP},
       #{revokeappname,jdbcType=VARCHAR}, #{bookdeliveryId,jdbcType=INTEGER})
   </insert>
   <update id="updateByBookstockKeySelective" parameterType="com.trkj.trainingprojects.vo.BookstockVo">
@@ -92,10 +93,10 @@
         CheckedBy = #{checkedby,jdbcType=INTEGER},
       </if>
       <if test="appname != null">
-        AppName = #{appname,jdbcType=TIMESTAMP},
+        AppName = #{appname,jdbcType=VARCHAR},
       </if>
       <if test="apptime != null">
-        AppTime = #{apptime,jdbcType=VARCHAR},
+        AppTime = #{apptime,jdbcType=TIMESTAMP},
       </if>
       <if test="revokeapptime != null">
         RevokeAppTime = #{revokeapptime,jdbcType=TIMESTAMP},
@@ -115,6 +116,14 @@
       DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
       TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Stock_Id = #{stockId,jdbcType=INTEGER}
+  </update>
+  <update id="appByBookstockKey" parameterType="com.trkj.trainingprojects.vo.BookstockVo">
+    update bookstock
+    set
+      AppName = #{appname,jdbcType=VARCHAR},
+      AppTime = #{apptime,jdbcType=TIMESTAMP},
+      CheckedBy = #{checkedby,jdbcType=INTEGER}
     where Stock_Id = #{stockId,jdbcType=INTEGER}
   </update>
 </mapper>

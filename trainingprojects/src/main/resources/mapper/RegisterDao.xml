@@ -260,4 +260,11 @@
       TimeLiness = 1
     where Register_Id = #{registerId,jdbcType=INTEGER}
   </update>
+  <update id="updateShRegister" parameterType="com.trkj.trainingprojects.vo.RegisterVo">
+    update register
+    set AttentState = #{attentstate,jdbcType=INTEGER},
+      UpdateName = #{updatename,jdbcType=VARCHAR},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
+      where Register_Id = #{registerId,jdbcType=INTEGER}
+  </update>
 </mapper>

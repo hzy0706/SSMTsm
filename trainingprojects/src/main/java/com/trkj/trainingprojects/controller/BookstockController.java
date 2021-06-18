@@ -40,14 +40,24 @@ public class BookstockController {
     }
 
     @PutMapping("/updateByBookstockKeySelective")
-    public int updateByBookstockKeySelective(@RequestBody @Valid BookstockVo bookstockVo) {
+    public AjaxResponse updateByBookstockKeySelective(@RequestBody @Valid BookstockVo bookstockVo) {
         bookstockVo.setUpdatetime(new Date());
-        return bookstockService.updateByBookstockKeySelective(bookstockVo);
+        bookstockService.updateByBookstockKeySelective(bookstockVo);
+        return AjaxResponse.success(bookstockVo);
     }
 
     @PutMapping("/deleteByBookstockKey")
-    public int deleteByBookstockKey(@RequestBody @Valid BookstockVo bookstockVo) {
+    public AjaxResponse deleteByBookstockKey(@RequestBody @Valid BookstockVo bookstockVo) {
         bookstockVo.setDeletetime(new Date());
-        return bookstockService.deleteByBookstockKey(bookstockVo);
+        bookstockService.deleteByBookstockKey(bookstockVo);
+        return AjaxResponse.success(bookstockVo);
+    }
+
+    @PutMapping("/appByBookstockKey")
+    public AjaxResponse appByBookstockKey(@RequestBody @Valid BookstockVo bookstockVo) {
+        bookstockVo.setApptime(new Date());
+        bookstockVo.setCheckedby(1);
+        bookstockService.appByBookstockKey(bookstockVo);
+        return AjaxResponse.success(bookstockVo);
     }
 }
