@@ -68,4 +68,9 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
     public List<CourseDetailsVo> selectAllCourseDetails2() {
         return coursedetailsDao.selectAllCourseDetails2();
     }
+
+    @Override
+    public List<CourseDetailsVo> selectAllCourseDetails3(Integer courseId) {
+        return coursedetailsDao.selectAllCourseDetails3(courseId);
+    }
 }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.ShiftDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.ShiftVo">
+    <id column="Shift_Id" jdbcType="INTEGER" property="shiftId" />
+    <result column="Shift_Date" jdbcType="TIMESTAMP" property="shiftDate" />
+    <result column="Shift_Reason" jdbcType="VARCHAR" property="shiftReason" />
+    <result column="Shift_Handler" jdbcType="VARCHAR" property="shiftHandler" />
+    <result column="Approval" jdbcType="INTEGER" property="approval" />
+    <result column="JW_AppName" jdbcType="VARCHAR" property="jwAppname" />
+    <result column="JW_AppTime" jdbcType="TIMESTAMP" property="jwApptime" />
+    <result column="JW_DropNameApp" jdbcType="VARCHAR" property="jwDropnameapp" />
+    <result column="JW_DropTimeApp" jdbcType="TIMESTAMP" property="jwDroptimeapp" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Student_Id" jdbcType="INTEGER" property="studentId" />
+    <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
+    <result column="Classes_Id2" jdbcType="INTEGER" property="classesId2" />
+    <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
+      <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
+    </association>
+    <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <result column="Classes_Name" jdbcType="VARCHAR" property="classesName"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    Shift_Id, Shift_Date, Shift_Reason, Shift_Handler, Approval, JW_AppName, JW_AppTime, 
+    JW_DropNameApp, JW_DropTimeApp, AddTime, DeleteName, DeleteTime, TimeLiness, Student_Id, 
+    Classes_Id, Classes_Id2
+  </sql>
+  <select id="selectByShiftKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name
+    from shift s
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    where s.Shift_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+
+  <select id="selectByShiftStudentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name
+    from shift s
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    where s.Student_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+
+  <select id="selectByShiftClassesId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name
+    from shift s
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    where s.Classes_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+
+  <insert id="addShift" keyColumn="Shift_Id" keyProperty="shiftId" parameterType="com.trkj.trainingprojects.vo.ShiftVo" useGeneratedKeys="true">
+    insert into shift (Shift_Date, Shift_Reason, Shift_Handler, 
+      JW_AppName, JW_AppTime,
+      JW_DropNameApp, JW_DropTimeApp,
+      DeleteName, DeleteTime,
+      Student_Id, Classes_Id, Classes_Id2
+      )
+    values (#{shiftDate,jdbcType=TIMESTAMP}, #{shiftReason,jdbcType=VARCHAR}, #{shiftHandler,jdbcType=VARCHAR}, 
+      #{jwAppname,jdbcType=VARCHAR}, #{jwApptime,jdbcType=TIMESTAMP},
+      #{jwDropnameapp,jdbcType=VARCHAR}, #{jwDroptimeapp,jdbcType=TIMESTAMP},
+      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
+      #{studentId,jdbcType=INTEGER}, #{classesId,jdbcType=INTEGER}, #{classesId2,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByShiftKeySelective" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
+    update shift
+    <set>
+      <if test="shiftDate != null">
+        Shift_Date = #{shiftDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shiftReason != null">
+        Shift_Reason = #{shiftReason,jdbcType=VARCHAR},
+      </if>
+      <if test="shiftHandler != null">
+        Shift_Handler = #{shiftHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="approval != null">
+        Approval = #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="jwAppname != null">
+        JW_AppName = #{jwAppname,jdbcType=VARCHAR},
+      </if>
+      <if test="jwApptime != null">
+        JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jwDropnameapp != null">
+        JW_DropNameApp = #{jwDropnameapp,jdbcType=VARCHAR},
+      </if>
+      <if test="jwDroptimeapp != null">
+        JW_DropTimeApp = #{jwDroptimeapp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null">
+        Student_Id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="classesId != null">
+        Classes_Id = #{classesId,jdbcType=INTEGER},
+      </if>
+      <if test="classesId2 != null">
+        Classes_Id2 = #{classesId2,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Shift_Id = #{shiftId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByShiftKey" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
+    update shift
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Shift_Id = #{shiftId,jdbcType=INTEGER}
+  </update>
+</mapper>

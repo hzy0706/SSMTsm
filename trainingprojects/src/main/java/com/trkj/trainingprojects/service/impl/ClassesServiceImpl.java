@@ -68,4 +68,9 @@ public class ClassesServiceImpl implements ClassesService {
     public List<ClassesVo> selectAllClassesByState() {
         return classesDao.selectAllClassesByState();
     }
+
+    @Override
+    public List<ClassesVo> selectAllClassesByState2() {
+        return classesDao.selectAllClassesByState2();
+    }
 }
