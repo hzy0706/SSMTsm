@@ -91,10 +91,10 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-      outstanding_Id, outstanding_Number, AlongMoney, outstanding_Date,
-       UpdateName, UpdateTime, AddName, AddTime, DeleteName, DeleteTime,
-        TimeLiness, outstanding_State, ApprovalTime, ApprovalName, RevokeAppTime,
-         RevokeAppName, Register_Id, Student_Id, Fees_Id
+      sts.outstanding_Id, sts.outstanding_Number, sts.AlongMoney, sts.outstanding_Date,
+       sts.UpdateName, sts.UpdateTime, sts.AddName, sts.AddTime, sts.DeleteName, sts.DeleteTime,
+        sts.TimeLiness, sts.outstanding_State, sts.ApprovalTime, sts.ApprovalName, sts.RevokeAppTime,
+         sts.RevokeAppName, sts.Register_Id, sts.Student_Id, sts.Fees_Id
     </sql>
 
     <!--查询所有-->
