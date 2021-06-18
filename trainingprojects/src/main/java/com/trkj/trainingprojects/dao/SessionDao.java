@@ -54,7 +54,7 @@ public interface SessionDao {
 
      * @return 对象列表
      */
-    List<SessionVo> selectAll();
+    List<SessionVo> selectAllSession();
     /**
      *
      */

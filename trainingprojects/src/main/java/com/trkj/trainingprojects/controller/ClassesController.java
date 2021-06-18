@@ -68,4 +68,10 @@ public class ClassesController {
         return list;
     }
 
+    @GetMapping("/selectAllClassesByState2")
+    public List<ClassesVo> selectAllClassesByState2(){
+        List<ClassesVo> list = classesService.selectAllClassesByState2();
+        return list;
+    }
+
 }

@@ -24,7 +24,7 @@
     </select>
 
     <!-- 查询所有可用的-->
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAllSession" resultMap="BaseResultMap">
       select
           Session_Id, Session_Name, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness
         from `session`
@@ -32,13 +32,13 @@
     </select>
     <!--新增所有列-->
     <insert id="addSession" keyProperty="sessionId" useGeneratedKeys="true">
-        insert into tr01904.session(Session_Name, AddName, UpdateName, UpdateTime, DeleteName, DeleteTime)
+        insert into session(Session_Name, AddName, UpdateName, UpdateTime, DeleteName, DeleteTime)
         values (#{sessionName}, #{addname}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update tr01904.session
+        update session
         set
                 Session_Name = #{sessionName},
                 UpdateName = #{updatename},
@@ -49,7 +49,7 @@
     <update id="delSessionById">
         update session
         set
-        UpdateTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
+        DeleteTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
         where Session_Id = #{sessionId}
     </update>
 </mapper>

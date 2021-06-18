@@ -44,7 +44,7 @@ public interface UnitDao {
      * 查询所有
      *
      */
-    List<UnitVo> selectAll();
+    List<UnitVo> selectAllUnit();
 
     /**
      * 根据id删除

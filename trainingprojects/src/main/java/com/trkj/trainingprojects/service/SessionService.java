@@ -44,7 +44,7 @@ public interface SessionService {
 
      * @return 对象列表
      */
-    List<SessionVo> selectAll();
+    List<SessionVo> selectAllSession();
 
     /**
      * 根据id删除

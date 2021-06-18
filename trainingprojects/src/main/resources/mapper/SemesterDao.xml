@@ -31,12 +31,12 @@
     </select>
     <!--新增所有列-->
     <insert id="addSemesterALL">
-        insert into tr01904.semester(Semester_Name, AddName,UpdateName, UpdateTime, DeleteName, DeleteTime)
+        insert into semester(Semester_Name, AddName,UpdateName, UpdateTime, DeleteName, DeleteTime)
         values (#{semesterName}, #{addname}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime})
     </insert>
     <!--通过主键修改数据-->
     <update id="updateSemesterById">
-        update tr01904.semester
+        update semester
         set
                 Semester_Name = #{semesterName},
                 UpdateName = #{updatename},
@@ -47,7 +47,7 @@
     <update id="delSemesterById">
         update semester
         set
-        UpdateTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
+        DeleteTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
         where Semester_Id=#{semesterId}
 
     </update>

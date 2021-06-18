@@ -42,7 +42,7 @@ public interface UnitService {
      * 查询所有
      *
      */
-    List<UnitVo> selectAll();
+    List<UnitVo> selectAllUnit();
     /**
      * 删除
      */

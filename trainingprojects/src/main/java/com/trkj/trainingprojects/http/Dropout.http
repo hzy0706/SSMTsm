@@ -1,0 +1,47 @@
+PUT http://localhost:8080/Training/updateByDropoutKeySelective
+Content-Type: application/json
+
+{
+  "dropId": 1,
+  "studentId": 1,
+  "courseId": 1,
+  "coursedetailsId": 1,
+  "classesId": 1,
+  "dropReason": "测试002",
+  "dropHandler": "HZY",
+  "ispay": 1,
+  "jwApproval": 0,
+  "jwDropnameapp": "JFC"
+}
+
+###
+GET http://localhost:8080/Training/selectByDropoutKey/12
+Accept: application/json
+
+###
+
+POST http://localhost:8080/Training/addDropout
+Content-Type: application/json
+
+{
+  "studentId": 1,
+  "courseId": 1,
+  "coursedetailsId": 1,
+  "classesId": 1,
+  "dropReason": "测试001",
+  "dropHandler": "JFC",
+  "ispay": 0,
+  "jwApproval": 0
+}
+
+###
+PUT http://localhost:8080/Training/deleteByDropoutKey
+Content-Type: application/json
+
+{
+  "dropId": 1,
+  "deletename": "胡志远",
+  "timeliness": 1
+}
+
+###
