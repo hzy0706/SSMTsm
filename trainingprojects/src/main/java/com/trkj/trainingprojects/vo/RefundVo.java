@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -70,7 +71,7 @@ public class RefundVo {
      * 删除人
      */
     private String deletename;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     /**
      * 删除时间
      */

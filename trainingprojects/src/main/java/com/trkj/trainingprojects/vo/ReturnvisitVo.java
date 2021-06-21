@@ -19,7 +19,7 @@ import java.util.Date;
 public class ReturnvisitVo {
     private Integer returnvisitId;
     private String returnvisitmode;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date returnvisitdate;
     private String returncontent;
     private String returnvisitback;

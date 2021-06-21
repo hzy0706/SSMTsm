@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.RefundDao">
-  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.Refund">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.RefundVo">
     <id column="Refund_Id" jdbcType="INTEGER" property="refundId" />
     <result column="RefundType" jdbcType="VARCHAR" property="refundtype" />
     <result column="Drop_Money" jdbcType="DECIMAL" property="dropMoney" />
@@ -21,23 +21,61 @@
     <result column="Drop_Id" jdbcType="INTEGER" property="dropId" />
     <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
     <result column="CourseDetails_Id" jdbcType="INTEGER" property="coursedetailsId" />
+    <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <result column="Class_Name" jdbcType="VARCHAR" property="classesName" />
+    </association>
+    <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
+      <result column="Course_Name" jdbcType="VARCHAR" property="courseName" />
+    </association>
+    <association property="backVo" javaType="com.trkj.trainingprojects.vo.BackVo">
+      <result column="Intention" jdbcType="VARCHAR" property="intention" />
+    </association>
+    <association property="suspendeVo" javaType="com.trkj.trainingprojects.vo.SuspendeVo">
+      <result column="Suspende_Reason" jdbcType="VARCHAR" property="suspendeReason" />
+    </association>
+    <association property="dropoutVo" javaType="com.trkj.trainingprojects.vo.DropoutVo">
+      <result column="Drop_Reason" jdbcType="VARCHAR" property="dropReason" />
+    </association>
+    <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+      <result column="CourseDetails_Name" jdbcType="VARCHAR" property="coursedetailsName" />
+    </association>
+
+
   </resultMap>
   <sql id="Base_Column_List">
-    Refund_Id, RefundType, Drop_Money, CW_Approval, CW_AppTime, CW_AppName, CW_DropAppTime, 
-    CW_DropAppName, AddName, AddTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, 
-    Back_Id, Suspende_Id, Drop_Id, Course_Id, CourseDetails_Id
+    re.Refund_Id, re.RefundType, re.Drop_Money, re.CW_Approval, re.CW_AppTime, re.CW_AppName, re.CW_DropAppTime,
+    re.CW_DropAppName, re.AddName, re.AddTime, re.DeleteName, re.DeleteTime, re.TimeLiness, re.Classes_Id,
+    re.Back_Id, re.Suspende_Id, re.Drop_Id, re.Course_Id, re.CourseDetails_Id
   </sql>
   <select id="selectByRefundKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from Refund
-    where Refund_Id = #{refundId,jdbcType=INTEGER}
+    <include refid="Base_Column_List" />,cl.Class_Name,co.Course_Name,ba.Intention,s.Suspende_Reason,d.Drop_Reason,cd.CourseDetails_Name
+    from Refund re
+    inner join classes cl on cl.Classes_Id=re.Classes_Id
+    inner join course co on co.Course_Id=re.Course_Id
+    inner join back ba on ba.Back_Id=re.Back_Id
+    inner join suspende s on s.Suspende_Id=re.Suspende_Id
+    inner join dropout d on d.Drop_Id=re.Drop_Id
+    inner join courseDetailsvo cd on cd.CourseDetails_Id=re.CourseDetails_Id
+    where Refund_Id = #{refundId,jdbcType=INTEGER}and re.TimeLiness=0
   </select>
-  <delete id="updateByRefundKey" parameterType="java.lang.Integer">
-    delete from Refund
-    where Refund_Id = #{refundId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="Refund_Id" keyProperty="refundId" parameterType="com.trkj.trainingprojects.entity.Refund" useGeneratedKeys="true">
+
+  <select id="findRefund" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Class_Name,co.Course_Name,ba.Intention,s.Suspende_Reason,d.Drop_Reason,cd.CourseDetails_Name
+    from Refund re
+    inner join classes cl on cl.Classes_Id=re.Classes_Id
+    inner join course co on co.Course_Id=re.Course_Id
+    inner join back ba on ba.Back_Id=re.Back_Id
+    inner join suspende s on s.Suspende_Id=re.Suspende_Id
+    inner join dropout d on d.Drop_Id=re.Drop_Id
+    inner join courseDetailsvo cd on cd.CourseDetails_Id=re.CourseDetails_Id
+    where re.TimeLiness=0
+  </select>
+
+
+
+  <insert id="insert" keyColumn="Refund_Id" keyProperty="refundId" parameterType="com.trkj.trainingprojects.vo.RefundVo" useGeneratedKeys="true">
     insert into Refund (RefundType, Drop_Money, CW_Approval, 
       CW_AppTime, CW_AppName, CW_DropAppTime, 
       CW_DropAppName, AddName, AddTime, 
@@ -53,7 +91,7 @@
       #{dropId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{coursedetailsId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="Refund_Id" keyProperty="refundId" parameterType="com.trkj.trainingprojects.entity.Refund" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="Refund_Id" keyProperty="refundId" parameterType="com.trkj.trainingprojects.vo.RefundVo" useGeneratedKeys="true">
     insert into Refund
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="refundtype != null">
@@ -168,7 +206,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByRefundeySelective" parameterType="com.trkj.trainingprojects.entity.Refund">
+  <update id="updateByRefundKey" parameterType="com.trkj.trainingprojects.vo.RefundVo">
     update Refund
     <set>
       <if test="refundtype != null">
