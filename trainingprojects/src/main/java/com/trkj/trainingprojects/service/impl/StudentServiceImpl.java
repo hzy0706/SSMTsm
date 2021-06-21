@@ -76,6 +76,7 @@ public class StudentServiceImpl implements StudentService {
         studentstatusVo.setCourseId(Integer.valueOf(studentVo.getDeletename()));
         studentstatusVo.setAddname(studentVo.getAddname());
         studentstatusDao.insert(studentstatusVo);
+        studentDao.updateByStudentDelName(studentVo);
         return 0;
     }
 }

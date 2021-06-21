@@ -310,5 +310,13 @@
         delete from tr01904.student where Student_Id = #{studentId}
     </delete>
 
+    <!--修改删除人-->
+    <update id="updateByStudentDelName" parameterType="com.trkj.trainingprojects.entity.Student">
+        update tr01904.classtype
+        set
+          DeleteName = #{deletename}
+        where Student_Id = #{studentId}
+    </update>
+
 </mapper>
 
