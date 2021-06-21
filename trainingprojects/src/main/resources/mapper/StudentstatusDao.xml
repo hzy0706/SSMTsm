@@ -20,6 +20,7 @@
         <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
         <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
         <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
+        <result property="remarks" column="Remarks" jdbcType="VARCHAR"/>
         <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
             <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
             <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
@@ -64,12 +65,32 @@
             <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
             <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
         </association>
+        <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
+            <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
+            <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
+            <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
+            <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
+            <result property="commission" column="Commission" jdbcType="NUMERIC"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="stopname" column="StopName" jdbcType="VARCHAR"/>
+            <result property="stoptime" column="StopTime" jdbcType="TIMESTAMP"/>
+            <result property="beginname" column="BeginName" jdbcType="VARCHAR"/>
+            <result property="begintime" column="BeginTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">
       sts.StudentStatus_Id, sts.Status, sts.AllotType, sts.Approval, sts.AppName, sts.AppTime,
        sts.RevokeAppName, sts.RevokeAppTime, sts.AddName, sts.AddTime, sts.UpdateName, sts.UpdateTime,
-        sts.DeleteName, sts.DeleteTime, sts.TimeLiness, sts.Student_Id, sts.Classes_Id,sts.Course_Id
+        sts.DeleteName, sts.DeleteTime, sts.TimeLiness, sts.Student_Id, sts.Classes_Id,sts.Course_Id,sts.Remarks
     </sql>
 
     <sql id="Base_Student_List">
@@ -85,13 +106,19 @@
         c.DeleteTime, c.TimeLiness, c.ClassType_Id
     </sql>
 
+    <sql id="Base_Class_List">
+      cl.Classes_Id, cl.Classes_Name, cl.Classes_Open, cl.StartedDate, cl.EndDate, cl.LastDate,cl.ManyLessons,
+      cl.AddName, cl.ADDTIME, cl.UpdateName, cl.UpdateTime, cl.DeleteName, cl.DeleteTime, cl.TimeLiness,
+      cl.Course_Id, cl.Emp_Id, cl.Teacher_Id, cl.CourseDetails_Id
+    </sql>
+
     <!--查询所有-->
     <select id="selectAllStudentStatus" resultMap="StudentstatusMap">
         select
         <include refid="Base_Column_List" />,
         <include refid="Base_Student_List" />
         from tr01904.studentstatus sts
-        /*inner join classes cl on sts.Classes_Id=cl.Classes_Id*/
+        LEFT join classes cl on sts.Classes_Id=cl.Classes_Id
         inner join student st on stu.Student_Id=st.Student_Id
         where sts.TimeLiness = 0 order by StudentStatus_Id DESC
     </select>
@@ -101,9 +128,10 @@
         select
         <include refid="Base_Column_List" />,
         <include refid="Base_Student_List" />,
-        <include refid="Base_Course_List" />
+        <include refid="Base_Course_List" />,
+        <include refid="Base_Class_List" />
         from tr01904.studentstatus sts
-        /*inner join classes cl on sts.Classes_Id=cl.Classes_Id*/
+        LEFT join classes cl on sts.Classes_Id=cl.Classes_Id
         inner join student st on sts.Student_Id=st.Student_Id
         inner join course c on sts.Course_Id=c.Course_Id
         where sts.Student_Id = #{studentId} and sts.TimeLiness = 0
@@ -180,8 +208,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="studentstatusId" useGeneratedKeys="true">
-        insert into tr01904.studentstatus(Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id, Course_Id)
-        values (#{status}, #{allottype}, #{approval}, #{appname}, #{apptime}, #{revokeappname}, #{revokeapptime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{classesId}, #{courseId})
+        insert into tr01904.studentstatus(Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id, Course_Id, Remarks)
+        values (#{status}, #{allottype}, #{approval}, #{appname}, #{apptime}, #{revokeappname}, #{revokeapptime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{classesId}, #{courseId}, #{remarks})
     </insert>
 
     <insert id="insertBatch" keyProperty="studentstatusId" useGeneratedKeys="true">

@@ -88,6 +88,10 @@ public class StudentstatusVo {
      * 课程编号
      */
     private Integer courseId;
+    /**
+     * 备注
+     */
+    public String remarks;
 
     private CourseVo courseVo;
     private StudentVo studentVo;
