@@ -11,7 +11,7 @@ public class AjaxResponse {
 
 
     private boolean isSuccess;
-    private int code;   
+    private int code;
     private String message;
     private Object data;
 

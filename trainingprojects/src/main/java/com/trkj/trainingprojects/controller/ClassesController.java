@@ -74,4 +74,10 @@ public class ClassesController {
         return list;
     }
 
+    @PutMapping("/deleteByOpenClasses")
+    public AjaxResponse deleteByOpenClasses(@RequestBody @Valid ClassesVo classesVo){
+        classesService.deleteByOpenClasses(classesVo);
+        return AjaxResponse.success(classesVo);
+    }
+
 }

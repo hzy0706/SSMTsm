@@ -95,7 +95,7 @@ public class UnitVo{
     * 单位类型
     */
     private Integer unittypeId;
-    private String  UnitTypeName;
+    private String  unittypeName;
 
 
 

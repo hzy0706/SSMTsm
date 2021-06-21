@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ClassMeta(className = "班级表")
-@ToString(exclude = "empVo,courseList,courseDetailsList")
+@ToString(exclude = "empVo1,empVo2,courseList,courseDetailsList")
 public class ClassesVo {
     /**
      * 班级编号

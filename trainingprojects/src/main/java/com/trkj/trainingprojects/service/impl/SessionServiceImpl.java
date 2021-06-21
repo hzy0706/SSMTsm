@@ -34,8 +34,8 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     @Transactional
-    public List<SessionVo> selectAll() {
-        return this.sessionDao.selectAll();
+    public List<SessionVo> selectAllSession() {
+        return this.sessionDao.selectAllSession();
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface StudentstatusDao {
 
-    Studentstatus queryById(Integer studentstatusId);
+    List<StudentstatusVo> selectStudentStatusByStudentId(Integer studentstatusId);
 
     List<Studentstatus> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 

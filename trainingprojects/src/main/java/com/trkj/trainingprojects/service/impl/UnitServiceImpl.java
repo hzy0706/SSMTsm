@@ -31,8 +31,8 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public List<UnitVo> selectAll() {
-        return dao.selectAll();
+    public List<UnitVo> selectAllUnit() {
+        return dao.selectAllUnit();
     }
 
     @Override
