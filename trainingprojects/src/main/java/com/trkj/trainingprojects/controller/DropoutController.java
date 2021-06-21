@@ -18,7 +18,6 @@ public class DropoutController {
 
     @PostMapping("/addDropout")
     public AjaxResponse addDropout(@RequestBody @Valid DropoutVo dropoutVo){
-        System.out.println("-----------我在这"+dropoutVo.toString());
         dropoutService.addDropout(dropoutVo);
         return AjaxResponse.success(dropoutVo);
     }
@@ -42,18 +41,47 @@ public class DropoutController {
         return AjaxResponse.success(dropoutVo);
     }
 
-    @PutMapping("/deleteByDropoutKey/{ids}")
-    public AjaxResponse deleteByDropoutKey(@PathVariable("ids") String ids){
+    @PutMapping("/deleteByDropoutKey/{id}/{deleteName}")
+    public AjaxResponse deleteByDropoutKey(@PathVariable("id") String id,@PathVariable("deleteName") String deleteName){
         Date date = new Date();
-        String[] id= ids.split(",");
-        for (String s:id){
+        String[] ids= id.split(",");
+        for (String s:ids){
             DropoutVo dropoutVo = new DropoutVo();
+            dropoutVo.setDeletename(deleteName);
             dropoutVo.setDeletetime(date);
             dropoutVo.setTimeliness(1);
             dropoutVo.setDropId(Integer.parseInt(s));
             dropoutService.deleteByDropoutKey(dropoutVo);
         }
-        return AjaxResponse.success(id);
+        return AjaxResponse.success(ids);
+    }
+
+    @PutMapping("/updateByJwApprovalDropoutKey")
+    public AjaxResponse updateByJwApprovalDropoutKey(@RequestBody @Valid DropoutVo dropoutVo){
+        dropoutVo.setJwApptime(new Date());
+        dropoutService.updateByJwApprovalDropoutKey(dropoutVo);
+        return AjaxResponse.success(dropoutVo);
+    }
+
+    @PutMapping("/updateByJwApprovalDropoutKey2")
+    public AjaxResponse updateByJwApprovalDropoutKey2(@RequestBody @Valid DropoutVo dropoutVo){
+        dropoutVo.setJwDroptimeapp(new Date());
+        dropoutService.updateByJwApprovalDropoutKey2(dropoutVo);
+        return AjaxResponse.success(dropoutVo);
+    }
+
+    @PutMapping("/updateByJwApprovalDropoutKey3")
+    public AjaxResponse updateByJwApprovalDropoutKey3(@RequestBody @Valid DropoutVo dropoutVo){
+        dropoutVo.setDropDate(new Date());
+        dropoutService.updateByJwApprovalDropoutKey3(dropoutVo);
+        return AjaxResponse.success(dropoutVo);
+    }
+
+    @PutMapping("/updateByJwApprovalDropoutKey4")
+    public AjaxResponse updateByJwApprovalDropoutKey4(@RequestBody @Valid DropoutVo dropoutVo){
+        dropoutVo.setDeletetime(new Date());
+        dropoutService.updateByJwApprovalDropoutKey4(dropoutVo);
+        return AjaxResponse.success(dropoutVo);
     }
 
 

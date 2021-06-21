@@ -25,4 +25,12 @@ public interface DropoutDao {
     List<DropoutVo> selectByDropoutClassesId(Integer classesId);
 
     List<DropoutVo> selectAllDropouts();
+
+    int updateByJwApprovalDropoutKey(DropoutVo record);
+
+    int updateByJwApprovalDropoutKey2(DropoutVo record);
+
+    int updateByJwApprovalDropoutKey3(DropoutVo record);
+
+    int updateByJwApprovalDropoutKey4(DropoutVo record);
 }

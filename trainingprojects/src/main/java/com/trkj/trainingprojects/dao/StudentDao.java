@@ -36,5 +36,7 @@ public interface StudentDao {
 
     List<StudentVo> selectAllStudent();
 
+    List<StudentVo> SelectStudentByState2(Integer classesId);
+
 }
 

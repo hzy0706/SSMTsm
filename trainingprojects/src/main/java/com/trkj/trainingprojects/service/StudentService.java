@@ -27,4 +27,5 @@ public interface StudentService {
 
     public List<StudentVo> selectAllStudent();
     public int addStudents(StudentVo studentVo);
+    List<StudentVo> SelectStudentByState2(Integer classesId);
 }
