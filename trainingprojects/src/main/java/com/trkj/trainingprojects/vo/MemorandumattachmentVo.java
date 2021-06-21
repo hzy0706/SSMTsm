@@ -29,6 +29,7 @@ public class MemorandumattachmentVo {
     private String jwrevokename;
     private Integer registerId;
     private RegisterVo registerVo;
+    private Integer jjexamine;
 
     private static final long serialVersionUID = 1L;
 }
