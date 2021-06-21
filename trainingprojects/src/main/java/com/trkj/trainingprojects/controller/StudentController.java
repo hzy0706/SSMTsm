@@ -42,6 +42,12 @@ public class StudentController {
         return list;
     }
 
+    @GetMapping("/SelectStudentByState2/{classesId}")
+    public List<StudentVo> SelectStudentByState2(@PathVariable("classesId") String classesId){
+        List<StudentVo> list = studentService.SelectStudentByState2(Integer.parseInt(classesId));
+        return list;
+    }
+
     @GetMapping("/selectAllStudent")
     public PageInfo<StudentVo> selectAllStudent(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);

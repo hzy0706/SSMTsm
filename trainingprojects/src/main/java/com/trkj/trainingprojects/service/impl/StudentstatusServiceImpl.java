@@ -16,8 +16,8 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     @Resource
     private StudentstatusDao studentstatusDao;
     @Override
-    public Studentstatus queryById(Integer studentstatusId) {
-        return null;
+    public List<StudentstatusVo> selectStudentStatusByStudentId(Integer studentstatusId) {
+        return studentstatusDao.selectStudentStatusByStudentId(studentstatusId);
     }
 
     @Override

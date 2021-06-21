@@ -4,6 +4,7 @@ import com.trkj.trainingprojects.dao.StudentDao;
 import com.trkj.trainingprojects.dao.StudentstatusDao;
 import com.trkj.trainingprojects.entity.Student;
 import com.trkj.trainingprojects.service.StudentService;
+import com.trkj.trainingprojects.vo.CourseDetailsVo;
 import com.trkj.trainingprojects.vo.StudentVo;
 import com.trkj.trainingprojects.vo.StudentstatusVo;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentVo> selectAllStudent() {
         return studentDao.selectAllStudent();
+    }
+
+    @Override
+    public List<StudentVo> SelectStudentByState2(Integer classesId) {
+        return studentDao.SelectStudentByState2(classesId);
     }
 
     @Override
