@@ -19,6 +19,7 @@
         <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
         <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
         <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+        <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
         <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
             <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
             <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
@@ -68,25 +69,44 @@
     <sql id="Base_Column_List">
       sts.StudentStatus_Id, sts.Status, sts.AllotType, sts.Approval, sts.AppName, sts.AppTime,
        sts.RevokeAppName, sts.RevokeAppTime, sts.AddName, sts.AddTime, sts.UpdateName, sts.UpdateTime,
-        sts.DeleteName, sts.DeleteTime, sts.TimeLiness, sts.Student_Id, sts.Classes_Id
+        sts.DeleteName, sts.DeleteTime, sts.TimeLiness, sts.Student_Id, sts.Classes_Id,sts.Course_Id
+    </sql>
+
+    <sql id="Base_Student_List">
+        st.Student_Id, st.Student_Name, st.Student_State, st.Sex, st.Student_Phone,
+         st.Address, st.ImgAddress, st.ParentName, st.ParentPhone, LPAD(st.Student_Number,7,'0') Student_Number,
+          st.Entrance, st.StudyTime, st.AddName, st.ADDTIME, st.UpdateName, st.UpdateTime, st.DeleteName, st.DeleteTime,
+           st.TimeLiness, st.Classes_Id, st.Source_Id, st.Register_Id
+    </sql>
+
+    <sql id="Base_Course_List">
+      c.Course_Id, c.Course_Name, c.Course_State, c.Classhours, c.Course_Money, c.Commission, c.AddName,
+       c.ADDTIME, c.UpdateName, c.UpdateTime, c.StopName, c.StopTime, c.BeginName, c.BeginTime, c.DeleteName,
+        c.DeleteTime, c.TimeLiness, c.ClassType_Id
     </sql>
 
     <!--查询所有-->
     <select id="selectAllStudentStatus" resultMap="StudentstatusMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,
+        <include refid="Base_Student_List" />
         from tr01904.studentstatus sts
         /*inner join classes cl on sts.Classes_Id=cl.Classes_Id*/
-        inner join student stu on stu.Student_Id=sts.Student_Id
+        inner join student st on stu.Student_Id=st.Student_Id
         where sts.TimeLiness = 0 order by StudentStatus_Id DESC
     </select>
 
     <!--查询单个-->
     <select id="selectStudentStatusByStudentId" resultMap="StudentstatusMap">
         select
-          StudentStatus_Id, Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id
-        from tr01904.studentstatus
-        where Student_Id = #{studentId} and TimeLiness = 0
+        <include refid="Base_Column_List" />,
+        <include refid="Base_Student_List" />,
+        <include refid="Base_Course_List" />
+        from tr01904.studentstatus sts
+        /*inner join classes cl on sts.Classes_Id=cl.Classes_Id*/
+        inner join student st on sts.Student_Id=st.Student_Id
+        inner join course c on sts.Course_Id=c.Course_Id
+        where sts.Student_Id = #{studentId} and sts.TimeLiness = 0
     </select>
 
     <!--查询指定行数据-->
@@ -160,8 +180,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="studentstatusId" useGeneratedKeys="true">
-        insert into tr01904.studentstatus(Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id)
-        values (#{status}, #{allottype}, #{approval}, #{appname}, #{apptime}, #{revokeappname}, #{revokeapptime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{classesId})
+        insert into tr01904.studentstatus(Status, AllotType, Approval, AppName, AppTime, RevokeAppName, RevokeAppTime, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Classes_Id, Course_Id)
+        values (#{status}, #{allottype}, #{approval}, #{appname}, #{apptime}, #{revokeappname}, #{revokeapptime}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{classesId}, #{courseId})
     </insert>
 
     <insert id="insertBatch" keyProperty="studentstatusId" useGeneratedKeys="true">

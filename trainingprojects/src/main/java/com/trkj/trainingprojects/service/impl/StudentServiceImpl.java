@@ -67,6 +67,7 @@ public class StudentServiceImpl implements StudentService {
         studentstatusVo.setApproval(0);
         studentstatusVo.setAddtime(date);
         studentstatusVo.setTimeliness(0);
+        studentstatusVo.setCourseId(Integer.valueOf(studentVo.getDeletename()));
         studentstatusVo.setAddname(studentVo.getAddname());
         studentstatusDao.insert(studentstatusVo);
         return 0;

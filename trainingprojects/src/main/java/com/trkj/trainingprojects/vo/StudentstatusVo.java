@@ -84,7 +84,12 @@ public class StudentstatusVo {
      * 班级编号
      */
     private Integer classesId;
+    /**
+     * 课程编号
+     */
+    private Integer courseId;
 
+    private CourseVo courseVo;
     private StudentVo studentVo;
     private ClassesVo classesVo;
     private static final long serialVersionUID = 1L;
