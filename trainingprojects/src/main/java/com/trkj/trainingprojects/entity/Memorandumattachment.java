@@ -30,6 +30,7 @@ public class Memorandumattachment implements Serializable {
     private String jwrevokename;
     private Integer registerId;
     private Register register;
+    private Integer jjexamine;
 
     private static final long serialVersionUID = 1L;
 }
