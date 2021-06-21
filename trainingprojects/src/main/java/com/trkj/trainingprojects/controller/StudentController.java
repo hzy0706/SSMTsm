@@ -43,8 +43,8 @@ public class StudentController {
     }
 
     @GetMapping("/SelectStudentByState2/{classesId}")
-    public List<StudentVo> SelectStudentByState2(@PathVariable("classesId") String classesId){
-        List<StudentVo> list = studentService.SelectStudentByState2(Integer.parseInt(classesId));
+    public List<StudentVo> SelectStudentByState2(@PathVariable("classesId") int classesId){
+        List<StudentVo> list = studentService.SelectStudentByState2(classesId);
         return list;
     }
 

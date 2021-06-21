@@ -80,4 +80,10 @@ public class ClassesController {
         return AjaxResponse.success(classesVo);
     }
 
+    @GetMapping("/selectAllClassesByState/{id}")
+    public List<ClassesVo> selectClassesById(@PathVariable("id") int id){
+        List<ClassesVo> list = classesService.selectClassesById(id);
+        return list;
+    }
+
 }

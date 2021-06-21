@@ -135,7 +135,7 @@
         select
           Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id
         from tr01904.classes
-        where Classes_Id = #{classesId}
+        where Course_Id = #{courseId}
     </select>
 
     <!--查询指定行数据-->

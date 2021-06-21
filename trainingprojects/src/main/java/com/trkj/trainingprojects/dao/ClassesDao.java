@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface ClassesDao {
 
-    Classes queryById(Integer classesId);
+    List<ClassesVo> queryById(Integer courseId);
 
     List<Classes> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
