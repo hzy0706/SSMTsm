@@ -268,24 +268,10 @@
   </update>
   <update id="deleteByRefundKey" parameterType="com.trkj.trainingprojects.entity.Refund">
     update Refund
-    set RefundType = #{refundtype,jdbcType=VARCHAR},
-      Drop_Money = #{dropMoney,jdbcType=DECIMAL},
-      CW_Approval = #{cwApproval,jdbcType=INTEGER},
-      CW_AppTime = #{cwApptime,jdbcType=TIMESTAMP},
-      CW_AppName = #{cwAppname,jdbcType=VARCHAR},
-      CW_DropAppTime = #{cwDropapptime,jdbcType=TIMESTAMP},
-      CW_DropAppName = #{cwDropappname,jdbcType=VARCHAR},
-      AddName = #{addname,jdbcType=VARCHAR},
-      AddTime = #{addtime,jdbcType=TIMESTAMP},
+    set
       DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
-      TimeLiness = #{timeliness,jdbcType=INTEGER},
-      Classes_Id = #{classesId,jdbcType=INTEGER},
-      Back_Id = #{backId,jdbcType=INTEGER},
-      Suspende_Id = #{suspendeId,jdbcType=INTEGER},
-      Drop_Id = #{dropId,jdbcType=INTEGER},
-      Course_Id = #{courseId,jdbcType=INTEGER},
-      CourseDetails_Id = #{coursedetailsId,jdbcType=INTEGER}
+      TimeLiness = 1
     where Refund_Id = #{refundId,jdbcType=INTEGER}
   </update>
 </mapper>
