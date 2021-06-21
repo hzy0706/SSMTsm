@@ -96,6 +96,16 @@
         where st.TimeLiness = 0 order by st.Student_Number ASC
     </select>
 
+    <select id="SelectStudentByState2" resultMap="StudentMap">
+        select
+        <include refid="Base_Column_List" />
+        from tr01904.student st
+        /*inner join classes cl on st.Classes_Id=cl.Classes_Id*/
+        inner join register re on st.Register_Id=re.Register_Id
+        inner join source so on st.Source_Id=so.Source_Id
+        where st.TimeLiness = 0 and st.Classes_Id = #{Classes_Id}
+    </select>
+
     <!--查询单个-->
     <select id="SelectStudentByClassId" resultMap="StudentMap">
         select

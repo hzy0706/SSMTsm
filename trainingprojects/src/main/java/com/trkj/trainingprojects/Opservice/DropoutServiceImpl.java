@@ -61,4 +61,28 @@ public class DropoutServiceImpl implements DropoutService {
     public List<DropoutVo> selectAllDropouts() {
         return dropoutDao.selectAllDropouts();
     }
+
+    @Override
+    @Transactional
+    public int updateByJwApprovalDropoutKey(DropoutVo record) {
+        return dropoutDao.updateByJwApprovalDropoutKey(record);
+    }
+
+    @Override
+    @Transactional
+    public int updateByJwApprovalDropoutKey2(DropoutVo record) {
+        return dropoutDao.updateByJwApprovalDropoutKey2(record);
+    }
+
+    @Override
+    @Transactional
+    public int updateByJwApprovalDropoutKey3(DropoutVo record) {
+        return dropoutDao.updateByJwApprovalDropoutKey3(record);
+    }
+
+    @Override
+    @Transactional
+    public int updateByJwApprovalDropoutKey4(DropoutVo record) {
+        return dropoutDao.updateByJwApprovalDropoutKey4(record);
+    }
 }

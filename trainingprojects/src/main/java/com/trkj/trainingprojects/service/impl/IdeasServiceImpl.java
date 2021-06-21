@@ -33,7 +33,6 @@ public class IdeasServiceImpl implements IdeasService {
     @Override
     @Transactional
     public int deleteByIdeasKey(IdeasVo record) {
-        System.out.println(record.toString());
         return ideasDao.updateByIdeasKey(record);
     }
 

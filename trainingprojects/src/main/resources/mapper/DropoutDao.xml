@@ -183,4 +183,37 @@
       TimeLiness = #{timeliness,jdbcType=INTEGER}
     where Drop_Id = #{dropId,jdbcType=INTEGER}
   </update>
+  <update id="updateByJwApprovalDropoutKey4" parameterType="com.trkj.trainingprojects.vo.DropoutVo">
+    update dropout
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Drop_Id = #{dropId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByJwApprovalDropoutKey" parameterType="com.trkj.trainingprojects.vo.DropoutVo">
+    update dropout
+    set
+      JW_AppName = #{jwAppname,jdbcType=VARCHAR},
+      JW_Approval = #{jwApproval,jdbcType=INTEGER},
+      JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP}
+    where Drop_Id = #{dropId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByJwApprovalDropoutKey2" parameterType="com.trkj.trainingprojects.vo.DropoutVo">
+    update dropout
+    set
+      isPay = #{ispay,jdbcType=INTEGER},
+      JW_DropNameApp = #{jwDropnameapp,jdbcType=VARCHAR},
+      JW_Approval = #{jwApproval,jdbcType=INTEGER},
+      JW_DropTimeApp = #{jwDroptimeapp,jdbcType=TIMESTAMP}
+    where Drop_Id = #{dropId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByJwApprovalDropoutKey3" parameterType="com.trkj.trainingprojects.vo.DropoutVo">
+    update dropout
+    set
+      isPay = #{ispay,jdbcType=INTEGER},
+      Drop_Date = #{dropDate,jdbcType=TIMESTAMP}
+    where Drop_Id = #{dropId,jdbcType=INTEGER}
+  </update>
+
 </mapper>
