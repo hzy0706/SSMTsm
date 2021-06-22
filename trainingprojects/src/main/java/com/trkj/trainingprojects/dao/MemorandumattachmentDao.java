@@ -29,4 +29,8 @@ public interface MemorandumattachmentDao {
     int updateZsName(MemorandumattachmentVo memorandumattachmentVo);
     //    撤销审核
     int updateZsChName(MemorandumattachmentVo memorandumattachmentVo);
+//    交接状态
+    List<MemorandumattachmentVo> findJjexamine();
+
+    List<MemorandumattachmentVo> findMemorandumattachmentKey();
 }

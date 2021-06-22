@@ -48,8 +48,9 @@
      r.TimeLiness, r.Source_Id, r.Course_Id, r.Emp_Id
     from memorandumattachment m
     inner join register r on m.Register_Id=r.Register_Id
-    where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}
+    where m.MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}and m.jjexamine=1
   </select>
+<!--  主表交接状态为1-->
   <select id="findMemorandumattachment" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />,r.Register_Id, r.ConsultAnt, r.Sex,
@@ -58,6 +59,29 @@
     r.TimeLiness, r.Source_Id, r.Course_Id, r.Emp_Id
     from memorandumattachment m
     inner join register r on m.Register_Id=r.Register_Id
+    where m.jjexamine=1
+  </select>
+<!--  弹窗显示为0交接状态-->
+  <select id="findMemorandumattachmentKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,r.Register_Id, r.ConsultAnt, r.Sex,
+    r.Phone, r.AttentState, r.PayState, r.ConsultContent, r.AddName,
+    r.ADDTIME, r.UpdateName, r.UpdateTime, r.DeleteName, r.DeleteTime,
+    r.TimeLiness, r.Source_Id, r.Course_Id, r.Emp_Id
+    from memorandumattachment m
+    inner join register r on m.Register_Id=r.Register_Id
+    where m.jjexamine=0
+  </select>
+<!--  根据交接状态显示-->
+  <select id="findJjexamine" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,r.Register_Id,  r.ConsultAnt, r.Sex,
+    r.Phone, r.AttentState, r.PayState, r.ConsultContent, r.AddName,
+    r.ADDTIME, r.UpdateName, r.UpdateTime, r.DeleteName, r.DeleteTime,
+    r.TimeLiness, r.Source_Id, r.Course_Id, r.Emp_Id
+    from memorandumattachment m
+    inner join register r on m.Register_Id=r.Register_Id
+    where jjexamine=0
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
