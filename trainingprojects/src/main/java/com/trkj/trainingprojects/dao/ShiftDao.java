@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.dao;
 
+import com.trkj.trainingprojects.vo.DropoutVo;
 import com.trkj.trainingprojects.vo.ShiftVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,7 +17,14 @@ public interface ShiftDao {
 
     int updateByShiftKey(ShiftVo record);
 
+    List<ShiftVo> selectAllShifts();
+
     List<ShiftVo> selectByShiftStudentId(Integer studentId);
 
     List<ShiftVo> selectByShiftClassesId(Integer classesId);
+
+    int updateByTypeShiftKey2(ShiftVo record);
+
+    int updateByTypeShiftKey3(ShiftVo record);
+
 }

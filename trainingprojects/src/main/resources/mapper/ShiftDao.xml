@@ -22,39 +22,57 @@
       <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
     </association>
     <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <id column="Classes_Id" jdbcType="INTEGER" property="classesId" />
       <result column="Classes_Name" jdbcType="VARCHAR" property="classesName"/>
+    </association>
+    <association property="classesVo2" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <id column="Classes_Id2" jdbcType="INTEGER" property="classesId" />
+      <result column="Classes_Name2" jdbcType="VARCHAR" property="classesName"/>
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    Shift_Id, Shift_Date, Shift_Reason, Shift_Handler, Approval, JW_AppName, JW_AppTime, 
-    JW_DropNameApp, JW_DropTimeApp, AddTime, DeleteName, DeleteTime, TimeLiness, Student_Id, 
-    Classes_Id, Classes_Id2
+    s.Shift_Id, s.Shift_Date, s.Shift_Reason, s.Shift_Handler, s.Approval, s.JW_AppName, s.JW_AppTime,
+    s.JW_DropNameApp, s.JW_DropTimeApp, s.AddTime, s.DeleteName, s.DeleteTime, s.TimeLiness, s.Student_Id,
+    s.Classes_Id, s.Classes_Id2
   </sql>
   <select id="selectByShiftKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
     where s.Shift_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
 
   <select id="selectByShiftStudentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
     where s.Student_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
 
   <select id="selectByShiftClassesId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
     where s.Classes_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+
+  <select id="selectAllShifts" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name Classes_Name2,cl.Classes_Id Classes_Id2,cl2.Classes_Id
+    from shift s
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
+    where s.TimeLiness=0
   </select>
 
   <insert id="addShift" keyColumn="Shift_Id" keyProperty="shiftId" parameterType="com.trkj.trainingprojects.vo.ShiftVo" useGeneratedKeys="true">
@@ -128,6 +146,22 @@
       DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
       TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Shift_Id = #{shiftId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByTypeShiftKey2" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
+    update shift
+    set
+      JW_AppName = #{jwAppname,jdbcType=VARCHAR},
+      Approval = #{approval,jdbcType=INTEGER},
+      JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP}
+    where Shift_Id = #{shiftId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByTypeShiftKey3" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
+    update shift
+    set
+      JW_DropNameApp = #{jwDropnameapp,jdbcType=VARCHAR},
+      Approval = #{approval,jdbcType=INTEGER},
+      JW_DropTimeApp = #{jwDroptimeapp,jdbcType=TIMESTAMP}
     where Shift_Id = #{shiftId,jdbcType=INTEGER}
   </update>
 </mapper>

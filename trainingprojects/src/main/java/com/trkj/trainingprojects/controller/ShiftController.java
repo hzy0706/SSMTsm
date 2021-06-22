@@ -1,12 +1,11 @@
 package com.trkj.trainingprojects.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.Opservice.ShiftService;
-import com.trkj.trainingprojects.dao.ShiftDao;
-import com.trkj.trainingprojects.entity.Shift;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.DropoutVo;
 import com.trkj.trainingprojects.vo.ShiftVo;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,6 +29,14 @@ public class ShiftController {
         return shiftService.selectByShiftKey(id);
     }
 
+    @GetMapping("/selectAllShifts")
+    public PageInfo<ShiftVo> selectAllShifts(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        List<ShiftVo> list = shiftService.selectAllShifts();
+        PageInfo<ShiftVo> pageInfo = new PageInfo<>(list);
+        return  pageInfo;
+    }
+
     @PutMapping("/updateByShiftKeySelective")
     public AjaxResponse updateByShiftKeySelective(@RequestBody @Valid ShiftVo shiftVo){
         shiftService.updateByShiftKeySelective(shiftVo);
@@ -48,5 +55,19 @@ public class ShiftController {
             shiftService.deleteByShiftKey(shiftVo);
         }
         return AjaxResponse.success(id);
+    }
+
+    @PutMapping("/updateByTypeShiftKey2")
+    public AjaxResponse updateByTypeShiftKey2(@RequestBody @Valid ShiftVo shiftVo){
+        shiftVo.setJwApptime(new Date());
+        shiftService.updateByTypeShiftKey2(shiftVo);
+        return AjaxResponse.success(shiftVo);
+    }
+
+    @PutMapping("/updateByTypeShiftKey3")
+    public AjaxResponse updateByTypeShiftKey3(@RequestBody @Valid ShiftVo shiftVo){
+        shiftVo.setJwDroptimeapp(new Date());
+        shiftService.updateByTypeShiftKey3(shiftVo);
+        return AjaxResponse.success(shiftVo);
     }
 }
