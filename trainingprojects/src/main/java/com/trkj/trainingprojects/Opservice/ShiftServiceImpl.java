@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.Opservice;
 
 import com.trkj.trainingprojects.dao.ShiftDao;
+import com.trkj.trainingprojects.vo.DropoutVo;
 import com.trkj.trainingprojects.vo.ShiftVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,11 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
+    public List<ShiftVo> selectAllShifts() {
+        return shiftDao.selectAllShifts();
+    }
+
+    @Override
     public List<ShiftVo> selectByShiftStudentId(Integer studentId) {
         return shiftDao.selectByShiftStudentId(studentId);
     }
@@ -44,5 +50,17 @@ public class ShiftServiceImpl implements ShiftService {
     @Override
     public List<ShiftVo> selectByShiftClassesId(Integer classesId) {
         return shiftDao.selectByShiftClassesId(classesId);
+    }
+
+    @Override
+    @Transactional
+    public int updateByTypeShiftKey2(ShiftVo record) {
+        return shiftDao.updateByTypeShiftKey2(record);
+    }
+
+    @Override
+    @Transactional
+    public int updateByTypeShiftKey3(ShiftVo record) {
+        return shiftDao.updateByTypeShiftKey3(record);
     }
 }
