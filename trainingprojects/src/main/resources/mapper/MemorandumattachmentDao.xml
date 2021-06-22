@@ -14,6 +14,7 @@
     <result column="JWRevokeTime" jdbcType="TIMESTAMP" property="jwrevoketime" />
     <result column="JWRevokeName" jdbcType="VARCHAR" property="jwrevokename" />
     <result column="Register_Id" jdbcType="INTEGER" property="registerId" />
+    <result column="JJExamine" jdbcType="INTEGER" property="jjexamine" />
     <association property="registerVo" javaType="com.trkj.trainingprojects.vo.RegisterVo">
       <id column="Register_Id" jdbcType="INTEGER" property="registerId" />
       <result column="ConsultAnt" jdbcType="VARCHAR" property="consultant" />
@@ -37,7 +38,7 @@
   <sql id="Base_Column_List">
     m.MemorandumAttachment_Id, m.ZSIsExamine, m.ZSExamineTime, m.ZSExamineName, m.ZSRevokeTime,
     m.ZSRevokeName, m.JWIsExamine, m.JWExamineTime, m.JWExamineName, m.JWRevokeTime, m.JWRevokeName,
-    m.Register_Id
+    m.Register_Id,m.JJExamine
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -68,11 +69,11 @@
     insert into tr01904.memorandumattachment (ZSIsExamine, ZSExamineTime, ZSExamineName,
       ZSRevokeTime, ZSRevokeName, JWIsExamine, 
       JWExamineTime, JWExamineName, JWRevokeTime, 
-      JWRevokeName, Register_Id)
+      JWRevokeName, Register_Id,JJExamine)
     values (#{zsisexamine,jdbcType=INTEGER}, #{zsexaminetime,jdbcType=TIMESTAMP}, #{zsexaminename,jdbcType=VARCHAR}, 
       #{zsrevoketime,jdbcType=TIMESTAMP}, #{zsrevokename,jdbcType=VARCHAR}, #{jwisexamine,jdbcType=INTEGER}, 
       #{jwexaminetime,jdbcType=TIMESTAMP}, #{jwexaminename,jdbcType=VARCHAR}, #{jwrevoketime,jdbcType=TIMESTAMP}, 
-      #{jwrevokename,jdbcType=VARCHAR}, #{registerId,jdbcType=INTEGER})
+      #{jwrevokename,jdbcType=VARCHAR}, #{registerId,jdbcType=INTEGER},#{jjexamine,jdbcType=INTEGER})
   </insert>
 
   <insert id="insertSelective" keyColumn="MemorandumAttachment_Id" keyProperty="memorandumattachmentId" parameterType="com.trkj.trainingprojects.entity.Memorandumattachment" useGeneratedKeys="true">
@@ -111,6 +112,9 @@
       <if test="registerId != null">
         Register_Id,
       </if>
+      <if test="jjeaxmine != null">
+        JJEaxmine,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="zsisexamine != null">
@@ -145,6 +149,9 @@
       </if>
       <if test="registerId != null">
         #{registerId,jdbcType=INTEGER},
+      </if>
+      <if test="jjexamine != null">
+        #{jjexamine,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -184,6 +191,9 @@
       </if>
       <if test="registerId != null">
         Register_Id = #{registerId,jdbcType=INTEGER},
+      </if>
+      <if test="jjexamine != null">
+        JJExamine = #{jjexamine,jdbcType=INTEGER},
       </if>
     </set>
     where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}

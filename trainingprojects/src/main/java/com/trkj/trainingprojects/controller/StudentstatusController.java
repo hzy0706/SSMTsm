@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,5 +47,11 @@ public class StudentstatusController {
         studentstatusService.addStudentStatus(studentstatusVo);
         return AjaxResponse.success(studentstatusVo);
     }*/
+
+    @PutMapping("/updateByStudentStatus")
+    public AjaxResponse updateByStudentStatus(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        studentstatusService.updateByStudentStatus(studentstatusVo);
+        return  AjaxResponse.success(studentstatusVo);
+    }
 
 }

@@ -63,6 +63,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int updateByStudent(StudentVo studentVo) {
+        return studentDao.updateByStudent(studentVo);
+    }
+
+    @Override
     @Transactional
     public int addStudents(StudentVo studentVo) {
         studentDao.insert(studentVo);
@@ -73,8 +78,10 @@ public class StudentServiceImpl implements StudentService {
         studentstatusVo.setApproval(0);
         studentstatusVo.setAddtime(date);
         studentstatusVo.setTimeliness(0);
+        studentstatusVo.setCourseId(Integer.valueOf(studentVo.getDeletename()));
         studentstatusVo.setAddname(studentVo.getAddname());
         studentstatusDao.insert(studentstatusVo);
+        studentDao.updateByStudentDelName(studentVo);
         return 0;
     }
 }

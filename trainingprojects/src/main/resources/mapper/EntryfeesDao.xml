@@ -96,14 +96,33 @@
          e.ApprovalName, e.RevokeAppTime, e.RevokeAppName, e.Register_Id, e.Student_Id, e.Course_Id
     </sql>
 
+    <sql id="Base_Student_List">
+        st.Student_Id, st.Student_Name, st.Student_State, st.Sex, st.Student_Phone,
+         st.Address, st.ImgAddress, st.ParentName, st.ParentPhone, LPAD(st.Student_Number,7,'0') Student_Number,
+          st.Entrance, st.StudyTime, st.AddName, st.ADDTIME, st.UpdateName, st.UpdateTime, st.DeleteName, st.DeleteTime,
+           st.TimeLiness, st.Classes_Id, st.Source_Id, st.Register_Id
+    </sql>
+
+    <sql id="Base_Course_List">
+      c.Course_Id, c.Course_Name, c.Course_State, c.Classhours, c.Course_Money, c.Commission, c.AddName,
+       c.ADDTIME, c.UpdateName, c.UpdateTime, c.StopName, c.StopTime, c.BeginName, c.BeginTime, c.DeleteName,
+        c.DeleteTime, c.TimeLiness, c.ClassType_Id
+    </sql>
+
     <!--查询所有-->
     <select id="selectAllEntryFees" resultMap="EntryfeesMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,
+        <include refid="Base_Student_List" />,
+        <include refid="Base_Course_List" />,
+        r.Register_Id, r.ConsultAnt, r.Sex, r.Phone, r.AttentState, r.PayState,
+        r.ConsultContent, r.AddName,r.ADDTIME, r.UpdateName, r.UpdateTime,
+        r.DeleteName, r.DeleteTime, r.TimeLiness, r.Source_Id, r.Course_Id,
+        r.Emp_Id
         from entryfees e
         inner join register r on e.Register_Id=r.Register_Id
-        inner join student s on e.Student_Id=s.Student_Id
-        inner join course co on e.Course_Id=co.Course_Id
+        inner join student st on e.Student_Id=st.Student_Id
+        inner join course c on e.Course_Id=c.Course_Id
         where e.TimeLiness = 0 order by e.Fees_Id DESC
     </select>
 

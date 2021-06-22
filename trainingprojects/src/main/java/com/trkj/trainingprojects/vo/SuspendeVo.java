@@ -8,93 +8,112 @@ import lombok.ToString;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
-
 @Validated
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@ClassMeta(className = "学员分班表")
-@ToString(exclude = "studentVo,classesVo")
-public class StudentstatusVo {
+@ClassMeta(className = "停课表")
+@ToString(exclude = "studentVo,courseVo,courseDetailsVo,classesVo")
+public class SuspendeVo {
+    private Integer suspendeId;
+
     /**
-     * 学员分班表编号
+     * 已上课时
      */
-    private Integer studentstatusId;
+    private String alreadyon;
+
     /**
-     * 学员状态
+     * 停课日期
      */
-    private Integer status;
+    private Date suspendeTime;
+
     /**
-     * 报班类型
+     * 停课理由
      */
-    private String allottype;
+    private String suspendeReason;
+
     /**
-     * 是否审批
+     * 停课办理人
      */
-    private Integer approval;
+    private String suspendeHandler;
+
     /**
-     * 审批人员
+     * 停课审批
      */
-    private String appname;
+    private Integer suspendeapproval;
+
     /**
-     * 审批时间
+     * 停课审批人
      */
-    private Date apptime;
+    private String suspendeappname;
+
     /**
-     * 撤销审批人员
+     * 停课审批时间
+     */
+    private Date suspendeapptime;
+
+    /**
+     * 撤销停课审批人
      */
     private String revokeappname;
+
     /**
-     * RevokeAppTime
+     * 撤销停课审批时间
      */
     private Date revokeapptime;
-    /**
-     * 增加人
-     */
-    public String addname;
+
     /**
      * 增加日期
      */
     private Date addtime;
+
     /**
      * 最后修改人
      */
-    public String updatename;
+    private String updatename;
+
     /**
      * 最后修改时间
      */
     private Date updatetime;
+
     /**
      * 删除人
      */
-    public String deletename;
+    private String deletename;
+
     /**
      * 删除时间
      */
     private Date deletetime;
+
     /**
      * 时效性
      */
     private Integer timeliness;
+
     /**
      * 学员编号
      */
     private Integer studentId;
-    /**
-     * 班级编号
-     */
-    private Integer classesId;
+    private StudentVo studentVo;
+
     /**
      * 课程编号
      */
     private Integer courseId;
-    /**
-     * 备注
-     */
-    public String remarks;
-
     private CourseVo courseVo;
-    private StudentVo studentVo;
+
+    /**
+     * 课程详细编号
+     */
+    private Integer coursedetailsId;
+    private CourseDetailsVo courseDetailsVo;
+    /**
+     * 班级编号
+     */
+    private Integer classesId;
     private ClassesVo classesVo;
+
     private static final long serialVersionUID = 1L;
 }

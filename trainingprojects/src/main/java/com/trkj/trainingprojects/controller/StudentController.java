@@ -43,8 +43,8 @@ public class StudentController {
     }
 
     @GetMapping("/SelectStudentByState2/{classesId}")
-    public List<StudentVo> SelectStudentByState2(@PathVariable("classesId") String classesId){
-        List<StudentVo> list = studentService.SelectStudentByState2(Integer.parseInt(classesId));
+    public List<StudentVo> SelectStudentByState2(@PathVariable("classesId") int classesId){
+        List<StudentVo> list = studentService.SelectStudentByState2(classesId);
         return list;
     }
 
@@ -65,6 +65,12 @@ public class StudentController {
         studentVo.setTimeliness(0);
         studentService.addStudents(studentVo);
         return AjaxResponse.success(studentVo);
+    }
+
+    @PutMapping("/updateByStudent")
+    public AjaxResponse updateByStudent(@RequestBody @Valid StudentVo studentVo){
+        studentService.updateByStudent(studentVo);
+        return  AjaxResponse.success(studentVo);
     }
 
 }

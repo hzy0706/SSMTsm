@@ -78,4 +78,9 @@ public class ClassesServiceImpl implements ClassesService {
     public int deleteByOpenClasses(ClassesVo classesVo) {
         return classesDao.deleteByOpenClasses(classesVo);
     }
+
+    @Override
+    public List<ClassesVo> selectClassesById(Integer classesId) {
+        return classesDao.queryById(classesId);
+    }
 }

@@ -38,5 +38,7 @@ public interface StudentDao {
 
     List<StudentVo> SelectStudentByState2(Integer classesId);
 
+    int updateByStudentDelName(StudentVo studentVo);
+    int updateByStudent(StudentVo studentVo);
 }
 

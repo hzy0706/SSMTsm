@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import com.trkj.trainingprojects.entity.Course;
 import com.trkj.trainingprojects.entity.Register;
@@ -82,6 +83,7 @@ public class EntryfeesVo {
     /**
      * 财务部审核时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date approvaltime;
     /**
      * 财务部审核人
@@ -90,6 +92,7 @@ public class EntryfeesVo {
     /**
      * 财务部撤销审核时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date revokeapptime;
     /**
      * 财务部撤销审核人

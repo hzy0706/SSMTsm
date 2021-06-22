@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.UnittypeDao">
+
+    <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.UnittypeVo">
+        <!--@Table unittype-->
+        <result property="unittypeId" column="UnitType_Id" jdbcType="INTEGER"/>
+        <result property="unittypeName" column="UnitType_Name" jdbcType="VARCHAR"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <!--查询所有时效性为0的列-->
+    <select id="selectAllUnitType" resultMap="BaseResultMap">
+        select
+           UnitType_Id,UnitType_Name,AddName,AddTime,UpdateName,UpdateTime,DeleteName,DeleteTime
+        from unittype
+        where TimeLiness=0
+
+    </select>
+    <!--新增所有列-->
+    <insert id="addUnitType" keyProperty="unittypeId" useGeneratedKeys="true">
+        insert into tr01904.unittype(UnitType_Name, AddName, UpdateName, UpdateTime, DeleteName, DeleteTime)
+        values (#{unittypeName}, #{addname}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateUnitType">
+        update tr01904.unittype
+        <set>
+            <if test="unittypeName != null and unittypeName != ''">
+                UnitType_Name = #{unittypeName},
+            </if>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                AddTime = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+        </set>
+        where UnitType_Id = #{unittypeId}
+    </update>
+
+    <!--通过主键删除-->
+    <update id="delUnitTypeById">
+        update unit
+        set
+        DeleteTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
+        where UnitType_Id = #{unittypeId}
+    </update>
+
+</mapper>

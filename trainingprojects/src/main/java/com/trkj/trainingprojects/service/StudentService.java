@@ -2,6 +2,7 @@ package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.entity.Student;
 import com.trkj.trainingprojects.vo.StudentVo;
+import com.trkj.trainingprojects.vo.StudentstatusVo;
 
 import java.util.List;
 
@@ -28,4 +29,5 @@ public interface StudentService {
     public List<StudentVo> selectAllStudent();
     public int addStudents(StudentVo studentVo);
     List<StudentVo> SelectStudentByState2(Integer classesId);
+    public int updateByStudent(StudentVo studentVo);
 }
