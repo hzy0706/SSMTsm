@@ -54,4 +54,14 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     public int updateByStudentStatus(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByStudentStatus(studentstatusVo);
     }
+
+    @Override
+    public int updateByStudentRemarks(StudentstatusVo studentstatusVo) {
+        return studentstatusDao.updateByStudentRemarks(studentstatusVo);
+    }
+
+    @Override
+    public int updateByStudentStateOne(StudentstatusVo studentstatusVo) {
+        return studentstatusDao.updateByStudentStateOne(studentstatusVo);
+    }
 }

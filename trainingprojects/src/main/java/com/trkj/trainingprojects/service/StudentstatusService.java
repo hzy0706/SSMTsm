@@ -26,4 +26,6 @@ public interface StudentstatusService {
     public List<StudentstatusVo> selectAllStudentStatus();
     public void addStudentStatus(StudentstatusVo studentstatusVo);
     public int updateByStudentStatus(StudentstatusVo studentstatusVo);
+    public int updateByStudentRemarks(StudentstatusVo studentstatusVo);
+    public int updateByStudentStateOne(StudentstatusVo studentstatusVo);
 }

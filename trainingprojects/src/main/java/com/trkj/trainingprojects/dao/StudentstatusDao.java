@@ -34,5 +34,7 @@ public interface StudentstatusDao {
 
     List<StudentstatusVo> selectAllStudentStatus();
     int updateByStudentStatus(StudentstatusVo studentstatusVo);
+    int updateByStudentRemarks(StudentstatusVo studentstatusVo);
+    int updateByStudentStateOne(StudentstatusVo studentstatusVo);
 }
 

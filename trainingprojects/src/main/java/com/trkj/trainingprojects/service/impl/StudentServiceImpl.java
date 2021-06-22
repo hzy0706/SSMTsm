@@ -75,6 +75,7 @@ public class StudentServiceImpl implements StudentService {
         StudentstatusVo studentstatusVo = new StudentstatusVo();
         studentstatusVo.setStudentId(studentVo.getStudentId());
         studentstatusVo.setStatus(0);
+        studentstatusVo.setAllottype("初次分班");
         studentstatusVo.setApproval(0);
         studentstatusVo.setAddtime(date);
         studentstatusVo.setTimeliness(0);

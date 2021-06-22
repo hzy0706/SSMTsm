@@ -87,6 +87,10 @@ public class Studentstatus implements Serializable {
      * 班级编号
      */
     private Integer classesId;
+    /**
+     * 备注
+     */
+    public String remarks;
 
     private Student student;
     private Classes classes;
