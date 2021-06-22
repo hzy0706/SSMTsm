@@ -24,4 +24,8 @@ public interface ShiftService {
     int updateByTypeShiftKey2(ShiftVo record);
 
     int updateByTypeShiftKey3(ShiftVo record);
+
+    int updateByTypeShiftKey4(ShiftVo record);
+
+    int updateByTypeShiftKey5(ShiftVo record);
 }

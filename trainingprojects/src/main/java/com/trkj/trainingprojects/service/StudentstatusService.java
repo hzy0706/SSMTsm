@@ -29,4 +29,5 @@ public interface StudentstatusService {
     public int updateByStudentRemarks(StudentstatusVo studentstatusVo);
     public int updateByStudentStateOne(StudentstatusVo studentstatusVo);
     public List<StudentstatusVo> selectStudentStatusByClassesId(Integer classesId);
+    public List<StudentstatusVo> selectStudentStatusByClassesId2(Integer classesId);
 }

@@ -63,4 +63,14 @@ public class ShiftServiceImpl implements ShiftService {
     public int updateByTypeShiftKey3(ShiftVo record) {
         return shiftDao.updateByTypeShiftKey3(record);
     }
+
+    @Override
+    public int updateByTypeShiftKey4(ShiftVo record) {
+        return shiftDao.updateByTypeShiftKey4(record);
+    }
+
+    @Override
+    public int updateByTypeShiftKey5(ShiftVo record) {
+        return shiftDao.updateByTypeShiftKey5(record);
+    }
 }

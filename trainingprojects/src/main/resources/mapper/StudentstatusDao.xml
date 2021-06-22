@@ -344,5 +344,18 @@
         where sts.Classes_Id = #{classesId} and sts.TimeLiness = 0
     </select>
 
+    <select id="selectStudentStatusByClassesId2" resultMap="StudentstatusMap">
+        select
+        <include refid="Base_Column_List" />,
+        <include refid="Base_Student_List" />,
+        <include refid="Base_Course_List" />,
+        <include refid="Base_Class_List" />
+        from tr01904.studentstatus sts
+        LEFT join classes cl on sts.Classes_Id=cl.Classes_Id
+        inner join student st on sts.Student_Id=st.Student_Id
+        inner join course c on sts.Course_Id=c.Course_Id
+        where sts.Classes_Id = #{classesId} and sts.TimeLiness = 0
+    </select>
+
 </mapper>
 

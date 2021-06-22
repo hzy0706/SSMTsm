@@ -79,4 +79,10 @@ public class StudentstatusController {
         return pageInfo;
     }
 
+    @GetMapping("/selectStudentStatusByClassesId2/{classesId}")
+    public List<StudentstatusVo> selectStudentStatusByClassesId2(@PathVariable("classesId") int classesId){
+        List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
+        return list;
+    }
+
 }

@@ -164,4 +164,19 @@
       JW_DropTimeApp = #{jwDroptimeapp,jdbcType=TIMESTAMP}
     where Shift_Id = #{shiftId,jdbcType=INTEGER}
   </update>
+  <update id="updateByTypeShiftKey4" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
+    update shift
+    set
+      Approval = #{approval,jdbcType=INTEGER},
+    Shift_Date = #{shiftDate,jdbcType=TIMESTAMP}
+    where Shift_Id = #{shiftId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByTypeShiftKey5" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
+    update shift
+    set
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Shift_Id = #{shiftId,jdbcType=INTEGER}
+  </update>
 </mapper>

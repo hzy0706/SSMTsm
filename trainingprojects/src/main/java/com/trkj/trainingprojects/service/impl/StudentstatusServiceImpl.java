@@ -69,4 +69,9 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     public List<StudentstatusVo> selectStudentStatusByClassesId(Integer classesId) {
         return studentstatusDao.selectStudentStatusByClassesId(classesId);
     }
+
+    @Override
+    public List<StudentstatusVo> selectStudentStatusByClassesId2(Integer classesId) {
+        return studentstatusDao.selectStudentStatusByClassesId2(classesId);
+    }
 }

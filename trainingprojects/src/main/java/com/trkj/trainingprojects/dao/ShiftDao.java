@@ -27,4 +27,8 @@ public interface ShiftDao {
 
     int updateByTypeShiftKey3(ShiftVo record);
 
+    int updateByTypeShiftKey4(ShiftVo record);
+
+    int updateByTypeShiftKey5(ShiftVo record);
+
 }
