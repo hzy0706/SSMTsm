@@ -71,4 +71,12 @@ public class StudentstatusController {
         return  AjaxResponse.success(studentstatusVo);
     }
 
+    @GetMapping("/selectStudentStatusByClassesId/{id}")
+    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId(id);
+        PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
 }
