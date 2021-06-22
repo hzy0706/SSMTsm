@@ -67,4 +67,10 @@ public class StudentController {
         return AjaxResponse.success(studentVo);
     }
 
+    @PutMapping("/updateByStudent")
+    public AjaxResponse updateByStudent(@RequestBody @Valid StudentVo studentVo){
+        studentService.updateByStudent(studentVo);
+        return  AjaxResponse.success(studentVo);
+    }
+
 }

@@ -49,4 +49,9 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     public void addStudentStatus(StudentstatusVo studentstatusVo) {
         studentstatusDao.insert(studentstatusVo);
     }
+
+    @Override
+    public int updateByStudentStatus(StudentstatusVo studentstatusVo) {
+        return studentstatusDao.updateByStudentStatus(studentstatusVo);
+    }
 }

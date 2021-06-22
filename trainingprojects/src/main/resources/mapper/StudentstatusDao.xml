@@ -303,5 +303,14 @@
         delete from tr01904.studentstatus where StudentStatus_Id = #{studentstatusId}
     </delete>
 
+    <!--修改分班的班级-->
+    <update id="updateByStudentStatus" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
+        update tr01904.studentstatus
+        set
+          Status = #{status},
+          Classes_Id = #{classesId}
+        where StudentStatus_Id = #{studentstatusId}
+    </update>
+
 </mapper>
 

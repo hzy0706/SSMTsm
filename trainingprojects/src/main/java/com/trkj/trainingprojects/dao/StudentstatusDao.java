@@ -33,5 +33,6 @@ public interface StudentstatusDao {
     int deleteById(Integer studentstatusId);
 
     List<StudentstatusVo> selectAllStudentStatus();
+    int updateByStudentStatus(StudentstatusVo studentstatusVo);
 }
 

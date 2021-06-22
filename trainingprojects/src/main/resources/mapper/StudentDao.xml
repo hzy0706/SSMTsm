@@ -318,5 +318,13 @@
         where Student_Id = #{studentId}
     </update>
 
+    <!--修改分班的班级-->
+    <update id="updateByStudent" parameterType="com.trkj.trainingprojects.entity.Student">
+        update tr01904.student
+        set
+          classesId = #{Classes_Id}
+        where Student_Id = #{studentId}
+    </update>
+
 </mapper>
 
