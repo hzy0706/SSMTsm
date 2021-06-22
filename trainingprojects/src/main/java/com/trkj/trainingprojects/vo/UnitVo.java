@@ -66,7 +66,7 @@ public class UnitVo{
     /**
     * 增加人
     */
-    private String addname;
+    public String addname;
     /**
     * 增加时间
     */
@@ -74,7 +74,7 @@ public class UnitVo{
     /**
     * 最后修改人
     */
-    private String updatename;
+    public String updatename;
     /**
     * 最后修改时间
     */
@@ -82,7 +82,7 @@ public class UnitVo{
     /**
     * 删除人
     */
-    private String deletename;
+    public String deletename;
     /**
     * 删除时间
     */
