@@ -15,6 +15,8 @@
         <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
         <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
         <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="classestudents" column="Classe_Students" jdbcType="INTEGER"/>
+        <result property="classecountstudents" column="Classe_CountStudents" jdbcType="INTEGER"/>
         <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
         <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
         <result property="empId" column="Emp_Id" jdbcType="INTEGER"/>
@@ -114,7 +116,7 @@
     <sql id="Base_Column_List">
       cl.Classes_Id, cl.Classes_Name, cl.Classes_Open, cl.StartedDate, cl.EndDate, cl.LastDate,cl.ManyLessons,
       cl.AddName, cl.ADDTIME, cl.UpdateName, cl.UpdateTime, cl.DeleteName, cl.DeleteTime, cl.TimeLiness,
-      cl.Course_Id, cl.Emp_Id, cl.Teacher_Id, cl.CourseDetails_Id
+      cl.Course_Id, cl.Emp_Id, cl.Teacher_Id, cl.CourseDetails_Id, cl.Classe_CountStudents, cl.Classe_Students
     </sql>
 
     <!--查询所有-->
