@@ -135,9 +135,9 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ClassesMap">
         select
-          Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id
+          Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id, cl.Classe_CountStudents, cl.Classe_Students
         from tr01904.classes
-        where Classes_Id = #{classesId}
+        where Classes_Id = #{classesId} and Classes_Open = 0
     </select>
 
     <!--查询指定行数据-->
@@ -235,8 +235,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="classesId" useGeneratedKeys="true">
-        insert into tr01904.classes(Classes_Name, Classes_Open, StartedDate, EndDate, LastDate,ManyLessons, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id)
-        values (#{classesName}, #{classesOpen}, #{starteddate}, #{enddate}, #{lastdate}, #{manylessons} , #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{courseId}, #{empId}, #{teacherId}, #{coursedetailsId})
+        insert into tr01904.classes(Classes_Name, Classes_Open, StartedDate, EndDate, LastDate,ManyLessons, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id, Classe_CountStudents)
+        values (#{classesName}, #{classesOpen}, #{starteddate}, #{enddate}, #{lastdate}, #{manylessons} , #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{courseId}, #{empId}, #{teacherId}, #{coursedetailsId}, #{classecountstudents})
     </insert>
 
     <insert id="insertBatch" keyProperty="classesId" useGeneratedKeys="true">
