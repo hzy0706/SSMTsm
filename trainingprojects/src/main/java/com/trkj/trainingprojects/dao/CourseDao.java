@@ -37,5 +37,6 @@ public interface CourseDao {
     int updateByCourseHouse(CourseVo courseVo);//根据id修改课程课时
     int updateByCourseHouse2(CourseVo courseVo);//根据id修改课程课时[减少]
     int selectCourseDelectOne(int classtypeid);//根据课程类型id查询
+    int updateByCourseHouse3(int courseid);//根据id修改课程课时[减少]批量
 }
 

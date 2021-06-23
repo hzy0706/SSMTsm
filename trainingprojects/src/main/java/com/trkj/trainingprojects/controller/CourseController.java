@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.CourseService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.ClassesVo;
+import com.trkj.trainingprojects.vo.CourseDetailsVo;
 import com.trkj.trainingprojects.vo.CourseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -97,5 +98,18 @@ public class CourseController {
     public int selectCourseDelectOne(@PathVariable("id") int id){
         int a = courseService.selectCourseDelectOne(id);
         return a;
+    }
+
+    @PutMapping("/deleteByCourseDetailsNumber/{ids}")
+    public int deleteByCourseDetailsNumber(@PathVariable("ids") String ids){
+        String[] id= ids.split(",");
+        System.out.println(ids);
+        for (String s:id){
+            /*CourseVo courseVo = new CourseVo();
+            courseVo.setCourseId(Integer.parseInt(s));*/
+            System.out.println(Integer.parseInt(s));
+            courseService.updateByCourseHouse3(Integer.parseInt(s));
+        }
+        return 0;
     }
 }
