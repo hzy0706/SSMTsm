@@ -16,10 +16,15 @@
     <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
     <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
     <result column="Student_Id" jdbcType="INTEGER" property="studentId" />
+    <result column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
     <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
     <result column="Classes_Id2" jdbcType="INTEGER" property="classesId2" />
     <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
       <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
+    </association>
+    <association property="studentstatusVo" javaType="com.trkj.trainingprojects.vo.StudentstatusVo">
+      <id column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
+      <result column="Status" jdbcType="INTEGER" property="status"/>
     </association>
     <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
       <id column="Classes_Id" jdbcType="INTEGER" property="classesId" />
@@ -63,6 +68,17 @@
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
     where s.Classes_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+
+  <select id="selectByShiftstudentstatusId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name,st2.status
+    from shift s
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join Studentstatus st2 on st2.StudentStatus_Id=s.StudentStatus_Id
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
+    where s.StudentStatus_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
 
   <select id="selectAllShifts" parameterType="java.lang.Integer" resultMap="BaseResultMap">
