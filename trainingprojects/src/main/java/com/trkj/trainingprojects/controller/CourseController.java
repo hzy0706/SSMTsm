@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.CourseService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
+import com.trkj.trainingprojects.vo.ClassesVo;
 import com.trkj.trainingprojects.vo.CourseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,7 @@ public class CourseController {
     public AjaxResponse updateByCourseKey(@RequestBody @Valid CourseVo courseVo){
         Date date = new Date();
         courseVo.setUpdatetime(date);
+        /*System.out.println(courseVo);*/
         courseService.updateByCourseKey(courseVo);
         return  AjaxResponse.success(courseVo);
     }
@@ -79,4 +81,21 @@ public class CourseController {
         return list;
     }
 
+    @PutMapping("/updateByCourseHouse")
+    public AjaxResponse updateByCourseHouse(@RequestBody @Valid CourseVo courseVo){
+        courseService.updateByCourseHouse(courseVo);
+        return  AjaxResponse.success(courseVo);
+    }
+
+    @PutMapping("/updateByCourseHouseTwo")
+    public AjaxResponse updateByCourseHouse2(@RequestBody @Valid CourseVo courseVo){
+        courseService.updateByCourseHouse2(courseVo);
+        return  AjaxResponse.success(courseVo);
+    }
+
+    @GetMapping("/selectCourseDelectOne/{id}")
+    public int selectCourseDelectOne(@PathVariable("id") int id){
+        int a = courseService.selectCourseDelectOne(id);
+        return a;
+    }
 }

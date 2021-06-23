@@ -34,5 +34,8 @@ public interface CourseDao {
     int insert(CourseVo courseVo);    //添加
     int updateByCoursePel(CourseVo courseVo);   //修改为停报
     List<CourseVo> selectAllCourses2();     //查询所有不分页
+    int updateByCourseHouse(CourseVo courseVo);//根据id修改课程课时
+    int updateByCourseHouse2(CourseVo courseVo);//根据id修改课程课时[减少]
+    int selectCourseDelectOne(int classtypeid);//根据课程类型id查询
 }
 

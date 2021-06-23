@@ -83,4 +83,10 @@ public class CourseDetailsController {
         return  AjaxResponse.success(id);
     }
 
+    @GetMapping("/selectCourseDetailsDeleteOne/{id}")
+    public int selectCourseDetailsDeleteOne(@PathVariable("id") int id){
+        int a = coursedetailsService.selectCourseDetailsDeleteOne(id);
+        return a;
+    }
+
 }

@@ -366,8 +366,8 @@
     <update id="UpdateAddClassesStudentNumber" parameterType="com.trkj.trainingprojects.entity.Classes">
         update tr01904.classes
         set
-          Classe_Students = (SELECT COUNT(Classes_Id) FROM studentstatus WHERE Classes_Id=#{classesId})+1
-        where Classes_Id = #{classesId}
+          Classe_Students = (SELECT COUNT(Classes_Id) FROM studentstatus WHERE Classes_Id=#{classesId} and TimeLiness = 0)+1
+        where Classes_Id = #{classesId} and TimeLiness = 0
     </update>
 
 </mapper>
