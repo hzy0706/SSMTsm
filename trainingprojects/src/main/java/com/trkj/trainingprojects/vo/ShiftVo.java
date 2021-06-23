@@ -90,6 +90,13 @@ public class ShiftVo {
     private StudentVo studentVo;
 
     /**
+     * 学员分班编号
+     */
+    private Integer studentstatusId;
+    private StudentstatusVo studentstatusVo;
+
+
+    /**
      * 原班级编号
      */
     private Integer classesId;

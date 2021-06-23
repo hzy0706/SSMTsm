@@ -48,6 +48,11 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
+    public List<ShiftVo> selectByShiftstudentstatusId(Integer studentstatusId) {
+        return shiftDao.selectByShiftstudentstatusId(studentstatusId);
+    }
+
+    @Override
     public List<ShiftVo> selectByShiftClassesId(Integer classesId) {
         return shiftDao.selectByShiftClassesId(classesId);
     }

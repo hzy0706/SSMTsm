@@ -19,6 +19,8 @@ public interface ShiftService {
 
     List<ShiftVo> selectByShiftStudentId(Integer studentId);
 
+    List<ShiftVo> selectByShiftstudentstatusId(Integer studentstatusId);
+
     List<ShiftVo> selectByShiftClassesId(Integer classesId);
 
     int updateByTypeShiftKey2(ShiftVo record);
