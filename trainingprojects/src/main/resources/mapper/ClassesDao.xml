@@ -332,6 +332,9 @@
             <if test="coursedetailsId != null">
                 CourseDetails_Id = #{coursedetailsId},
             </if>
+            <if test="classecountstudents != null">
+                Classe_CountStudents = #{classecountstudents},
+            </if>
         </set>
         where Classes_Id = #{classesId}
     </update>
