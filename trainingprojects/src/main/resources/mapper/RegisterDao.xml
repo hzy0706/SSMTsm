@@ -267,4 +267,11 @@
       UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
       where Register_Id = #{registerId,jdbcType=INTEGER}
   </update>
+<!--  修改缴费状态，并自动生成一条缴费记录-->
+  <update id="updateRegisterState" parameterType="com.trkj.trainingprojects.vo.RegisterVo">
+    update register
+    set
+     PayState = #{paystate,jdbcType=INTEGER}
+     where Register_Id=#{registerId,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -75,4 +75,12 @@ public class RegisterController {
         registerService.updateShRegister(registerVo);
         return AjaxResponse.success(registerVo);
     }
+    /**
+     * 修改缴费状态，并自动生成一条缴费记录
+     */
+    @PutMapping("/updateRegisterState")
+    public AjaxResponse updateRegisterState(@RequestBody @Valid RegisterVo registerVo){
+        registerService.updateRegisterState(registerVo);
+        return AjaxResponse.success(registerVo);
+    }
 }

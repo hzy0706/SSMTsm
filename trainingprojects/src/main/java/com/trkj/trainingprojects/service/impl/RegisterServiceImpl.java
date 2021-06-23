@@ -53,4 +53,9 @@ public class RegisterServiceImpl implements RegisterService {
     public int updateShRegister(RegisterVo registerVo) {
         return registerDao.updateShRegister(registerVo);
     }
+
+    @Override
+    public int updateRegisterState(RegisterVo registerVo) {
+        return registerDao.updateRegisterState(registerVo);
+    }
 }
