@@ -85,4 +85,13 @@ public class StudentstatusController {
         return list;
     }
 
+    /*
+    * 根据班级id修改学员状态[学习中]
+    * */
+    @PutMapping("/updateByClassesIdOnState")
+    public AjaxResponse updateByClassesIdOnState(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        studentstatusService.updateByClassesIdOnState(studentstatusVo);
+        return  AjaxResponse.success(studentstatusVo);
+    }
+
 }

@@ -30,5 +30,7 @@ public interface ClassesService {
     List<ClassesVo> selectAllClassesByState();
     List<ClassesVo> selectAllClassesByState2();
     public int deleteByOpenClasses(ClassesVo classesVo);
-    public List<ClassesVo> selectClassesById(Integer classesId);
+    public List<ClassesVo> selectClassesById(Integer courseId);
+    public ClassesVo selectClassesNumber(Integer classesId);
+    public int UpdateAddClassesStudentNumber(ClassesVo classesVo);
 }

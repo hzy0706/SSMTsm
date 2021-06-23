@@ -80,7 +80,17 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
-    public List<ClassesVo> selectClassesById(Integer classesId) {
-        return classesDao.queryById(classesId);
+    public List<ClassesVo> selectClassesById(Integer courseId) {
+        return classesDao.queryById(courseId);
+    }
+
+    @Override
+    public ClassesVo selectClassesNumber(Integer classesId) {
+        return classesDao.queryById2(classesId);
+    }
+
+    @Override
+    public int UpdateAddClassesStudentNumber(ClassesVo classesVo) {
+        return classesDao.UpdateAddClassesStudentNumber(classesVo);
     }
 }

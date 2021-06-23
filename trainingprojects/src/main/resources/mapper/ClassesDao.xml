@@ -132,12 +132,20 @@
         where cl.TimeLiness = 0 ORDER BY CONVERT(cl.Classes_Name USING gbk) DESC
     </select>
 
-    <!--查询单个-->
+    <!--查询单个[根据课程和未开班来查询]-->
     <select id="queryById" resultMap="ClassesMap">
         select
           Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id, Classe_CountStudents, Classe_Students
         from tr01904.classes
-        where Course_Id = #{courseId} and Classes_Open = 0
+        where Course_Id = #{courseId} and Classes_Open = 0 and TimeLiness = 0
+    </select>
+
+    <!--查询单个[根据班级id来查询人数是否超过]-->
+    <select id="queryById2" resultMap="ClassesMap">
+        select
+          Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id, Classe_CountStudents, Classe_Students
+        from tr01904.classes
+        where Classes_Id = #{classesId} and TimeLiness = 0
     </select>
 
     <!--查询指定行数据-->
@@ -348,6 +356,14 @@
         update tr01904.classes
         set
           Classes_Open = #{classesOpen}
+        where Classes_Id = #{classesId}
+    </update>
+
+    <!--分班后添加班级人数-->
+    <update id="UpdateAddClassesStudentNumber" parameterType="com.trkj.trainingprojects.entity.Classes">
+        update tr01904.classes
+        set
+          Classe_Students = (SELECT COUNT(Classes_Id) AS Classes_Id FROM studentstatus WHERE Classes_Id=#{classesId})+1
         where Classes_Id = #{classesId}
     </update>
 

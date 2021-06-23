@@ -357,13 +357,13 @@
         where sts.Classes_Id = #{classesId} and sts.TimeLiness = 0
     </select>
 
-    <!--根据班级id修改-->
-    <!--<update id="updateByStudentStateOne" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
+   <!-- 根据班级id修改-->
+    <update id="updateByClassesIdOnState" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
         update tr01904.studentstatus
         set
           Status = #{status}
-        where StudentStatus_Id = #{studentstatusId}
-    </update>-->
+        where Classes_Id = #{classesId}
+    </update>
 
 </mapper>
 

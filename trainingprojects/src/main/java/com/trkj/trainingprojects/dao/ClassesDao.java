@@ -16,7 +16,8 @@ import java.util.List;
 @Mapper
 public interface ClassesDao {
 
-    List<ClassesVo> queryById(Integer classesId);
+    List<ClassesVo> queryById(Integer courseId);
+    ClassesVo queryById2(Integer classesId);
 
     List<Classes> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
@@ -37,5 +38,6 @@ public interface ClassesDao {
     List<ClassesVo> selectAllClassesByState();
     List<ClassesVo> selectAllClassesByState2();
     int deleteByOpenClasses(ClassesVo classesVo);
+    int UpdateAddClassesStudentNumber(ClassesVo classesVo);
 }
 
