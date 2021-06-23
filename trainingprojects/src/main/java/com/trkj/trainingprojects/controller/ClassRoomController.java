@@ -47,6 +47,7 @@ public class ClassRoomController {
         /*System.out.println(classTypeVo+"-------------------");*/
         Date date = new Date();
         classRoomVo.setUpdatetime(date);
+        classRoomVo.setTimeliness(1);
         classroomService.updateByClassRoomKey(classRoomVo);
         return  AjaxResponse.success(classRoomVo);
     }
