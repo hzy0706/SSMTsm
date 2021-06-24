@@ -168,7 +168,7 @@
         where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1)
     </select>
 
-    <!--查询所有开办状态为0或者1的班级信息（胡志远）-->
+    <!--查询所有开办状态为1的班级信息（胡志远）-->
     <select id="selectAllClassesByState2" resultMap="ClassesMap">
         select
         <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name,co.Course_Name,cs.CourseDetails_Name
