@@ -71,7 +71,7 @@ public class ExaminationVo {
     /**
      * 课程编号
      */
-    private Integer courseId;
+    private Integer coursedetailsId;
 
     private ClassesVo classesListVos;
     private EmpVo empsVo;

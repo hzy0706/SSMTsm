@@ -15,7 +15,7 @@
         <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
         <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
         <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
-        <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+        <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
         <association property="classesListVos" javaType="com.trkj.trainingprojects.vo.ClassesVo">
             <id property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
             <result property="classesName" column="Classes_Name" jdbcType="VARCHAR"/>
@@ -82,7 +82,7 @@
     <sql id="Base_Column_List">
       ex.Examination_Id, ex.ExaminationName, ex.Average, ex.HighestScore, ex.LowestScore,
       ex.AddName, ex.ADDTIME, ex.UpdateName, ex.UpdateTime, ex.DeleteName, ex.DeleteTime, ex.TimeLiness,
-      ex.Classes_Id, ex.Teacher_Id, ex.Course_Id
+      ex.Classes_Id, ex.Teacher_Id, ex.CourseDetails_Id
     </sql>
 
     <!--查询所有-->
@@ -96,7 +96,7 @@
         from examination ex
         inner join classes cl on ex.Classes_Id =cl.Classes_Id
         inner join emp e on ex.Teacher_Id=e.Emp_Id
-        inner join course co on ex.Course_Id=co.Course_Id
+        inner join course co on ex.CourseDetails_Id=co.CourseDetails_Id
         where ex.TimeLiness = 0
     </select>
 

@@ -14,7 +14,6 @@
         <result property="examinationId" column="Examination_Id" jdbcType="INTEGER"/>
         <association property="examinationVo" javaType="com.trkj.trainingprojects.vo.ExaminationVo">
             <id property="examinationId" column="Examination_Id" jdbcType="INTEGER"/>
-            <result property="examinationname" column="ExaminationName" jdbcType="VARCHAR"/>
             <result property="average" column="Average" jdbcType="VARCHAR"/>
             <result property="highestscore" column="HighestScore" jdbcType="VARCHAR"/>
             <result property="lowestscore" column="LowestScore" jdbcType="VARCHAR"/>
@@ -27,7 +26,7 @@
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
             <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
             <result property="teacherId" column="Teacher_Id" jdbcType="INTEGER"/>
-            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
         </association>
         <collection property="itemBankVoList" ofType="com.trkj.trainingprojects.vo.ItemBankVo">
             <id property="itembankId" column="ItemBank_Id" jdbcType="INTEGER"/>
@@ -40,7 +39,7 @@
             <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
-            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
         </collection>
     </resultMap>
 
