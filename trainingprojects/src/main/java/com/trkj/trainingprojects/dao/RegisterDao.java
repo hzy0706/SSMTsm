@@ -31,4 +31,6 @@ public interface RegisterDao {
      * 修改缴费状态，并自动生成一条缴费记录
      */
     int updateRegisterState(RegisterVo registerVo);
+
+    RegisterVo queryById(Integer registerId);
 }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.SemesterDao">
-
     <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.SemesterVo">
         <!--@Table semester-->
-        <result property="semesterId" column="Semester_Id" jdbcType="INTEGER"/>
+        <id property="semesterId" column="Semester_Id" jdbcType="INTEGER"/>
         <result property="semesterName" column="Semester_Name" jdbcType="VARCHAR"/>
         <result property="addname" column="AddName" jdbcType="VARCHAR"/>
         <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>

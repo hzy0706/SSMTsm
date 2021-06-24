@@ -30,7 +30,7 @@ public interface StudentstatusDao {
 
     int update(Studentstatus studentstatus);
 
-    int deleteById(Integer studentstatusId);
+    int deleteById(@Param("courseId") int courseId,@Param("studentId") int studentId);
 
     List<StudentstatusVo> selectAllStudentStatus();
     int updateByStudentStatus(StudentstatusVo studentstatusVo);
@@ -39,5 +39,6 @@ public interface StudentstatusDao {
     List<StudentstatusVo> selectStudentStatusByClassesId(Integer classesId);
     List<StudentstatusVo> selectStudentStatusByClassesId2(Integer classesId);
     int updateByClassesIdOnState(StudentstatusVo studentstatusVo);
+    List<StudentstatusVo> queryByStudentId(int studentId);
 }
 

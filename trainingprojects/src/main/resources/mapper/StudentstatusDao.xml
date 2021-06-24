@@ -139,6 +139,15 @@
         where sts.Student_Id = #{studentId} and sts.TimeLiness = 0
     </select>
 
+   <!-- 根据学员id查询-->
+    <select id="queryByStudentId" resultMap="StudentstatusMap">
+        select
+          sts.Classes_Id,cl.Classes_Name
+        from studentstatus sts
+        LEFT join classes cl on sts.Classes_Id=cl.Classes_Id
+        where sts.Student_Id = #{studentId} and sts.TimeLiness = 0
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StudentstatusMap">
         select
@@ -302,7 +311,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from tr01904.studentstatus where StudentStatus_Id = #{studentstatusId}
+        delete from studentstatus where Course_Id = #{courseId} AND Student_Id = #{studentId}
     </delete>
 
     <!--修改分班的班级-->

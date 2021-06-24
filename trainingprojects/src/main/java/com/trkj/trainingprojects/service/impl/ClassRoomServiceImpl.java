@@ -68,4 +68,9 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     public int updateByClassRoomKey(ClassRoomVo classRoomVo) {
         return classroomDao.updateByClassRoomKey(classRoomVo);
     }
+
+    @Override
+    public int updateClassRoomState(ClassRoomVo classRoomVo) {
+        return classroomDao.updateClassRoomState(classRoomVo);
+    }
 }

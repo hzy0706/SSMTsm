@@ -274,4 +274,14 @@
      PayState = #{paystate,jdbcType=INTEGER}
      where Register_Id=#{registerId,jdbcType=INTEGER}
   </update>
+
+  <!--查询单个-->
+  <select id="queryById" resultMap="BaseResultMap">
+        select
+          Register_Id, ConsultAnt, Sex, Phone, AttentState, PayState, ConsultContent, AddName,
+          ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Source_Id, Course_Id,
+          Emp_Id
+        from register
+        where Register_Id = #{registerId}
+    </select>
 </mapper>

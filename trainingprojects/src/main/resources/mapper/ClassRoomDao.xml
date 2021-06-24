@@ -185,5 +185,13 @@
           TimeLiness = #{timeliness}
         where ClassRoom_Id = #{classroomId}
     </update>
+
+    <!--修改教室状态-->
+    <update id="updateClassRoomState" parameterType="com.trkj.trainingprojects.entity.ClassRoom">
+        update tr01904.classroom
+        set
+          ClassRoom_State = #{classroomState}
+        where ClassRoom_Id = #{classroomId}
+    </update>
 </mapper>
 

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.SessionDao">
-
     <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.SessionVo">
         <!--@Table session-->
-        <result property="sessionId" column="Session_Id" jdbcType="INTEGER"/>
+        <id property="sessionId" column="Session_Id" jdbcType="INTEGER"/>
         <result property="sessionName" column="Session_Name" jdbcType="VARCHAR"/>
         <result property="addname" column="AddName" jdbcType="VARCHAR"/>
         <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>

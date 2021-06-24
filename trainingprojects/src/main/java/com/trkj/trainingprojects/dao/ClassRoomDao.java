@@ -36,5 +36,6 @@ public interface ClassRoomDao {
 
     List<ClassRoomVo> selectAllClassRooms();
     int deleteByClassRoom(ClassRoomVo classRoomVo);
+    int updateClassRoomState(ClassRoomVo classRoomVo);
 }
 

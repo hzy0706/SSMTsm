@@ -67,4 +67,10 @@ public class ClassRoomController {
         return AjaxResponse.success(classRoomVo);
     }
 
+    @PutMapping("/updateClassRoomState")
+    public AjaxResponse updateClassRoomState(@RequestBody @Valid ClassRoomVo classRoomVo){
+        classroomService.updateClassRoomState(classRoomVo);
+        return  AjaxResponse.success(classRoomVo);
+    }
+
 }

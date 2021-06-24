@@ -36,8 +36,6 @@ public class AwardsController {
 
     @PostMapping("/addAwards")
     public AjaxResponse addAwards(@RequestBody @Valid AwardsVo awardsVo){
-        Date date = new Date();
-        awardsVo.setAwardsdate(date);
         awardsService.addAwards(awardsVo);
         return AjaxResponse.success(awardsVo);
     }
