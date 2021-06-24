@@ -42,6 +42,11 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     }
 
     @Override
+    public List<ClassRoomVo> selectAllClassRoomsByState(Integer state) {
+        return classroomDao.selectAllClassRoomsByState(state);
+    }
+
+    @Override
     public List<ClassRoomVo> selectAllClassRooms() {
         return classroomDao.selectAllClassRooms();
     }

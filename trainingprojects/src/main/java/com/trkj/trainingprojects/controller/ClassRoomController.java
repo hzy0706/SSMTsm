@@ -34,6 +34,12 @@ public class ClassRoomController {
         return pageInfo;
     }
 
+    @GetMapping("/selectAllClassRoomsByState/{state}")
+    public List<ClassRoomVo> selectAllClassRoomsByState(@PathVariable("state") Integer state){
+        List<ClassRoomVo> list = classroomService.selectAllClassRoomsByState(state);
+        return list;
+    }
+
     @PostMapping("/addClassRoom")
     public AjaxResponse addClassRoom(@RequestBody @Valid ClassRoomVo classRoomVo){
         Date date = new Date();

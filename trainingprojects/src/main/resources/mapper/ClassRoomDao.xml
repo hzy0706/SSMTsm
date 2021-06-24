@@ -28,6 +28,13 @@
         where TimeLiness = 0 ORDER BY CONVERT(ClassRoom_Name USING gbk) ASC
     </select>
 
+    <select id="selectAllClassRoomsByState" resultMap="ClassroomMap">
+        select
+        <include refid="Base_Column_List" />
+        from classroom
+        where TimeLiness = 0 and ClassRoom_State=#{state} ORDER BY CONVERT(ClassRoom_Name USING gbk) ASC
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="ClassroomMap">
         select

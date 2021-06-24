@@ -15,7 +15,7 @@ import java.util.Date;
 @ClassMeta(className = "课段表")
 public class TrainingPeriodVo {
     /**
-     * 时段编号
+     *时段编号
      */
     private Integer periodId;
     /**

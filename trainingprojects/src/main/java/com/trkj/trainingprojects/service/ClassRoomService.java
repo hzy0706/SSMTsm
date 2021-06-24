@@ -22,7 +22,7 @@ public interface ClassRoomService {
     ClassRoom update(ClassRoom classroom);
 
     boolean deleteById(Integer classroomId);
-
+    List<ClassRoomVo> selectAllClassRoomsByState(Integer state);
     public List<ClassRoomVo> selectAllClassRooms();
     public void addClassRoom(ClassRoomVo classRoomVo);
     public int deleteByClassRoom(ClassRoomVo classRoomVo);
