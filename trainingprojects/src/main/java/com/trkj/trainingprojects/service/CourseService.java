@@ -23,5 +23,9 @@ public interface CourseService {
     public int updateByCourseKey(CourseVo courseVo);
     public int deleteByCourse(CourseVo courseVo);
     public int updateByCoursePel(CourseVo courseVo);
-    List<CourseVo> selectAllCourses2();
+    public List<CourseVo> selectAllCourses2();
+    public int updateByCourseHouse(CourseVo courseVo);
+    public int updateByCourseHouse2(CourseVo courseVo);
+    public int selectCourseDelectOne(int classtypeid);
+    public int updateByCourseHouse3(int courseid);//根据id修改课程课时[减少]批量
 }

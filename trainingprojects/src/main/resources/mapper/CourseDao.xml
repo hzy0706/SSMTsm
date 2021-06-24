@@ -283,5 +283,33 @@
           StopTime = #{stoptime}
         where Course_Id = #{courseId}
     </update>
+
+    <!--根据课程id修改课时量[加]-->
+    <update id="updateByCourseHouse" parameterType="com.trkj.trainingprojects.entity.Course">
+        update tr01904.course
+        set
+          Classhours = (SELECT COUNT(Course_Id) FROM coursedetails WHERE Course_Id=#{courseId} and TimeLiness = 0)+1
+        where Course_Id = #{courseId} and TimeLiness = 0
+    </update>
+
+    <!--根据课程实体类的id修改课时量[减]-->
+    <update id="updateByCourseHouse2" parameterType="com.trkj.trainingprojects.entity.Course">
+        update tr01904.course
+        set
+          Classhours = (SELECT COUNT(Course_Id) FROM coursedetails WHERE Course_Id=#{courseId} and TimeLiness = 0)-1
+        where Course_Id = #{courseId} and TimeLiness = 0
+    </update>
+
+    <select id="selectCourseDelectOne" resultType="integer" parameterType="integer">
+        SELECT COUNT(ClassType_Id) FROM course WHERE ClassType_Id= #{classtypeId} AND TimeLiness = 0
+    </select>
+
+    <!--根据课程id修改课时量[减][批量]-->
+    <update id="updateByCourseHouse3" parameterType="integer">
+        update tr01904.course
+        set
+          Classhours = (SELECT COUNT(Course_Id) FROM coursedetails WHERE Course_Id=#{courseId} and TimeLiness = 0)-1
+        where Course_Id = #{courseId} and TimeLiness = 0
+    </update>
 </mapper>
 

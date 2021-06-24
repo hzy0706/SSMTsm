@@ -27,4 +27,8 @@ public interface RegisterDao {
     List<RegisterVo> mohuRegister(@Param("value") String registerName);
 
     int updateShRegister(RegisterVo registerVo);
+    /**
+     * 修改缴费状态，并自动生成一条缴费记录
+     */
+    int updateRegisterState(RegisterVo registerVo);
 }

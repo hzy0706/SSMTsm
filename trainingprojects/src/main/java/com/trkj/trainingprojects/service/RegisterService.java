@@ -19,4 +19,9 @@ public interface RegisterService {
     public List<RegisterVo> mohuRegister(String registerName);
 
     public int updateShRegister(RegisterVo registerVo);
+
+    /**
+     * 修改缴费状态，并自动生成一条缴费记录
+     */
+    public int updateRegisterState(RegisterVo registerVo);
 }

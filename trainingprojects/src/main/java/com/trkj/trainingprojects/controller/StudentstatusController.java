@@ -71,4 +71,27 @@ public class StudentstatusController {
         return  AjaxResponse.success(studentstatusVo);
     }
 
+    @GetMapping("/selectStudentStatusByClassesId/{id}")
+    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId(id);
+        PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @GetMapping("/selectStudentStatusByClassesId2/{classesId}")
+    public List<StudentstatusVo> selectStudentStatusByClassesId2(@PathVariable("classesId") int classesId){
+        List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
+        return list;
+    }
+
+    /*
+    * 根据班级id修改学员状态[学习中]
+    * */
+    @PutMapping("/updateByClassesIdOnState")
+    public AjaxResponse updateByClassesIdOnState(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        studentstatusService.updateByClassesIdOnState(studentstatusVo);
+        return  AjaxResponse.success(studentstatusVo);
+    }
+
 }

@@ -21,4 +21,8 @@ public interface MemorandumattachmentService {
     public int updateZsName(MemorandumattachmentVo memorandumattachmentVo);
     //撤销审核
     public int updateZsChName(MemorandumattachmentVo memorandumattachmentVo);
+
+    public List<MemorandumattachmentVo> findJjexamine();
+
+    public List<MemorandumattachmentVo> findMemorandumattachmentKey();
 }

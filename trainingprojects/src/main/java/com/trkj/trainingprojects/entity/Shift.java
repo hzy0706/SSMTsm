@@ -81,6 +81,11 @@ public class Shift implements Serializable {
     private Integer studentId;
 
     /**
+     * 学员分班编号
+     */
+    private Integer studentstatusId;
+
+    /**
      * 原班级编号
      */
     private Integer classesId;

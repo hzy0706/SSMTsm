@@ -12,16 +12,17 @@ import java.util.List;
  * @since 2021-06-02 11:02:48
  */
 public interface CourseDetailsService {
-    CourseDetails queryById(Integer coursedetailsId);
+    CourseDetailsVo queryById(Integer coursedetailsId);
     List<CourseDetails> queryAllByLimit(int offset, int limit);
     CourseDetails insert(CourseDetails coursedetails);
     CourseDetails update(CourseDetails coursedetails);
-    boolean deleteById(Integer coursedetailsId);
+    public boolean deleteById(Integer coursedetailsId);
 
     public List<CourseDetailsVo> selectAllCourseDetails();
     public void addCourseDetailsService(CourseDetailsVo coursedetailsVo);
     public int updateByCourseDetailsKey(CourseDetailsVo coursedetailsVo);
     public int deleteByCourseDetails(CourseDetailsVo coursedetailsVo);
     public List<CourseDetailsVo> selectAllCourseDetails2();
-    List<CourseDetailsVo> selectAllCourseDetails3(Integer courseId);
+    public List<CourseDetailsVo> selectAllCourseDetails3(Integer courseId);
+    public int selectCourseDetailsDeleteOne(int courseId);
 }

@@ -1,9 +1,11 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
@@ -22,6 +24,8 @@ public class ShiftVo {
     /**
      * 转班日期
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date shiftDate;
 
     /**
@@ -84,6 +88,13 @@ public class ShiftVo {
      */
     private Integer studentId;
     private StudentVo studentVo;
+
+    /**
+     * 学员分班编号
+     */
+    private Integer studentstatusId;
+    private StudentstatusVo studentstatusVo;
+
 
     /**
      * 原班级编号

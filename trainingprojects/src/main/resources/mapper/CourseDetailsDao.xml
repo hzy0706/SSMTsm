@@ -306,5 +306,9 @@
         where CourseDetails_Id = #{coursedetailsId}
     </update>
 
+    <select id="selectCourseDetailsDeleteOne" resultType="integer" parameterType="integer">
+        SELECT COUNT(Course_Id) FROM coursedetails WHERE Course_Id= #{courseId} AND TimeLiness = 0
+    </select>
+
 </mapper>
 

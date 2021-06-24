@@ -73,4 +73,24 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseVo> selectAllCourses2() {
         return courseDao.selectAllCourses2();
     }
+
+    @Override
+    public int updateByCourseHouse(CourseVo courseVo) {
+        return courseDao.updateByCourseHouse(courseVo);
+    }
+
+    @Override
+    public int updateByCourseHouse2(CourseVo courseVo) {
+        return courseDao.updateByCourseHouse2(courseVo);
+    }
+
+    @Override
+    public int selectCourseDelectOne(int classtypeid) {
+        return courseDao.selectCourseDelectOne(classtypeid);
+    }
+
+    @Override
+    public int updateByCourseHouse3(int courseid) {
+        return courseDao.updateByCourseHouse3(courseid);
+    }
 }

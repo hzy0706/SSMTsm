@@ -87,4 +87,16 @@ public class ClassesController {
         return list;
     }
 
+    @GetMapping("/selectClassesNumbers/{id}")
+    public ClassesVo selectClassesNumber(@PathVariable("id") int id){
+        ClassesVo list = classesService.selectClassesNumber(id);
+        return list;
+    }
+
+    @PutMapping("/UpdateAddClassesStudentNumber")
+    public AjaxResponse UpdateAddClassesStudentNumber(@RequestBody @Valid ClassesVo classesVo){
+        classesService.UpdateAddClassesStudentNumber(classesVo);
+        return  AjaxResponse.success(classesVo);
+    }
+
 }

@@ -62,4 +62,14 @@ public class MemorandumattachmentServiceImpl implements MemorandumattachmentServ
         return memorandumattachmentDao.updateZsChName(memorandumattachmentVo);
     }
 
+    @Override
+    public List<MemorandumattachmentVo> findJjexamine() {
+        return memorandumattachmentDao.findJjexamine();
+    }
+
+    @Override
+    public List<MemorandumattachmentVo> findMemorandumattachmentKey() {
+        return memorandumattachmentDao.findMemorandumattachmentKey();
+    }
+
 }

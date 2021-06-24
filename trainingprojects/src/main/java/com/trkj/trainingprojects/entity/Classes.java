@@ -73,6 +73,14 @@ public class Classes implements Serializable {
      */
     private Date deletetime;
     /**
+     * 班级实际人数
+     */
+    public Integer classestudents;
+    /**
+     * 班级最大人数
+     */
+    public Integer classecountstudents;
+    /**
      * 时效性
      */
     private Integer timeliness;

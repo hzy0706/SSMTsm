@@ -35,6 +35,7 @@ public class MemorandumattachmentController {
     //    修改
     @PutMapping("/updateMemorandumattachment")
     public AjaxResponse updateMemorandumattachment(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+//        memorandumattachmentVo.setJjexamine(1);
         memorandumattachmentService.updateMemorandumattachment(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }
@@ -88,5 +89,17 @@ public class MemorandumattachmentController {
         memorandumattachmentVo.setZsexaminename(null);
         memorandumattachmentService.updateZsChName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
+    }
+    @GetMapping("/findJjexamine")
+    public AjaxResponse findJjexamine(){
+        List<MemorandumattachmentVo> list= memorandumattachmentService.findJjexamine();
+        log.debug(list.toString());
+        return AjaxResponse.success(list);
+    }
+    @GetMapping("/findMemorandumattachmentKey")
+    public AjaxResponse findMemorandumattachmentKey(){
+        List<MemorandumattachmentVo> list= memorandumattachmentService.findMemorandumattachmentKey();
+        log.debug(list.toString());
+        return AjaxResponse.success(list);
     }
 }
