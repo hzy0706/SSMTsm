@@ -56,6 +56,12 @@ public class StudentController {
         return pageInfo;
     }
 
+    @GetMapping("/selectAllStudent2")
+    public List<StudentVo> selectAllStudent2(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        List<StudentVo> list = studentService.selectAllStudent();
+        return list;
+    }
+
     @PostMapping("/addStudents")
     public AjaxResponse addStudents(@RequestBody @Valid StudentVo studentVo){
         Date date = new Date();

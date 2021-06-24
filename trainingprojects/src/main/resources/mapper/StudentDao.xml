@@ -96,6 +96,14 @@
         where st.TimeLiness = 0
     </select>
 
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentMap">
+        select
+          Student_Id, Student_Name, Student_State, Sex, Student_Phone, Address, ImgAddress, ParentName, ParentPhone, LPAD(Student_Number,7,'0') Student_Number, Entrance, StudyTime, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Classes_Id, Source_Id, Register_Id
+        from student
+        where Register_Id = #{registerId}
+    </select>
+
     <select id="SelectStudentByState2" resultMap="StudentMap">
         select
         <include refid="Base_Column_List" />
@@ -307,7 +315,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from tr01904.student where Student_Id = #{studentId}
+        delete from student where Register_Id = #{registerId}
     </delete>
 
     <!--修改删除人-->
