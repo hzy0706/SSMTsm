@@ -36,4 +36,9 @@ public class ReturnvisitServiceImpl implements ReturnvisitService {
     public int delReturnVisit(ReturnvisitVo returnvisitVo) {
         return returnvisitDao.delByReturnvisitKey2(returnvisitVo)   ;
     }
+
+    @Override
+    public int updateReturnVisitState(Integer registerId,Integer attentstate) {
+        return returnvisitDao.updateReturnVisitState(registerId,attentstate);
+    }
 }

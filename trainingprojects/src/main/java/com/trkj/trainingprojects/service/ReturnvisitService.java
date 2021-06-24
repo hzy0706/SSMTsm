@@ -14,4 +14,6 @@ public interface ReturnvisitService {
 //    删除
     public int delReturnVisit(ReturnvisitVo returnvisitVo);
 
+    public int updateReturnVisitState( Integer registerId, Integer attentstate);
+
 }

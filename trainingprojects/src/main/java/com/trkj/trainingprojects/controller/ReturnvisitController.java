@@ -50,6 +50,8 @@ public class ReturnvisitController {
 //    删除
     @PutMapping("/delReturnvisit")
     public AjaxResponse delReturnvisit(@RequestBody @Valid ReturnvisitVo returnvisitVo){
+
+        log.debug(returnvisitVo.toString());
 //        时效性为1才可以删除
         returnvisitVo.setTimeliness(1);
         Date data=new Date();
@@ -60,5 +62,14 @@ public class ReturnvisitController {
         returnvisitVo.setReturnvisitdate(data);
         returnvisitService.delReturnVisit(returnvisitVo);
         return AjaxResponse.success(returnvisitVo);
+    }
+
+    /**
+     * 修改回访状态
+     */
+    @PutMapping("/updateReturnVisitState/{registerId}/{attentstate}")
+    public AjaxResponse updateReturnVisitState(@PathVariable("registerId") Integer registerId,@PathVariable("attentstate") Integer attentstate){
+        returnvisitService.updateReturnVisitState(registerId,attentstate);
+        return AjaxResponse.success();
     }
 }

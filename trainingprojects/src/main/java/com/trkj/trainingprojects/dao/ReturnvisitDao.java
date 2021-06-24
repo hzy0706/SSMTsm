@@ -21,4 +21,6 @@ public interface ReturnvisitDao {
     int delByReturnvisitKey2(ReturnvisitVo record);
 //    查询
     List<ReturnvisitVo> findReturnvisit();
+
+    int updateReturnVisitState(Integer registerId, Integer attentstate);
 }
