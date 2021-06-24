@@ -36,8 +36,6 @@ public class InterviewController {
 
     @PostMapping("/addInterview")
     public AjaxResponse addInterview(@RequestBody @Valid InterviewVo interviewVo){
-        Date date = new Date();
-        interviewVo.setInterviewdate(date);
         interviewService.addInterview(interviewVo);
         return AjaxResponse.success(interviewVo);
     }
