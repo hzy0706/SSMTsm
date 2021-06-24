@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.entity.ExamManage;
+import com.trkj.trainingprojects.vo.ExamManageVo;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface ExamManageService {
 
     boolean deleteById(Integer examcode);
 
+    public List<ExamManageVo> selectAllExamManage();
 }

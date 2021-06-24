@@ -81,6 +81,25 @@
         </association>
     </resultMap>
 
+    <sql id="Base_Column_List">
+        ex.examCode, ex.ExaminationName, ex.description, ex.paperId, ex.examDate,
+         ex.totalTime, ex.totalScore, ex.studenttype, ex.tips, ex.Session_Id, ex.Semester_Id,
+          ex.Classes_Id, ex.CourseDetails_Id, ex.AddName, ex.ADDTIME, ex.UpdateName, ex.UpdateTime,
+          ex.DeleteName, ex.DeleteTime, ex.TimeLiness
+    </sql>
+
+    <!--查询所有[分页]-->
+    <select id="selectAllExamManage" resultMap="ExamManageMap">
+        select
+        <include refid="Base_Column_List" />
+        from exam_manage ex
+        inner join session se on ex.Session_Id = se.Session_Id
+        inner join semester sm on ex.Semester_Id = sm.Semester_Id
+        inner join classes cl on ex.Classes_Id = cl.Classes_Id
+        inner join coursedetails co on ex.CourseDetails_Id = co.CourseDetails_Id
+        where ex.TimeLiness = 0 order by ex.examCode DESC
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="ExamManageMap">
         select
