@@ -16,9 +16,7 @@ import javax.annotation.Resource;
 @RestController
 @Slf4j
 public class ExamManageController {
-    /**
-     * 服务对象
-     */
+
     @Resource
     private ExamManageService examManageService;
 

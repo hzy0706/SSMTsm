@@ -13,8 +13,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ClassMeta(className = "题库表")
-@ToString(exclude = "courses")
+@ClassMeta(className = "考试题库表")
+@ToString(exclude = "courseDetailsVo")
 public class ItemBankVo {
     /**
      * 题库编号
@@ -57,10 +57,38 @@ public class ItemBankVo {
      */
     private Integer timeliness;
     /**
-     * 课程编号
+     * 课程详细编号
      */
-    private Integer courseId;
+    private Integer coursedetailsId;
+    /**
+     * 正确答案
+     */
+    public String rightAnswer;
+    /**
+     * 分数
+     */
+    private Integer score;
+    /**
+     * 题目解析
+     */
+    public String analysis;
+    /**
+     * 选项A
+     */
+    public String answerA;
+    /**
+     * 选项B
+     */
+    public String answerB;
+    /**
+     * 选项C
+     */
+    public String answerC;
+    /**
+     * 选项D
+     */
+    public String answerD;
 
-    private CourseVo courseVo;
+    private CourseDetailsVo courseDetailsVo;
     private static final long serialVersionUID = 1L;
 }

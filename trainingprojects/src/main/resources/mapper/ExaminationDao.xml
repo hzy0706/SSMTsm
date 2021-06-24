@@ -3,7 +3,6 @@
 <mapper namespace="com.trkj.trainingprojects.dao.ExaminationDao">
     <resultMap type="com.trkj.trainingprojects.vo.ExaminationVo" id="ExaminationMap">
         <id property="examinationId" column="Examination_Id" jdbcType="INTEGER"/>
-        <result property="examinationname" column="ExaminationName" jdbcType="VARCHAR"/>
         <result property="average" column="Average" jdbcType="VARCHAR"/>
         <result property="highestscore" column="HighestScore" jdbcType="VARCHAR"/>
         <result property="lowestscore" column="LowestScore" jdbcType="VARCHAR"/>
@@ -65,25 +64,18 @@
             <result property="deptId" column="Dept_Id" jdbcType="INTEGER"/>
             <result property="enterpriseId" column="Enterprise_Id" jdbcType="INTEGER"/>
         </association>
-        <association property="coursesVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
-            <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
-            <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
-            <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
-            <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
-            <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
-            <result property="commission" column="Commission" jdbcType="NUMERIC"/>
+        <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+            <id property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsName" column="CourseDetails_Name" jdbcType="VARCHAR"/>
+            <result property="coursesequence" column="CourseSequence" jdbcType="INTEGER"/>
             <result property="addname" column="AddName" jdbcType="VARCHAR"/>
             <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
             <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
             <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
-            <result property="stopname" column="StopName" jdbcType="VARCHAR"/>
-            <result property="stoptime" column="StopTime" jdbcType="TIMESTAMP"/>
-            <result property="beginname" column="BeginName" jdbcType="VARCHAR"/>
-            <result property="begintime" column="BeginTime" jdbcType="TIMESTAMP"/>
             <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
-            <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
         </association>
     </resultMap>
 

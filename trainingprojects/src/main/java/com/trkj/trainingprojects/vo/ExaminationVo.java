@@ -14,16 +14,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ClassMeta(className = "考试总表")
-@ToString(exclude = "classesListVos,empsVo,coursesVo")
+@ToString(exclude = "classesListVos,empsVo,courseDetailsVo")
 public class ExaminationVo {
     /**
      * 考试总表编号
      */
     private Integer examinationId;
-    /**
-     * 考试名称
-     */
-    private String examinationname;
     /**
      * 平均分
      */
@@ -79,6 +75,6 @@ public class ExaminationVo {
 
     private ClassesVo classesListVos;
     private EmpVo empsVo;
-    private CourseVo coursesVo;
+    private CourseDetailsVo courseDetailsVo;
     private static final long serialVersionUID = 1L;
 }
