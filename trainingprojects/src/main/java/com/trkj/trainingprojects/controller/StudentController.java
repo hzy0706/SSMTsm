@@ -57,7 +57,7 @@ public class StudentController {
     }
 
     @GetMapping("/selectAllStudent2")
-    public List<StudentVo> selectAllStudent2(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    public List<StudentVo> selectAllStudent2(){
         List<StudentVo> list = studentService.selectAllStudent();
         return list;
     }
