@@ -27,4 +27,5 @@ public interface ClassRoomService {
     public void addClassRoom(ClassRoomVo classRoomVo);
     public int deleteByClassRoom(ClassRoomVo classRoomVo);
     public int updateByClassRoomKey(ClassRoomVo classRoomVo);
+    public int updateClassRoomState(ClassRoomVo classRoomVo);
 }
