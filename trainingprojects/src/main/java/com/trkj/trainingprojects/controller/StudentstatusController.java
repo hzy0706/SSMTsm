@@ -94,4 +94,10 @@ public class StudentstatusController {
         return  AjaxResponse.success(studentstatusVo);
     }
 
+    @GetMapping("/queryByStudentId/{studentId}")
+    public List<StudentstatusVo> queryByStudentId(@PathVariable("studentId") int studentId){
+        List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
+        return list;
+    }
+
 }
