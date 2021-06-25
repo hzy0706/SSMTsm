@@ -18,6 +18,7 @@ public interface ClassesDao {
 
     List<ClassesVo> queryById(Integer courseId);
     ClassesVo queryById2(Integer classesId);
+    List<ClassesVo> selectAllClassesByTeacherId(Integer teacherId);
 
     List<Classes> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 

@@ -42,6 +42,11 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
+    public List<ClassesVo> selectAllClassesByTeacherId(Integer teacherId) {
+        return classesDao.selectAllClassesByTeacherId(teacherId);
+    }
+
+    @Override
     public List<ClassesVo> selectAllClasses() {
         return classesDao.selectAllClasses();
     }

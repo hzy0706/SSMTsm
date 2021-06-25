@@ -58,6 +58,17 @@
     inner join enterprise en on en.Enterprise_Id=e.Enterprise_Id
     inner join `position` p on p.Position_Id=e.Position_Id
   </select>
+
+  <select id="selectAllEmpsByPositionId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,d.Dept_Name,en.Enterprise_Name,p.Position_Name
+    from emp e
+    inner join dept d on d.Dept_Id=e.Dept_Id
+    inner join enterprise en on en.Enterprise_Id=e.Enterprise_Id
+    inner join `position` p on p.Position_Id=e.Position_Id
+    where e.Position_Id = #{positionId,jdbcType=INTEGER}
+  </select>
+
   <select id="selectAllIncumbencyEmps" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />,d.Dept_Name,en.Enterprise_Name,p.Position_Name
