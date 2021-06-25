@@ -72,7 +72,7 @@
         from awards a
         inner join student s on a.Student_Id=s.Student_Id
         inner join classes c on a.Classes_Id=c.Classes_Id
-        where a.TimeLiness = 0
+        where a.TimeLiness = 0 order by Awards_Id desc
     </select>
 
     <!--查询单个-->
