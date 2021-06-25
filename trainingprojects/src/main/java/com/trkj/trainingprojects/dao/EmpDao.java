@@ -15,6 +15,8 @@ public interface EmpDao {
 
     List<EmpVo> selectAllEmps();
 
+    List<EmpVo> selectAllEmpsByPositionId(Integer positionId);
+
     /**
      * 查询所有在职职工
      * @return
