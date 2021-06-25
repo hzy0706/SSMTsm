@@ -35,7 +35,7 @@ public class SuspendeVo {
     /**
      * 停课办理人
      */
-    private String suspendeHandler;
+    public String addname;
 
     /**
      * 停课审批
@@ -114,6 +114,12 @@ public class SuspendeVo {
      */
     private Integer classesId;
     private ClassesVo classesVo;
+
+    /**
+     * 学员分班编号
+     */
+    private Integer studentstatusId;
+    private StudentstatusVo studentstatusVo;
 
     private static final long serialVersionUID = 1L;
 }

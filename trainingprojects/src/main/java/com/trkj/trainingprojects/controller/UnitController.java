@@ -43,7 +43,7 @@ public class UnitController {
      * @param unitVo
      * @return
      */
-    @PostMapping("/addSemesterALL")
+    @PostMapping("/addUnitALL")
     public AjaxResponse addUnitALL(@RequestBody @Valid UnitVo unitVo){
         unitService.addUnit(unitVo);
         return AjaxResponse.success(unitVo);
@@ -56,7 +56,7 @@ public class UnitController {
      */
     @PutMapping("/updateUnitById")
     public  AjaxResponse updateUnitById(@RequestBody @Valid UnitVo unitVo){
-        unitService.update(unitVo);
+        unitService.updateUnit(unitVo);
         return AjaxResponse.success(unitVo);
     }
     /**

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.AttendanceDao">
+    <resultMap type="com.trkj.trainingprojects.vo.AttendanceVo" id="AttendanceMap">
+        <id property="attendanceId" column="Attendance_Id" jdbcType="INTEGER"/>
+        <result property="attendanceTime" column="Attendance_Time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="Status" jdbcType="INTEGER"/>
+        <result property="remarks" column="Remarks" jdbcType="VARCHAR"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+        <result property="empId" column="Emp_Id" jdbcType="INTEGER"/>
+        <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
+            <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
+            <result property="studentName" column="Student_Name" jdbcType="VARCHAR"/>
+            <result property="studentState" column="Student_State" jdbcType="INTEGER"/>
+            <result property="sex" column="Sex" jdbcType="VARCHAR"/>
+            <result property="studentPhone" column="Student_Phone" jdbcType="VARCHAR"/>
+            <result property="address" column="Address" jdbcType="VARCHAR"/>
+            <result property="imgaddress" column="ImgAddress" jdbcType="VARCHAR"/>
+            <result property="parentname" column="ParentName" jdbcType="VARCHAR"/>
+            <result property="parentphone" column="ParentPhone" jdbcType="VARCHAR"/>
+            <result property="studentNumber" column="Student_Number" jdbcType="VARCHAR"/>
+            <result property="entrance" column="Entrance" jdbcType="VARCHAR"/>
+            <result property="studytime" column="StudyTime" jdbcType="TIMESTAMP"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
+            <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
+        </association>
+        <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+            <id column="Emp_Id" jdbcType="INTEGER" property="empId" />
+            <result column="JobNumber" jdbcType="VARCHAR" property="jobnumber" />
+            <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+            <result column="UserImg" jdbcType="VARCHAR" property="userimg" />
+            <result column="IndividualImg" jdbcType="VARCHAR" property="individualimg" />
+            <result column="Emp_Sex" jdbcType="VARCHAR" property="empSex" />
+            <result column="Emp_Phone" jdbcType="VARCHAR" property="empPhone" />
+            <result column="E_mail" jdbcType="VARCHAR" property="eMail" />
+            <result column="Birthday" jdbcType="TIMESTAMP" property="birthday" />
+            <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+            <result column="Address" jdbcType="VARCHAR" property="address" />
+            <result column="WorkersState" jdbcType="INTEGER" property="workersstate" />
+            <result column="Password" jdbcType="VARCHAR" property="password" />
+            <result column="LoginState" jdbcType="INTEGER" property="loginstate" />
+            <result column="Education" jdbcType="VARCHAR" property="education" />
+            <result column="Graduate" jdbcType="VARCHAR" property="graduate" />
+            <result column="AddName" jdbcType="VARCHAR" property="addname" />
+            <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+            <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+            <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+            <result column="SeparationName" jdbcType="VARCHAR" property="separationname" />
+            <result column="SeparationTime" jdbcType="TIMESTAMP" property="separationtime" />
+            <result column="SeparationDate" jdbcType="TIMESTAMP" property="separationdate" />
+            <result column="Position_Id" jdbcType="INTEGER" property="positionId" />
+            <result column="Dept_Id" jdbcType="INTEGER" property="deptId" />
+            <result column="Enterprise_Id" jdbcType="INTEGER" property="enterpriseId" />
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Attendance_Id, Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id
+    </sql>
+
+    <sql id="Base_Student_List">
+        st.Student_Id, st.Student_Name, st.Student_State, st.Sex, st.Student_Phone,
+         st.Address, st.ImgAddress, st.ParentName, st.ParentPhone, LPAD(st.Student_Number,7,'0') Student_Number,
+          st.Entrance, st.StudyTime, st.AddName, st.ADDTIME, st.UpdateName, st.UpdateTime, st.DeleteName, st.DeleteTime,
+           st.TimeLiness, st.Classes_Id, st.Source_Id, st.Register_Id
+    </sql>
+
+    <sql id="Base_Emp_List">
+    e.Emp_Id, e.JobNumber, e.Emp_Name, e.UserImg, e.IndividualImg, e.Emp_Sex, e.Emp_Phone, e.E_mail,
+    e.Birthday, e.Remarks, e.Address, e.WorkersState, e.`Password`, e.LoginState, e.Education, e.Graduate,
+    e.AddName, e.AddTime, e.UpdateName, e.UpdateTime, e.SeparationName, e.SeparationTime, e.SeparationDate,
+    e.Position_Id, e.Dept_Id, e.Enterprise_Id
+  </sql>
+
+    <!--查询所有[分页]-->
+    <select id="selectAllAttenDance" resultMap="AttendanceMap">
+        select
+        <include refid="Base_Column_List" />,
+        <include refid="Base_Student_List" />,
+        <include refid="Base_Emp_List" />
+        from attendance ate
+        inner join student st on ate.Student_Id = st.Student_Id
+        inner join emp e on ate.Emp_Id = e.Emp_Id
+        where ate.TimeLiness = 0 order by Attendance_Id DESC
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AttendanceMap">
+        select
+          Attendance_Id, Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id
+        from tr01904.attendance
+        where Attendance_Id = #{attendanceId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AttendanceMap">
+        select
+          Attendance_Id, Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id
+        from tr01904.attendance
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="AttendanceMap">
+        select
+        Attendance_Id, Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName,
+        DeleteTime, TimeLiness, Student_Id, Emp_Id
+        from tr01904.attendance
+        <where>
+            <if test="attendanceId != null">
+                and Attendance_Id = #{attendanceId}
+            </if>
+            <if test="attendanceTime != null">
+                and Attendance_Time = #{attendanceTime}
+            </if>
+            <if test="status != null">
+                and Status = #{status}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and Remarks = #{remarks}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and AddTime = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="studentId != null">
+                and Student_Id = #{studentId}
+            </if>
+            <if test="empId != null">
+                and Emp_Id = #{empId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="attendanceId" useGeneratedKeys="true">
+        insert into tr01904.attendance(Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id)
+        values (#{attendanceTime}, #{status}, #{remarks}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{empId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="attendanceId" useGeneratedKeys="true">
+        insert into tr01904.attendance(Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.attendanceTime}, #{entity.status}, #{entity.remarks}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.studentId}, #{entity.empId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="attendanceId" useGeneratedKeys="true">
+        insert into tr01904.attendance(Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime,
+        DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.attendanceTime}, #{entity.status}, #{entity.remarks}, #{entity.addname}, #{entity.addtime},
+            #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
+            #{entity.timeliness}, #{entity.studentId}, #{entity.empId})
+        </foreach>
+        on duplicate key update
+        Attendance_Time = values(Attendance_Time) , Status = values(Status) , Remarks = values(Remarks) , AddName =
+        values(AddName) , AddTime = values(AddTime) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime)
+        , DeleteName = values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness = values(TimeLiness) ,
+        Student_Id = values(Student_Id) , Emp_Id = values(Emp_Id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateByAttenDanceKey">
+        update tr01904.attendance
+        <set>
+            <if test="attendanceTime != null">
+                Attendance_Time = #{attendanceTime},
+            </if>
+            <if test="status != null">
+                Status = #{status},
+            </if>
+            <if test="remarks != null">
+                Remarks = #{remarks},
+            </if>
+            <if test="addname != null">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                AddTime = #{addtime},
+            </if>
+            <if test="updatename != null">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="studentId != null">
+                Student_Id = #{studentId},
+            </if>
+            <if test="empId != null">
+                Emp_Id = #{empId},
+            </if>
+        </set>
+        where Attendance_Id = #{attendanceId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.attendance where Attendance_Id = #{attendanceId}
+    </delete>
+
+    <!--修改删除人与时效性-->
+    <update id="deleteByAttenDance" parameterType="com.trkj.trainingprojects.entity.Attendance">
+        update tr01904.attendance
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where Attendance_Id = #{attendanceId}
+    </update>
+</mapper>
+

@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.dao;
 
 import com.trkj.trainingprojects.entity.ExamManage;
+import com.trkj.trainingprojects.vo.ExamManageVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,5 +32,6 @@ public interface ExamManageDao {
 
     int deleteById(Integer examcode);
 
+    List<ExamManageVo> selectAllExamManage();
 }
 

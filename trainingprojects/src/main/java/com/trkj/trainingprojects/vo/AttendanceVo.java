@@ -1,6 +1,8 @@
 package com.trkj.trainingprojects.vo;
 
 import com.trkj.trainingprojects.ann.ClassMeta;
+import com.trkj.trainingprojects.entity.Emp;
+import com.trkj.trainingprojects.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,21 +15,25 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ClassMeta(className = "考试题库表")
-@ToString(exclude = "courseDetailsVo")
-public class ItemBankVo {
+@ClassMeta(className = "学员考勤表")
+@ToString(exclude = "studentVo,empVo")
+public class AttendanceVo {
     /**
-     * 题库编号
+     * 考勤表编号
      */
-    private Integer itembankId;
+    private Integer attendanceId;
     /**
-     * 题目类型
+     * 考勤时间
      */
-    private String itembankType;
+    private Date attendanceTime;
     /**
-     * 题目内容
+     * 考勤状态
      */
-    private String itembankContent;
+    private Integer status;
+    /**
+     * 备注
+     */
+    private String remarks;
     /**
      * 增加人
      */
@@ -57,38 +63,15 @@ public class ItemBankVo {
      */
     private Integer timeliness;
     /**
-     * 课程详细编号
+     * 学员编号
      */
-    private Integer coursedetailsId;
+    private Integer studentId;
     /**
-     * 正确答案
+     * 职工编号
      */
-    public String rightAnswer;
-    /**
-     * 分数
-     */
-    private Integer score;
-    /**
-     * 题目解析
-     */
-    public String analysis;
-    /**
-     * 选项A
-     */
-    public String answerA;
-    /**
-     * 选项B
-     */
-    public String answerB;
-    /**
-     * 选项C
-     */
-    public String answerC;
-    /**
-     * 选项D
-     */
-    public String answerD;
+    private Integer empId;
 
-    private CourseDetailsVo courseDetailsVo;
+    private StudentVo studentVo;
+    private EmpVo empVo;
     private static final long serialVersionUID = 1L;
 }
