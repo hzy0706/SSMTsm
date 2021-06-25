@@ -38,9 +38,12 @@ public class JwtTokenUtil {
      */
     public String generateToken(String userName,String userId) {
         Map<String, Object> claims = new HashMap<>(2);
-        claims.put("sub", userName);
+        claims.put("sub", "jwtdemo");
+        claims.put("uname",userName);
         claims.put("uid",userId);
-        claims.put("created", new Date());
+
+        Date iatDate=new Date();
+        claims.put("iat", iatDate);
         return generateToken(claims);
     }
 
@@ -54,14 +57,14 @@ public class JwtTokenUtil {
         String username;
         try {
             Claims claims = getClaimsFromToken(token);
-            username = claims.getSubject();
+            username = claims.get("uname").toString();
         } catch (Exception e) {
             username = null;
         }
         return username;
     }
     /**
-     * 从令牌中获取用户名
+     * 从令牌中获取用户ID
      *
      * @param token 令牌
      * @return 用户编号
@@ -98,7 +101,7 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 得到token的过期时间，测试用，可删除
+     * 得到token的过期时间，测试用
      * @param token
      * @return
      */
@@ -117,7 +120,8 @@ public class JwtTokenUtil {
         String refreshedToken;
         try {
             Claims claims = getClaimsFromToken(token);
-            claims.put("created", new Date());
+            Date iatDate=new Date();
+            claims.put("iat", iatDate);
             refreshedToken = generateToken(claims);
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,12 +158,15 @@ public class JwtTokenUtil {
          * 如果是第二种（及String类型）的key，则将其进行base64解码获得byte[] 。
          * compact() 生成JWT
          */
+
+        Date iatDate= (Date) claims.get("iat");
+        log.debug("创建时间:{},过期时间:{}",iatDate.toLocaleString(),expirationDate.toLocaleString());
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setClaims(claims)
                 //.setId("")
                 .setExpiration(expirationDate)
-                .setIssuedAt((Date)claims.get("created"))
+                //.setIssuedAt((Date)claims.get("created"))
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
@@ -173,7 +180,9 @@ public class JwtTokenUtil {
     private Claims getClaimsFromToken(String token) {
         Claims claims;
         try {
-            claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+            claims = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token).getBody();
         } catch (Exception e) {
             claims = null;
         }

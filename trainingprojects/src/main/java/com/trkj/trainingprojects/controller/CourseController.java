@@ -34,6 +34,12 @@ public class CourseController {
         PageInfo<CourseVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+    //勿删（胡志远）
+    @GetMapping("/selectAllCourse")
+    public List<CourseVo> selectAllCourses(){
+        List<CourseVo> list = courseService.selectAllCourses();
+        return list;
+    }
 
     @PostMapping("/addCourses")
     public AjaxResponse addCourse(@RequestBody @Valid CourseVo courseVo){

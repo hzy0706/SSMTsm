@@ -47,11 +47,11 @@ jwt:
   # 密匙KEY
   secret: JWTSecret
   # HeaderKEY
-  header: JWTHeaderName
+  header: jwtAuth
   # Token前缀字符
   tokenPrefix: Security-c
   # 过期时间毫秒
-  expire: 100000
+  expire: 1800000
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

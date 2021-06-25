@@ -25,7 +25,7 @@ public class ArrangeController {
     private EmpService empService;
     @PostMapping("checkedArrange")
     public AjaxResponse checkedArrange(@RequestBody @Valid List<ArrangeFormVo> arrangeFormVoList){
-        List<ArrangeFormVo> list1 = new ArrayList<>();
+        /*List<ArrangeFormVo> list1 = new ArrayList<>();
         //保存所有需要排课的班级
         List<Integer> classIdList = new ArrayList<>();
         for (ArrangeFormVo arrangeFormVo:arrangeFormVoList) {
@@ -34,7 +34,7 @@ public class ArrangeController {
         }
         Map<ArrangeFormVo, Integer> arrangeFormVoMap = new HashMap<>();
         Map<ArrangeFormVo, Integer> arrangeFormVoMap2 = new HashMap<>();
-        /*根据教师来筛选，保证同一个老师在同一个时段只能上一个班的课*/
+        *//*根据教师来筛选，保证同一个老师在同一个时段只能上一个班的课*//*
         List<EmpVo> empVoList = empService.selectAllEmpsByPositionId(9);
         for (int i=0;i<empVoList.size();i++){
             List<ClassesVo> classesVoList = classesService.selectAllClassesByTeacherId(empVoList.get(i).getEmpId());
@@ -61,9 +61,9 @@ public class ArrangeController {
             }
 
         }
-        /*for (ArrangeFormVo arrangeFormVo:arrangeFormVoList){
+        *//*for (ArrangeFormVo arrangeFormVo:arrangeFormVoList){
             System.out.println(arrangeFormVoList.size()+"======2========"+arrangeFormVo.toString());
-        }*/
+        }*//*
         int c=0;
         for (Map.Entry entry : arrangeFormVoMap2.entrySet()) {
             System.out.println(c++);
@@ -74,7 +74,7 @@ public class ArrangeController {
         classIdList.addAll(set);
         for(Integer integer:classIdList){
             System.out.println(integer+"*****************");
-        }
+        }*/
         return AjaxResponse.success();
     }
 }

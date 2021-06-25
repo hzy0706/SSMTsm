@@ -3,6 +3,7 @@ package com.trkj.trainingprojects.service.impl;
 import com.trkj.trainingprojects.dao.EmpDao;
 import com.trkj.trainingprojects.service.EmpService;
 import com.trkj.trainingprojects.vo.EmpVo;
+import com.trkj.trainingprojects.vo.UserVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,13 +41,15 @@ public class EmpServiceImpl implements EmpService {
         return empDao.updateByEmpKey(record);
     }
 
-    @Override
-    public List<EmpVo> selectAllEmpsByPositionId(Integer positionId) {
-        return empDao.selectAllEmpsByPositionId(positionId);
-    }
 
     @Override
     public List<EmpVo> selectAllIncumbencyEmps() {
         return empDao.selectAllIncumbencyEmps();
+    }
+
+    @Override
+    public EmpVo findByUsername(String username) {
+        EmpVo empVo=empDao.findByUsername(username);
+        return empVo;
     }
 }

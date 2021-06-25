@@ -1,20 +1,22 @@
 package com.trkj.trainingprojects.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
 @ClassMeta(className = "职工表")
-public class EmpVo {
+public class EmpVo implements UserDetails{
     /**
      * 职工编号
      */
@@ -58,8 +60,6 @@ public class EmpVo {
     /**
      * 出生年月
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date birthday;
 
     /**
@@ -105,8 +105,6 @@ public class EmpVo {
     /**
      * 增加时间
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addtime;
 
     /**
@@ -117,8 +115,6 @@ public class EmpVo {
     /**
      * 最后修改时间
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatetime;
 
     /**
@@ -129,22 +125,13 @@ public class EmpVo {
     /**
      * 离职办理时间
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date separationtime;
 
     /**
      * 离职日期
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date separationdate;
 
-    /**
-     * 职位编号
-     */
-    private Integer positionId;
-    private PositionVo positionVo;
 
     /**
      * 部门编号
@@ -153,10 +140,57 @@ public class EmpVo {
     private DeptVo deptVo;
 
     /**
-     * 企业档案编号
+     * 0无效用户，1是有效用户
      */
-    private Integer enterpriseId;
-    private EnterpriseVo enterpriseVo;
+    private Boolean enabled;
+
+    /**
+     * 账户是否没过期
+     */
+    private Boolean accountNonExpired;
+
+    /**
+     * 是否没被锁定
+     */
+    private Boolean accountNonLocked;
+
+    /**
+     * 密码是否没有过期
+     */
+    private Boolean credentialsNonExpired;
+
 
     private static final long serialVersionUID = 1L;
+
+    Collection<? extends GrantedAuthority> authorities;  //用户的权限集合
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return jobnumber;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 }
