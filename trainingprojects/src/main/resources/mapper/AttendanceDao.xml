@@ -70,7 +70,9 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        Attendance_Id, Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id
+        ate.Attendance_Id, ate.Attendance_Time, ate.Status, ate.Remarks,
+         ate.AddName, ate.AddTime, ate.UpdateName, ate.UpdateTime, ate.DeleteName, ate.DeleteTime,
+          ate.TimeLiness, ate.Student_Id, ate.Emp_Id
     </sql>
 
     <sql id="Base_Student_List">

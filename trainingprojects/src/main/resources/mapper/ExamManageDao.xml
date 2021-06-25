@@ -6,7 +6,7 @@
         <result property="examinationname" column="ExaminationName" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="paperid" column="paperId" jdbcType="INTEGER"/>
-        <result property="examdate" column="examDate" jdbcType="VARCHAR"/>
+        <result property="examdate" column="examDate" jdbcType="TIMESTAMP"/>
         <result property="totaltime" column="totalTime" jdbcType="INTEGER"/>
         <result property="totalscore" column="totalScore" jdbcType="INTEGER"/>
         <result property="studenttype" column="studenttype" jdbcType="VARCHAR"/>

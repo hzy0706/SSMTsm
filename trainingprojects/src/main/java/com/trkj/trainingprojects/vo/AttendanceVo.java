@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import com.trkj.trainingprojects.entity.Emp;
 import com.trkj.trainingprojects.entity.Student;
@@ -25,6 +26,7 @@ public class AttendanceVo {
     /**
      * 考勤时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date attendanceTime;
     /**
      * 考勤状态
