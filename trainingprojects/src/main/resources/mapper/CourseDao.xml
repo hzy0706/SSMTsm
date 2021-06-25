@@ -55,7 +55,7 @@
             <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
-            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
         </collection>
     </resultMap>
 
