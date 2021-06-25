@@ -108,4 +108,14 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     public int updateByClassesIdAndStudentIdOnState(Integer classesId, Integer studentId,Integer status) {
         return studentstatusDao.updateByClassesIdAndStudentIdOnState(classesId,studentId,status);
     }
+
+    @Override
+    public List<StudentstatusVo> selectStudentAllotType() {
+        return studentstatusDao.selectStudentAllotType();
+    }
+
+    @Override
+    public int updateByApprovedStu(StudentstatusVo studentstatusVo) {
+        return studentstatusDao.updateByApprovedStu(studentstatusVo);
+    }
 }

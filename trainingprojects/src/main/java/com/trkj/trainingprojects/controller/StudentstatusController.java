@@ -99,4 +99,33 @@ public class StudentstatusController {
         List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
         return list;
     }
+
+    @GetMapping("/selectStudentAllotType")
+    public PageInfo<StudentstatusVo> selectStudentAllotType(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        List<StudentstatusVo> list = studentstatusService.selectStudentAllotType();
+        PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @PutMapping("/updateByApprovedStu/{ids}/{updatename}")
+    public AjaxResponse updateByApprovedStu(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+        Date date = new Date();
+        String[] id= ids.split(",");
+        for (String s:id){
+            StudentstatusVo studentstatusVo = new StudentstatusVo();
+            studentstatusVo.setStudentstatusId(Integer.parseInt(s));
+            studentstatusVo.setAppname(updatename);
+            studentstatusVo.setAddtime(date);
+            studentstatusVo.setApproval(1);
+            studentstatusVo.setRevokeappname(null);
+            studentstatusVo.setRevokeapptime(null);
+            studentstatusVo.setUpdatename(updatename);
+            studentstatusVo.setUpdatetime(date);
+            studentstatusVo.setTimeliness(0);
+            studentstatusService.updateByApprovedStu(studentstatusVo);
+        }
+
+        return  AjaxResponse.success(id);
+    }
 }
