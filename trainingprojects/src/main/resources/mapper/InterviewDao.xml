@@ -102,7 +102,7 @@
         inner join classes cl on iv.Classes_Id =cl.Classes_Id
         inner join emp e on iv.Emp_Id=e.Emp_Id
         inner join student s on iv.Student_Id=s.Student_Id
-        where iv.TimeLiness = 0
+        where iv.TimeLiness = 0 order by Interview_Id desc
     </select>
 
     <!--查询单个-->

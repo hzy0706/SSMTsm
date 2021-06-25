@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +36,8 @@ public class ExamManageVo {
     /**
      * 考试日期
      */
-    private String examdate;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    private Date examdate;
     /**
      * 持续时长
      */

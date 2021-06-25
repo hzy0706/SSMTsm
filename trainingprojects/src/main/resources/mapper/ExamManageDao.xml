@@ -6,7 +6,7 @@
         <result property="examinationname" column="ExaminationName" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="paperid" column="paperId" jdbcType="INTEGER"/>
-        <result property="examdate" column="examDate" jdbcType="VARCHAR"/>
+        <result property="examdate" column="examDate" jdbcType="TIMESTAMP"/>
         <result property="totaltime" column="totalTime" jdbcType="INTEGER"/>
         <result property="totalscore" column="totalScore" jdbcType="INTEGER"/>
         <result property="studenttype" column="studenttype" jdbcType="VARCHAR"/>
@@ -91,7 +91,7 @@
     <!--查询所有[分页]-->
     <select id="selectAllExamManage" resultMap="ExamManageMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,co.CourseDetails_Name
         from exam_manage ex
         inner join session se on ex.Session_Id = se.Session_Id
         inner join semester sm on ex.Semester_Id = sm.Semester_Id

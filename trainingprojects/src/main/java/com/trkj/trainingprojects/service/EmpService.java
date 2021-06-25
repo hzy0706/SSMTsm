@@ -14,6 +14,7 @@ public interface EmpService {
     int updateByEmpKeySelective(EmpVo record);
 
     int updateByEmpKey(EmpVo record);
+    List<EmpVo> selectAllEmpsByPositionId(Integer positionId);
 
     List<EmpVo> selectAllIncumbencyEmps();
 }

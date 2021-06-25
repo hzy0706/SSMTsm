@@ -29,8 +29,8 @@
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
           Unit_Id, Unit_Name, Unit_Level, Director, Unit_Address, MailCode, Unit_Phone, Email, Profile, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, UnitType_Id
-        from tr01904.unit
-        where Unit_Id = #{unitId} where timeliness=0
+        from unit
+        where timeliness=0 ORDER BY Unit_Id desc
     </select>
 
     <!--查询所有-->
@@ -39,71 +39,33 @@
            u.Unit_Phone,u.Email,u.Profile,u.Remarks,u.AddName,u.AddTime,
            u.UpdateName,u.UpdateTime,u.DeleteName,u.DeleteTime,u.UnitType_Id,ty.UnitType_Name
            from unit u left join unittype ty on u.UnitType_Id = ty.UnitType_Id
-           where u.TimeLiness=0
+           where u.TimeLiness=0 ORDER BY u.Unit_Id desc
     </select>
 
     <!--新增所有列-->
-    <insert id="addUnit" keyProperty="unitId" useGeneratedKeys="true" parameterType="com.trkj.trainingprojects.vo.UnitVo">
-        insert into tr01904.unit(Unit_Name, Unit_Level, Director, Unit_Address, MailCode, Unit_Phone, Email, Profile, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, UnitType_Id)
-        values (#{unitName}, #{unitLevel}, #{director}, #{unitAddress}, #{mailcode}, #{unitPhone}, #{email}, #{profile}, #{remarks}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{unittypeId})
+    <insert id="addUnit">
+        insert into unit(Unit_Name, Unit_Level, Director, Unit_Address,
+         MailCode, Unit_Phone, Email, Profile, Remarks, AddName, UnitType_Id)
+        values (#{unitName}, #{unitLevel}, #{director}, #{unitAddress}, #{mailcode}, #{unitPhone},
+         #{email}, #{profile}, #{remarks}, #{addname}, #{unittypeId})
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update" parameterType="com.trkj.trainingprojects.vo.UnitVo">
-        update tr01904.unit
-        <set>
-            <if test="unitName != null and unitName != ''">
+    <update id="updateUnit">
+        update unit
+        set
                 Unit_Name = #{unitName},
-            </if>
-            <if test="unitLevel != null and unitLevel != ''">
                 Unit_Level = #{unitLevel},
-            </if>
-            <if test="director != null and director != ''">
                 Director = #{director},
-            </if>
-            <if test="unitAddress != null and unitAddress != ''">
                 Unit_Address = #{unitAddress},
-            </if>
-            <if test="mailcode != null and mailcode != ''">
                 MailCode = #{mailcode},
-            </if>
-            <if test="unitPhone != null and unitPhone != ''">
                 Unit_Phone = #{unitPhone},
-            </if>
-            <if test="email != null and email != ''">
                 Email = #{email},
-            </if>
-            <if test="profile != null and profile != ''">
                 Profile = #{profile},
-            </if>
-            <if test="remarks != null and remarks != ''">
                 Remarks = #{remarks},
-            </if>
-            <if test="addname != null and addname != ''">
-                AddName = #{addname},
-            </if>
-            <if test="addtime != null">
-                AddTime = #{addtime},
-            </if>
-            <if test="updatename != null and updatename != ''">
                 UpdateName = #{updatename},
-            </if>
-            <if test="updatetime != null">
-                UpdateTime = #{updatetime},
-            </if>
-            <if test="deletename != null and deletename != ''">
-                DeleteName = #{deletename},
-            </if>
-            <if test="deletetime != null">
-                DeleteTime = #{deletetime},
-            </if>
-            <if test="timeliness != null">
-                TimeLiness = #{timeliness},
-            </if>
-            <if test="unittypeId != null">
-                UnitType_Id = #{unittypeId},
-            </if>
-        </set>
+                UpdateTime = CURRENT_TIMESTAMP,
+                UnitType_Id = #{unittypeId}
         where Unit_Id = #{unitId}
     </update>
     <update id="delUnitById">

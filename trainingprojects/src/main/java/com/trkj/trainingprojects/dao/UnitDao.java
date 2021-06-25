@@ -37,7 +37,7 @@ public interface UnitDao {
      * @param unitVo 实例对象
      * @return 影响行数
      */
-    int update(UnitVo unitVo);
+    int updateUnit(UnitVo unitVo);
 
 
     /**

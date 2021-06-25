@@ -37,13 +37,14 @@
 
     <sql id="Base_Column_List">
       ib.ItemBank_Id, ib.ItemBank_Type, ib.ItemBank_Content, ib.AddName, ib.ADDTIME, ib.UpdateName,
-      ib.UpdateTime, ib.DeleteName, ib.DeleteTime, ib.TimeLiness, ib.CourseDetails_Id
+      ib.UpdateTime, ib.DeleteName, ib.DeleteTime, ib.TimeLiness, ib.CourseDetails_Id,ib.rightAnswer,
+      ib.score,ib.analysis,ib.answerA,ib.answerB,ib.answerC,ib.answerD
     </sql>
 
     <!--查询所有-->
     <select id="selectAllItemBanks" resultMap="ItembankMap">
         select
-        <include refid="Base_Column_List" />,c.coursedetailsName
+        <include refid="Base_Column_List" />,c.CourseDetails_Name
         from itembank ib
         inner join coursedetails c on ib.CourseDetails_Id=c.CourseDetails_Id
         where ib.TimeLiness = 0 order by ib.ItemBank_Id DESC
@@ -110,8 +111,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="itembankId" useGeneratedKeys="true">
-        insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, TimeLiness, CourseDetails_Id)
-        values (#{itembankType}, #{itembankContent}, #{addname}, #{addtime}, #{timeliness}, #{coursedetailsId})
+        insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, TimeLiness, CourseDetails_Id,rightAnswer,score,analysis,answerA,answerB,answerC,answerD)
+        values (#{itembankType}, #{itembankContent}, #{addname}, #{addtime}, #{timeliness}, #{coursedetailsId},#{rightAnswer},#{score},#{analysis},#{answerA},#{answerB},#{answerC},#{answerD})
     </insert>
 
     <insert id="insertBatch" keyProperty="itembankId" useGeneratedKeys="true">
@@ -172,8 +173,29 @@
             <if test="timeliness != null">
                 TimeLiness = #{timeliness},
             </if>
-            <if test="courseId != null">
+            <if test="coursedetailsId != null">
                 CourseDetails_Id = #{coursedetailsId},
+            </if>
+            <if test="rightAnswer != null">
+                rightAnswer = #{rightAnswer},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="analysis != null">
+                analysis = #{analysis},
+            </if>
+            <if test="answerA != null">
+                answerA = #{answerA},
+            </if>
+            <if test="answerB != null">
+                answerB = #{answerB},
+            </if>
+            <if test="answerC != null">
+                answerC = #{answerC},
+            </if>
+            <if test="answerD != null">
+                answerD = #{answerD}
             </if>
         </set>
         where ItemBank_Id = #{itembankId}

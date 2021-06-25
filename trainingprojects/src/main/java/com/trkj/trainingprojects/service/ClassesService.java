@@ -22,7 +22,7 @@ public interface ClassesService {
     Classes update(Classes classes);
 
     boolean deleteById(Integer classesId);
-
+    List<ClassesVo> selectAllClassesByTeacherId(Integer teacherId);
     public List<ClassesVo> selectAllClasses();
     public void addClasses(ClassesVo classesVo);
     public int deleteByClasses(ClassesVo classesVo);
