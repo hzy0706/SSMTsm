@@ -51,6 +51,7 @@ public class StudentstatusController {
     @PutMapping("/updateByStudentStatus")
     public AjaxResponse updateByStudentStatus(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusVo.setStatus(1);//修改为已分班
+        studentstatusVo.setAllottype("初次分班");//修改为分班信息
         studentstatusService.updateByStudentStatus(studentstatusVo);
         return  AjaxResponse.success(studentstatusVo);
     }

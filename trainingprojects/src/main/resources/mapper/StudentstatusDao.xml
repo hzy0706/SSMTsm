@@ -352,6 +352,7 @@
         update tr01904.studentstatus
         set
           Status = #{status},
+          AllotType = #{allottype},
           Classes_Id = #{classesId}
         where StudentStatus_Id = #{studentstatusId}
     </update>
