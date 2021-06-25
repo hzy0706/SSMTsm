@@ -26,8 +26,8 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     @Transactional
-    public int update(UnitVo unit) {
-        return dao.update(unit);
+    public int updateUnit(UnitVo unit) {
+        return dao.updateUnit(unit);
     }
 
     @Override
@@ -36,6 +36,7 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
+    @Transactional
     public int delUnitById(UnitVo unitVo) {
         return dao.delUnitById(unitVo);
     }
