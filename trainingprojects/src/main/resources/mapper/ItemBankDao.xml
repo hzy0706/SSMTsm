@@ -12,47 +12,47 @@
         <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
         <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
         <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
-        <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
-        <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
-            <id property="courseId" column="Course_Id" jdbcType="INTEGER"/>
-            <result property="courseName" column="Course_Name" jdbcType="VARCHAR"/>
-            <result property="courseState" column="Course_State" jdbcType="INTEGER"/>
-            <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
-            <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
-            <result property="commission" column="Commission" jdbcType="NUMERIC"/>
+        <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+        <result property="rightAnswer" column="rightAnswer" jdbcType="VARCHAR"/>
+        <result property="score" column="score" jdbcType="INTEGER"/>
+        <result property="analysis" column="analysis" jdbcType="VARCHAR"/>
+        <result property="answerA" column="answerA" jdbcType="VARCHAR"/>
+        <result property="answerB" column="answerB" jdbcType="VARCHAR"/>
+        <result property="answerC" column="answerC" jdbcType="VARCHAR"/>
+        <result property="answerD" column="answerD" jdbcType="VARCHAR"/>
+        <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+            <id property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsName" column="CourseDetails_Name" jdbcType="VARCHAR"/>
+            <result property="coursesequence" column="CourseSequence" jdbcType="INTEGER"/>
             <result property="addname" column="AddName" jdbcType="VARCHAR"/>
             <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
             <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
             <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
-            <result property="stopname" column="StopName" jdbcType="VARCHAR"/>
-            <result property="stoptime" column="StopTime" jdbcType="TIMESTAMP"/>
-            <result property="beginname" column="BeginName" jdbcType="VARCHAR"/>
-            <result property="begintime" column="BeginTime" jdbcType="TIMESTAMP"/>
             <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
-            <result property="classtypeId" column="ClassType_Id" jdbcType="INTEGER"/>
+            <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
         </association>
     </resultMap>
 
     <sql id="Base_Column_List">
       ib.ItemBank_Id, ib.ItemBank_Type, ib.ItemBank_Content, ib.AddName, ib.ADDTIME, ib.UpdateName,
-      ib.UpdateTime, ib.DeleteName, ib.DeleteTime, ib.TimeLiness, ib.Course_Id
+      ib.UpdateTime, ib.DeleteName, ib.DeleteTime, ib.TimeLiness, ib.CourseDetails_Id
     </sql>
 
     <!--查询所有-->
     <select id="selectAllItemBanks" resultMap="ItembankMap">
         select
-        <include refid="Base_Column_List" />,c.Course_Name
+        <include refid="Base_Column_List" />,c.coursedetailsName
         from itembank ib
-        inner join course c on ib.Course_Id=c.Course_Id
+        inner join coursedetails c on ib.CourseDetails_Id=c.CourseDetails_Id
         where ib.TimeLiness = 0 order by ib.ItemBank_Id DESC
     </select>
 
     <!--查询单个-->
     <select id="queryById" resultMap="ItembankMap">
         select
-          ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id
+          ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, CourseDetails_Id
         from tr01904.itembank
         where ItemBank_Id = #{itembankId}
     </select>
@@ -60,7 +60,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ItembankMap">
         select
-          ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id
+          ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, CourseDetails_Id
         from tr01904.itembank
         limit #{offset}, #{limit}
     </select>
@@ -69,7 +69,7 @@
     <select id="queryAll" resultMap="ItembankMap">
         select
         ItemBank_Id, ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime,
-        TimeLiness, Course_Id
+        TimeLiness, CourseDetails_Id
         from tr01904.itembank
         <where>
             <if test="itembankId != null">
@@ -103,42 +103,42 @@
                 and TimeLiness = #{timeliness}
             </if>
             <if test="courseId != null">
-                and Course_Id = #{courseId}
+                and CourseDetails_Id = #{coursedetailsId}
             </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="itembankId" useGeneratedKeys="true">
-        insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, TimeLiness, Course_Id)
-        values (#{itembankType}, #{itembankContent}, #{addname}, #{addtime}, #{timeliness}, #{courseId})
+        insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, TimeLiness, CourseDetails_Id)
+        values (#{itembankType}, #{itembankContent}, #{addname}, #{addtime}, #{timeliness}, #{coursedetailsId})
     </insert>
 
     <insert id="insertBatch" keyProperty="itembankId" useGeneratedKeys="true">
         insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime,
-        DeleteName, DeleteTime, TimeLiness, Course_Id)
+        DeleteName, DeleteTime, TimeLiness, CourseDetails_Id)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.itembankType}, #{entity.itembankContent}, #{entity.addname}, #{entity.addtime},
             #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
-            #{entity.timeliness}, #{entity.courseId})
+            #{entity.timeliness}, #{entity.coursedetailsId})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="itembankId" useGeneratedKeys="true">
         insert into tr01904.itembank(ItemBank_Type, ItemBank_Content, AddName, ADDTIME, UpdateName, UpdateTime,
-        DeleteName, DeleteTime, TimeLiness, Course_Id)
+        DeleteName, DeleteTime, TimeLiness, CourseDetails_Id)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.itembankType}, #{entity.itembankContent}, #{entity.addname}, #{entity.addtime},
             #{entity.updatename}, #{entity.updatetime}, #{entity.deletename}, #{entity.deletetime},
-            #{entity.timeliness}, #{entity.courseId})
+            #{entity.timeliness}, #{entity.coursedetailsId})
         </foreach>
         on duplicate key update
         ItemBank_Type = values(ItemBank_Type) , ItemBank_Content = values(ItemBank_Content) , AddName = values(AddName)
         , ADDTIME = values(ADDTIME) , UpdateName = values(UpdateName) , UpdateTime = values(UpdateTime) , DeleteName =
         values(DeleteName) , DeleteTime = values(DeleteTime) , TimeLiness = values(TimeLiness) , Course_Id =
-        values(Course_Id)
+        values(coursedetailsId)
     </insert>
 
     <!--通过主键修改数据-->
@@ -173,7 +173,7 @@
                 TimeLiness = #{timeliness},
             </if>
             <if test="courseId != null">
-                Course_Id = #{courseId},
+                CourseDetails_Id = #{coursedetailsId},
             </if>
         </set>
         where ItemBank_Id = #{itembankId}

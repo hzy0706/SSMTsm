@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ClassMeta(className = "成绩表")
-@ToString(exclude = "studentVos,examinationVo")
+@ToString(exclude = "studentVos,examinationVo,examManageVo")
 public class ExaminationScoreVo {
     /**
      * 成绩表编号
@@ -53,6 +53,10 @@ public class ExaminationScoreVo {
      */
     private Date deletetime;
     /**
+     * 答题时间
+     */
+    private Date answerDate;
+    /**
      * 时效性
      */
     private Integer timeliness;
@@ -64,8 +68,14 @@ public class ExaminationScoreVo {
      * 考试总表编号
      */
     private Integer examinationId;
+    /**
+     * 试卷编号
+     */
+    private Integer examCode;
+
 
     private StudentVo studentVos;
     private ExaminationVo examinationVo;
+    private ExamManageVo examManageVo;
     private static final long serialVersionUID = 1L;
 }

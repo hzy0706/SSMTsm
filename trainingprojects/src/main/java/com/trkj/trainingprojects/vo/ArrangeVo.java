@@ -4,91 +4,116 @@ import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
-
-@Validated
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ClassMeta(className = "考试题库表")
-@ToString(exclude = "courseDetailsVo")
-public class ItemBankVo {
+@Validated
+@ClassMeta(className = "排课表")
+public class ArrangeVo {
     /**
-     * 题库编号
+     * 排课编号
      */
-    private Integer itembankId;
+    private Integer arrangeId;
+
     /**
-     * 题目类型
+     * 排课日期
      */
-    private String itembankType;
+    private Date arrangeDate;
+
     /**
-     * 题目内容
+     * 备注
      */
-    private String itembankContent;
+    private String remarks;
+
+    /**
+     * 是否审核
+     */
+    private Integer isexamine;
+
+    /**
+     * 审核时间
+     */
+    private Date examinetime;
+
+    /**
+     * 审核人
+     */
+    public String examinename;
+
+    /**
+     * 撤销审核时间
+     */
+    private Date revoketime;
+
+    /**
+     * 撤销审核人
+     */
+    public String revokename;
+
     /**
      * 增加人
      */
     public String addname;
+
     /**
      * 增加日期
      */
     private Date addtime;
+
     /**
      * 最后修改人
      */
     public String updatename;
+
     /**
      * 最后修改时间
      */
     private Date updatetime;
+
     /**
      * 删除人
      */
     public String deletename;
+
     /**
      * 删除时间
      */
     private Date deletetime;
+
     /**
      * 时效性
      */
     private Integer timeliness;
+
+    /**
+     * 培训时段编号
+     */
+    private Integer periodId;
+    private TrainingPeriodVo trainingPeriodVo;
+    /**
+     * 班级编号
+     */
+    private Integer classesId;
+    private ClassesVo classesVo;
+
+    /**
+     * 教室编号
+     */
+    private Integer classroomId;
+    private ClassRoomVo classRoomVo;
+    /**
+     * 教师编号
+     */
+    private Integer empId;
+    private EmpVo empVo;
     /**
      * 课程详细编号
      */
     private Integer coursedetailsId;
-    /**
-     * 正确答案
-     */
-    public String rightAnswer;
-    /**
-     * 分数
-     */
-    private Integer score;
-    /**
-     * 题目解析
-     */
-    public String analysis;
-    /**
-     * 选项A
-     */
-    public String answerA;
-    /**
-     * 选项B
-     */
-    public String answerB;
-    /**
-     * 选项C
-     */
-    public String answerC;
-    /**
-     * 选项D
-     */
-    public String answerD;
-
     private CourseDetailsVo courseDetailsVo;
+
     private static final long serialVersionUID = 1L;
 }

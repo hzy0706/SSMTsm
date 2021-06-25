@@ -31,4 +31,6 @@ public interface StudentstatusService {
     int updateByStudentStateTwo(StudentstatusVo record);
     public List<StudentstatusVo> selectStudentStatusByClassesId(Integer classesId);
     public List<StudentstatusVo> selectStudentStatusByClassesId2(Integer classesId);
+    public int updateByClassesIdOnState(StudentstatusVo studentstatusVo);
+    public  List<StudentstatusVo> queryByStudentId(int studentId);
 }

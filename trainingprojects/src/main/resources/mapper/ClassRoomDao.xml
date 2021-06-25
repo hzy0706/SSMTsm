@@ -28,6 +28,13 @@
         where TimeLiness = 0 ORDER BY CONVERT(ClassRoom_Name USING gbk) ASC
     </select>
 
+    <select id="selectAllClassRoomsByState" resultMap="ClassroomMap">
+        select
+        <include refid="Base_Column_List" />
+        from classroom
+        where TimeLiness = 0 and ClassRoom_State=#{state} ORDER BY CONVERT(ClassRoom_Name USING gbk) ASC
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="ClassroomMap">
         select
@@ -176,6 +183,14 @@
           DeleteName = #{deletename},
           DeleteTime = #{deletetime},
           TimeLiness = #{timeliness}
+        where ClassRoom_Id = #{classroomId}
+    </update>
+
+    <!--修改教室状态-->
+    <update id="updateClassRoomState" parameterType="com.trkj.trainingprojects.entity.ClassRoom">
+        update tr01904.classroom
+        set
+          ClassRoom_State = #{classroomState}
         where ClassRoom_Id = #{classroomId}
     </update>
 </mapper>

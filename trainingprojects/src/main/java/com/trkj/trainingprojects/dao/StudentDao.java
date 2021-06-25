@@ -40,5 +40,6 @@ public interface StudentDao {
 
     int updateByStudentDelName(StudentVo studentVo);
     int updateByStudent(StudentVo studentVo);
+    StudentVo queryById(int registerId);
 }
 

@@ -108,5 +108,6 @@ public class StudentVo {
     private SourceVo sourceVo;
     private RegisterVo registerVo;
 
+
     private static final long serialVersionUID = 1L;
 }

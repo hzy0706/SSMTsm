@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface CourseDetailsDao {
 
-    CourseDetails queryById(Integer coursedetailsId);
+    CourseDetailsVo queryById(Integer coursedetailsId);
 
     List<CourseDetails> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
@@ -36,5 +36,6 @@ public interface CourseDetailsDao {
     int deleteByCourseDetails(CourseDetailsVo courseDetailsVo);
     List<CourseDetailsVo> selectAllCourseDetails2();
     List<CourseDetailsVo> selectAllCourseDetails3(Integer courseId);
+    int selectCourseDetailsDeleteOne(int courseId);
 }
 

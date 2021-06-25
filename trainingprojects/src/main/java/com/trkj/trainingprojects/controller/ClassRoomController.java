@@ -34,6 +34,12 @@ public class ClassRoomController {
         return pageInfo;
     }
 
+    @GetMapping("/selectAllClassRoomsByState/{state}")
+    public List<ClassRoomVo> selectAllClassRoomsByState(@PathVariable("state") Integer state){
+        List<ClassRoomVo> list = classroomService.selectAllClassRoomsByState(state);
+        return list;
+    }
+
     @PostMapping("/addClassRoom")
     public AjaxResponse addClassRoom(@RequestBody @Valid ClassRoomVo classRoomVo){
         Date date = new Date();
@@ -47,6 +53,7 @@ public class ClassRoomController {
         /*System.out.println(classTypeVo+"-------------------");*/
         Date date = new Date();
         classRoomVo.setUpdatetime(date);
+        classRoomVo.setTimeliness(1);
         classroomService.updateByClassRoomKey(classRoomVo);
         return  AjaxResponse.success(classRoomVo);
     }
@@ -58,6 +65,12 @@ public class ClassRoomController {
         classRoomVo.setTimeliness(1);
         classroomService.deleteByClassRoom(classRoomVo);
         return AjaxResponse.success(classRoomVo);
+    }
+
+    @PutMapping("/updateClassRoomState")
+    public AjaxResponse updateClassRoomState(@RequestBody @Valid ClassRoomVo classRoomVo){
+        classroomService.updateClassRoomState(classRoomVo);
+        return  AjaxResponse.success(classRoomVo);
     }
 
 }

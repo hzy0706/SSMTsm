@@ -34,6 +34,12 @@ public class TrainingPeriodController {
         return pageInfo;
     }
 
+    @GetMapping("/selectAllTrainingPeriodList")
+    public List<TrainingPeriodVo> selectAllTrainingPeriodList(){
+        List<TrainingPeriodVo> list = trainingperiodService.selectAllTrainingPeriod();
+        return list;
+    }
+
     @PostMapping("/addTrainingPeriod")
     public AjaxResponse addTrainingPeriod(@RequestBody @Valid TrainingPeriodVo trainingPeriodVo){
         Date date = new Date();

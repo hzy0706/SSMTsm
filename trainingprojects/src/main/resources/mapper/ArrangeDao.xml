@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.ArrangeDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.ArrangeVo">
+    <id column="Arrange_Id" jdbcType="INTEGER" property="arrangeId" />
+    <result column="Arrange_Date" jdbcType="TIMESTAMP" property="arrangeDate" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="IsExamine" jdbcType="INTEGER" property="isexamine" />
+    <result column="ExamineTime" jdbcType="TIMESTAMP" property="examinetime" />
+    <result column="ExamineName" jdbcType="VARCHAR" property="examinename" />
+    <result column="RevokeTime" jdbcType="TIMESTAMP" property="revoketime" />
+    <result column="RevokeName" jdbcType="VARCHAR" property="revokename" />
+    <result column="AddName" jdbcType="VARCHAR" property="addname" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DeleteName" jdbcType="VARCHAR" property="deletename" />
+    <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
+    <result column="Period_Id" jdbcType="INTEGER" property="periodId" />
+    <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
+    <result column="ClassRoom_Id" jdbcType="INTEGER" property="classroomId" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <result column="CourseDetails_Id" jdbcType="INTEGER" property="coursedetailsId" />
+    <association property="trainingPeriodVo" javaType="com.trkj.trainingprojects.vo.TrainingPeriodVo">
+      <result property="period" column="Period" jdbcType="VARCHAR"/>
+    </association>
+    <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <result property="classesName" column="Classes_Name" jdbcType="VARCHAR"/>
+    </association>
+    <association property="classRoomVo" javaType="com.trkj.trainingprojects.vo.ClassRoomVo">
+      <result property="classroomName" column="ClassRoom_Name" jdbcType="VARCHAR"/>
+    </association>
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+    <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+      <result property="coursedetailsName" column="CourseDetails_Name" jdbcType="VARCHAR"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    a.Arrange_Id, a.Arrange_Date, a.Remarks, a.IsExamine, a.ExamineTime, a.ExamineName, a.RevokeTime,
+    a.RevokeName, a.AddName, a.AddTime, a.UpdateName, a.UpdateTime, a.DeleteName, a.DeleteTime, a.TimeLiness,
+    a.Period_Id, a.Classes_Id, a.ClassRoom_Id, a.Emp_Id, a.CourseDetails_Id
+  </sql>
+  <select id="selectByArrangeKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />t.Period,c.Classes_Name,cr.ClassRoom_Name,e.Emp_Name,cd.CourseDetails_Name
+    from arrange a
+    inner join trainingperiod t on t.Period_Id=a.Period_Id
+    inner join classes c on c.Classes_Id=a.Classes_Id
+    inner join classroom cr on cr.ClassRoom_Id=a.ClassRoom_Id
+    inner join emp e on e.Emp_Id=a.Emp_Id
+    inner join classesdelivery cd on cd.CourseDetails_Id=a.CourseDetails_Id
+    where Arrange_Id = #{arrangeId,jdbcType=INTEGER} and TimeLiness=0
+  </select>
+
+  <select id="selectAllArranges" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />t.Period,c.Classes_Name,cr.ClassRoom_Name,e.Emp_Name,cd.CourseDetails_Name
+    from arrange a
+    inner join trainingperiod t on t.Period_Id=a.Period_Id
+    inner join classes c on c.Classes_Id=a.Classes_Id
+    inner join classroom cr on cr.ClassRoom_Id=a.ClassRoom_Id
+    inner join emp e on e.Emp_Id=a.Emp_Id
+    inner join classesdelivery cd on cd.CourseDetails_Id=a.CourseDetails_Id
+    where TimeLiness=0 order by Arrange_Date desc
+  </select>
+
+  <delete id="deleteByArrangeKey" parameterType="java.lang.Integer">
+    delete from arrange
+    where Arrange_Id = #{arrangeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addArrange" keyColumn="Arrange_Id" keyProperty="arrangeId" parameterType="com.trkj.trainingprojects.vo.ArrangeVo" useGeneratedKeys="true">
+    insert into arrange (Arrange_Date, Remarks, IsExamine, 
+      ExamineTime, ExamineName, RevokeTime, 
+      RevokeName, AddName,
+      UpdateName, UpdateTime, DeleteName, 
+      DeleteTime, Period_Id,
+      Classes_Id, ClassRoom_Id, Emp_Id, 
+      CourseDetails_Id)
+    values (#{arrangeDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{isexamine,jdbcType=INTEGER}, 
+      #{examinetime,jdbcType=TIMESTAMP}, #{examinename,jdbcType=VARCHAR}, #{revoketime,jdbcType=TIMESTAMP}, 
+      #{revokename,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
+      #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{periodId,jdbcType=INTEGER},
+      #{classesId,jdbcType=INTEGER}, #{classroomId,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}, 
+      #{coursedetailsId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="Arrange_Id" keyProperty="arrangeId" parameterType="com.trkj.trainingprojects.vo.ArrangeVo" useGeneratedKeys="true">
+    insert into arrange
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="arrangeDate != null">
+        Arrange_Date,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+      <if test="isexamine != null">
+        IsExamine,
+      </if>
+      <if test="examinetime != null">
+        ExamineTime,
+      </if>
+      <if test="examinename != null">
+        ExamineName,
+      </if>
+      <if test="revoketime != null">
+        RevokeTime,
+      </if>
+      <if test="revokename != null">
+        RevokeName,
+      </if>
+      <if test="addname != null">
+        AddName,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="updatename != null">
+        UpdateName,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="deletename != null">
+        DeleteName,
+      </if>
+      <if test="deletetime != null">
+        DeleteTime,
+      </if>
+      <if test="timeliness != null">
+        TimeLiness,
+      </if>
+      <if test="periodId != null">
+        Period_Id,
+      </if>
+      <if test="classesId != null">
+        Classes_Id,
+      </if>
+      <if test="classroomId != null">
+        ClassRoom_Id,
+      </if>
+      <if test="empId != null">
+        Emp_Id,
+      </if>
+      <if test="coursedetailsId != null">
+        CourseDetails_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="arrangeDate != null">
+        #{arrangeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isexamine != null">
+        #{isexamine,jdbcType=INTEGER},
+      </if>
+      <if test="examinetime != null">
+        #{examinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinename != null">
+        #{examinename,jdbcType=VARCHAR},
+      </if>
+      <if test="revoketime != null">
+        #{revoketime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revokename != null">
+        #{revokename,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="periodId != null">
+        #{periodId,jdbcType=INTEGER},
+      </if>
+      <if test="classesId != null">
+        #{classesId,jdbcType=INTEGER},
+      </if>
+      <if test="classroomId != null">
+        #{classroomId,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="coursedetailsId != null">
+        #{coursedetailsId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByArrangeKeySelective" parameterType="com.trkj.trainingprojects.vo.ArrangeVo">
+    update arrange
+    <set>
+      <if test="arrangeDate != null">
+        Arrange_Date = #{arrangeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isexamine != null">
+        IsExamine = #{isexamine,jdbcType=INTEGER},
+      </if>
+      <if test="examinetime != null">
+        ExamineTime = #{examinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinename != null">
+        ExamineName = #{examinename,jdbcType=VARCHAR},
+      </if>
+      <if test="revoketime != null">
+        RevokeTime = #{revoketime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revokename != null">
+        RevokeName = #{revokename,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        AddName = #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletename != null">
+        DeleteName = #{deletename,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeliness != null">
+        TimeLiness = #{timeliness,jdbcType=INTEGER},
+      </if>
+      <if test="periodId != null">
+        Period_Id = #{periodId,jdbcType=INTEGER},
+      </if>
+      <if test="classesId != null">
+        Classes_Id = #{classesId,jdbcType=INTEGER},
+      </if>
+      <if test="classroomId != null">
+        ClassRoom_Id = #{classroomId,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        Emp_Id = #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="coursedetailsId != null">
+        CourseDetails_Id = #{coursedetailsId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Arrange_Id = #{arrangeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByArrangeKey" parameterType="com.trkj.trainingprojects.vo.ArrangeVo">
+    update arrange
+    set Arrange_Date = #{arrangeDate,jdbcType=TIMESTAMP},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      IsExamine = #{isexamine,jdbcType=INTEGER},
+      ExamineTime = #{examinetime,jdbcType=TIMESTAMP},
+      ExamineName = #{examinename,jdbcType=VARCHAR},
+      RevokeTime = #{revoketime,jdbcType=TIMESTAMP},
+      RevokeName = #{revokename,jdbcType=VARCHAR},
+      AddName = #{addname,jdbcType=VARCHAR},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      UpdateName = #{updatename,jdbcType=VARCHAR},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER},
+      Period_Id = #{periodId,jdbcType=INTEGER},
+      Classes_Id = #{classesId,jdbcType=INTEGER},
+      ClassRoom_Id = #{classroomId,jdbcType=INTEGER},
+      Emp_Id = #{empId,jdbcType=INTEGER},
+      CourseDetails_Id = #{coursedetailsId,jdbcType=INTEGER}
+    where Arrange_Id = #{arrangeId,jdbcType=INTEGER}
+  </update>
+</mapper>

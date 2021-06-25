@@ -42,6 +42,11 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     }
 
     @Override
+    public List<ClassRoomVo> selectAllClassRoomsByState(Integer state) {
+        return classroomDao.selectAllClassRoomsByState(state);
+    }
+
+    @Override
     public List<ClassRoomVo> selectAllClassRooms() {
         return classroomDao.selectAllClassRooms();
     }
@@ -62,5 +67,10 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     @Transactional
     public int updateByClassRoomKey(ClassRoomVo classRoomVo) {
         return classroomDao.updateByClassRoomKey(classRoomVo);
+    }
+
+    @Override
+    public int updateClassRoomState(ClassRoomVo classRoomVo) {
+        return classroomDao.updateClassRoomState(classRoomVo);
     }
 }

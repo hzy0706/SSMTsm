@@ -22,6 +22,8 @@ public interface ClassRoomDao {
 
     List<ClassRoom> queryAll(ClassRoom classroom);
 
+    List<ClassRoomVo> selectAllClassRoomsByState(Integer state);
+
     int insert(ClassRoomVo classRoomVo);
 
     int insertBatch(@Param("entities") List<ClassRoom> entities);
@@ -34,5 +36,6 @@ public interface ClassRoomDao {
 
     List<ClassRoomVo> selectAllClassRooms();
     int deleteByClassRoom(ClassRoomVo classRoomVo);
+    int updateClassRoomState(ClassRoomVo classRoomVo);
 }
 

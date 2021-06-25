@@ -132,12 +132,20 @@
         where cl.TimeLiness = 0 ORDER BY CONVERT(cl.Classes_Name USING gbk) DESC
     </select>
 
-    <!--查询单个-->
+    <!--查询单个[根据课程和未开班来查询]-->
     <select id="queryById" resultMap="ClassesMap">
         select
           Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id, Classe_CountStudents, Classe_Students
         from tr01904.classes
-        where Course_Id = #{courseId} and   = 0
+        where Course_Id = #{courseId} and Classes_Open = 0 and TimeLiness = 0
+    </select>
+
+    <!--查询单个[根据班级id来查询人数是否超过]-->
+    <select id="queryById2" resultMap="ClassesMap">
+        select
+          Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id, Classe_CountStudents, Classe_Students
+        from tr01904.classes
+        where Classes_Id = #{classesId} and TimeLiness = 0
     </select>
 
     <!--查询指定行数据-->
@@ -160,7 +168,7 @@
         where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1)
     </select>
 
-    <!--查询所有开办状态为0或者1的班级信息（胡志远）-->
+    <!--查询所有开办状态为1的班级信息（胡志远）-->
     <select id="selectAllClassesByState2" resultMap="ClassesMap">
         select
         <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name,co.Course_Name,cs.CourseDetails_Name
@@ -324,6 +332,9 @@
             <if test="coursedetailsId != null">
                 CourseDetails_Id = #{coursedetailsId},
             </if>
+            <if test="classecountstudents != null">
+                Classe_CountStudents = #{classecountstudents},
+            </if>
         </set>
         where Classes_Id = #{classesId}
     </update>
@@ -349,6 +360,14 @@
         set
           Classes_Open = #{classesOpen}
         where Classes_Id = #{classesId}
+    </update>
+
+    <!--分班后添加班级人数-->
+    <update id="UpdateAddClassesStudentNumber" parameterType="com.trkj.trainingprojects.entity.Classes">
+        update tr01904.classes
+        set
+          Classe_Students = (SELECT COUNT(Classes_Id) FROM studentstatus WHERE Classes_Id=#{classesId} and TimeLiness = 0)+1
+        where Classes_Id = #{classesId} and TimeLiness = 0
     </update>
 
 </mapper>

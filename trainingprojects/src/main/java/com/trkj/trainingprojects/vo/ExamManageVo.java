@@ -13,21 +13,45 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ClassMeta(className = "考试题库表")
-@ToString(exclude = "courseDetailsVo")
-public class ItemBankVo {
+@ClassMeta(className = "试卷表")
+@ToString(exclude = "sessionVo,semesterVo,classesVo,courseDetailsVo")
+public class ExamManageVo {
     /**
-     * 题库编号
+     * 考试编号
      */
-    private Integer itembankId;
+    private Integer examcode;
     /**
-     * 题目类型
+     * 考试名称
      */
-    private String itembankType;
+    private String examinationname;
     /**
-     * 题目内容
+     * 该次考试介绍
      */
-    private String itembankContent;
+    private String description;
+    /**
+     * 试卷编号
+     */
+    private Integer paperid;
+    /**
+     * 考试日期
+     */
+    private String examdate;
+    /**
+     * 持续时长
+     */
+    private Integer totaltime;
+    /**
+     * 总分
+     */
+    private Integer totalscore;
+    /**
+     * 考试类型
+     */
+    private String studenttype;
+    /**
+     * 考生须知
+     */
+    private String tips;
     /**
      * 增加人
      */
@@ -57,38 +81,25 @@ public class ItemBankVo {
      */
     private Integer timeliness;
     /**
+     * 年届编号
+     */
+    private Integer sessionId;
+    /**
+     * 学期编号
+     */
+    private Integer semesterId;
+    /**
+     * 班级编号
+     */
+    private Integer classesId;
+    /**
      * 课程详细编号
      */
     private Integer coursedetailsId;
-    /**
-     * 正确答案
-     */
-    public String rightAnswer;
-    /**
-     * 分数
-     */
-    private Integer score;
-    /**
-     * 题目解析
-     */
-    public String analysis;
-    /**
-     * 选项A
-     */
-    public String answerA;
-    /**
-     * 选项B
-     */
-    public String answerB;
-    /**
-     * 选项C
-     */
-    public String answerC;
-    /**
-     * 选项D
-     */
-    public String answerD;
 
+    private SessionVo sessionVo;
+    private SemesterVo semesterVo;
+    private ClassesVo classesVo;
     private CourseDetailsVo courseDetailsVo;
     private static final long serialVersionUID = 1L;
 }

@@ -267,4 +267,21 @@
       UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
       where Register_Id = #{registerId,jdbcType=INTEGER}
   </update>
+<!--  修改缴费状态，并自动生成一条缴费记录-->
+  <update id="updateRegisterState" parameterType="com.trkj.trainingprojects.vo.RegisterVo">
+    update register
+    set
+     PayState = #{paystate,jdbcType=INTEGER}
+     where Register_Id=#{registerId,jdbcType=INTEGER}
+  </update>
+
+  <!--查询单个-->
+  <select id="queryById" resultMap="BaseResultMap">
+        select
+          Register_Id, ConsultAnt, Sex, Phone, AttentState, PayState, ConsultContent, AddName,
+          ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Source_Id, Course_Id,
+          Emp_Id
+        from register
+        where Register_Id = #{registerId}
+    </select>
 </mapper>

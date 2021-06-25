@@ -36,6 +36,12 @@ public class StudentController {
         return pageInfo;
     }
 
+    @GetMapping("/SelectStudentByClassId2/{id}")
+    public List<StudentVo> SelectStudentByClassId2(@PathVariable("id") int id){
+        List<StudentVo> list = studentService.SelectStudentByClassId(id);
+        return list;
+    }
+
     @GetMapping("/SelectStudentByState")
     public List<StudentVo> SelectStudentByState(){
         List<StudentVo> list = studentService.SelectStudentByState();
@@ -54,6 +60,12 @@ public class StudentController {
         List<StudentVo> list = studentService.selectAllStudent();
         PageInfo<StudentVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @GetMapping("/selectAllStudent2")
+    public List<StudentVo> selectAllStudent2(){
+        List<StudentVo> list = studentService.selectAllStudent();
+        return list;
     }
 
     @PostMapping("/addStudents")

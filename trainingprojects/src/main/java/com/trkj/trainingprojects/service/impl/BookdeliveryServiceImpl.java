@@ -27,7 +27,6 @@ public class BookdeliveryServiceImpl implements BookdeliveryService {
         RandomNumber randomNumber = new RandomNumber();
         bookdeliveryVo.setSalenumber(randomNumber.getLocalTrmSeqNum());
         bookdeliveryDao.addBookdelivery(bookdeliveryVo);
-
         //增加出库详表
         for (ArrVo arrVo:list) {
             DeliveryddetailsVo deliveryddetailsVo = new DeliveryddetailsVo();

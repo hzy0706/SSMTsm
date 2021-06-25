@@ -14,8 +14,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ClassMeta(className = "考试内容表")
-@ToString(exclude = "itemBankVoList,examinationVo")
+@ClassMeta(className = "试卷管理表")
+@ToString(exclude = "itemBankVoList,examinationVo,examManageVo")
 public class ExaminationContentVo {
     /**
      * 考试内容表编号
@@ -57,8 +57,13 @@ public class ExaminationContentVo {
      * 考试总表编号
      */
     private Integer examinationId;
+    /**
+     * 试卷编号
+     */
+    private Integer examCode;
 
     private List<ItemBankVo> itemBankVoList;
     private ExaminationVo examinationVo;
+    private ExamManageVo examManageVo;
     private static final long serialVersionUID = 1L;
 }
