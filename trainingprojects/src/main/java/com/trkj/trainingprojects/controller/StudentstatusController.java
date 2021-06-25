@@ -125,7 +125,28 @@ public class StudentstatusController {
             studentstatusVo.setTimeliness(0);
             studentstatusService.updateByApprovedStu(studentstatusVo);
         }
-
         return  AjaxResponse.success(id);
     }
+
+    @PutMapping("/updateByApprovedStu2/{ids}/{updatename}")
+    public AjaxResponse updateByApprovedStu2(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+        Date date = new Date();
+        String[] id= ids.split(",");
+        for (String s:id){
+            StudentstatusVo studentstatusVo = new StudentstatusVo();
+            studentstatusVo.setStudentstatusId(Integer.parseInt(s));
+            studentstatusVo.setAppname(null);
+            studentstatusVo.setAddtime(null);
+            studentstatusVo.setApproval(0);
+            studentstatusVo.setRevokeappname(updatename);
+            studentstatusVo.setRevokeapptime(date);
+            studentstatusVo.setUpdatename(updatename);
+            studentstatusVo.setUpdatetime(date);
+            studentstatusVo.setTimeliness(1);
+            studentstatusService.updateByApprovedStu(studentstatusVo);
+        }
+        return  AjaxResponse.success(id);
+    }
+
+
 }

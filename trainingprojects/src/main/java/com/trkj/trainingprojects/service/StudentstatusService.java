@@ -33,7 +33,7 @@ public interface StudentstatusService {
     public List<StudentstatusVo> selectStudentStatusByClassesId(Integer classesId);
     public List<StudentstatusVo> selectStudentStatusByClassesId2(Integer classesId);
     public int updateByClassesIdOnState(StudentstatusVo studentstatusVo);
-    public  List<StudentstatusVo> queryByStudentId(int studentId);
+    public List<StudentstatusVo> queryByStudentId(int studentId);
 
     int appByClassesIdOnClassesId(Integer classesId,Integer studentId,Integer classesId2 ,Integer status);
     StudentstatusVo selectByClassesIdOnClassesId(Integer classesId,Integer studentId);
