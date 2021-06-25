@@ -47,7 +47,7 @@
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
-    where s.Shift_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+    where s.Shift_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0 order by s.AddTime desc
   </select>
 
   <select id="selectByShiftStudentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -57,7 +57,7 @@
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
-    where s.Student_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+    where s.Student_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0 order by s.AddTime desc
   </select>
 
   <select id="selectByShiftClassesId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -67,7 +67,7 @@
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
-    where s.Classes_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+    where s.Classes_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0 order by s.AddTime desc
   </select>
 
   <select id="selectByShiftstudentstatusId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -78,7 +78,7 @@
     inner join Studentstatus st2 on st2.StudentStatus_Id=s.StudentStatus_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
-    where s.StudentStatus_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0
+    where s.StudentStatus_Id = #{shiftId,jdbcType=INTEGER} and s.TimeLiness=0 order by s.AddTime desc
   </select>
 
   <select id="selectAllShifts" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -88,7 +88,7 @@
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join classes cl2 on cl2.Classes_Id=s.Classes_Id2
-    where s.TimeLiness=0
+    where s.TimeLiness=0 order by s.AddTime desc
   </select>
 
   <insert id="addShift" keyColumn="Shift_Id" keyProperty="shiftId" parameterType="com.trkj.trainingprojects.vo.ShiftVo" useGeneratedKeys="true">
