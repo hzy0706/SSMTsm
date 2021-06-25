@@ -339,6 +339,13 @@
         where StudentStatus_Id = #{studentstatusId}
     </update>
 
+    <update id="updateByStudentStateTwo" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
+        update tr01904.studentstatus
+        set
+          Status = #{status}
+        where Classes_Id = #{classesId} and Student_Id = #{studentId}
+    </update>
+
     <!--查询单个2[根据课程id]-->
     <select id="selectStudentStatusByClassesId" resultMap="StudentstatusMap">
         select

@@ -1,18 +1,27 @@
 package com.trkj.trainingprojects.Opservice;
 
 import com.trkj.trainingprojects.dao.ShiftDao;
-import com.trkj.trainingprojects.vo.DropoutVo;
-import com.trkj.trainingprojects.vo.ShiftVo;
+import com.trkj.trainingprojects.service.StudentoutstandingService;
+import com.trkj.trainingprojects.service.StudentstatusService;
+import com.trkj.trainingprojects.vo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ShiftServiceImpl implements ShiftService {
     @Resource
     private ShiftDao shiftDao;
+
+    @Resource
+    private StudentstatusService studentstatusService;
+
 
     @Override
     @Transactional
@@ -60,8 +69,16 @@ public class ShiftServiceImpl implements ShiftService {
     @Override
     @Transactional
     public int updateByTypeShiftKey2(ShiftVo record) {
+//        StudentstatusVo studentstatusVo = studentstatusService.updateByStudentStateOne();
         return shiftDao.updateByTypeShiftKey2(record);
     }
+
+    @PutMapping("/updateByStudentStateTwo")
+    public AjaxResponse updateByStudentStateTwo(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        studentstatusService.updateByStudentStateTwo(studentstatusVo);
+        return AjaxResponse.success(studentstatusVo);
+    }
+
 
     @Override
     @Transactional
@@ -70,11 +87,7 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
-    public int updateByTypeShiftKey4(ShiftVo record) {
-        return shiftDao.updateByTypeShiftKey4(record);
-    }
-
-    @Override
+    @Transactional
     public int updateByTypeShiftKey5(ShiftVo record) {
         return shiftDao.updateByTypeShiftKey5(record);
     }

@@ -3,9 +3,11 @@ package com.trkj.trainingprojects.service.impl;
 import com.trkj.trainingprojects.dao.StudentstatusDao;
 import com.trkj.trainingprojects.entity.Studentstatus;
 import com.trkj.trainingprojects.service.StudentstatusService;
+import com.trkj.trainingprojects.vo.ShiftVo;
 import com.trkj.trainingprojects.vo.StudentstatusVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -63,6 +65,12 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     @Override
     public int updateByStudentStateOne(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByStudentStateOne(studentstatusVo);
+    }
+
+    @Override
+    @Transactional
+    public int updateByStudentStateTwo(StudentstatusVo record) {
+        return studentstatusDao.updateByStudentStateTwo(record);
     }
 
     @Override

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.SuspendeDao">
-  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.Suspende">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.SuspendeVo">
     <id column="Suspende_Id" jdbcType="INTEGER" property="suspendeId" />
     <result column="AlreadyOn" jdbcType="VARCHAR" property="alreadyon" />
     <result column="Suspende_Time" jdbcType="TIMESTAMP" property="suspendeTime" />
     <result column="Suspende_Reason" jdbcType="VARCHAR" property="suspendeReason" />
-    <result column="Suspende_Handler" jdbcType="VARCHAR" property="suspendeHandler" />
+    <result column="Suspende_Handler" jdbcType="VARCHAR" property="addname" />
     <result column="SuspendeApproval" jdbcType="INTEGER" property="suspendeapproval" />
     <result column="SuspendeAppName" jdbcType="VARCHAR" property="suspendeappname" />
     <result column="SuspendeAppTime" jdbcType="TIMESTAMP" property="suspendeapptime" />
@@ -22,161 +22,124 @@
     <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
     <result column="CourseDetails_Id" jdbcType="INTEGER" property="coursedetailsId" />
     <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
+    <result column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
+    <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
+      <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
+    </association>
+    <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <result column="Classes_Name" jdbcType="VARCHAR" property="classesName"/>
+    </association>
+    <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
+      <result column="Course_Name" jdbcType="VARCHAR" property="courseName"/>
+    </association>
+    <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+      <result column="Coursedetails_Name" jdbcType="VARCHAR" property="coursedetailsName"/>
+    </association>
+    <association property="studentstatusVo" javaType="com.trkj.trainingprojects.vo.StudentstatusVo">
+      <id column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
+      <result column="Status" jdbcType="INTEGER" property="status"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    Suspende_Id, AlreadyOn, Suspende_Time, Suspende_Reason, Suspende_Handler, SuspendeApproval, 
-    SuspendeAppName, SuspendeAppTime, RevokeAppName, RevokeAppTime, AddTime, UpdateName, 
-    UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Course_Id, CourseDetails_Id, 
-    Classes_Id
+    s.Suspende_Id, s.AlreadyOn, s.Suspende_Time, s.Suspende_Reason, s.Suspende_Handler, s.SuspendeApproval,
+    s.SuspendeAppName, s.SuspendeAppTime, s.RevokeAppName, s.RevokeAppTime, s.AddTime, s.UpdateName,
+    s.UpdateTime, s.DeleteName, s.DeleteTime, s.TimeLiness, s.Student_Id, s.Course_Id, s.CourseDetails_Id,
+    s.Classes_Id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectBySuspendeKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from suspende
-    where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende s
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join course co on co.Course_Id=s.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
+    where s.Suspende_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from suspende
-    where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="Suspende_Id" keyProperty="suspendeId" parameterType="com.trkj.trainingprojects.entity.Suspende" useGeneratedKeys="true">
+  <select id="selectBySuspendeKeyClasses" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende s
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join course co on co.Course_Id=s.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
+    where s.Classes_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+  <select id="selectBySuspendeKeyStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende s
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join course co on co.Course_Id=s.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
+    where s.Student_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+  <select id="selectBySuspendeKeyCourse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende s
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join course co on co.Course_Id=s.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
+    where s.Course_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+  <select id="selectBySuspendeKeyCoursedetails" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende s
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join course co on co.Course_Id=s.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
+    where s.Coursedetails_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+  <select id="selectBySuspendeKeyStudentStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende s
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join course co on co.Course_Id=s.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
+    where s.StudentStatus_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
+  </select>
+  <!--分页查询-->
+  <select id="selectBySuspendeKeyStudents" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende s
+    inner join classes cl on cl.Classes_Id=s.Classes_Id
+    inner join student st on st.Student_Id=s.Student_Id
+    inner join course co on co.Course_Id=s.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
+    where s.TimeLiness=0
+  </select>
+
+  <insert id="addSuspende" keyColumn="Suspende_Id" keyProperty="suspendeId" parameterType="com.trkj.trainingprojects.vo.SuspendeVo" useGeneratedKeys="true">
     insert into suspende (AlreadyOn, Suspende_Time, Suspende_Reason, 
-      Suspende_Handler, SuspendeApproval, SuspendeAppName, 
-      SuspendeAppTime, RevokeAppName, RevokeAppTime, 
-      AddTime, UpdateName, UpdateTime, 
-      DeleteName, DeleteTime, TimeLiness, 
-      Student_Id, Course_Id, CourseDetails_Id, 
+      Suspende_Handler, SuspendeAppName,
+      SuspendeAppTime, RevokeAppName, RevokeAppTime,UpdateName, UpdateTime,
+      DeleteName, DeleteTime,Student_Id, Course_Id, CourseDetails_Id,
       Classes_Id)
     values (#{alreadyon,jdbcType=VARCHAR}, #{suspendeTime,jdbcType=TIMESTAMP}, #{suspendeReason,jdbcType=VARCHAR}, 
-      #{suspendeHandler,jdbcType=VARCHAR}, #{suspendeapproval,jdbcType=INTEGER}, #{suspendeappname,jdbcType=VARCHAR}, 
+      #{addname,jdbcType=VARCHAR}, #{suspendeappname,jdbcType=VARCHAR},
       #{suspendeapptime,jdbcType=TIMESTAMP}, #{revokeappname,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP}, 
-      #{addtime,jdbcType=TIMESTAMP}, #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{timeliness,jdbcType=INTEGER}, 
+      #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
+      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
       #{studentId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{coursedetailsId,jdbcType=INTEGER}, 
       #{classesId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="Suspende_Id" keyProperty="suspendeId" parameterType="com.trkj.trainingprojects.entity.Suspende" useGeneratedKeys="true">
-    insert into suspende
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="alreadyon != null">
-        AlreadyOn,
-      </if>
-      <if test="suspendeTime != null">
-        Suspende_Time,
-      </if>
-      <if test="suspendeReason != null">
-        Suspende_Reason,
-      </if>
-      <if test="suspendeHandler != null">
-        Suspende_Handler,
-      </if>
-      <if test="suspendeapproval != null">
-        SuspendeApproval,
-      </if>
-      <if test="suspendeappname != null">
-        SuspendeAppName,
-      </if>
-      <if test="suspendeapptime != null">
-        SuspendeAppTime,
-      </if>
-      <if test="revokeappname != null">
-        RevokeAppName,
-      </if>
-      <if test="revokeapptime != null">
-        RevokeAppTime,
-      </if>
-      <if test="addtime != null">
-        AddTime,
-      </if>
-      <if test="updatename != null">
-        UpdateName,
-      </if>
-      <if test="updatetime != null">
-        UpdateTime,
-      </if>
-      <if test="deletename != null">
-        DeleteName,
-      </if>
-      <if test="deletetime != null">
-        DeleteTime,
-      </if>
-      <if test="timeliness != null">
-        TimeLiness,
-      </if>
-      <if test="studentId != null">
-        Student_Id,
-      </if>
-      <if test="courseId != null">
-        Course_Id,
-      </if>
-      <if test="coursedetailsId != null">
-        CourseDetails_Id,
-      </if>
-      <if test="classesId != null">
-        Classes_Id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="alreadyon != null">
-        #{alreadyon,jdbcType=VARCHAR},
-      </if>
-      <if test="suspendeTime != null">
-        #{suspendeTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="suspendeReason != null">
-        #{suspendeReason,jdbcType=VARCHAR},
-      </if>
-      <if test="suspendeHandler != null">
-        #{suspendeHandler,jdbcType=VARCHAR},
-      </if>
-      <if test="suspendeapproval != null">
-        #{suspendeapproval,jdbcType=INTEGER},
-      </if>
-      <if test="suspendeappname != null">
-        #{suspendeappname,jdbcType=VARCHAR},
-      </if>
-      <if test="suspendeapptime != null">
-        #{suspendeapptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="revokeappname != null">
-        #{revokeappname,jdbcType=VARCHAR},
-      </if>
-      <if test="revokeapptime != null">
-        #{revokeapptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="addtime != null">
-        #{addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatename != null">
-        #{updatename,jdbcType=VARCHAR},
-      </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deletename != null">
-        #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timeliness != null">
-        #{timeliness,jdbcType=INTEGER},
-      </if>
-      <if test="studentId != null">
-        #{studentId,jdbcType=INTEGER},
-      </if>
-      <if test="courseId != null">
-        #{courseId,jdbcType=INTEGER},
-      </if>
-      <if test="coursedetailsId != null">
-        #{coursedetailsId,jdbcType=INTEGER},
-      </if>
-      <if test="classesId != null">
-        #{classesId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.trainingprojects.entity.Suspende">
+  <update id="updateBySuspendeKeySelective" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
     update suspende
     <set>
       <if test="alreadyon != null">
@@ -189,7 +152,7 @@
         Suspende_Reason = #{suspendeReason,jdbcType=VARCHAR},
       </if>
       <if test="suspendeHandler != null">
-        Suspende_Handler = #{suspendeHandler,jdbcType=VARCHAR},
+        Suspende_Handler = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="suspendeapproval != null">
         SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER},
@@ -239,27 +202,12 @@
     </set>
     where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.trkj.trainingprojects.entity.Suspende">
+  <update id="updateBySuspendeKey" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
     update suspende
     set AlreadyOn = #{alreadyon,jdbcType=VARCHAR},
-      Suspende_Time = #{suspendeTime,jdbcType=TIMESTAMP},
-      Suspende_Reason = #{suspendeReason,jdbcType=VARCHAR},
-      Suspende_Handler = #{suspendeHandler,jdbcType=VARCHAR},
-      SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER},
-      SuspendeAppName = #{suspendeappname,jdbcType=VARCHAR},
-      SuspendeAppTime = #{suspendeapptime,jdbcType=TIMESTAMP},
-      RevokeAppName = #{revokeappname,jdbcType=VARCHAR},
-      RevokeAppTime = #{revokeapptime,jdbcType=TIMESTAMP},
-      AddTime = #{addtime,jdbcType=TIMESTAMP},
-      UpdateName = #{updatename,jdbcType=VARCHAR},
-      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
       DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
-      TimeLiness = #{timeliness,jdbcType=INTEGER},
-      Student_Id = #{studentId,jdbcType=INTEGER},
-      Course_Id = #{courseId,jdbcType=INTEGER},
-      CourseDetails_Id = #{coursedetailsId,jdbcType=INTEGER},
-      Classes_Id = #{classesId,jdbcType=INTEGER}
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
     where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
   </update>
 </mapper>

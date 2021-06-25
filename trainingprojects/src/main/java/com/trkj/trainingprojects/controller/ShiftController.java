@@ -71,13 +71,6 @@ public class ShiftController {
         return AjaxResponse.success(shiftVo);
     }
 
-    @PutMapping("/updateByTypeShiftKey4")
-    public AjaxResponse updateByTypeShiftKey4(@RequestBody @Valid ShiftVo shiftVo){
-        shiftVo.setShiftDate(new Date());
-        shiftService.updateByTypeShiftKey4(shiftVo);
-        return AjaxResponse.success(shiftVo);
-    }
-
     @PutMapping("/updateByTypeShiftKey5")
     public AjaxResponse updateByTypeShiftKey5(@RequestBody @Valid ShiftVo shiftVo){
         shiftVo.setDeletetime(new Date());

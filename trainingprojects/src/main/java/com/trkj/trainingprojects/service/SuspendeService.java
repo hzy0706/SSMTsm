@@ -1,12 +1,10 @@
-package com.trkj.trainingprojects.dao;
+package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.vo.SuspendeVo;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface SuspendeDao {
+public interface SuspendeService {
 
     int addSuspende(SuspendeVo record);
 
@@ -14,7 +12,7 @@ public interface SuspendeDao {
 
     int updateBySuspendeKeySelective(SuspendeVo record);
 
-    int updateBySuspendeKey(SuspendeVo record);
+    int deleteBySuspendeKey(SuspendeVo record);
 
     List<SuspendeVo> selectBySuspendeKeyClasses(Integer classesId);
 
@@ -27,6 +25,4 @@ public interface SuspendeDao {
     List<SuspendeVo> selectBySuspendeKeyStudentStatus(Integer studentstatusId);
 
     List<SuspendeVo> selectBySuspendeKeyStudents();
-
-
 }
