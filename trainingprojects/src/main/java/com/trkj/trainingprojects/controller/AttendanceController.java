@@ -56,8 +56,8 @@ public class AttendanceController {
         return  AjaxResponse.success(attendanceVo);
     }
 
-    @PutMapping("/deleteByClassType")
-    public AjaxResponse deleteByClassType(@RequestBody @Valid AttendanceVo attendanceVo){
+    @PutMapping("/deleteByAttenDance")
+    public AjaxResponse deleteByAttenDance(@RequestBody @Valid AttendanceVo attendanceVo){
         Date date = new Date();
         attendanceVo.setDeletetime(date);
         attendanceVo.setTimeliness(1);
