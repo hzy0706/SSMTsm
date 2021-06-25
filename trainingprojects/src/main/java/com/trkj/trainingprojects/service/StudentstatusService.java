@@ -2,6 +2,7 @@ package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.entity.Studentstatus;
 import com.trkj.trainingprojects.vo.StudentstatusVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -33,4 +34,9 @@ public interface StudentstatusService {
     public List<StudentstatusVo> selectStudentStatusByClassesId2(Integer classesId);
     public int updateByClassesIdOnState(StudentstatusVo studentstatusVo);
     public  List<StudentstatusVo> queryByStudentId(int studentId);
+
+    int appByClassesIdOnClassesId(Integer classesId,Integer studentId,Integer classesId2 ,Integer status);
+    StudentstatusVo selectByClassesIdOnClassesId(Integer classesId,Integer studentId);
+    int updateByClassesIdAndStudentIdOnState(Integer classesId,Integer studentId,Integer status);
+
 }

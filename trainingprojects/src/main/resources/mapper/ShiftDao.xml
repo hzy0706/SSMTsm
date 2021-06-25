@@ -5,9 +5,9 @@
     <id column="Shift_Id" jdbcType="INTEGER" property="shiftId" />
     <result column="Shift_Date" jdbcType="TIMESTAMP" property="shiftDate" />
     <result column="Shift_Reason" jdbcType="VARCHAR" property="shiftReason" />
-    <result column="Shift_Handler" jdbcType="VARCHAR" property="shiftHandler" />
+    <result column="Shift_Handler" jdbcType="VARCHAR" property="addname" />
     <result column="Approval" jdbcType="INTEGER" property="approval" />
-    <result column="JW_AppName" jdbcType="VARCHAR" property="jwAppname" />
+    <result column="JW_AppName" jdbcType="VARCHAR" property="appname" />
     <result column="JW_AppTime" jdbcType="TIMESTAMP" property="jwApptime" />
     <result column="JW_DropNameApp" jdbcType="VARCHAR" property="jwDropnameapp" />
     <result column="JW_DropTimeApp" jdbcType="TIMESTAMP" property="jwDroptimeapp" />
@@ -98,8 +98,8 @@
       DeleteName, DeleteTime,
       Student_Id, Classes_Id, Classes_Id2
       )
-    values (#{shiftDate,jdbcType=TIMESTAMP}, #{shiftReason,jdbcType=VARCHAR}, #{shiftHandler,jdbcType=VARCHAR}, 
-      #{jwAppname,jdbcType=VARCHAR}, #{jwApptime,jdbcType=TIMESTAMP},
+    values (#{shiftDate,jdbcType=TIMESTAMP}, #{shiftReason,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
+      #{appname,jdbcType=VARCHAR}, #{jwApptime,jdbcType=TIMESTAMP},
       #{jwDropnameapp,jdbcType=VARCHAR}, #{jwDroptimeapp,jdbcType=TIMESTAMP},
       #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
       #{studentId,jdbcType=INTEGER}, #{classesId,jdbcType=INTEGER}, #{classesId2,jdbcType=INTEGER}
@@ -115,13 +115,13 @@
         Shift_Reason = #{shiftReason,jdbcType=VARCHAR},
       </if>
       <if test="shiftHandler != null">
-        Shift_Handler = #{shiftHandler,jdbcType=VARCHAR},
+        Shift_Handler = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="approval != null">
         Approval = #{approval,jdbcType=INTEGER},
       </if>
       <if test="jwAppname != null">
-        JW_AppName = #{jwAppname,jdbcType=VARCHAR},
+        JW_AppName = #{appname,jdbcType=VARCHAR},
       </if>
       <if test="jwApptime != null">
         JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP},
@@ -164,10 +164,10 @@
       TimeLiness = #{timeliness,jdbcType=INTEGER}
     where Shift_Id = #{shiftId,jdbcType=INTEGER}
   </update>
-  <update id="updateByTypeShiftKey2" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
+  <update id="appByTypeShiftKey2" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
     update shift
     set
-      JW_AppName = #{jwAppname,jdbcType=VARCHAR},
+      JW_AppName = #{addname,jdbcType=VARCHAR},
       Approval = #{approval,jdbcType=INTEGER},
       JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP}
     where Shift_Id = #{shiftId,jdbcType=INTEGER}

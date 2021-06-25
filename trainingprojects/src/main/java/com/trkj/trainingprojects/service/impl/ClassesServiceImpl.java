@@ -70,6 +70,11 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
+    public List<ClassesVo> selectAllClassesByNumber() {
+        return classesDao.selectAllClassesByNumber();
+    }
+
+    @Override
     public List<ClassesVo> selectAllClassesByState2() {
         return classesDao.selectAllClassesByState2();
     }

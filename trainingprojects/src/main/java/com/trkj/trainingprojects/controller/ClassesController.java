@@ -68,6 +68,12 @@ public class ClassesController {
         return list;
     }
 
+    @GetMapping("/selectAllClassesByNumber")
+    public List<ClassesVo> selectAllClassesByNumber(){
+        List<ClassesVo> list = classesService.selectAllClassesByNumber();
+        return list;
+    }
+
     @GetMapping("/selectAllClassesByState2")
     public List<ClassesVo> selectAllClassesByState2(){
         List<ClassesVo> list = classesService.selectAllClassesByState2();

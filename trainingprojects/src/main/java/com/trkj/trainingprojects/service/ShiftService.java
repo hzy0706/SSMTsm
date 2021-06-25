@@ -1,4 +1,4 @@
-package com.trkj.trainingprojects.Opservice;
+package com.trkj.trainingprojects.service;
 
 
 import com.trkj.trainingprojects.vo.ShiftVo;
@@ -23,10 +23,10 @@ public interface ShiftService {
 
     List<ShiftVo> selectByShiftClassesId(Integer classesId);
 
-    int updateByTypeShiftKey2(ShiftVo record);
+    int appByTypeShiftKey2(ShiftVo record);
 
     int updateByTypeShiftKey3(ShiftVo record);
 
-    int updateByTypeShiftKey5(ShiftVo record);
+    int deleteByTypeShiftKey5(ShiftVo record);
 
 }

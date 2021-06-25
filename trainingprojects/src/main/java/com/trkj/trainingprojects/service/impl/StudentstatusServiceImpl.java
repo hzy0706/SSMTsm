@@ -92,4 +92,20 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     public List<StudentstatusVo> queryByStudentId(int studentId) {
         return studentstatusDao.queryByStudentId(studentId);
     }
+    @Transactional
+    @Override
+    public int appByClassesIdOnClassesId(Integer classesId, Integer studentId, Integer classesId2,Integer status) {
+        return studentstatusDao.updateByClassesIdOnClassesId(classesId,studentId,classesId2,status);
+    }
+
+    @Override
+    public StudentstatusVo selectByClassesIdOnClassesId(Integer classesId, Integer studentId) {
+        return studentstatusDao.selectByClassesIdOnClassesId(classesId,studentId);
+    }
+
+    @Transactional
+    @Override
+    public int updateByClassesIdAndStudentIdOnState(Integer classesId, Integer studentId,Integer status) {
+        return studentstatusDao.updateByClassesIdAndStudentIdOnState(classesId,studentId,status);
+    }
 }

@@ -25,10 +25,9 @@ public interface ShiftDao {
 
     List<ShiftVo> selectByShiftClassesId(Integer classesId);
 
-    int updateByTypeShiftKey2(ShiftVo record);
+    int appByTypeShiftKey2(ShiftVo record);
 
     int updateByTypeShiftKey3(ShiftVo record);
 
     int updateByTypeShiftKey5(ShiftVo record);
-
 }

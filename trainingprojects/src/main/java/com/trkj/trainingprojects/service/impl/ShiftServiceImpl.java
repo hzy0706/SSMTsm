@@ -1,8 +1,9 @@
-package com.trkj.trainingprojects.Opservice;
+package com.trkj.trainingprojects.service.impl;
 
+import com.trkj.trainingprojects.dao.ClassesDao;
 import com.trkj.trainingprojects.dao.ShiftDao;
-import com.trkj.trainingprojects.service.StudentoutstandingService;
-import com.trkj.trainingprojects.service.StudentstatusService;
+import com.trkj.trainingprojects.dao.StudentstatusDao;
+import com.trkj.trainingprojects.service.ShiftService;
 import com.trkj.trainingprojects.vo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,12 +20,18 @@ public class ShiftServiceImpl implements ShiftService {
     private ShiftDao shiftDao;
 
     @Resource
-    private StudentstatusService studentstatusService;
+    private StudentstatusDao studentstatusDao;
+
+    @Resource
+    private ClassesDao classesDao;
 
 
     @Override
     @Transactional
     public int addShift(ShiftVo record) {
+        StudentstatusVo studentstatusVo=studentstatusDao.selectByClassesIdOnClassesId(record.getClassesId(),record.getStudentId());
+        int b=studentstatusDao.updateByClassesIdAndStudentIdOnState(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),5);
+
         return shiftDao.addShift(record);
     }
 
@@ -68,14 +74,21 @@ public class ShiftServiceImpl implements ShiftService {
 
     @Override
     @Transactional
-    public int updateByTypeShiftKey2(ShiftVo record) {
-//        StudentstatusVo studentstatusVo = studentstatusService.updateByStudentStateOne();
-        return shiftDao.updateByTypeShiftKey2(record);
+    public int appByTypeShiftKey2(ShiftVo record) {
+        StudentstatusVo studentstatusVo=studentstatusDao.selectByClassesIdOnClassesId(record.getClassesId(),record.getStudentId());
+        int a = studentstatusDao.updateByClassesIdOnClassesId(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),record.getClassesId2(),2);
+        ClassesVo classesVo=classesDao.queryById2(record.getClassesId());
+        classesVo.setClassestudents(classesVo.getClassestudents()-1);
+        classesDao.updateClassesIdOnClasseStudents(classesVo);
+        ClassesVo classesVo2=classesDao.queryById2(record.getClassesId2());
+        classesVo2.setClassestudents(classesVo2.getClassestudents()+1);
+        classesDao.updateClassesIdOnClasseStudents(classesVo2);
+        return shiftDao.appByTypeShiftKey2(record);
     }
 
     @PutMapping("/updateByStudentStateTwo")
     public AjaxResponse updateByStudentStateTwo(@RequestBody @Valid StudentstatusVo studentstatusVo){
-        studentstatusService.updateByStudentStateTwo(studentstatusVo);
+        studentstatusDao.updateByStudentStateTwo(studentstatusVo);
         return AjaxResponse.success(studentstatusVo);
     }
 
@@ -88,7 +101,7 @@ public class ShiftServiceImpl implements ShiftService {
 
     @Override
     @Transactional
-    public int updateByTypeShiftKey5(ShiftVo record) {
+    public int deleteByTypeShiftKey5(ShiftVo record) {
         return shiftDao.updateByTypeShiftKey5(record);
     }
 }

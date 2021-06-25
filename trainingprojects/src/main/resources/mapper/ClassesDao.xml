@@ -168,6 +168,18 @@
         where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1)
     </select>
 
+    <!--查询所有开办状态为0或者1并且人数小于最大容纳量的班级信息（焦凡超）-->
+    <select id="selectAllClassesByNumber" resultMap="ClassesMap">
+        select
+        <include refid="Base_Column_List" />,e1.Emp_Name,e2.Emp_Name,co.Course_Name,cs.CourseDetails_Name
+        from classes cl
+        inner join emp e1 on cl.Emp_Id=e1.Emp_Id
+        inner join emp e2 on cl.Teacher_Id=e2.Emp_Id
+        inner join course co on cl.Course_Id=co.Course_Id
+        inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
+        where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1) and cl.Classe_Students &lt; cl.Classe_CountStudents
+    </select>
+
     <!--查询所有开办状态为1的班级信息（胡志远）-->
     <select id="selectAllClassesByState2" resultMap="ClassesMap">
         select
@@ -179,6 +191,7 @@
         inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
         where cl.TimeLiness = 0 and cl.Classes_Open = 1
     </select>
+
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ClassesMap">
@@ -369,6 +382,14 @@
           Classe_Students = (SELECT COUNT(Classes_Id) FROM studentstatus WHERE Classes_Id=#{classesId} and TimeLiness = 0)+1
         where Classes_Id = #{classesId} and TimeLiness = 0
     </update>
+
+    <update id="updateClassesIdOnClasseStudents" parameterType="com.trkj.trainingprojects.entity.Classes">
+        update tr01904.classes
+        set
+          Classe_Students =#{classestudents}
+        where Classes_Id = #{classesId} and TimeLiness = 0
+    </update>
+
 
 </mapper>
 

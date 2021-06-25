@@ -36,7 +36,7 @@ public class ShiftVo {
     /**
      * 转班办理人
      */
-    public String shiftHandler;
+    public String addname;
 
     /**
      * 操作审批
@@ -46,7 +46,7 @@ public class ShiftVo {
     /**
      * 教务部审核人
      */
-    public String jwAppname;
+    public String appname;
 
     /**
      * 教务部审批时间

@@ -43,5 +43,11 @@ public interface StudentstatusDao {
     List<StudentstatusVo> selectStudentStatusByClassesId2(Integer classesId);
     int updateByClassesIdOnState(StudentstatusVo studentstatusVo);
     List<StudentstatusVo> queryByStudentId(int studentId);
+    int updateByClassesIdOnClassesId(@Param("classesId") Integer classesId,@Param("studentId") Integer studentId,@Param("classesId2") Integer classesId2, @Param("status") Integer status );
+    StudentstatusVo selectByClassesIdOnClassesId(@Param("classesId") Integer classesId,@Param("studentId") Integer studentId);
+
+    int updateByClassesIdAndStudentIdOnState(@Param("classesId") Integer classesId,@Param("studentId") Integer studentId, @Param("status") Integer status );
+
+
 }
 

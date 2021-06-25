@@ -373,6 +373,8 @@
         where sts.Classes_Id = #{classesId} and sts.TimeLiness = 0
     </select>
 
+
+
    <!-- 根据班级id修改-->
     <update id="updateByClassesIdOnState" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
         update tr01904.studentstatus
@@ -381,5 +383,27 @@
         where Classes_Id = #{classesId}
     </update>
 
+    <update id="updateByClassesIdAndStudentIdOnState" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
+        update tr01904.studentstatus
+        set
+          Status = #{status}
+        where Classes_Id = #{classesId} and Student_Id = #{studentId}
+    </update>
+
+    <update id="updateByClassesIdOnClassesId" parameterType="int">
+        update tr01904.studentstatus
+        set
+          Classes_Id = #{classesId2},
+          Status = #{status}
+        where Classes_Id = #{classesId} and Student_Id = #{studentId}
+    </update>
+    <select id="selectByClassesIdOnClassesId" resultMap="StudentstatusMap">
+        select
+        <include refid="Base_Column_List" />,sts.Classes_Id
+        from studentstatus sts
+        inner join classes cl on sts.Classes_Id=cl.Classes_Id
+        inner join student st on sts.Student_Id=st.Student_Id
+        where sts.Student_Id = #{studentId,jdbcType=INTEGER} and sts.Classes_Id = #{classesId,jdbcType=INTEGER} and sts.TimeLiness = 0
+    </select>
 </mapper>
 

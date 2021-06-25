@@ -99,5 +99,4 @@ public class StudentstatusController {
         List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
         return list;
     }
-
 }

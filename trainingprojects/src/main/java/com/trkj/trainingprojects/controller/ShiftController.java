@@ -2,9 +2,8 @@ package com.trkj.trainingprojects.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.trkj.trainingprojects.Opservice.ShiftService;
+import com.trkj.trainingprojects.service.ShiftService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
-import com.trkj.trainingprojects.vo.DropoutVo;
 import com.trkj.trainingprojects.vo.ShiftVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,13 +42,14 @@ public class ShiftController {
         return AjaxResponse.success(shiftVo);
     }
 
-    @PutMapping("/deleteByShiftKey/{ids}")
-    public AjaxResponse deleteByShiftKey(@PathVariable("ids") String ids){
+    @PutMapping("/deleteByShiftKey/{ids}/{deletename}")
+    public AjaxResponse deleteByShiftKey(@PathVariable("ids") String ids , @PathVariable("deletename") String deletename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
             ShiftVo shiftVo = new ShiftVo();
             shiftVo.setDeletetime(date);
+            shiftVo.setDeletename(deletename);
             shiftVo.setTimeliness(1);
             shiftVo.setShiftId(Integer.parseInt(s));
             shiftService.deleteByShiftKey(shiftVo);
@@ -60,7 +60,7 @@ public class ShiftController {
     @PutMapping("/updateByTypeShiftKey2")
     public AjaxResponse updateByTypeShiftKey2(@RequestBody @Valid ShiftVo shiftVo){
         shiftVo.setJwApptime(new Date());
-        shiftService.updateByTypeShiftKey2(shiftVo);
+        shiftService.appByTypeShiftKey2(shiftVo);
         return AjaxResponse.success(shiftVo);
     }
 
@@ -74,7 +74,7 @@ public class ShiftController {
     @PutMapping("/updateByTypeShiftKey5")
     public AjaxResponse updateByTypeShiftKey5(@RequestBody @Valid ShiftVo shiftVo){
         shiftVo.setDeletetime(new Date());
-        shiftService.updateByTypeShiftKey5(shiftVo);
+        shiftService.deleteByTypeShiftKey5(shiftVo);
         return AjaxResponse.success(shiftVo);
     }
 }
