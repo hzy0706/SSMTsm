@@ -169,7 +169,7 @@
         LEFT join classes cl on sts.Classes_Id=cl.Classes_Id
         inner join student st on sts.Student_Id=st.Student_Id
         inner join course c on sts.Course_Id=c.Course_Id
-        where sts.TimeLiness = 0 and sts.allottype = '正式学员补报'
+        where sts.TimeLiness = 0 and sts.allottype = '正式学员补报' order by StudentStatus_Id DESC
     </select>
 
    <!-- 根据学员id查询-->
