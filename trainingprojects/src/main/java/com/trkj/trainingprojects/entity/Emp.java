@@ -1,8 +1,9 @@
 package com.trkj.trainingprojects.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * emp
@@ -93,7 +94,7 @@ public class Emp implements Serializable {
     /**
      * 增加人
      */
-    private String addname;
+    public String addname;
 
     /**
      * 增加时间
@@ -103,7 +104,7 @@ public class Emp implements Serializable {
     /**
      * 最后修改人
      */
-    private String updatename;
+    public String updatename;
 
     /**
      * 最后修改时间
@@ -125,11 +126,6 @@ public class Emp implements Serializable {
      */
     private Date separationdate;
 
-    /**
-     * 职位编号
-     */
-    private Integer positionId;
-    private Position position;
 
     /**
      * 部门编号
@@ -138,10 +134,26 @@ public class Emp implements Serializable {
     private Dept dept;
 
     /**
-     * 企业档案编号
+     * 0无效用户，1是有效用户
      */
-    private Integer enterpriseId;
-    private Enterprise enterprise;
+    private Boolean enabled;
+
+    /**
+     * 账户是否没过期
+     */
+    private Boolean accountNonExpired;
+
+    /**
+     * 是否没被锁定
+     */
+    private Boolean accountNonLocked;
+
+    /**
+     * 密码是否没有过期
+     */
+    private Boolean credentialsNonExpired;
+
 
     private static final long serialVersionUID = 1L;
+
 }

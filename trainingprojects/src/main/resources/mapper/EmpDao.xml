@@ -25,53 +25,47 @@
     <result column="SeparationName" jdbcType="VARCHAR" property="separationname" />
     <result column="SeparationTime" jdbcType="TIMESTAMP" property="separationtime" />
     <result column="SeparationDate" jdbcType="TIMESTAMP" property="separationdate" />
-    <result column="Position_Id" jdbcType="INTEGER" property="positionId" />
+    <result column="account_non_expired" jdbcType="BIT" property="accountNonExpired" />
+    <result column="account_non_locked" jdbcType="BIT" property="accountNonLocked" />
+    <result column="credentials_non_expired" jdbcType="BIT" property="credentialsNonExpired" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
     <result column="Dept_Id" jdbcType="INTEGER" property="deptId" />
-    <result column="Enterprise_Id" jdbcType="INTEGER" property="enterpriseId" />
     <association property="deptVo" javaType="com.trkj.trainingprojects.vo.DeptVo">
       <result column="Dept_Name" jdbcType="VARCHAR" property="deptName" />
-    </association>
-    <association property="enterpriseVo" javaType="com.trkj.trainingprojects.vo.EnterpriseVo">
-      <result column="Enterprise_Name" jdbcType="VARCHAR" property="enterpriseName" />
-    </association>
-    <association property="positionVo" javaType="com.trkj.trainingprojects.vo.PositionVo">
-      <result column="Position_Name" jdbcType="VARCHAR" property="positionName" />
     </association>
   </resultMap>
   <sql id="Base_Column_List">
     e.Emp_Id, e.JobNumber, e.Emp_Name, e.UserImg, e.IndividualImg, e.Emp_Sex, e.Emp_Phone, e.E_mail,
     e.Birthday, e.Remarks, e.Address, e.WorkersState, e.`Password`, e.LoginState, e.Education, e.Graduate,
     e.AddName, e.AddTime, e.UpdateName, e.UpdateTime, e.SeparationName, e.SeparationTime, e.SeparationDate,
-    e.Position_Id, e.Dept_Id, e.Enterprise_Id
+    e.Dept_Id,e.account_non_expired, e.account_non_locked, e.credentials_non_expired,enabled
   </sql>
   <select id="selectByEmpKey" parameterType="com.trkj.trainingprojects.vo.EmpVo" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />,d.Dept_Name
     from emp e
+    inner join dept d on d.Dept_Id=e.Dept_Id
     where JobNumber = #{jobnumber,jdbcType=VARCHAR} and Password = #{password,jdbcType=VARCHAR} and LoginState=0
   </select>
-  <select id="selectAllEmps" resultMap="BaseResultMap">
+
+  <select id="findByUsername" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,d.Dept_Name,en.Enterprise_Name,p.Position_Name
+    <include refid="Base_Column_List" />,d.Dept_Name
     from emp e
     inner join dept d on d.Dept_Id=e.Dept_Id
-    inner join enterprise en on en.Enterprise_Id=e.Enterprise_Id
-    inner join `position` p on p.Position_Id=e.Position_Id
+    where JobNumber = #{jobnumber,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectAllEmpsByPositionId" resultMap="BaseResultMap">
+  <select id="selectAllEmps" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,d.Dept_Name,en.Enterprise_Name,p.Position_Name
+    <include refid="Base_Column_List" />,d.Dept_Name
     from emp e
     inner join dept d on d.Dept_Id=e.Dept_Id
-    inner join enterprise en on en.Enterprise_Id=e.Enterprise_Id
-    inner join `position` p on p.Position_Id=e.Position_Id
-    where e.Position_Id = #{positionId,jdbcType=INTEGER}
   </select>
 
   <select id="selectAllIncumbencyEmps" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,d.Dept_Name,en.Enterprise_Name,p.Position_Name
+    <include refid="Base_Column_List" />,d.Dept_Name
     from emp e
     inner join dept d on d.Dept_Id=e.Dept_Id
     inner join enterprise en on en.Enterprise_Id=e.Enterprise_Id
@@ -85,16 +79,16 @@
       Address, Education, Graduate,
       AddName, UpdateName,
       UpdateTime, SeparationName, SeparationTime, 
-      SeparationDate, Position_Id, Dept_Id, 
-      Enterprise_Id)
+      SeparationDate, Dept_Id,account_non_expired, account_non_locked,
+      credentials_non_expired,enabled)
     values (#{jobnumber,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{userimg,jdbcType=VARCHAR}, 
       #{individualimg,jdbcType=VARCHAR}, #{empSex,jdbcType=VARCHAR}, #{empPhone,jdbcType=VARCHAR}, 
       #{eMail,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{graduate,jdbcType=VARCHAR},
       #{addname,jdbcType=VARCHAR}, #{updatename,jdbcType=VARCHAR},
       #{updatetime,jdbcType=TIMESTAMP}, #{separationname,jdbcType=VARCHAR}, #{separationtime,jdbcType=TIMESTAMP}, 
-      #{separationdate,jdbcType=TIMESTAMP}, #{positionId,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, 
-      #{enterpriseId,jdbcType=INTEGER})
+      #{separationdate,jdbcType=TIMESTAMP},#{deptId,jdbcType=INTEGER},#{accountNonExpired,jdbcType=BIT}, #{accountNonLocked,jdbcType=BIT},
+      #{credentialsNonExpired,jdbcType=BIT},#{enabled,jdbcType=BIT})
   </insert>
   <update id="updateByEmpKeySelective" parameterType="com.trkj.trainingprojects.entity.Emp">
     update emp
@@ -165,14 +159,20 @@
       <if test="separationdate != null">
         SeparationDate = #{separationdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="positionId != null">
-        Position_Id = #{positionId,jdbcType=INTEGER},
-      </if>
       <if test="deptId != null">
         Dept_Id = #{deptId,jdbcType=INTEGER},
       </if>
-      <if test="enterpriseId != null">
-        Enterprise_Id = #{enterpriseId,jdbcType=INTEGER},
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="accountNonExpired != null">
+        account_non_expired = #{accountNonExpired,jdbcType=BIT},
+      </if>
+      <if test="accountNonLocked != null">
+        account_non_locked = #{accountNonLocked,jdbcType=BIT},
+      </if>
+      <if test="credentialsNonExpired != null">
+        credentials_non_expired = #{credentialsNonExpired,jdbcType=BIT},
       </if>
     </set>
     where Emp_Id = #{empId,jdbcType=INTEGER}

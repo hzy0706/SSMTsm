@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.vo.EmpVo;
+import com.trkj.trainingprojects.vo.UserVo;
 
 import java.util.List;
 
@@ -14,7 +15,8 @@ public interface EmpService {
     int updateByEmpKeySelective(EmpVo record);
 
     int updateByEmpKey(EmpVo record);
-    List<EmpVo> selectAllEmpsByPositionId(Integer positionId);
 
     List<EmpVo> selectAllIncumbencyEmps();
+
+    public EmpVo findByUsername(String username);
 }
