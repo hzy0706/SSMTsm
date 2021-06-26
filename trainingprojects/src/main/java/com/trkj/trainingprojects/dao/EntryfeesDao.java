@@ -28,7 +28,7 @@ public interface EntryfeesDao {
 
     int insertOrUpdateBatch(@Param("entities") List<Entryfees> entities);
 
-    int update(Entryfees entryfees);
+    int update(EntryfeesVo entryfeesVo);
 
     int deleteById(Integer feesId);
 

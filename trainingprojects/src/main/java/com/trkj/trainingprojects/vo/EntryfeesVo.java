@@ -63,6 +63,7 @@ public class EntryfeesVo {
     /**
      * 增加时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date addtime;
     /**
      * 删除人

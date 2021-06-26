@@ -4,12 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.entity.Entryfees;
 import com.trkj.trainingprojects.service.EntryfeesService;
+import com.trkj.trainingprojects.vo.AjaxResponse;
+import com.trkj.trainingprojects.vo.ClassTypeVo;
 import com.trkj.trainingprojects.vo.EntryfeesVo;
 import com.trkj.trainingprojects.vo.ExaminationContentVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,4 +36,13 @@ public class EntryfeesController {
         PageInfo<EntryfeesVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+
+    @PutMapping("/updateEntryFees")
+    public AjaxResponse updateEntryFees(@RequestBody @Valid EntryfeesVo entryfeesVo){
+        Date date = new Date();
+        entryfeesVo.setUpdatetime(date);
+        entryfeesService.updateEntryFees(entryfeesVo);
+        return  AjaxResponse.success(entryfeesVo);
+    }
+
 }

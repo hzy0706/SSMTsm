@@ -26,7 +26,7 @@ public interface StudentDao {
 
     int insertOrUpdateBatch(@Param("entities") List<Student> entities);
 
-    int update(Student student);
+    int updateByStudentKey(StudentVo studentVo);
 
     int deleteById(Integer studentId);
 

@@ -85,4 +85,12 @@ public class StudentController {
         return  AjaxResponse.success(studentVo);
     }
 
+    @PutMapping("/updateByStudentKey")
+    public AjaxResponse updateByStudentKey(@RequestBody @Valid StudentVo studentVo){
+        Date date = new Date();
+        studentVo.setUpdatetime(date);
+        studentService.updateByStudentKey(studentVo);
+        return  AjaxResponse.success(studentVo);
+    }
+
 }

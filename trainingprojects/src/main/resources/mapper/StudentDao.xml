@@ -249,7 +249,7 @@
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update">
+    <update id="updateByStudentKey">
         update tr01904.student
         <set>
             <if test="studentName != null and studentName != ''">
