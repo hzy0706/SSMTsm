@@ -45,8 +45,8 @@ public class BookController {
         List<BookVo> list = bookService.selectAllBooks2();
         return list;
     }
-    @GetMapping("/selectByBookKey/{id}")
-    public BookVo selectByBookKey(@PathVariable("id") int id){
+    @GetMapping("/selectByBookKey")
+    public BookVo selectByBookKey(@RequestParam("id") int id){
         return bookService.selectByBookKey(id);
     }
     @PutMapping("/updateBook")

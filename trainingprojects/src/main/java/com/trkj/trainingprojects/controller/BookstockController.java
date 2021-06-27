@@ -26,8 +26,8 @@ public class BookstockController {
 
     }
 
-    @GetMapping("/selectByBookstockKey/{stockId}")
-    public BookstockVo selectByBookstockKey(@PathVariable("stockId") Integer stockId) {
+    @GetMapping("/selectByBookstockKey")
+    public BookstockVo selectByBookstockKey(@RequestParam("stockId") Integer stockId) {
         return bookstockService.selectByBookstockKey(stockId);
     }
 
