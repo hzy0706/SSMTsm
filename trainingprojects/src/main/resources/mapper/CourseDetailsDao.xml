@@ -56,9 +56,7 @@
                 <result property="separationname" column="SeparationName" jdbcType="VARCHAR"/>
                 <result property="separationtime" column="SeparationTime" jdbcType="TIMESTAMP"/>
                 <result property="separationdate" column="SeparationDate" jdbcType="TIMESTAMP"/>
-                <result property="positionId" column="Position_Id" jdbcType="INTEGER"/>
                 <result property="deptId" column="Dept_Id" jdbcType="INTEGER"/>
-                <result property="enterpriseId" column="Enterprise_Id" jdbcType="INTEGER"/>
             </collection>
             <collection property="empVo2" ofType="com.trkj.trainingprojects.vo.EmpVo">
                 <id property="empId" column="Emp_Id" jdbcType="INTEGER"/>
@@ -84,9 +82,7 @@
                 <result property="separationname" column="SeparationName" jdbcType="VARCHAR"/>
                 <result property="separationtime" column="SeparationTime" jdbcType="TIMESTAMP"/>
                 <result property="separationdate" column="SeparationDate" jdbcType="TIMESTAMP"/>
-                <result property="positionId" column="Position_Id" jdbcType="INTEGER"/>
                 <result property="deptId" column="Dept_Id" jdbcType="INTEGER"/>
-                <result property="enterpriseId" column="Enterprise_Id" jdbcType="INTEGER"/>
             </collection>
         </association>
         <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">

@@ -30,4 +30,5 @@ public interface StudentService {
     public int addStudents(StudentVo studentVo);
     List<StudentVo> SelectStudentByState2(Integer classesId);
     public int updateByStudent(StudentVo studentVo);
+    public int updateByStudentKey(StudentVo studentVo);
 }

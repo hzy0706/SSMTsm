@@ -42,6 +42,11 @@
             <result column="Source_Id" jdbcType="INTEGER" property="sourceId" />
             <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
             <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+            <collection property="empVo" ofType="com.trkj.trainingprojects.vo.EmpVo">
+                <id column="Emp_Id" jdbcType="INTEGER" property="empId" />
+                <result column="JobNumber" jdbcType="VARCHAR" property="jobnumber" />
+                <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+            </collection>
         </association>
         <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
             <id property="studentId" column="Student_Id" jdbcType="INTEGER"/>
@@ -118,11 +123,12 @@
         r.Register_Id, r.ConsultAnt, r.Sex, r.Phone, r.AttentState, r.PayState,
         r.ConsultContent, r.AddName,r.ADDTIME, r.UpdateName, r.UpdateTime,
         r.DeleteName, r.DeleteTime, r.TimeLiness, r.Source_Id, r.Course_Id,
-        r.Emp_Id
+        r.Emp_Id, em.Emp_Id, em.Emp_Name
         from entryfees e
         inner join register r on e.Register_Id=r.Register_Id
         inner join student st on e.Student_Id=st.Student_Id
         inner join course c on e.Course_Id=c.Course_Id
+        inner join emp em on r.Emp_Id=em.Emp_Id
         where e.TimeLiness = 0 order by e.Fees_Id DESC
     </select>
 
@@ -265,13 +271,13 @@
     <update id="update">
         update tr01904.entryfees
         <set>
-            <if test="feesNumber != null and feesNumber != ''">
+            <if test="feesNumber != null">
                 Fees_Number = #{feesNumber},
             </if>
             <if test="feesReceivable != null">
                 Fees_Receivable = #{feesReceivable},
             </if>
-            <if test="feesType != null and feesType != ''">
+            <if test="feesType != null">
                 Fees_Type = #{feesType},
             </if>
             <if test="feesAdvance != null">
@@ -283,19 +289,19 @@
             <if test="receipts != null">
                 Receipts = #{receipts},
             </if>
-            <if test="updatename != null and updatename != ''">
+            <if test="updatename != null">
                 UpdateName = #{updatename},
             </if>
             <if test="updatetime != null">
                 UpdateTime = #{updatetime},
             </if>
-            <if test="addname != null and addname != ''">
+            <if test="addname != null">
                 AddName = #{addname},
             </if>
             <if test="addtime != null">
                 AddTime = #{addtime},
             </if>
-            <if test="deletename != null and deletename != ''">
+            <if test="deletename != null">
                 DeleteName = #{deletename},
             </if>
             <if test="deletetime != null">
@@ -310,13 +316,13 @@
             <if test="approvaltime != null">
                 ApprovalTime = #{approvaltime},
             </if>
-            <if test="approvalname != null and approvalname != ''">
+            <if test="approvalname != null">
                 ApprovalName = #{approvalname},
             </if>
             <if test="revokeapptime != null">
                 RevokeAppTime = #{revokeapptime},
             </if>
-            <if test="revokeappname != null and revokeappname != ''">
+            <if test="revokeappname != null">
                 RevokeAppName = #{revokeappname},
             </if>
             <if test="registerId != null">
@@ -336,6 +342,8 @@
     <delete id="deleteById">
         delete from tr01904.entryfees where Fees_Id = #{feesId}
     </delete>
+
+
 
 </mapper>
 

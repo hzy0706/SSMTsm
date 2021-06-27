@@ -24,4 +24,5 @@ public interface EntryfeesService {
     boolean deleteById(Integer feesId);
 
     public List<EntryfeesVo> selectAllEntryFees();
+    public int updateEntryFees(EntryfeesVo entryfeesVo);
 }

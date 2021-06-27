@@ -68,6 +68,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int updateByStudentKey(StudentVo studentVo) {
+        return studentDao.updateByStudentKey(studentVo);
+    }
+
+    @Override
     @Transactional
     public int addStudents(StudentVo studentVo) {
         studentDao.insert(studentVo);

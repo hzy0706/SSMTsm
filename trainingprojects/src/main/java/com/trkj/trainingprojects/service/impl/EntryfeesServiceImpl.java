@@ -42,4 +42,9 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     public List<EntryfeesVo> selectAllEntryFees() {
         return entryfeesDao.selectAllEntryFees();
     }
+
+    @Override
+    public int updateEntryFees(EntryfeesVo entryfeesVo) {
+        return entryfeesDao.update(entryfeesVo);
+    }
 }
