@@ -101,9 +101,9 @@ public class CourseController {
     }
 
     @GetMapping("/selectCourseDelectOne/{id}")
-    public int selectCourseDelectOne(@PathVariable("id") int id){
+    public AjaxResponse selectCourseDelectOne(@PathVariable("id") int id){
         int a = courseService.selectCourseDelectOne(id);
-        return a;
+        return AjaxResponse.success(a);
     }
 
     @PutMapping("/deleteByCourseDetailsNumber/{ids}")

@@ -63,9 +63,7 @@
             <result column="SeparationName" jdbcType="VARCHAR" property="separationname" />
             <result column="SeparationTime" jdbcType="TIMESTAMP" property="separationtime" />
             <result column="SeparationDate" jdbcType="TIMESTAMP" property="separationdate" />
-            <result column="Position_Id" jdbcType="INTEGER" property="positionId" />
             <result column="Dept_Id" jdbcType="INTEGER" property="deptId" />
-            <result column="Enterprise_Id" jdbcType="INTEGER" property="enterpriseId" />
         </association>
     </resultMap>
 
