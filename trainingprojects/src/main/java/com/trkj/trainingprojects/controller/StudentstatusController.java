@@ -34,8 +34,8 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @GetMapping("/selectStudentStatusByStudentId/{id}")
-    public PageInfo<StudentstatusVo> SelectStudentByClassId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectStudentStatusByStudentId")
+    public PageInfo<StudentstatusVo> SelectStudentByClassId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByStudentId(id);
         PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
@@ -72,18 +72,18 @@ public class StudentstatusController {
         return  AjaxResponse.success(studentstatusVo);
     }
 
-    @GetMapping("/selectStudentStatusByClassesId/{id}")
-    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectStudentStatusByClassesId")
+    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId(id);
         PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 
-    @GetMapping("/selectStudentStatusByClassesId2/{classesId}")
-    public List<StudentstatusVo> selectStudentStatusByClassesId2(@PathVariable("classesId") int classesId){
+    @GetMapping("/selectStudentStatusByClassesId2")
+    public AjaxResponse selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
-        return list;
+        return AjaxResponse.success(list);
     }
 
     /*
@@ -95,10 +95,10 @@ public class StudentstatusController {
         return  AjaxResponse.success(studentstatusVo);
     }
 
-    @GetMapping("/queryByStudentId/{studentId}")
-    public List<StudentstatusVo> queryByStudentId(@PathVariable("studentId") int studentId){
+    @GetMapping("/queryByStudentId")
+    public AjaxResponse queryByStudentId(@RequestParam("studentId") int studentId){
         List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
-        return list;
+        return AjaxResponse.success(list);
     }
 
     @GetMapping("/selectStudentAllotType")

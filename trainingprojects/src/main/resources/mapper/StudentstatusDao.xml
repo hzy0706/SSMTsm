@@ -63,6 +63,10 @@
                 <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
                 <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
             </collection>
+            <collection property="sourceVo" ofType="com.trkj.trainingprojects.vo.SourceVo">
+                <id column="Source_Id" jdbcType="INTEGER" property="sourceId" />
+                <result column="Source_Name" jdbcType="VARCHAR" property="sourceName" />
+            </collection>
         </association>
         <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
             <id property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
@@ -150,11 +154,12 @@
         <include refid="Base_Column_List" />,
         <include refid="Base_Student_List" />,
         <include refid="Base_Course_List" />,
-        <include refid="Base_Class_List" />
+        <include refid="Base_Class_List" />,s.Source_Id,s.Source_Name
         from tr01904.studentstatus sts
         LEFT join classes cl on sts.Classes_Id=cl.Classes_Id
         inner join student st on sts.Student_Id=st.Student_Id
         inner join course c on sts.Course_Id=c.Course_Id
+        inner join source s on st.Source_Id=s.Source_Id
         where sts.Student_Id = #{studentId} and sts.TimeLiness = 0
     </select>
 

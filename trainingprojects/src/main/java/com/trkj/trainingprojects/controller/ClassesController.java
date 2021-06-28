@@ -87,14 +87,14 @@ public class ClassesController {
         return AjaxResponse.success(classesVo);
     }
 
-    @GetMapping("/selectAllClassesByState/{id}")
-    public List<ClassesVo> selectClassesById(@PathVariable("id") int id){
+    @GetMapping("/selectAllClassesByState3")
+    public List<ClassesVo> selectClassesById(@RequestParam("id") int id){
         List<ClassesVo> list = classesService.selectClassesById(id);
         return list;
     }
 
-    @GetMapping("/selectClassesNumbers/{id}")
-    public ClassesVo selectClassesNumber(@PathVariable("id") int id){
+    @GetMapping("/selectClassesNumbers")
+    public ClassesVo selectClassesNumber(@RequestParam("id") int id){
         ClassesVo list = classesService.selectClassesNumber(id);
         return list;
     }
