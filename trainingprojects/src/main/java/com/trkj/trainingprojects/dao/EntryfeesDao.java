@@ -33,6 +33,7 @@ public interface EntryfeesDao {
     int deleteById(Integer feesId);
 
     List<EntryfeesVo> selectAllEntryFees();
-
+    int updateByEntryFeeState(EntryfeesVo entryfeesVo);
+    int deleteByEntryFees(EntryfeesVo entryfeesVo);
 }
 

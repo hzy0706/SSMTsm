@@ -63,4 +63,9 @@ public class ExaminationContentServiceImpl implements ExaminationContentService 
     public int deleteByExaminationContent(ExaminationContentVo examinationContentVo) {
         return examinationContentDao.deleteByExaminationContent(examinationContentVo);
     }
+
+    @Override
+    public ExaminationContentVo selectAllExaminationContentByCode(int examCode) {
+        return examinationContentDao.selectAllExaminationContentByCode(examCode);
+    }
 }

@@ -45,7 +45,7 @@ public class CourseController {
     public AjaxResponse addCourse(@RequestBody @Valid CourseVo courseVo){
         Date date = new Date();
         courseVo.setAddtime(date);
-        courseVo.setCourseState(0);
+        courseVo.setCourseState(1);
         courseVo.setTimeliness(0);
         courseVo.setStopname(null);
         courseService.addCourse(courseVo);
@@ -100,14 +100,14 @@ public class CourseController {
         return  AjaxResponse.success(courseVo);
     }
 
-    @GetMapping("/selectCourseDelectOne/{id}")
-    public AjaxResponse selectCourseDelectOne(@PathVariable("id") int id){
+    @GetMapping("/selectCourseDelectOne")
+    public AjaxResponse selectCourseDelectOne(@RequestParam("id") int id){
         int a = courseService.selectCourseDelectOne(id);
         return AjaxResponse.success(a);
     }
 
-    @PutMapping("/deleteByCourseDetailsNumber/{ids}")
-    public int deleteByCourseDetailsNumber(@PathVariable("ids") String ids){
+    @PutMapping("/deleteByCourseDetailsNumber")
+    public int deleteByCourseDetailsNumber(@RequestParam("ids") String ids){
         String[] id= ids.split(",");
         System.out.println(ids);
         for (String s:id){

@@ -25,4 +25,6 @@ public interface EntryfeesService {
 
     public List<EntryfeesVo> selectAllEntryFees();
     public int updateEntryFees(EntryfeesVo entryfeesVo);
+    public int updateByEntryFeeState(EntryfeesVo entryfeesVo);
+    public int deleteByEntryFees(EntryfeesVo entryfeesVo);
 }
