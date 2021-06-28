@@ -19,7 +19,7 @@ public class FaqQuestionsController {
     @Autowired
     private FaqService faqService;
 //    查询
-    @GetMapping("/findFaq")
+    @GetMapping("/selectFindFaq")
     public PageInfo<FaqQuestionsVo> findFaqQuestions(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize) {
 //       分页
         PageHelper.startPage(currentPage,pagesize);
