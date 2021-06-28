@@ -57,4 +57,11 @@ public class ExaminationContentController {
         return AjaxResponse.success(examinationContentVo);
     }
 
+    @GetMapping("/selectAllExaminationContentByCode")
+    public AjaxResponse selectAllExaminationContentByCode(@RequestParam("id") int id){
+        System.out.println(id);
+        ExaminationContentVo examinationContentVo = examinationcontentService.selectAllExaminationContentByCode(id);
+        return AjaxResponse.success(examinationContentVo);
+    }
+
 }

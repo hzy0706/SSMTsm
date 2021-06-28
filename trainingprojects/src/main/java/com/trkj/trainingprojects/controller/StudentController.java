@@ -28,16 +28,16 @@ public class StudentController {
     @Resource
     private StudentstatusService studentstatusService;
 
-    @GetMapping("/SelectStudentByClassId/{id}")
-    public PageInfo<StudentVo> SelectStudentByClassId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/SelectStudentByClassId")
+    public PageInfo<StudentVo> SelectStudentByClassId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentVo> list = studentService.SelectStudentByClassId(id);
         PageInfo<StudentVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 
-    @GetMapping("/SelectStudentByClassId2/{id}")
-    public List<StudentVo> SelectStudentByClassId2(@PathVariable("id") int id){
+    @GetMapping("/SelectStudentByClassId2")
+    public List<StudentVo> SelectStudentByClassId2(@RequestParam("id") int id){
         List<StudentVo> list = studentService.SelectStudentByClassId(id);
         return list;
     }
@@ -48,8 +48,8 @@ public class StudentController {
         return list;
     }
 
-    @GetMapping("/SelectStudentByState2/{classesId}")
-    public List<StudentVo> SelectStudentByState2(@PathVariable("classesId") int classesId){
+    @GetMapping("/SelectStudentByState2")
+    public List<StudentVo> SelectStudentByState2(@RequestParam("classesId") int classesId){
         List<StudentVo> list = studentService.SelectStudentByState2(classesId);
         return list;
     }

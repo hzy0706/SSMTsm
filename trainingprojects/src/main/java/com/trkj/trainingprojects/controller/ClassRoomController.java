@@ -52,7 +52,6 @@ public class ClassRoomController {
     public AjaxResponse updateByClassRoomKey(@RequestBody @Valid ClassRoomVo classRoomVo){
         Date date = new Date();
         classRoomVo.setUpdatetime(date);
-        classRoomVo.setTimeliness(1);
         classroomService.updateByClassRoomKey(classRoomVo);
         return  AjaxResponse.success(classRoomVo);
     }

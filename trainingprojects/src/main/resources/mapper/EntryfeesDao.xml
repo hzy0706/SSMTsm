@@ -343,7 +343,27 @@
         delete from tr01904.entryfees where Fees_Id = #{feesId}
     </delete>
 
+    <!--修改缴费状态-->
+    <update id="updateByEntryFeeState" parameterType="com.trkj.trainingprojects.entity.Entryfees">
+        update tr01904.entryfees
+        set
+          Fees_State = #{feesState},
+          ApprovalTime = #{approvaltime},
+          ApprovalName = #{approvalname},
+          RevokeAppTime = #{revokeapptime},
+          RevokeAppName = #{revokeappname}
+        where Fees_Id = #{feesId}
+    </update>
 
+    <!--修改删除人与时效性-->
+    <update id="deleteByEntryFees" parameterType="com.trkj.trainingprojects.entity.Entryfees">
+        update tr01904.entryfees
+        set
+          DeleteName = #{deletename},
+          DeleteTime = #{deletetime},
+          TimeLiness = #{timeliness}
+        where Fees_Id = #{feesId}
+    </update>
 
 </mapper>
 

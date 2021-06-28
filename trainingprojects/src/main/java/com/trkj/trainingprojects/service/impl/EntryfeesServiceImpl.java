@@ -47,4 +47,14 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     public int updateEntryFees(EntryfeesVo entryfeesVo) {
         return entryfeesDao.update(entryfeesVo);
     }
+
+    @Override
+    public int updateByEntryFeeState(EntryfeesVo entryfeesVo) {
+        return entryfeesDao.updateByEntryFeeState(entryfeesVo);
+    }
+
+    @Override
+    public int deleteByEntryFees(EntryfeesVo entryfeesVo) {
+        return entryfeesDao.deleteByEntryFees(entryfeesVo);
+    }
 }

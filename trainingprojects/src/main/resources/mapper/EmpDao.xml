@@ -68,8 +68,6 @@
     <include refid="Base_Column_List" />,d.Dept_Name
     from emp e
     inner join dept d on d.Dept_Id=e.Dept_Id
-    inner join enterprise en on en.Enterprise_Id=e.Enterprise_Id
-    inner join `position` p on p.Position_Id=e.Position_Id
     where e.WorkersState=0
   </select>
   <insert id="insert" keyColumn="Emp_Id" keyProperty="empId" parameterType="com.trkj.trainingprojects.vo.EmpVo" useGeneratedKeys="true">

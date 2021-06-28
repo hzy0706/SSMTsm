@@ -45,4 +45,31 @@ public class EntryfeesController {
         return  AjaxResponse.success(entryfeesVo);
     }
 
+    @PutMapping("/updateByEntryFeeState")
+    public AjaxResponse updateByEntryFeeState(@RequestBody @Valid EntryfeesVo entryfeesVo){
+        Date date = new Date();
+        entryfeesVo.setApprovaltime(date);
+        entryfeesVo.setFeesState(1);//修改为已缴费
+        entryfeesService.updateByEntryFeeState(entryfeesVo);
+        return  AjaxResponse.success(entryfeesVo);
+    }
+
+    @PutMapping("/updateByEntryFeeState2")
+    public AjaxResponse updateByEntryFeeState2(@RequestBody @Valid EntryfeesVo entryfeesVo){
+        Date date = new Date();
+        entryfeesVo.setRevokeapptime(date);
+        entryfeesVo.setFeesState(0);//修改为未缴费
+        entryfeesService.updateByEntryFeeState(entryfeesVo);
+        return  AjaxResponse.success(entryfeesVo);
+    }
+
+    @PutMapping("/deleteByEntryFees")
+    public AjaxResponse deleteByEntryFees(@RequestBody @Valid EntryfeesVo entryfeesVo){
+        Date date = new Date();
+        entryfeesVo.setDeletetime(date);
+        entryfeesVo.setTimeliness(1);
+        entryfeesService.deleteByEntryFees(entryfeesVo);
+        return  AjaxResponse.success(entryfeesVo);
+    }
+
 }

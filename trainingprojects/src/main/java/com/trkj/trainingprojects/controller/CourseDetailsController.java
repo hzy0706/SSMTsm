@@ -66,14 +66,14 @@ public class CourseDetailsController {
         return list;
     }
 
-    @GetMapping("/selectAllCourseDetails3/{courseId}")
-    public List<CourseDetailsVo> selectAllCourseDetails3(@PathVariable("courseId") String courseId){
+    @GetMapping("/selectAllCourseDetails3")
+    public List<CourseDetailsVo> selectAllCourseDetails3(@RequestParam("courseId") String courseId){
         List<CourseDetailsVo> list = coursedetailsService.selectAllCourseDetails3(Integer.parseInt(courseId));
         return list;
     }
 
-    @PutMapping("/deleteByCourseDetailsKey/{ids}/{deleteName}")
-    public AjaxResponse deleteByDeptKey(@PathVariable("ids") String ids, @PathVariable("deleteName") String deleteName){
+    @DeleteMapping("/deleteByCourseDetailsKey")
+    public AjaxResponse deleteByDeptKey(@RequestParam("ids") String ids, @RequestParam("deleteName") String deleteName){
         try {
             Date date = new Date();
             String[] id= ids.split(",");
@@ -91,13 +91,13 @@ public class CourseDetailsController {
             log.error("操作异常",e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//contoller中增加事务
         }
-        return  AjaxResponse.success();
+        return  AjaxResponse.success(ids);
     }
 
-    @GetMapping("/selectCourseDetailsDeleteOne/{id}")
-    public int selectCourseDetailsDeleteOne(@PathVariable("id") int id){
+    @GetMapping("/selectCourseDetailsDeleteOne")
+    public AjaxResponse selectCourseDetailsDeleteOne(@RequestParam("id") int id){
         int a = coursedetailsService.selectCourseDetailsDeleteOne(id);
-        return a;
+        return AjaxResponse.success(a);
     }
 
 }

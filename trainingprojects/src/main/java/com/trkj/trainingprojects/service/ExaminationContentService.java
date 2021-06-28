@@ -27,5 +27,5 @@ public interface ExaminationContentService {
     public void addExaminationContent(ExaminationContentVo examinationContentVo);
     public int updateByExaminationContentKey(ExaminationContentVo examinationContentVo);
     public int deleteByExaminationContent(ExaminationContentVo examinationContentVo);
-
+    public ExaminationContentVo selectAllExaminationContentByCode(int examCode);
 }
