@@ -32,6 +32,20 @@
       </foreach>
     </trim>
   </select>
+
+  <select id="findMenus" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM sys_menu m
+  </select>
+
+  <select id="findMenusByRoleid" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM sys_menu m
+    LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id
+    LEFT JOIN sys_role r ON r.id = rm.role_id
+    where rm.role_id=#{roleId}
+  </select>
+
   <select id="findAuthorityByRoleCodes" parameterType="collection"  resultType="java.lang.String">
     SELECT m.url
     FROM sys_menu m

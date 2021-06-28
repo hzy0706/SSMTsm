@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.dao;
 
+import com.trkj.trainingprojects.entity.SysMenu;
 import com.trkj.trainingprojects.vo.SysMenuVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,6 +20,9 @@ public interface SysMenuDao {
     int updateByPrimaryKeySelective(SysMenuVo record);
 
     int updateByPrimaryKey(SysMenuVo record);
+
+    List<SysMenuVo>  findMenusByRoleid(Integer roleId);
+    List<SysMenuVo>  findMenus();
 
     List<String> findAuthorityByRoleCodes(@Param("roleCodes") List<String> roleCodes);
     List<SysMenuVo> findMenusByRoleCodes(@Param("roleCodes") List<String> roleCodes);

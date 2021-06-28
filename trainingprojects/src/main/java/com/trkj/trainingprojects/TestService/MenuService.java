@@ -1,6 +1,7 @@
 package com.trkj.trainingprojects.TestService;
 
 
+import com.trkj.trainingprojects.entity.SysMenu;
 import com.trkj.trainingprojects.vo.SysMenuVo;
 
 import java.util.List;
@@ -13,5 +14,6 @@ import java.util.List;
  */
 public interface MenuService {
     public List<SysMenuVo> findMenuByPidAndLevel(int pid, byte level);
-
+    List<SysMenuVo>  findMenusByRoleid(Integer roleId);
+    List<SysMenuVo>  findMenus();
 }

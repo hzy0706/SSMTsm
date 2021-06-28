@@ -1,10 +1,13 @@
 package com.trkj.trainingprojects.TestService;
 import com.trkj.trainingprojects.dao.SysMenuDao;
+import com.trkj.trainingprojects.entity.SysMenu;
+import com.trkj.trainingprojects.util.BeanCopyUtil;
 import com.trkj.trainingprojects.vo.SysMenuVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /***
@@ -24,5 +27,15 @@ public class MenuServiceImpl implements MenuService {
        // List<SysMenu> list=sysMenuDao.findByMenuPidAndAndLevelOrderBySortDesc(pid,level);
        // return DozerUtils.mapList(list, MenuVo.class);
         return null;
+    }
+
+    @Override
+    public List<SysMenuVo>  findMenusByRoleid(Integer roleId) {
+        return sysMenuDao.findMenusByRoleid(roleId);
+    }
+
+    @Override
+    public List<SysMenuVo> findMenus() {
+        return sysMenuDao.findMenus();
     }
 }

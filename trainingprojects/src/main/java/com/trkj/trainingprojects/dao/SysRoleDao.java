@@ -20,4 +20,6 @@ public interface SysRoleDao {
     int updateByPrimaryKey(SysRoleVo record);
 
     List<String> findRoleByUserName(String username);
+
+    List<SysRoleVo> selectAllRole();
 }
