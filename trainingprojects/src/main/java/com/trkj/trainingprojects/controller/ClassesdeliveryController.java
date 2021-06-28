@@ -18,8 +18,8 @@ public class ClassesdeliveryController {
     @Resource
     private ClassesdeliveryService classesdeliveryService;
 
-    @GetMapping("/selectByClassesdeliveryKey/{id}")
-    public ClassesdeliveryVo selectByClassesdeliveryKey(@PathVariable("id") int id){
+    @GetMapping("/selectByClassesdeliveryKey")
+    public ClassesdeliveryVo selectByClassesdeliveryKey(@RequestParam("id") int id){
         return classesdeliveryService.selectByClassesdeliveryKey(id);
     }
 
@@ -40,7 +40,6 @@ public class ClassesdeliveryController {
     @PutMapping("/updateByClassesdeliveryKeySelective")
     public AjaxResponse updateByClassesdeliveryKeySelective(@RequestBody @Valid ClassesdeliveryVo classesdeliveryVo){
         classesdeliveryVo.setUpdatetime(new Date());
-        System.out.println(classesdeliveryVo.toString()+"-----------");
         classesdeliveryService.updateByClassesdeliveryKeySelective(classesdeliveryVo);
         return AjaxResponse.success(classesdeliveryVo);
     }

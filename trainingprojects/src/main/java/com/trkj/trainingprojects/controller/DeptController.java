@@ -45,8 +45,8 @@ public class DeptController {
         return  AjaxResponse.success(deptVo);
     }
 
-    @PutMapping("/deleteByDeptKey/{ids}/{deleteName}")
-    public AjaxResponse deleteByDeptKey(@PathVariable("ids") String ids,@PathVariable("deleteName") String deleteName){
+    @PutMapping("/deleteByDeptKey")
+    public AjaxResponse deleteByDeptKey(@RequestParam("ids") String ids,@RequestParam("deleteName") String deleteName){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){

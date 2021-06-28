@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.LoginjournalDao">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.LoginjournalVo">
+    <id column="LoginJournal_Id" jdbcType="INTEGER" property="loginjournalId" />
+    <result column="LoginTime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <association property="empVo" javaType="com.trkj.trainingprojects.vo.EmpVo">
+      <result column="Emp_Name" jdbcType="VARCHAR" property="empName" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    LoginJournal_Id, LoginTime, Emp_Id
+  </sql>
+  <select id="selectAllLoginjournals" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,e.Emp_Name
+    from loginjournal l
+    inner join emp e e.Emp_Id=l.Emp_Id
+    where 1=1 order by l.LoginTime desc
+  </select>
+  <insert id="addLoginjournal" keyColumn="LoginJournal_Id" keyProperty="loginjournalId" parameterType="com.trkj.trainingprojects.vo.LoginjournalVo" useGeneratedKeys="true">
+    insert into loginjournal (Emp_Id)
+    values (#{empId,jdbcType=INTEGER})
+  </insert>
+</mapper>

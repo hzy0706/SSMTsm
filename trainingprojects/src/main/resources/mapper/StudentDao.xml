@@ -95,7 +95,14 @@
         inner join source so on st.Source_Id=so.Source_Id
         where st.TimeLiness = 0
     </select>
-
+    <!--    根据生源渠道id查询学员信息-->
+    <select id="selectStudentCource" resultMap="StudentMap">
+        select
+        <include refid="Base_Column_List" />
+        from tr01904.student st
+        inner join source so on st.Source_Id=so.Source_Id
+        where st.TimeLiness = 0 and st.Source_Id=#{sourceId}
+    </select>
     <!--查询单个-->
     <select id="queryById" resultMap="StudentMap">
         select

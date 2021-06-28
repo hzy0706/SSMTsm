@@ -34,8 +34,8 @@ public class ClassRoomController {
         return pageInfo;
     }
 
-    @GetMapping("/selectAllClassRoomsByState/{state}")
-    public List<ClassRoomVo> selectAllClassRoomsByState(@PathVariable("state") Integer state){
+    @GetMapping("/selectAllClassRoomsByState")
+    public List<ClassRoomVo> selectAllClassRoomsByState(@RequestParam("state") Integer state){
         List<ClassRoomVo> list = classroomService.selectAllClassRoomsByState(state);
         return list;
     }
@@ -50,7 +50,6 @@ public class ClassRoomController {
 
     @PutMapping("/updateByClassRoomKey")
     public AjaxResponse updateByClassRoomKey(@RequestBody @Valid ClassRoomVo classRoomVo){
-        /*System.out.println(classTypeVo+"-------------------");*/
         Date date = new Date();
         classRoomVo.setUpdatetime(date);
         classroomService.updateByClassRoomKey(classRoomVo);

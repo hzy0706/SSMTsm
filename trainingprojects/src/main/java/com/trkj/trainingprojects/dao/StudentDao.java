@@ -41,5 +41,10 @@ public interface StudentDao {
     int updateByStudentDelName(StudentVo studentVo);
     int updateByStudent(StudentVo studentVo);
     StudentVo queryById(int registerId);
+    /**
+     * 根据生源查学员
+     * @return
+     */
+    List<StudentVo> selectStudentCource(Integer SourceId);
 }
 
