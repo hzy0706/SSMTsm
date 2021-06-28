@@ -92,5 +92,10 @@ public class StudentController {
         studentService.updateByStudentKey(studentVo);
         return  AjaxResponse.success(studentVo);
     }
+    @GetMapping("/selectStudentCource/{sourceId}")
+    public AjaxResponse selectStudentCource(@PathVariable("sourceId") Integer sourceId){
+        List<StudentVo> student=studentService.selectStudentCource(sourceId);
+        return AjaxResponse.success(student);
+    }
 
 }

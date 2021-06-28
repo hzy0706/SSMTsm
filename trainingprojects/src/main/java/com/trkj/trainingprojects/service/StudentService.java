@@ -31,4 +31,6 @@ public interface StudentService {
     List<StudentVo> SelectStudentByState2(Integer classesId);
     public int updateByStudent(StudentVo studentVo);
     public int updateByStudentKey(StudentVo studentVo);
+
+    public List<StudentVo> selectStudentCource(Integer sourceId);
 }
