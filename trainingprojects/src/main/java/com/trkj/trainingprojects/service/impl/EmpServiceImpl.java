@@ -13,11 +13,7 @@ import java.util.List;
 public class EmpServiceImpl implements EmpService {
     @Resource
     private EmpDao empDao;
-    @Override
-    @Transactional
-    public int addEmp(EmpVo record) {
-        return empDao.insert(record);
-    }
+
 
     @Override
     public EmpVo selectByEmpKey(EmpVo empVo) {
@@ -29,17 +25,6 @@ public class EmpServiceImpl implements EmpService {
         return empDao.selectAllEmps();
     }
 
-    @Override
-    @Transactional
-    public int updateByEmpKeySelective(EmpVo record) {
-        return empDao.updateByEmpKeySelective(record);
-    }
-
-    @Override
-    @Transactional
-    public int updateByEmpKey(EmpVo record) {
-        return empDao.updateByEmpKey(record);
-    }
 
 
     @Override
@@ -51,5 +36,12 @@ public class EmpServiceImpl implements EmpService {
     public EmpVo findByUsername(String username) {
         EmpVo empVo=empDao.findByUsername(username);
         return empVo;
+    }
+
+    @Override
+    @Transactional
+    public int addEmp(EmpVo empVo) {
+       System.out.println(empVo.getEMail()+"1323123123123");
+        return empDao.addEmp(empVo);
     }
 }
