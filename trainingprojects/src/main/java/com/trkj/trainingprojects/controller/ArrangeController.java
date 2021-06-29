@@ -1,80 +1,172 @@
 package com.trkj.trainingprojects.controller;
 
-import com.trkj.trainingprojects.entity.Interview;
+import com.trkj.trainingprojects.Opservice.AdvancearrangeService;
 import com.trkj.trainingprojects.service.ArrangeService;
 import com.trkj.trainingprojects.service.ClassesService;
 import com.trkj.trainingprojects.service.EmpService;
+import com.trkj.trainingprojects.vo.AdvancearrangeVo;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.ArrangeFormVo;
 import com.trkj.trainingprojects.vo.ClassesVo;
-import com.trkj.trainingprojects.vo.EmpVo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
 public class ArrangeController {
     @Resource
-    private ArrangeService arrangeService;
+    private AdvancearrangeService advancearrangeService;
     @Resource
     private ClassesService classesService;
     @Resource
     private EmpService empService;
     @PostMapping("checkedArrange")
-    public AjaxResponse checkedArrange(@RequestBody @Valid List<ArrangeFormVo> arrangeFormVoList){
-        /*List<ArrangeFormVo> list1 = new ArrayList<>();
-        //保存所有需要排课的班级
-        List<Integer> classIdList = new ArrayList<>();
-        for (ArrangeFormVo arrangeFormVo:arrangeFormVoList) {
-            classIdList.add(arrangeFormVo.getClassesId());
-            System.out.println(arrangeFormVoList.size() + "========1======" + arrangeFormVo.toString());
+    public AjaxResponse checkedArrange(@RequestBody @Valid List<ArrangeFormVo> arrangeFormVoList) throws ParseException {
+        //获得选择排课的班级id
+        List<ArrangeFormVo> arrangeFormVoList1 = new ArrayList<>();
+
+        List<Integer> classIds = arrangeFormVoList.get(0).getClassesId();
+        List<Integer> teacherIds = new ArrayList<>();
+        int courseCount = 0;
+        for (Integer integer:classIds){
+            ClassesVo classesVo = classesService.queryById(integer);
+            teacherIds.add(classesVo.getTeacherId());
+            courseCount+=classesVo.getManylessons();
         }
-        Map<ArrangeFormVo, Integer> arrangeFormVoMap = new HashMap<>();
-        Map<ArrangeFormVo, Integer> arrangeFormVoMap2 = new HashMap<>();
-        *//*根据教师来筛选，保证同一个老师在同一个时段只能上一个班的课*//*
-        List<EmpVo> empVoList = empService.selectAllEmpsByPositionId(9);
-        for (int i=0;i<empVoList.size();i++){
-            List<ClassesVo> classesVoList = classesService.selectAllClassesByTeacherId(empVoList.get(i).getEmpId());
-            if(classesVoList.size()>1){
-                for (int j=1;j<classesVoList.size();j++){
-                    int classesId2 = classesVoList.get(j).getClassesId();
-                    System.out.println(classesId2+"----------------------->1-----------------------");
-                    for(int h=0;h<arrangeFormVoList.size();h++){
-                        if(classesId2!=arrangeFormVoList.get(h).getClassesId()){
-                            arrangeFormVoMap.put(arrangeFormVoList.get(h),arrangeFormVoList.get(h).getClassesId());
-                        }
+        System.out.println(courseCount+"----------------所有上课总数------------------");
+        System.out.println(classIds.size()+"----------------需要排课的班级数量------------------");
+        for (Integer integer:teacherIds){
+            System.out.println(integer+"-----------老师编号------------");
+        }
+        Map<Integer,ArrayList<Integer>> saveMap=new LinkedHashMap<Integer,ArrayList<Integer>>();
+        for (int i = 0; i < teacherIds.size(); i++)
+        {
+            if(teacherIds.get(i) != -1)//设置一个数组中不可能出现的值
+            {
+                //记录该数字
+                int id=teacherIds.get(i);
+
+                //创建list，用于存放数字所在的下标位置
+                ArrayList<Integer> list=new ArrayList<Integer>();
+                list.add(i); //记录该数字出现的第一个位置
+                for (int j = i + 1; j < teacherIds.size(); j++)
+                {
+                    //遍历数组，查找与test[i]相同的值并记录下标
+                    if(teacherIds.get(i) == teacherIds.get(j))
+                    {
+                        list.add(j);
+                        teacherIds.set(j,-1);//同上，设置一个不可能出现的值，要与前面设置的保持一致
                     }
                 }
-            }else{
-                for (int j=0;j<classesVoList.size();j++){
-                    int classesId2 = classesVoList.get(j).getClassesId();
-                    System.out.println(classesId2+"-------------------------=0---------------------");
-                    for(int h=0;h<arrangeFormVoList.size();h++){
-                        if(classesId2==arrangeFormVoList.get(h).getClassesId()){
-                            arrangeFormVoMap2.put(arrangeFormVoList.get(h),arrangeFormVoList.get(h).getClassesId());
+                //通过key-value将该数字和出现的位置put进map
+                saveMap.put(id, list);
+            }
+        }
+        Map<String,ArrayList<Integer>> saveMap2=new LinkedHashMap<String,ArrayList<Integer>>();
+        for (Map.Entry entry : saveMap.entrySet()) {
+            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
+            System.out.println("----");
+            String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
+            String [] strs = str.split(",");
+            ArrayList<Integer> list=new ArrayList<Integer>();
+            for (String st:strs){
+                list.add(classIds.get(Integer.parseInt(st.trim())));
+            }
+            saveMap2.put(entry.getKey().toString(), list);
+        }
+        System.out.println("----------------------");
+        for (Map.Entry entry : saveMap2.entrySet()) {
+            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
+            String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
+            String [] strs = str.split(",");
+            for (String st:strs){
+                int c=1;
+                System.out.println(st+"----当前班级编号");
+                ClassesVo classesVo = classesService.queryById(Integer.parseInt(st.trim()));
+                int count = classesVo.getManylessons();
+                System.out.println(Integer.parseInt(st.trim())+"------------一周可上课时-----------"+count);
+                int step = arrangeFormVoList.size()/(courseCount-count);//排课时循环步长
+                System.out.println(step+"-----------排课时循环步长--------");
+                for (int i = 0;i<arrangeFormVoList.size();){
+                    System.out.println(i+"---------------------------------当前循环id-");
+                    ArrangeFormVo arrangeFormVo = new ArrangeFormVo();
+                    arrangeFormVo.setPeriodId(arrangeFormVoList.get(i).getPeriodId());
+                    arrangeFormVo.setClassRoomId(arrangeFormVoList.get(i).getClassRoomId());
+                    arrangeFormVo.setNewClassesId(Integer.parseInt(st.trim()));
+                    String [] stri = arrangeFormVoList.get(i).getDate().split("\\(");
+                    arrangeFormVo.setDate(stri[0].trim());
+                    arrangeFormVo.setTercherId(Integer.parseInt(entry.getKey().toString()));
+                    arrangeFormVo.setAddname(arrangeFormVoList.get(i).getAddname());
+                    arrangeFormVoList1.add(arrangeFormVo);
+                    arrangeFormVoList.remove(i--);
+                    if(count==c){
+                        break;
+                    }
+                    c++;
+                    System.out.println(c+"===========");
+                    i+=step;
+                }
+                System.out.println(arrangeFormVoList.size()+"-----------------当前可排课集合数量----------------");
+            }
+        }
+        for (Map.Entry entry : saveMap2.entrySet()) {
+            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
+            String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
+            String [] strs = str.split(",");
+            List<ArrangeFormVo> arrangeFormVoList2 = new ArrayList<>();
+            for(int i=0;i<strs.length;i++){
+                for (int j=0;j<arrangeFormVoList1.size();j++){
+                    if(Integer.parseInt(strs[i].trim())==arrangeFormVoList1.get(j).getNewClassesId()){
+                        arrangeFormVoList2.add(arrangeFormVoList1.get(j));
+                    }
+                }
+            }
+            System.out.println(arrangeFormVoList2.size()+"--------------to-----------");
+            for (int h=0;h<arrangeFormVoList2.size();h++){
+                int pid = arrangeFormVoList2.get(h).getPeriodId();
+                String date = arrangeFormVoList2.get(h).getDate();
+                System.out.println(pid+"----异常数据-----"+date);
+                for (int k=h+1;k<arrangeFormVoList2.size();k++){
+                    if(pid==arrangeFormVoList2.get(k).getPeriodId()
+                            && date.equals(arrangeFormVoList2.get(k).getDate())){
+                        int pid2 = arrangeFormVoList2.get(k).getPeriodId();
+                        String date2 = arrangeFormVoList2.get(k).getDate();
+                        int cls2 = arrangeFormVoList2.get(k).getNewClassesId();
+                        int clar2 = arrangeFormVoList2.get(k).getClassRoomId();
+                        for (int f=0;f<arrangeFormVoList1.size();f++){
+                            if(arrangeFormVoList1.get(f).getPeriodId()==pid2 &&
+                                    arrangeFormVoList1.get(f).getClassRoomId()==clar2 &&
+                                    arrangeFormVoList1.get(f).getNewClassesId()==cls2 &&
+                                    arrangeFormVoList1.get(f).getDate().equals(date2)){
+                                arrangeFormVoList1.remove(f--);
+                            }
+                        }
+                        for (int v=0;v<arrangeFormVoList.size();v++){
+                            if(pid2!=arrangeFormVoList.get(v).getPeriodId()){
+                                arrangeFormVoList1.add(arrangeFormVoList.get(v));
+                                arrangeFormVoList.remove(v--);
+                            }
                         }
                     }
                 }
             }
-
         }
-        *//*for (ArrangeFormVo arrangeFormVo:arrangeFormVoList){
-            System.out.println(arrangeFormVoList.size()+"======2========"+arrangeFormVo.toString());
-        }*//*
-        int c=0;
-        for (Map.Entry entry : arrangeFormVoMap2.entrySet()) {
-            System.out.println(c++);
-            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (ArrangeFormVo arrangeFormVo:arrangeFormVoList1){
+            AdvancearrangeVo advancearrangeVo = new AdvancearrangeVo();
+            advancearrangeVo.setArrangeDate(dateFormat.parse(arrangeFormVo.getDate()));
+            advancearrangeVo.setAddname(arrangeFormVo.getAddname());
+            advancearrangeVo.setClassesId(arrangeFormVo.getNewClassesId());
+            advancearrangeVo.setClassroomId(arrangeFormVo.getClassRoomId());
+            advancearrangeVo.setPeriodId(arrangeFormVo.getPeriodId());
+            advancearrangeVo.setEmpId(arrangeFormVo.getTercherId());
+            advancearrangeService.addAdvancearrange(advancearrangeVo);
         }
-        HashSet set = new HashSet(classIdList);
-        classIdList.clear();
-        classIdList.addAll(set);
-        for(Integer integer:classIdList){
-            System.out.println(integer+"*****************");
-        }*/
-        return AjaxResponse.success();
+        return AjaxResponse.success(arrangeFormVoList1);
     }
 }

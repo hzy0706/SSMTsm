@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ClassesService {
 
-    Classes queryById(Integer classesId);
+    ClassesVo queryById(Integer classesId);
 
     List<Classes> queryAllByLimit(int offset, int limit);
 
