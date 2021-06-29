@@ -45,7 +45,7 @@ public class BackVo {
     /**
      * 复课办理人
      */
-    private String backHandler;
+    public String addname;
 
     /**
      * 复课审批
@@ -55,7 +55,7 @@ public class BackVo {
     /**
      * 复课审批人
      */
-    private String backappname;
+    public String appname;
 
     /**
      * 复课审批时间

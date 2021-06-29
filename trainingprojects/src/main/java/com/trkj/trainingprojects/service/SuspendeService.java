@@ -31,4 +31,5 @@ public interface SuspendeService {
     int NoAppBySuspende(SuspendeVo record);
 
     int deleteOneBySuspendeKey(SuspendeVo record);
+
 }

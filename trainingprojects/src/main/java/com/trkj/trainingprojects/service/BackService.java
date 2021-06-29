@@ -1,12 +1,10 @@
-package com.trkj.trainingprojects.dao;
+package com.trkj.trainingprojects.service;
 
 import com.trkj.trainingprojects.vo.BackVo;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface BackDao {
+public interface BackService {
 
     int addBack(BackVo record);
 
@@ -26,5 +24,5 @@ public interface BackDao {
 
     int updateByBackKeySelective(BackVo record);
 
-    int updateByBackKey(BackVo record);
+    int deleteByBackKey(BackVo record);
 }
