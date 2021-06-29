@@ -24,8 +24,8 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     }
 
     @Override
-    public Entryfees insert(Entryfees entryfees) {
-        return null;
+    public int addEntryfees(EntryfeesVo entryfeesVo) {
+        return entryfeesDao.insert(entryfeesVo);
     }
 
     @Override

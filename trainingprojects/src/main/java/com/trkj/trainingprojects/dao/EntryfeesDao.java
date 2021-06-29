@@ -22,7 +22,7 @@ public interface EntryfeesDao {
 
     List<Entryfees> queryAll(Entryfees entryfees);
 
-    int insert(Entryfees entryfees);
+    int insert(EntryfeesVo entryfeesVo);
 
     int insertBatch(@Param("entities") List<Entryfees> entities);
 
