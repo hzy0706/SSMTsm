@@ -62,7 +62,7 @@ public class ExaminationContentVo {
      */
     private Integer examCode;
 
-    private List<ItemBankVo> itemBankVoList;
+    private ItemBankVo itemBankVoList;
     private ExaminationVo examinationVo;
     private ExamManageVo examManageVo;
     private static final long serialVersionUID = 1L;

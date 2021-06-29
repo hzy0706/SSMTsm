@@ -109,14 +109,15 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @PutMapping("/updateByApprovedStu/{ids}/{updatename}")
-    public AjaxResponse updateByApprovedStu(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+    @DeleteMapping("/updateByApprovedStu")
+    public AjaxResponse updateByApprovedStu(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
             StudentstatusVo studentstatusVo = new StudentstatusVo();
             studentstatusVo.setStudentstatusId(Integer.parseInt(s));
             studentstatusVo.setAppname(updatename);
+            studentstatusVo.setApptime(date);
             studentstatusVo.setAddtime(date);
             studentstatusVo.setApproval(1);
             studentstatusVo.setRevokeappname(null);
@@ -129,15 +130,15 @@ public class StudentstatusController {
         return  AjaxResponse.success(id);
     }
 
-    @PutMapping("/updateByApprovedStu2/{ids}/{updatename}")
-    public AjaxResponse updateByApprovedStu2(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+    @DeleteMapping("/updateByApprovedStu2")
+    public AjaxResponse updateByApprovedStu2(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
             StudentstatusVo studentstatusVo = new StudentstatusVo();
             studentstatusVo.setStudentstatusId(Integer.parseInt(s));
             studentstatusVo.setAppname(null);
-            studentstatusVo.setAddtime(null);
+            studentstatusVo.setApptime(null);
             studentstatusVo.setApproval(0);
             studentstatusVo.setRevokeappname(updatename);
             studentstatusVo.setRevokeapptime(date);
@@ -149,5 +150,10 @@ public class StudentstatusController {
         return  AjaxResponse.success(id);
     }
 
+    @PostMapping("/addStudentStatus")
+    public AjaxResponse addStudentStatus(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        studentstatusService.addStudentStatus(studentstatusVo);
+        return AjaxResponse.success(studentstatusVo);
+    }
 
 }
