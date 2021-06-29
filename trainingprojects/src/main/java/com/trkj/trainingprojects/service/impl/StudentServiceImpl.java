@@ -90,6 +90,8 @@ public class StudentServiceImpl implements StudentService {
         studentDao.updateByStudentDelName(studentVo);
         return 0;
     }
+
+    @Override
     public List<StudentVo> selectStudentCource(Integer sourceId) {
         return studentDao.selectStudentCource(sourceId);
     }

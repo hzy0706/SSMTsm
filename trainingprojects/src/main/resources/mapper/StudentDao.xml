@@ -322,7 +322,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from student where Register_Id = #{registerId}
+        delete from tr01904.student where Register_Id = #{registerId}
     </delete>
 
     <!--修改删除人-->

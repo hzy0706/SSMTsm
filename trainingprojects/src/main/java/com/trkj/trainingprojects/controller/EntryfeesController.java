@@ -82,6 +82,8 @@ public class EntryfeesController {
 
     @PostMapping("/addEntryfees2")
     public AjaxResponse addEntryfees2(@RequestBody @Valid EntryfeesVo entryfeesVo){
+        RandomNumber randomNumber = new RandomNumber();
+        entryfeesVo.setFeesNumber("CW"+randomNumber.getLocalTrmSeqNum());//缴费编号
         entryfeesService.addEntryfees(entryfeesVo);
         return AjaxResponse.success(entryfeesVo);
     }
