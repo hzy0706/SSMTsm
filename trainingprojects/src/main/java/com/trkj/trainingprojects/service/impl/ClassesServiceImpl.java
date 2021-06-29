@@ -17,8 +17,8 @@ public class ClassesServiceImpl implements ClassesService {
     @Resource
     private ClassesDao classesDao;
     @Override
-    public Classes queryById(Integer classesId) {
-        return null;
+    public ClassesVo queryById(Integer classesId) {
+        return classesDao.queryById2(classesId);
     }
 
     @Override
