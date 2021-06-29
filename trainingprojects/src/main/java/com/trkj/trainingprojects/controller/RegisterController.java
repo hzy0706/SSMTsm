@@ -56,9 +56,9 @@ public class RegisterController {
     }
 //    外键查询
     @GetMapping("/findRegisterList")
-    public List<RegisterVo> findRegisterList() {
+    public AjaxResponse findRegisterList() {
         List<RegisterVo> list = registerService.selectAllRegister();
-        return list;
+        return AjaxResponse.success(list);
     }
 //    模糊查询
     @GetMapping("/mohuRegister/{value}")

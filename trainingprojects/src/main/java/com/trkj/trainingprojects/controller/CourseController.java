@@ -118,4 +118,10 @@ public class CourseController {
         }
         return 0;
     }
+
+    @GetMapping("/selectOneBycourseId")
+    public AjaxResponse selectOneBycourseId(@RequestParam("courseId") Integer courseId){
+        CourseVo list = courseService.selectOneBycourseId(courseId);
+        return AjaxResponse.success(list);
+    }
 }
