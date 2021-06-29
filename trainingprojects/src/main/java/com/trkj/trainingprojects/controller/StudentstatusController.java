@@ -63,9 +63,9 @@ public class StudentstatusController {
     }
 
     /*
-    * 根据学员分班id修改学员分班状态
-    * 0:未分班；1：已分班；2:读书中;3：已停课；4：已复课；5：已转班；6:已退学；7：已毕业
-    * */
+     * 根据学员分班id修改学员分班状态
+     * 0:未分班；1：已分班；2:读书中;3：已停课；4：已复课；5：已转班；6:已退学；7：已毕业
+     * */
     @PutMapping("/updateByStudentStateOne")
     public AjaxResponse updateByStudentStateOne(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusService.updateByStudentStateOne(studentstatusVo);
@@ -81,18 +81,14 @@ public class StudentstatusController {
     }
 
     @GetMapping("/selectStudentStatusByClassesId2")
-<<<<<<< HEAD
-    public List<StudentstatusVo> selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
-=======
     public AjaxResponse selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
->>>>>>> 8a89e17c08388b7b92740c410a8b9c41548af0b5
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
         return AjaxResponse.success(list);
     }
 
     /*
-    * 根据班级id修改学员状态[学习中]
-    * */
+     * 根据班级id修改学员状态[学习中]
+     * */
     @PutMapping("/updateByClassesIdOnState")
     public AjaxResponse updateByClassesIdOnState(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusService.updateByClassesIdOnState(studentstatusVo);
@@ -100,11 +96,7 @@ public class StudentstatusController {
     }
 
     @GetMapping("/queryByStudentId")
-<<<<<<< HEAD
-    public List<StudentstatusVo> queryByStudentId(@RequestParam("studentId") int studentId){
-=======
     public AjaxResponse queryByStudentId(@RequestParam("studentId") int studentId){
->>>>>>> 8a89e17c08388b7b92740c410a8b9c41548af0b5
         List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
         return AjaxResponse.success(list);
     }
@@ -117,7 +109,7 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @PutMapping("/updateByApprovedStu")
+    @DeleteMapping("/updateByApprovedStu")
     public AjaxResponse updateByApprovedStu(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
@@ -125,6 +117,7 @@ public class StudentstatusController {
             StudentstatusVo studentstatusVo = new StudentstatusVo();
             studentstatusVo.setStudentstatusId(Integer.parseInt(s));
             studentstatusVo.setAppname(updatename);
+            studentstatusVo.setApptime(date);
             studentstatusVo.setAddtime(date);
             studentstatusVo.setApproval(1);
             studentstatusVo.setRevokeappname(null);
@@ -137,7 +130,7 @@ public class StudentstatusController {
         return  AjaxResponse.success(id);
     }
 
-    @PutMapping("/updateByApprovedStu2")
+    @DeleteMapping("/updateByApprovedStu2")
     public AjaxResponse updateByApprovedStu2(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
@@ -145,7 +138,7 @@ public class StudentstatusController {
             StudentstatusVo studentstatusVo = new StudentstatusVo();
             studentstatusVo.setStudentstatusId(Integer.parseInt(s));
             studentstatusVo.setAppname(null);
-            studentstatusVo.setAddtime(null);
+            studentstatusVo.setApptime(null);
             studentstatusVo.setApproval(0);
             studentstatusVo.setRevokeappname(updatename);
             studentstatusVo.setRevokeapptime(date);
@@ -157,5 +150,10 @@ public class StudentstatusController {
         return  AjaxResponse.success(id);
     }
 
+    @PostMapping("/addStudentStatus")
+    public AjaxResponse addStudentStatus(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        studentstatusService.addStudentStatus(studentstatusVo);
+        return AjaxResponse.success(studentstatusVo);
+    }
 
 }
