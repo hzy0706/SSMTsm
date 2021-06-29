@@ -366,14 +366,13 @@
     </update>
 
     <!--修改欠费金额-->
-    <update id="updateByEntryFeeState" parameterType="com.trkj.trainingprojects.entity.Entryfees">
+    <update id="updateByEntryFeeStateByAccumulated" parameterType="com.trkj.trainingprojects.entity.Entryfees">
         update tr01904.entryfees
         set
-          Fees_State = #{feesState},
-          ApprovalTime = #{approvaltime},
-          ApprovalName = #{approvalname},
-          RevokeAppTime = #{revokeapptime},
-          RevokeAppName = #{revokeappname}
+           Accumulated = #{accumulated},
+           Receipts = #{receipts},
+           UpdateName = #{updatename},
+           UpdateTime = #{updatetime}
         where Fees_Id = #{feesId}
     </update>
 

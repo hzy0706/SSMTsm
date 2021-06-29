@@ -284,4 +284,14 @@
         from register
         where Register_Id = #{registerId}
     </select>
+
+  <!--  修改缴费状态-->
+  <update id="updateRegisterState3" parameterType="com.trkj.trainingprojects.vo.RegisterVo">
+    update register
+    set
+     PayState = #{paystate,jdbcType=INTEGER},
+     UpdateName = #{updatename,jdbcType=VARCHAR},
+     UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
+     where Register_Id=#{registerId,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -89,4 +89,15 @@ public class EntryfeesController {
         return AjaxResponse.success(entryfeesVo);
     }
 
+    /*
+    * 修改实收和累计欠费
+    * */
+    @PutMapping("/updateByEntryFeeStateByAccumulated")
+    public AjaxResponse updateByEntryFeeStateByAccumulated(@RequestBody @Valid EntryfeesVo entryfeesVo){
+        Date date = new Date();
+        entryfeesVo.setUpdatetime(date);
+        entryfeesService.updateByEntryFeeStateByAccumulated(entryfeesVo);
+        return  AjaxResponse.success(entryfeesVo);
+    }
+
 }

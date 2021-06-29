@@ -83,4 +83,15 @@ public class RegisterController {
         registerService.updateRegisterState(registerVo);
         return AjaxResponse.success(registerVo);
     }
+
+    /**
+     * 修改缴费状态，蔡锦康的方法
+     */
+    @PutMapping("/updateRegisterState3")
+    public AjaxResponse updateRegisterState3(@RequestBody @Valid RegisterVo registerVo){
+        Date date = new Date();
+        registerVo.setUpdatetime(date);
+        registerService.updateRegisterState3(registerVo);
+        return AjaxResponse.success(registerVo);
+    }
 }
