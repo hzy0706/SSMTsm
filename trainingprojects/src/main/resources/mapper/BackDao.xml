@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.trainingprojects.dao.BackDao">
-  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.Back">
+  <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.BackVo">
     <id column="Back_Id" jdbcType="INTEGER" property="backId" />
     <result column="ClassAlreadyOn" jdbcType="INTEGER" property="classalreadyon" />
     <result column="Absent" jdbcType="INTEGER" property="absent" />
     <result column="Back_Time" jdbcType="TIMESTAMP" property="backTime" />
     <result column="isPay" jdbcType="INTEGER" property="ispay" />
     <result column="Intention" jdbcType="INTEGER" property="intention" />
-    <result column="Back_Handler" jdbcType="VARCHAR" property="backHandler" />
+    <result column="Back_Handler" jdbcType="VARCHAR" property="addname" />
     <result column="BackApproval" jdbcType="INTEGER" property="backapproval" />
-    <result column="BackAppName" jdbcType="VARCHAR" property="backappname" />
+    <result column="BackAppName" jdbcType="VARCHAR" property="appname" />
     <result column="BackAppTime" jdbcType="TIMESTAMP" property="backapptime" />
     <result column="RevokeAppName" jdbcType="VARCHAR" property="revokeappname" />
     <result column="RevokeAppTime" jdbcType="TIMESTAMP" property="revokeapptime" />
@@ -25,181 +25,131 @@
     <result column="Course_Id" jdbcType="INTEGER" property="courseId" />
     <result column="CourseDetails_Id" jdbcType="INTEGER" property="coursedetailsId" />
     <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
+    <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
+      <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
+      <result column="Sex" jdbcType="VARCHAR" property="sex" />
+      <result column="Student_Phone" jdbcType="VARCHAR" property="studentPhone"/>
+    </association>
+    <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
+      <result column="Classes_Name" jdbcType="VARCHAR" property="classesName"/>
+    </association>
+    <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
+      <result column="Course_Name" jdbcType="VARCHAR" property="courseName"/>
+    </association>
+    <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
+      <result column="Coursedetails_Name" jdbcType="VARCHAR" property="coursedetailsName"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    Back_Id, ClassAlreadyOn, Absent, Back_Time, isPay, Intention, Back_Handler, BackApproval, 
-    BackAppName, BackAppTime, RevokeAppName, RevokeAppTime, AddTime, UpdateName, UpdateTime, 
-    DeleteName, DeleteTime, TimeLiness, Student_Id, Suspende_Id, Course_Id, CourseDetails_Id, 
-    Classes_Id
+    b.Back_Id, b.ClassAlreadyOn, b.Absent, b.Back_Time, b.isPay, b.Intention, b.Back_Handler, b.BackApproval,
+    b.BackAppName, b.BackAppTime, b.RevokeAppName, b.RevokeAppTime, b.AddTime, b.UpdateName, b.UpdateTime,
+    b.DeleteName, b.DeleteTime, b.TimeLiness, b.Student_Id, b.Suspende_Id, b.Course_Id, b.CourseDetails_Id,
+    b.Classes_Id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from back
-    where Back_Id = #{backId,jdbcType=INTEGER}
+  <select id="selectByBackKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende b
+    inner join classes cl on cl.Classes_Id=b.Classes_Id
+    inner join student st on st.Student_Id=b.Student_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
+    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    where b.Back_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from back
-    where Back_Id = #{backId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="Back_Id" keyProperty="backId" parameterType="com.trkj.trainingprojects.entity.Back" useGeneratedKeys="true">
+  <select id="selectByBackKeyClasses" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende b
+    inner join classes cl on cl.Classes_Id=b.Classes_Id
+    inner join student st on st.Student_Id=b.Student_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
+    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    where b.Classes_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+  </select>
+  <select id="selectByBackKeyStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende b
+    inner join classes cl on cl.Classes_Id=b.Classes_Id
+    inner join student st on st.Student_Id=b.Student_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
+    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    where s.Student_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+  </select>
+  <select id="selectByBackKeyCourse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende b
+    inner join classes cl on cl.Classes_Id=b.Classes_Id
+    inner join student st on st.Student_Id=b.Student_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
+    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    where s.Course_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+  </select>
+  <select id="selectByBackKeyCoursedetails" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende b
+    inner join classes cl on cl.Classes_Id=b.Classes_Id
+    inner join student st on st.Student_Id=b.Student_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
+    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    where b.Coursedetails_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+  </select>
+  <select id="selectByBackKeySuspende" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende b
+    inner join classes cl on cl.Classes_Id=b.Classes_Id
+    inner join student st on st.Student_Id=b.Student_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
+    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    where b.Suspende_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+  </select>
+  <!--分页查询-->
+  <select id="selectAllBacks" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    from suspende b
+    inner join classes cl on cl.Classes_Id=b.Classes_Id
+    inner join student st on st.Student_Id=b.Student_Id
+    inner join course co on co.Course_Id=b.Course_Id
+    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
+    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
+    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    where b.TimeLiness=0 order by s.AddTime desc
+  </select>
+
+  <insert id="addBack" keyColumn="Back_Id" keyProperty="backId" parameterType="com.trkj.trainingprojects.vo.BackVo" useGeneratedKeys="true">
     insert into back (ClassAlreadyOn, Absent, Back_Time, 
       isPay, Intention, Back_Handler, 
-      BackApproval, BackAppName, BackAppTime, 
-      RevokeAppName, RevokeAppTime, AddTime, 
+      BackAppName, BackAppTime,
+      RevokeAppName, RevokeAppTime,
       UpdateName, UpdateTime, DeleteName, 
-      DeleteTime, TimeLiness, Student_Id, 
+      DeleteTime, Student_Id,
       Suspende_Id, Course_Id, CourseDetails_Id, 
       Classes_Id)
     values (#{classalreadyon,jdbcType=INTEGER}, #{absent,jdbcType=INTEGER}, #{backTime,jdbcType=TIMESTAMP}, 
-      #{ispay,jdbcType=INTEGER}, #{intention,jdbcType=INTEGER}, #{backHandler,jdbcType=VARCHAR}, 
-      #{backapproval,jdbcType=INTEGER}, #{backappname,jdbcType=VARCHAR}, #{backapptime,jdbcType=TIMESTAMP}, 
-      #{revokeappname,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP}, #{addtime,jdbcType=TIMESTAMP}, 
-      #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, 
-      #{deletetime,jdbcType=TIMESTAMP}, #{timeliness,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
+      #{ispay,jdbcType=INTEGER}, #{intention,jdbcType=INTEGER}, #{addname,jdbcType=VARCHAR},
+      #{appname,jdbcType=VARCHAR},#{revokeappname,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP},
+      #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
+      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{studentId,jdbcType=INTEGER},
       #{suspendeId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{coursedetailsId,jdbcType=INTEGER}, 
       #{classesId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="Back_Id" keyProperty="backId" parameterType="com.trkj.trainingprojects.entity.Back" useGeneratedKeys="true">
-    insert into back
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="classalreadyon != null">
-        ClassAlreadyOn,
-      </if>
-      <if test="absent != null">
-        Absent,
-      </if>
-      <if test="backTime != null">
-        Back_Time,
-      </if>
-      <if test="ispay != null">
-        isPay,
-      </if>
-      <if test="intention != null">
-        Intention,
-      </if>
-      <if test="backHandler != null">
-        Back_Handler,
-      </if>
-      <if test="backapproval != null">
-        BackApproval,
-      </if>
-      <if test="backappname != null">
-        BackAppName,
-      </if>
-      <if test="backapptime != null">
-        BackAppTime,
-      </if>
-      <if test="revokeappname != null">
-        RevokeAppName,
-      </if>
-      <if test="revokeapptime != null">
-        RevokeAppTime,
-      </if>
-      <if test="addtime != null">
-        AddTime,
-      </if>
-      <if test="updatename != null">
-        UpdateName,
-      </if>
-      <if test="updatetime != null">
-        UpdateTime,
-      </if>
-      <if test="deletename != null">
-        DeleteName,
-      </if>
-      <if test="deletetime != null">
-        DeleteTime,
-      </if>
-      <if test="timeliness != null">
-        TimeLiness,
-      </if>
-      <if test="studentId != null">
-        Student_Id,
-      </if>
-      <if test="suspendeId != null">
-        Suspende_Id,
-      </if>
-      <if test="courseId != null">
-        Course_Id,
-      </if>
-      <if test="coursedetailsId != null">
-        CourseDetails_Id,
-      </if>
-      <if test="classesId != null">
-        Classes_Id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="classalreadyon != null">
-        #{classalreadyon,jdbcType=INTEGER},
-      </if>
-      <if test="absent != null">
-        #{absent,jdbcType=INTEGER},
-      </if>
-      <if test="backTime != null">
-        #{backTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ispay != null">
-        #{ispay,jdbcType=INTEGER},
-      </if>
-      <if test="intention != null">
-        #{intention,jdbcType=INTEGER},
-      </if>
-      <if test="backHandler != null">
-        #{backHandler,jdbcType=VARCHAR},
-      </if>
-      <if test="backapproval != null">
-        #{backapproval,jdbcType=INTEGER},
-      </if>
-      <if test="backappname != null">
-        #{backappname,jdbcType=VARCHAR},
-      </if>
-      <if test="backapptime != null">
-        #{backapptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="revokeappname != null">
-        #{revokeappname,jdbcType=VARCHAR},
-      </if>
-      <if test="revokeapptime != null">
-        #{revokeapptime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="addtime != null">
-        #{addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatename != null">
-        #{updatename,jdbcType=VARCHAR},
-      </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deletename != null">
-        #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timeliness != null">
-        #{timeliness,jdbcType=INTEGER},
-      </if>
-      <if test="studentId != null">
-        #{studentId,jdbcType=INTEGER},
-      </if>
-      <if test="suspendeId != null">
-        #{suspendeId,jdbcType=INTEGER},
-      </if>
-      <if test="courseId != null">
-        #{courseId,jdbcType=INTEGER},
-      </if>
-      <if test="coursedetailsId != null">
-        #{coursedetailsId,jdbcType=INTEGER},
-      </if>
-      <if test="classesId != null">
-        #{classesId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.trainingprojects.entity.Back">
+  <update id="updateByBackKeySelective" parameterType="com.trkj.trainingprojects.vo.BackVo">
     update back
     <set>
       <if test="classalreadyon != null">
@@ -217,14 +167,14 @@
       <if test="intention != null">
         Intention = #{intention,jdbcType=INTEGER},
       </if>
-      <if test="backHandler != null">
-        Back_Handler = #{backHandler,jdbcType=VARCHAR},
+      <if test="addname != null">
+        Back_Handler = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="backapproval != null">
         BackApproval = #{backapproval,jdbcType=INTEGER},
       </if>
-      <if test="backappname != null">
-        BackAppName = #{backappname,jdbcType=VARCHAR},
+      <if test="appname != null">
+        BackAppName = #{appname,jdbcType=VARCHAR},
       </if>
       <if test="backapptime != null">
         BackAppTime = #{backapptime,jdbcType=TIMESTAMP},
@@ -271,30 +221,12 @@
     </set>
     where Back_Id = #{backId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.trkj.trainingprojects.entity.Back">
+  <update id="updateByBackKey" parameterType="com.trkj.trainingprojects.vo.BackVo">
     update back
-    set ClassAlreadyOn = #{classalreadyon,jdbcType=INTEGER},
-      Absent = #{absent,jdbcType=INTEGER},
-      Back_Time = #{backTime,jdbcType=TIMESTAMP},
-      isPay = #{ispay,jdbcType=INTEGER},
-      Intention = #{intention,jdbcType=INTEGER},
-      Back_Handler = #{backHandler,jdbcType=VARCHAR},
-      BackApproval = #{backapproval,jdbcType=INTEGER},
-      BackAppName = #{backappname,jdbcType=VARCHAR},
-      BackAppTime = #{backapptime,jdbcType=TIMESTAMP},
-      RevokeAppName = #{revokeappname,jdbcType=VARCHAR},
-      RevokeAppTime = #{revokeapptime,jdbcType=TIMESTAMP},
-      AddTime = #{addtime,jdbcType=TIMESTAMP},
-      UpdateName = #{updatename,jdbcType=VARCHAR},
-      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+    set
       DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
-      TimeLiness = #{timeliness,jdbcType=INTEGER},
-      Student_Id = #{studentId,jdbcType=INTEGER},
-      Suspende_Id = #{suspendeId,jdbcType=INTEGER},
-      Course_Id = #{courseId,jdbcType=INTEGER},
-      CourseDetails_Id = #{coursedetailsId,jdbcType=INTEGER},
-      Classes_Id = #{classesId,jdbcType=INTEGER}
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
     where Back_Id = #{backId,jdbcType=INTEGER}
   </update>
 </mapper>

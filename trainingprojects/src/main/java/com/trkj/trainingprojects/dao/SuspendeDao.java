@@ -34,5 +34,4 @@ public interface SuspendeDao {
 
     int updateOneBySuspendeKey(SuspendeVo record);
 
-
 }

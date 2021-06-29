@@ -219,6 +219,7 @@
         SuspendeAppTime = #{suspendeapptime,jdbcType=TIMESTAMP}
     where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
   </update>
+
   <!--驳回审批停课数据-->
   <update id="NoAppBySuspende" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
     update suspende
