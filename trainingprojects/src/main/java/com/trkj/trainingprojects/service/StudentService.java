@@ -33,4 +33,5 @@ public interface StudentService {
     public int updateByStudentKey(StudentVo studentVo);
 
     public List<StudentVo> selectStudentCource(Integer sourceId);
+    public int updateByStudentImg(StudentVo studentVo);
 }

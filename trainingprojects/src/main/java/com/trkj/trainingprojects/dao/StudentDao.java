@@ -46,5 +46,6 @@ public interface StudentDao {
      * @return
      */
     List<StudentVo> selectStudentCource(Integer SourceId);
+    int updateByStudentImg(StudentVo studentVo);
 }
 

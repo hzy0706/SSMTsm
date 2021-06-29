@@ -25,4 +25,5 @@ public interface StudentoutstandingService {
 
     public List<StudentoutstandingVo> selectAllStudentOutStanding();
     public void addStudentoutstanding(StudentoutstandingVo studentoutstandingVo);
+    int updateByStudentOutStanding(StudentoutstandingVo studentoutstandingVo);
 }

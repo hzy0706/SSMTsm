@@ -95,4 +95,9 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentVo> selectStudentCource(Integer sourceId) {
         return studentDao.selectStudentCource(sourceId);
     }
+
+    @Override
+    public int updateByStudentImg(StudentVo studentVo) {
+        return studentDao.updateByStudentImg(studentVo);
+    }
 }

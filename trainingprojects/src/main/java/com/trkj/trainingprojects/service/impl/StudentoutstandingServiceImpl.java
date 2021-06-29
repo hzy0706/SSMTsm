@@ -49,4 +49,9 @@ public class StudentoutstandingServiceImpl implements StudentoutstandingService 
     public void addStudentoutstanding(StudentoutstandingVo studentoutstandingVo) {
         studentoutstandingDao.insert(studentoutstandingVo);
     }
+
+    @Override
+    public int updateByStudentOutStanding(StudentoutstandingVo studentoutstandingVo) {
+        return studentoutstandingDao.updateByStudentOutStanding(studentoutstandingVo);
+    }
 }

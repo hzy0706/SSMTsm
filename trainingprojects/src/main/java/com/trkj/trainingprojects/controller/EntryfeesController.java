@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.entity.Entryfees;
 import com.trkj.trainingprojects.service.EntryfeesService;
+import com.trkj.trainingprojects.service.StudentoutstandingService;
 import com.trkj.trainingprojects.util.RandomNumber;
 import com.trkj.trainingprojects.vo.*;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,8 @@ public class EntryfeesController {
 
     @Resource
     private EntryfeesService entryfeesService;
+    @Resource
+    private StudentoutstandingService studentoutstandingService;
 
     @GetMapping("/selectAllEntryFees")
     public PageInfo<EntryfeesVo> selectAllEntryFees(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
@@ -82,9 +85,7 @@ public class EntryfeesController {
 
     @PostMapping("/addEntryfees2")
     public AjaxResponse addEntryfees2(@RequestBody @Valid EntryfeesVo entryfeesVo){
-        RandomNumber randomNumber = new RandomNumber();
-        entryfeesVo.setFeesNumber("CW"+randomNumber.getLocalTrmSeqNum());//缴费编号
-        entryfeesService.addEntryfees(entryfeesVo);
+        entryfeesService.addEntryfees2(entryfeesVo);
         return AjaxResponse.success(entryfeesVo);
     }
 

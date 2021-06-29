@@ -38,8 +38,11 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     @Override
     @Transactional
     public int addEntryfees2(EntryfeesVo entryfeesVo) {
+        RandomNumber randomNumber = new RandomNumber();
+        entryfeesVo.setFeesNumber("CW"+randomNumber.getLocalTrmSeqNum());//缴费编号
         Date date = new Date();
         entryfeesVo.setAddtime(date);
+        entryfeesDao.insert(entryfeesVo);
         //添加欠费补缴
         StudentoutstandingVo studentoutstandingVo = new StudentoutstandingVo();
         studentoutstandingVo.setFeesId(entryfeesVo.getFeesId());
@@ -50,8 +53,9 @@ public class EntryfeesServiceImpl implements EntryfeesService {
         studentoutstandingVo.setAddtime(date);
         studentoutstandingVo.setAlongmoney(entryfeesVo.getReceipts());
         studentoutstandingVo.setOutstandingState(0);
+        studentoutstandingVo.setTimeliness(0);
         studentoutstandingService.insert(studentoutstandingVo);
-        return entryfeesDao.insert(entryfeesVo);
+        return 0;
     }
 
     @Override

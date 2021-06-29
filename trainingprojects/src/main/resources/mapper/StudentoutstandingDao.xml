@@ -122,7 +122,7 @@
         r.DeleteName, r.DeleteTime, r.TimeLiness, r.Source_Id, r.Course_Id,
         r.Emp_Id
         from studentoutstanding sts
-        inner join register r on sts.Register_Id=r.Register_Id
+        LEFT join register r on sts.Register_Id=r.Register_Id
         inner join student st on sts.Student_Id=st.Student_Id
         inner join entryfees e on sts.Fees_Id=e.Fees_Id
         where sts.TimeLiness = 0 order by sts.outstanding_Id DESC
@@ -320,6 +320,20 @@
     <delete id="deleteById">
         delete from tr01904.studentoutstanding where outstanding_Id = #{outstandingId}
     </delete>
+
+    <!--修改缴费状态-->
+    <update id="updateByStudentOutStanding" parameterType="com.trkj.trainingprojects.entity.Studentoutstanding">
+        update tr01904.studentoutstanding
+        set
+          outstanding_State = #{outstandingState},
+          ApprovalTime = #{approvaltime},
+          ApprovalName = #{approvalname},
+          RevokeAppTime = #{revokeapptime},
+          RevokeAppName = #{revokeappname},
+          UpdateName = #{updatename},
+          UpdateTime = #{updatetime}
+        where outstanding_Id = #{outstandingId}
+    </update>
 
 </mapper>
 
