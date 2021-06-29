@@ -81,7 +81,7 @@ public class StudentServiceImpl implements StudentService {
         studentstatusVo.setStudentId(studentVo.getStudentId());
         studentstatusVo.setStatus(0);
         studentstatusVo.setAllottype("初次分班");
-        studentstatusVo.setApproval(0);
+        studentstatusVo.setApproval(1);//直接审核
         studentstatusVo.setAddtime(date);
         studentstatusVo.setTimeliness(0);
         studentstatusVo.setCourseId(Integer.valueOf(studentVo.getDeletename()));

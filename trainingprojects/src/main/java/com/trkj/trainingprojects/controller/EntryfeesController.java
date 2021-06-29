@@ -72,4 +72,12 @@ public class EntryfeesController {
         return  AjaxResponse.success(entryfeesVo);
     }
 
+    @PostMapping("/addEntryfees")
+    public AjaxResponse addEntryfees(@RequestBody @Valid EntryfeesVo entryfeesVo){
+        Date date = new Date();
+        entryfeesVo.setAddtime(date);
+        entryfeesService.addEntryfees(entryfeesVo);
+        return AjaxResponse.success(entryfeesVo);
+    }
+
 }

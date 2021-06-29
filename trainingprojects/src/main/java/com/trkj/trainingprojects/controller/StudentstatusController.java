@@ -152,6 +152,8 @@ public class StudentstatusController {
 
     @PostMapping("/addStudentStatus")
     public AjaxResponse addStudentStatus(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        Date date = new Date();
+        studentstatusVo.setAddtime(date);
         studentstatusService.addStudentStatus(studentstatusVo);
         return AjaxResponse.success(studentstatusVo);
     }

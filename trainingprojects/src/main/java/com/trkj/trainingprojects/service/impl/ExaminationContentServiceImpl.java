@@ -68,4 +68,19 @@ public class ExaminationContentServiceImpl implements ExaminationContentService 
     public ExaminationContentVo selectAllExaminationContentByCode(int examCode) {
         return examinationContentDao.selectAllExaminationContentByCode(examCode);
     }
+
+    @Override
+    public List<ExaminationContentVo> selectAllExaminationContentByCodeOne(int examCode) {
+        return examinationContentDao.selectAllExaminationContentByCodeOne(examCode);
+    }
+
+    @Override
+    public List<ExaminationContentVo> selectAllExaminationContentByCodeTwo(int examCode) {
+        return examinationContentDao.selectAllExaminationContentByCodeTwo(examCode);
+    }
+
+    @Override
+    public List<ExaminationContentVo> selectAllExaminationContentByCodeThree(int examCode) {
+        return examinationContentDao.selectAllExaminationContentByCodeThree(examCode);
+    }
 }

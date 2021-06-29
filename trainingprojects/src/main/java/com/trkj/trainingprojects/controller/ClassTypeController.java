@@ -41,6 +41,8 @@ public class ClassTypeController {
 
     @PostMapping("/addClassType")
     public AjaxResponse addClassType(@RequestBody @Valid ClassTypeVo classtypeVo){
+        Date date = new Date();
+        classtypeVo.setAddtime(date);
         classtypeService.addClassType(classtypeVo);
         return AjaxResponse.success(classtypeVo);
     }

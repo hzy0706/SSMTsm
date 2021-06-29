@@ -35,5 +35,8 @@ public interface ExaminationContentDao {
     List<ExaminationContentVo> selectAllExaminationContent();
     int deleteByExaminationContent(ExaminationContentVo examinationContentVo);
     ExaminationContentVo selectAllExaminationContentByCode(int examCode);
+    List<ExaminationContentVo> selectAllExaminationContentByCodeOne(int examCode);
+    List<ExaminationContentVo> selectAllExaminationContentByCodeTwo(int examCode);
+    List<ExaminationContentVo> selectAllExaminationContentByCodeThree(int examCode);
 }
 
