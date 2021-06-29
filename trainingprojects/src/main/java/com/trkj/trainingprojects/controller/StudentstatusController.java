@@ -34,8 +34,8 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @GetMapping("/selectStudentStatusByStudentId/{id}")
-    public PageInfo<StudentstatusVo> SelectStudentByClassId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectStudentStatusByStudentId")
+    public PageInfo<StudentstatusVo> SelectStudentByClassId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByStudentId(id);
         PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
@@ -72,16 +72,16 @@ public class StudentstatusController {
         return  AjaxResponse.success(studentstatusVo);
     }
 
-    @GetMapping("/selectStudentStatusByClassesId/{id}")
-    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectStudentStatusByClassesId")
+    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId(id);
         PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 
-    @GetMapping("/selectStudentStatusByClassesId2/{classesId}")
-    public List<StudentstatusVo> selectStudentStatusByClassesId2(@PathVariable("classesId") int classesId){
+    @GetMapping("/selectStudentStatusByClassesId2")
+    public List<StudentstatusVo> selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
         return list;
     }
@@ -95,8 +95,8 @@ public class StudentstatusController {
         return  AjaxResponse.success(studentstatusVo);
     }
 
-    @GetMapping("/queryByStudentId/{studentId}")
-    public List<StudentstatusVo> queryByStudentId(@PathVariable("studentId") int studentId){
+    @GetMapping("/queryByStudentId")
+    public List<StudentstatusVo> queryByStudentId(@RequestParam("studentId") int studentId){
         List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
         return list;
     }
@@ -109,8 +109,8 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @PutMapping("/updateByApprovedStu/{ids}/{updatename}")
-    public AjaxResponse updateByApprovedStu(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+    @PutMapping("/updateByApprovedStu")
+    public AjaxResponse updateByApprovedStu(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
@@ -129,8 +129,8 @@ public class StudentstatusController {
         return  AjaxResponse.success(id);
     }
 
-    @PutMapping("/updateByApprovedStu2/{ids}/{updatename}")
-    public AjaxResponse updateByApprovedStu2(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+    @PutMapping("/updateByApprovedStu2")
+    public AjaxResponse updateByApprovedStu2(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){

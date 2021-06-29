@@ -108,5 +108,10 @@ public class ShiftVo {
     private Integer classesId2;
     private ClassesVo classesVo2;
 
+    public String updatename;
+
+    private Date updatetime;
+
+
     private static final long serialVersionUID = 1L;
 }

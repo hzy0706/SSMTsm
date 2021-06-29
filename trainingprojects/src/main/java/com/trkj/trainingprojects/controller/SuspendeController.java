@@ -24,8 +24,8 @@ public class SuspendeController {
         return AjaxResponse.success(suspendeVo);
     }
 
-    @GetMapping("/selectBySuspendeKey/{id}")
-    public SuspendeVo selectBySuspendeKey(@PathVariable("id") Integer id){
+    @GetMapping("/selectBySuspendeKey")
+    public SuspendeVo selectBySuspendeKey(@RequestParam("id") Integer id){
         return suspendeService.selectBySuspendeKey(id);
     }
 
@@ -36,8 +36,8 @@ public class SuspendeController {
         return AjaxResponse.success(suspendeVo);
     }
 
-    @PutMapping("/deleteBySuspendeKey{ids}")
-    public AjaxResponse deleteBySuspendeKey(@PathVariable("ids") String ids){
+    @PutMapping("/deleteBySuspendeKey")
+    public AjaxResponse deleteBySuspendeKey(@RequestParam("ids") String ids){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
@@ -56,6 +56,29 @@ public class SuspendeController {
         List<SuspendeVo> list = suspendeService.selectBySuspendeKeyStudents();
         PageInfo<SuspendeVo> pageInfo = new PageInfo<>(list);
         return  pageInfo;
+    }
+    //审批停课
+    @PutMapping("/appBySuspende")
+    public AjaxResponse appBySuspende(@RequestBody @Valid SuspendeVo suspendeVo){
+        suspendeVo.setSuspendeapptime(new Date());
+        System.out.println(suspendeVo+"-------------+++++++=");
+        suspendeService.appBySuspende(suspendeVo);
+        return AjaxResponse.success(suspendeVo);
+    }
+    //驳回审批停课
+    @PutMapping("/NoAppBySuspende")
+    public AjaxResponse NoAppBySuspende(@RequestBody @Valid SuspendeVo suspendeVo){
+        suspendeVo.setRevokeapptime(new Date());
+        suspendeService.NoAppBySuspende(suspendeVo);
+        return AjaxResponse.success(suspendeVo);
+    }
+
+    //删除单行
+    @PutMapping("/deleteOneBySuspendeKey")
+    public AjaxResponse deleteOneBySuspendeKey(@RequestBody @Valid SuspendeVo suspendeVo){
+        suspendeVo.setDeletetime(new Date());
+        suspendeService.deleteOneBySuspendeKey(suspendeVo);
+        return AjaxResponse.success(suspendeVo);
     }
 
 

@@ -6,9 +6,9 @@
     <result column="Drop_Date" jdbcType="TIMESTAMP" property="dropDate" />
     <result column="Drop_Reason" jdbcType="VARCHAR" property="dropReason" />
     <result column="isPay" jdbcType="INTEGER" property="ispay" />
-    <result column="Drop_Handler" jdbcType="VARCHAR" property="dropHandler" />
+    <result column="Drop_Handler" jdbcType="VARCHAR" property="addname" />
     <result column="JW_Approval" jdbcType="INTEGER" property="jwApproval" />
-    <result column="JW_AppName" jdbcType="VARCHAR" property="jwAppname" />
+    <result column="JW_AppName" jdbcType="VARCHAR" property="appname" />
     <result column="JW_AppTime" jdbcType="TIMESTAMP" property="jwApptime" />
     <result column="JW_DropNameApp" jdbcType="VARCHAR" property="jwDropnameapp" />
     <result column="JW_DropTimeApp" jdbcType="TIMESTAMP" property="jwDroptimeapp" />
@@ -112,7 +112,7 @@
       Student_Id, Course_Id,
       CourseDetails_Id, Classes_Id)
     values (#{dropDate,jdbcType=TIMESTAMP}, #{dropReason,jdbcType=VARCHAR},
-      #{dropHandler,jdbcType=VARCHAR}, #{jwAppname,jdbcType=VARCHAR},
+      #{addname,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR},
       #{jwApptime,jdbcType=TIMESTAMP}, #{jwDropnameapp,jdbcType=VARCHAR}, #{jwDroptimeapp,jdbcType=TIMESTAMP}, 
       #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
       #{studentId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER},
@@ -130,14 +130,14 @@
       <if test="ispay != null">
         isPay = #{ispay,jdbcType=INTEGER},
       </if>
-      <if test="dropHandler != null">
-        Drop_Handler = #{dropHandler,jdbcType=VARCHAR},
+      <if test="addname != null">
+        Drop_Handler = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="jwApproval != null">
         JW_Approval = #{jwApproval,jdbcType=INTEGER},
       </if>
-      <if test="jwAppname != null">
-        JW_AppName = #{jwAppname,jdbcType=VARCHAR},
+      <if test="appname != null">
+        JW_AppName = #{appname,jdbcType=VARCHAR},
       </if>
       <if test="jwApptime != null">
         JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP},
@@ -194,7 +194,7 @@
   <update id="updateByJwApprovalDropoutKey" parameterType="com.trkj.trainingprojects.vo.DropoutVo">
     update dropout
     set
-      JW_AppName = #{jwAppname,jdbcType=VARCHAR},
+      JW_AppName = #{appname,jdbcType=VARCHAR},
       JW_Approval = #{jwApproval,jdbcType=INTEGER},
       JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP}
     where Drop_Id = #{dropId,jdbcType=INTEGER}

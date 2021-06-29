@@ -8,7 +8,7 @@
     <result column="Suspende_Reason" jdbcType="VARCHAR" property="suspendeReason" />
     <result column="Suspende_Handler" jdbcType="VARCHAR" property="addname" />
     <result column="SuspendeApproval" jdbcType="INTEGER" property="suspendeapproval" />
-    <result column="SuspendeAppName" jdbcType="VARCHAR" property="suspendeappname" />
+    <result column="SuspendeAppName" jdbcType="VARCHAR" property="appname" />
     <result column="SuspendeAppTime" jdbcType="TIMESTAMP" property="suspendeapptime" />
     <result column="RevokeAppName" jdbcType="VARCHAR" property="revokeappname" />
     <result column="RevokeAppTime" jdbcType="TIMESTAMP" property="revokeapptime" />
@@ -25,6 +25,8 @@
     <result column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
     <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
       <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
+      <result column="Sex" jdbcType="VARCHAR" property="sex" />
+      <result column="Student_Phone" jdbcType="VARCHAR" property="studentPhone"/>
     </association>
     <association property="classesVo" javaType="com.trkj.trainingprojects.vo.ClassesVo">
       <result column="Classes_Name" jdbcType="VARCHAR" property="classesName"/>
@@ -132,7 +134,7 @@
       DeleteName, DeleteTime,Student_Id, Course_Id, CourseDetails_Id,
       Classes_Id)
     values (#{alreadyon,jdbcType=VARCHAR}, #{suspendeTime,jdbcType=TIMESTAMP}, #{suspendeReason,jdbcType=VARCHAR}, 
-      #{addname,jdbcType=VARCHAR}, #{suspendeappname,jdbcType=VARCHAR},
+      #{addname,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR},
       #{suspendeapptime,jdbcType=TIMESTAMP}, #{revokeappname,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP}, 
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
       #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
@@ -151,14 +153,14 @@
       <if test="suspendeReason != null">
         Suspende_Reason = #{suspendeReason,jdbcType=VARCHAR},
       </if>
-      <if test="suspendeHandler != null">
+      <if test="addname != null">
         Suspende_Handler = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="suspendeapproval != null">
         SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER},
       </if>
-      <if test="suspendeappname != null">
-        SuspendeAppName = #{suspendeappname,jdbcType=VARCHAR},
+      <if test="appname != null">
+        SuspendeAppName = #{appname,jdbcType=VARCHAR},
       </if>
       <if test="suspendeapptime != null">
         SuspendeAppTime = #{suspendeapptime,jdbcType=TIMESTAMP},
@@ -204,8 +206,31 @@
   </update>
   <update id="updateBySuspendeKey" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
     update suspende
-    set AlreadyOn = #{alreadyon,jdbcType=VARCHAR},
-      DeleteName = #{deletename,jdbcType=VARCHAR},
+    set DeleteName = #{deletename,jdbcType=VARCHAR},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
+  </update>
+<!--审批停课数据-->
+  <update id="appBySuspende" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
+    update suspende
+    set SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER},
+        SuspendeAppName = #{appname,jdbcType=VARCHAR},
+        SuspendeAppTime = #{suspendeapptime,jdbcType=TIMESTAMP}
+    where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
+  </update>
+  <!--驳回审批停课数据-->
+  <update id="NoAppBySuspende" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
+    update suspende
+    set RevokeAppName = #{revokeappname,jdbcType=VARCHAR},
+        RevokeAppTime = #{revokeapptime,jdbcType=TIMESTAMP},
+        SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER}
+    where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
+  </update>
+  <!--删除单行-->
+  <update id="updateOneBySuspendeKey" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
+    update suspende
+    set DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
       TimeLiness = #{timeliness,jdbcType=INTEGER}
     where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
