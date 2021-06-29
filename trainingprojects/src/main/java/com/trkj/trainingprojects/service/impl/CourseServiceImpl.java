@@ -17,8 +17,8 @@ public class CourseServiceImpl implements CourseService {
     @Resource
     private CourseDao courseDao;
     @Override
-    public Course queryById(Integer courseId) {
-        return null;
+    public CourseVo selectOneBycourseId(Integer courseId) {
+        return courseDao.queryById(courseId);
     }
 
     @Override
