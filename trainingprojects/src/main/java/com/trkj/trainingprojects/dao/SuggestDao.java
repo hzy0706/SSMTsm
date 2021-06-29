@@ -29,7 +29,7 @@ public interface SuggestDao {
      * @param
      * @return 影响行数
      */
-    int addSuggest(SuggestVo suggestVo);
+    void addSuggest(SuggestVo suggestVo);
 
     /**
      * 修改数据
@@ -37,7 +37,7 @@ public interface SuggestDao {
      * @param
      * @return 影响行数
      */
-    int update(SuggestVo suggestVo);
+    int updateSuggest(SuggestVo suggestVo);
 
     /**
      * 查询所有
