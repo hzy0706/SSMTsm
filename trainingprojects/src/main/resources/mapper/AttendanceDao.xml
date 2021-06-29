@@ -84,7 +84,7 @@
     e.Emp_Id, e.JobNumber, e.Emp_Name, e.UserImg, e.IndividualImg, e.Emp_Sex, e.Emp_Phone, e.E_mail,
     e.Birthday, e.Remarks, e.Address, e.WorkersState, e.`Password`, e.LoginState, e.Education, e.Graduate,
     e.AddName, e.AddTime, e.UpdateName, e.UpdateTime, e.SeparationName, e.SeparationTime, e.SeparationDate,
-    e.Position_Id, e.Dept_Id, e.Enterprise_Id
+    e.Dept_Id
   </sql>
 
     <!--查询所有[分页]-->

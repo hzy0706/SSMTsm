@@ -31,8 +31,8 @@ public class MemorandumattachmentController {
     @Resource
     private StudentstatusDao studentstatusDao;
     //查询
-    @GetMapping("/findMemorandumattachment")
-    public PageInfo<MemorandumattachmentVo> findMemorandumattachment(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+    @GetMapping("/selectMemorandumattachment")
+    public PageInfo<MemorandumattachmentVo> selectMemorandumattachment(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
         PageHelper.startPage(currentPage,pagesize);
         List<MemorandumattachmentVo> list=memorandumattachmentService.selectAllMemorandumattachment();
         PageInfo<MemorandumattachmentVo> pageInfo=new PageInfo<>(list);
@@ -58,26 +58,22 @@ public class MemorandumattachmentController {
         return AjaxResponse.success(memorandumattachmentVo);
     }
 
-    @PutMapping("/updateJwName/{id}/{name}")
-    public AjaxResponse updateJwName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+    @PutMapping("/updateJwName")
+    public AjaxResponse updateJwName(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         Date date = new Date();
         memorandumattachmentVo.setJwexaminetime(date);
-        memorandumattachmentVo.setMemorandumattachmentId(id);
-        memorandumattachmentVo.setJwexaminename(name);
         memorandumattachmentVo.setJwisexamine(1);
         memorandumattachmentService.updateJwName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }
 
-    @PutMapping("/updateJwChName/{id}/{name}")
-    public AjaxResponse updateJwChName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+    @PutMapping("/updateJwChName")
+    public AjaxResponse updateJwChName(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         try {
             Date date = new Date();
             memorandumattachmentVo.setJwrevoketime(date);
             memorandumattachmentVo.setJwexaminetime(null);
             memorandumattachmentVo.setJwexaminename(null);
-            memorandumattachmentVo.setJwrevokename(name);
-            memorandumattachmentVo.setMemorandumattachmentId(id);
             System.out.println("学员交接：咨询登记id"+memorandumattachmentVo.getRegisterId());
             memorandumattachmentVo.setJwisexamine(0);
             RegisterVo registerVo = registerDao.queryById(memorandumattachmentVo.getRegisterId());

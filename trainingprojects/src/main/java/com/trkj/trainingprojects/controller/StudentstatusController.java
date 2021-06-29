@@ -81,9 +81,13 @@ public class StudentstatusController {
     }
 
     @GetMapping("/selectStudentStatusByClassesId2")
+<<<<<<< HEAD
     public List<StudentstatusVo> selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
+=======
+    public AjaxResponse selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
+>>>>>>> 8a89e17c08388b7b92740c410a8b9c41548af0b5
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
-        return list;
+        return AjaxResponse.success(list);
     }
 
     /*
@@ -96,9 +100,13 @@ public class StudentstatusController {
     }
 
     @GetMapping("/queryByStudentId")
+<<<<<<< HEAD
     public List<StudentstatusVo> queryByStudentId(@RequestParam("studentId") int studentId){
+=======
+    public AjaxResponse queryByStudentId(@RequestParam("studentId") int studentId){
+>>>>>>> 8a89e17c08388b7b92740c410a8b9c41548af0b5
         List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
-        return list;
+        return AjaxResponse.success(list);
     }
 
     @GetMapping("/selectStudentAllotType")

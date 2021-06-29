@@ -1,6 +1,5 @@
 package com.trkj.trainingprojects.service;
 
-import com.trkj.trainingprojects.vo.DeptVo;
 import com.trkj.trainingprojects.vo.DropoutVo;
 
 import java.util.List;

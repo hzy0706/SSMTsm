@@ -17,7 +17,7 @@ public class SourceController {
     @Autowired
     private SourceService sourceService;
 //    查询
-    @GetMapping("/findSource")
+    @GetMapping("/selectfindSource")
     public PageInfo<SourceVo> findFaqQuestions(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize) {
         PageInfo<SourceVo> sourcevo = sourceService.selectAllSource(currentPage, pagesize);
         return sourcevo;

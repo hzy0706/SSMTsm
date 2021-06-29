@@ -19,7 +19,7 @@ public class RegisterController {
     @Resource
     private RegisterService registerService;
 //    查询
-    @GetMapping("/findRegister")
+    @GetMapping("/selectFindRegister")
     public PageInfo<RegisterVo> findRegister(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
 //       分页
         PageHelper.startPage(currentPage,pageSize);
