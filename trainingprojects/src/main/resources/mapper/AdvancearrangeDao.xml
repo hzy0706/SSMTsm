@@ -59,4 +59,8 @@
       Emp_Id = #{empId,jdbcType=INTEGER}
     where Arrange_Id = #{arrangeId,jdbcType=INTEGER}
   </update>
+
+  <update id="clearArrange">
+    Truncate Table advancearrange
+  </update>
 </mapper>

@@ -34,4 +34,5 @@ public interface ClassesService {
     public List<ClassesVo> selectClassesById(Integer courseId);
     public ClassesVo selectClassesNumber(Integer classesId);
     public int UpdateAddClassesStudentNumber(ClassesVo classesVo);
+    int updateCoursedetailsIdByClassesId(ClassesVo classesVo);
 }

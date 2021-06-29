@@ -306,5 +306,12 @@
         SELECT COUNT(Course_Id) FROM coursedetails WHERE Course_Id= #{courseId} AND TimeLiness = 0
     </select>
 
+    <!--排课相关（胡志远）-->
+    <select id="selectArrangeInfo" resultMap="CoursedetailsMap">
+        select <include refid="Base_Column_List" />
+        from coursedetails cd
+        where timeliness=0 and coursesequence>=#{param2} and Course_Id=#{param1}
+        order by coursesequence asc
+    </select>
 </mapper>
 

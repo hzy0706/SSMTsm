@@ -103,4 +103,9 @@ public class ClassesServiceImpl implements ClassesService {
     public int UpdateAddClassesStudentNumber(ClassesVo classesVo) {
         return classesDao.UpdateAddClassesStudentNumber(classesVo);
     }
+
+    @Override
+    public int updateCoursedetailsIdByClassesId(ClassesVo classesVo) {
+        return classesDao.updateCoursedetailsIdByClassesId(classesVo);
+    }
 }

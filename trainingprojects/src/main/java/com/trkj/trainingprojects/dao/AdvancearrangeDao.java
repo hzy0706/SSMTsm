@@ -10,4 +10,5 @@ public interface AdvancearrangeDao {
     int addAdvancearrange(AdvancearrangeVo record);
     List<AdvancearrangeVo> selectAllAdvancearrange();
     int updateByAdvancearrangeKey(AdvancearrangeVo record);
+    int clearArrange();
 }

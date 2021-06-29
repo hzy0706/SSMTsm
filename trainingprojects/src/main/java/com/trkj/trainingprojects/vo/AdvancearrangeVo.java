@@ -58,4 +58,7 @@ public class AdvancearrangeVo {
      */
     private Integer empId;
     private EmpVo empVo;
+
+    private Integer CoursedetailsId;
+
 }
