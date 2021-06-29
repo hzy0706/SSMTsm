@@ -83,6 +83,9 @@ public class StudentstatusController {
     @GetMapping("/selectStudentStatusByClassesId2")
     public AjaxResponse selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
+        for (int i=0; i<list.size(); i++){
+            System.out.println(list.get(i).toString());
+        }
         return AjaxResponse.success(list);
     }
 

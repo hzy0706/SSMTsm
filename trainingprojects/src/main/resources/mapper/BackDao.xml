@@ -55,7 +55,7 @@
     inner join course co on co.Course_Id=b.Course_Id
     inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
     inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    inner join suspende su on su.Suspende_Id=b.Suspende_Id
     where b.Back_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
   </select>
   <select id="selectByBackKeyClasses" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -67,7 +67,7 @@
     inner join course co on co.Course_Id=b.Course_Id
     inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
     inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    inner join suspende su on su.Suspende_Id=b.Suspende_Id
     where b.Classes_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
   </select>
   <select id="selectByBackKeyStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -79,7 +79,7 @@
     inner join course co on co.Course_Id=b.Course_Id
     inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
     inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    inner join suspende su on su.Suspende_Id=b.Suspende_Id
     where s.Student_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
   </select>
   <select id="selectByBackKeyCourse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -91,7 +91,7 @@
     inner join course co on co.Course_Id=b.Course_Id
     inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
     inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    inner join suspende su on su.Suspende_Id=b.Suspende_Id
     where s.Course_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
   </select>
   <select id="selectByBackKeyCoursedetails" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -103,7 +103,7 @@
     inner join course co on co.Course_Id=b.Course_Id
     inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
     inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    inner join suspende su on su.Suspende_Id=b.Suspende_Id
     where b.Coursedetails_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
   </select>
   <select id="selectByBackKeySuspende" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -115,7 +115,7 @@
     inner join course co on co.Course_Id=b.Course_Id
     inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
     inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    inner join suspende su on su.Suspende_Id=b.Suspende_Id
     where b.Suspende_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
   </select>
   <!--分页查询-->
@@ -128,7 +128,7 @@
     inner join course co on co.Course_Id=b.Course_Id
     inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
     inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende stu on su.Suspende_Id=b.Suspende_Id
+    inner join suspende su on su.Suspende_Id=b.Suspende_Id
     where b.TimeLiness=0 order by s.AddTime desc
   </select>
 

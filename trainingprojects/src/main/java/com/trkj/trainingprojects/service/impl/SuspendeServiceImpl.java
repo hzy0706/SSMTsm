@@ -78,7 +78,7 @@ public class SuspendeServiceImpl implements SuspendeService {
     @Override
     public int appBySuspende(SuspendeVo record) {
         StudentstatusVo studentstatusVo=studentstatusDao.selectByClassesIdOnClassesId(record.getClassesId(),record.getStudentId());
-        int a = studentstatusDao.updateByClassesIdAndStudentIdOnState(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),3);
+        int a = studentstatusDao.OnupdateByClassesIdAndStudentIdOnState(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),3);
         return suspendeDao.appBySuspende(record);
     }
 

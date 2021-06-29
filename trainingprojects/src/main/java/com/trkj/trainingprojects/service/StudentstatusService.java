@@ -37,7 +37,7 @@ public interface StudentstatusService {
 
     int appByClassesIdOnClassesId(Integer classesId,Integer studentId,Integer classesId2 ,Integer status);
     StudentstatusVo selectByClassesIdOnClassesId(Integer classesId,Integer studentId);
-    int updateByClassesIdAndStudentIdOnState(Integer classesId,Integer studentId,Integer status);
+    int OnupdateByClassesIdAndStudentIdOnState(Integer classesId,Integer studentId,Integer status);
     List<StudentstatusVo> selectStudentAllotType();
 
     int updateByApprovedStu(StudentstatusVo studentstatusVo);

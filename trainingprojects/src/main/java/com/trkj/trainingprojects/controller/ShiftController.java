@@ -19,6 +19,8 @@ public class ShiftController {
 
     @PostMapping("/addShift")
     public AjaxResponse addShift(@RequestBody @Valid ShiftVo shiftVo){
+        System.out.println("---------------------++++++++++++--------------");
+        System.out.println(shiftVo.toString());
         shiftService.addShift(shiftVo);
         return AjaxResponse.success(shiftVo);
     }

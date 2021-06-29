@@ -19,10 +19,12 @@
     <result column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
     <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
     <result column="Classes_Id2" jdbcType="INTEGER" property="classesId2" />
-    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
-    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="Update_Name" jdbcType="VARCHAR" property="updatename" />
+    <result column="Update_Time" jdbcType="TIMESTAMP" property="updatetime" />
     <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
       <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
+      <result column="Sex" jdbcType="VARCHAR" property="sex" />
+      <result column="Student_Phone" jdbcType="VARCHAR" property="studentPhone"/>
     </association>
     <association property="studentstatusVo" javaType="com.trkj.trainingprojects.vo.StudentstatusVo">
       <id column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
@@ -40,11 +42,11 @@
   <sql id="Base_Column_List">
     s.Shift_Id, s.Shift_Date, s.Shift_Reason, s.Shift_Handler, s.Approval, s.JW_AppName, s.JW_AppTime,
     s.JW_DropNameApp, s.JW_DropTimeApp, s.AddTime, s.DeleteName, s.DeleteTime, s.TimeLiness, s.Student_Id,
-    s.Classes_Id, s.Classes_Id2, s.UpdateName, s.UpdateTime
+    s.Classes_Id, s.Classes_Id2, s.Update_Name, s.Update_Time
   </sql>
   <select id="selectByShiftKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name
+    <include refid="Base_Column_List" />,st.Student_Name,st.Sex,st.Student_Phone,cl.Classes_Name,cl2.Classes_Name
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
@@ -54,7 +56,7 @@
 
   <select id="selectByShiftStudentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name
+    <include refid="Base_Column_List" />,st.Student_Name,st.Sex,st.Student_Phone,cl.Classes_Name,cl2.Classes_Name
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
@@ -64,7 +66,7 @@
 
   <select id="selectByShiftClassesId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name
+    <include refid="Base_Column_List" />,st.Student_Name,st.Sex,st.Student_Phone,cl.Classes_Name,cl2.Classes_Name
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
@@ -74,7 +76,7 @@
 
   <select id="selectByShiftstudentstatusId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name,st2.status
+    <include refid="Base_Column_List" />,st.Student_Name,st.Sex,st.Student_Phone,cl.Classes_Name,cl2.Classes_Name,st2.status
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join Studentstatus st2 on st2.StudentStatus_Id=s.StudentStatus_Id
@@ -85,7 +87,7 @@
 
   <select id="selectAllShifts" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,st.Student_Name,cl.Classes_Name,cl2.Classes_Name Classes_Name2,cl.Classes_Id Classes_Id2,cl2.Classes_Id
+    <include refid="Base_Column_List" />,st.Student_Name,st.Sex,st.Student_Phone,cl.Classes_Name,cl2.Classes_Name Classes_Name2,cl.Classes_Id Classes_Id2,cl2.Classes_Id
     from shift s
     inner join student st on st.Student_Id=s.Student_Id
     inner join classes cl on cl.Classes_Id=s.Classes_Id
@@ -98,13 +100,15 @@
       JW_AppName, JW_AppTime,
       JW_DropNameApp, JW_DropTimeApp,
       DeleteName, DeleteTime,
-      Student_Id, Classes_Id, Classes_Id2
+      Student_Id, Classes_Id, Classes_Id2,
+      Update_Name, Update_Time
       )
     values (#{shiftDate,jdbcType=TIMESTAMP}, #{shiftReason,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
       #{appname,jdbcType=VARCHAR}, #{jwApptime,jdbcType=TIMESTAMP},
       #{jwDropnameapp,jdbcType=VARCHAR}, #{jwDroptimeapp,jdbcType=TIMESTAMP},
       #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
-      #{studentId,jdbcType=INTEGER}, #{classesId,jdbcType=INTEGER}, #{classesId2,jdbcType=INTEGER}
+      #{studentId,jdbcType=INTEGER}, #{classesId,jdbcType=INTEGER}, #{classesId2,jdbcType=INTEGER},
+      #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}
       )
   </insert>
   <update id="updateByShiftKeySelective" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
@@ -156,10 +160,10 @@
         Classes_Id2 = #{classesId2,jdbcType=INTEGER},
       </if>
       <if test="updatename != null">
-        UpdateName = #{updatename,jdbcType=VARCHAR},
+        Update_Name = #{updatename,jdbcType=VARCHAR},
       </if>
       <if test="updatetime != null">
-        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+        Update_Time = #{updatetime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where Shift_Id = #{shiftId,jdbcType=INTEGER}
