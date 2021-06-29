@@ -5,13 +5,16 @@ import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.ExaminationContentService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.ExaminationContentVo;
+import com.trkj.trainingprojects.vo.ItemBankVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 考试内容表(ExaminationContent)表控制层
@@ -62,6 +65,18 @@ public class ExaminationContentController {
         System.out.println(id);
         ExaminationContentVo examinationContentVo = examinationcontentService.selectAllExaminationContentByCode(id);
         return AjaxResponse.success(examinationContentVo);
+    }
+
+    @GetMapping("/selectAllExaminationContentByCode1")
+    public Map<Integer, List<?>> findById(@RequestParam("paperId") Integer paperId) {
+        List<ExaminationContentVo> multiQuestionRes = examinationcontentService.selectAllExaminationContentByCodeOne(paperId);   //选择题题库 1
+        List<ExaminationContentVo> fillQuestionsRes = examinationcontentService.selectAllExaminationContentByCodeTwo(paperId);     //填空题题库 2
+        List<ExaminationContentVo> judgeQuestionRes = examinationcontentService.selectAllExaminationContentByCodeThree(paperId);   //判断题题库 3
+        Map<Integer, List<?>> map = new HashMap<>();
+        map.put(1,multiQuestionRes);
+        map.put(2,fillQuestionsRes);
+        map.put(3,judgeQuestionRes);
+        return  map;
     }
 
 }

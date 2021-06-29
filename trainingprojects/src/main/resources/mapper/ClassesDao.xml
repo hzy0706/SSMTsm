@@ -133,7 +133,7 @@
         select
           Classes_Id, Classes_Name, Classes_Open, StartedDate, EndDate, LastDate, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Course_Id, Emp_Id, Teacher_Id, CourseDetails_Id, Classe_CountStudents, Classe_Students
         from tr01904.classes
-        where Course_Id = #{courseId} and Classes_Open = 0 and TimeLiness = 0
+        where Course_Id = #{courseId} and Classes_Open = 0 and TimeLiness = 0 and Classe_Students &lt; Classe_CountStudents
     </select>
 
     <!--查询单个[根据班级id来查询人数是否超过]-->

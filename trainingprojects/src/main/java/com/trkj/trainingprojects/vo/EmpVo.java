@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -55,11 +56,12 @@ public class EmpVo implements UserDetails{
     /**
      * 电子邮件
      */
-    private String eMail;
+    public String eMail;
 
     /**
      * 出生年月
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date birthday;
 
     /**

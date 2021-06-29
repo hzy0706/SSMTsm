@@ -24,4 +24,5 @@ public interface StudentoutstandingService {
     boolean deleteById(Integer outstandingId);
 
     public List<StudentoutstandingVo> selectAllStudentOutStanding();
+    public void addStudentoutstanding(StudentoutstandingVo studentoutstandingVo);
 }

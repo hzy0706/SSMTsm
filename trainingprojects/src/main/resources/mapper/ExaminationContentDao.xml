@@ -64,7 +64,7 @@
                 <result property="courseId" column="Course_Id" jdbcType="INTEGER"/>
             </collection>
         </association>
-        <collection property="itemBankVoList" ofType="com.trkj.trainingprojects.vo.ItemBankVo">
+        <association property="itemBankVoList" javaType="com.trkj.trainingprojects.vo.ItemBankVo">
             <id property="itembankId" column="ItemBank_Id" jdbcType="INTEGER"/>
             <result property="itembankType" column="ItemBank_Type" jdbcType="VARCHAR"/>
             <result property="itembankContent" column="ItemBank_Content" jdbcType="VARCHAR"/>
@@ -74,9 +74,10 @@
             <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
             <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
             <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="score" column="score" jdbcType="INTEGER"/>
             <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
             <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
-        </collection>
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -133,6 +134,36 @@
         inner join exam_manage ex on e.examCode = ex.examCode
         inner join coursedetails co on ex.CourseDetails_Id = co.CourseDetails_Id
         where e.TimeLiness = 0 and e.examCode = #{examCode}
+    </select>
+
+    <!--根据试卷id查询选择题-->
+    <select id="selectAllExaminationContentByCodeOne" resultMap="ExaminationcontentMap">
+        select
+        <include refid="Base_Column_List" />,
+        <include refid="Base_ItemBank_List" />
+        from examinationcontent e
+        inner join itembank ib on e.ItemBank_Id=ib.ItemBank_Id
+        where e.TimeLiness = 0 and e.examCode = #{examCode} and ib.ItemBank_Type = '选择题'
+    </select>
+
+    <!--根据试卷id查询填空题-->
+    <select id="selectAllExaminationContentByCodeTwo" resultMap="ExaminationcontentMap">
+        select
+        <include refid="Base_Column_List" />,
+        <include refid="Base_ItemBank_List" />
+        from examinationcontent e
+        inner join itembank ib on e.ItemBank_Id=ib.ItemBank_Id
+        where e.TimeLiness = 0 and e.examCode = #{examCode} and ib.ItemBank_Type = '填空题'
+    </select>
+
+    <!--根据试卷id查询判断题-->
+    <select id="selectAllExaminationContentByCodeThree" resultMap="ExaminationcontentMap">
+        select
+        <include refid="Base_Column_List" />,
+        <include refid="Base_ItemBank_List" />
+        from examinationcontent e
+        inner join itembank ib on e.ItemBank_Id=ib.ItemBank_Id
+        where e.TimeLiness = 0 and e.examCode = #{examCode} and ib.ItemBank_Type = '判断题'
     </select>
 
     <!--查询单个-->

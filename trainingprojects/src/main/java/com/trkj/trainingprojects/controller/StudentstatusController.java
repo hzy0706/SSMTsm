@@ -34,8 +34,8 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @GetMapping("/selectStudentStatusByStudentId/{id}")
-    public PageInfo<StudentstatusVo> SelectStudentByClassId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectStudentStatusByStudentId")
+    public PageInfo<StudentstatusVo> SelectStudentByClassId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByStudentId(id);
         PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
@@ -63,42 +63,42 @@ public class StudentstatusController {
     }
 
     /*
-    * 根据学员分班id修改学员分班状态
-    * 0:未分班；1：已分班；2:读书中;3：已停课；4：已复课；5：已转班；6:已退学；7：已毕业
-    * */
+     * 根据学员分班id修改学员分班状态
+     * 0:未分班；1：已分班；2:读书中;3：已停课；4：已复课；5：已转班；6:已退学；7：已毕业
+     * */
     @PutMapping("/updateByStudentStateOne")
     public AjaxResponse updateByStudentStateOne(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusService.updateByStudentStateOne(studentstatusVo);
         return  AjaxResponse.success(studentstatusVo);
     }
 
-    @GetMapping("/selectStudentStatusByClassesId/{id}")
-    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@PathVariable("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectStudentStatusByClassesId")
+    public PageInfo<StudentstatusVo> selectStudentStatusByClassesId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId(id);
         PageInfo<StudentstatusVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 
-    @GetMapping("/selectStudentStatusByClassesId2/{classesId}")
-    public List<StudentstatusVo> selectStudentStatusByClassesId2(@PathVariable("classesId") int classesId){
+    @GetMapping("/selectStudentStatusByClassesId2")
+    public AjaxResponse selectStudentStatusByClassesId2(@RequestParam("classesId") int classesId){
         List<StudentstatusVo> list = studentstatusService.selectStudentStatusByClassesId2(classesId);
-        return list;
+        return AjaxResponse.success(list);
     }
 
     /*
-    * 根据班级id修改学员状态[学习中]
-    * */
+     * 根据班级id修改学员状态[学习中]
+     * */
     @PutMapping("/updateByClassesIdOnState")
     public AjaxResponse updateByClassesIdOnState(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusService.updateByClassesIdOnState(studentstatusVo);
         return  AjaxResponse.success(studentstatusVo);
     }
 
-    @GetMapping("/queryByStudentId/{studentId}")
-    public List<StudentstatusVo> queryByStudentId(@PathVariable("studentId") int studentId){
+    @GetMapping("/queryByStudentId")
+    public AjaxResponse queryByStudentId(@RequestParam("studentId") int studentId){
         List<StudentstatusVo> list = studentstatusService.queryByStudentId(studentId);
-        return list;
+        return AjaxResponse.success(list);
     }
 
     @GetMapping("/selectStudentAllotType")
@@ -109,14 +109,15 @@ public class StudentstatusController {
         return pageInfo;
     }
 
-    @PutMapping("/updateByApprovedStu/{ids}/{updatename}")
-    public AjaxResponse updateByApprovedStu(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+    @DeleteMapping("/updateByApprovedStu")
+    public AjaxResponse updateByApprovedStu(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
             StudentstatusVo studentstatusVo = new StudentstatusVo();
             studentstatusVo.setStudentstatusId(Integer.parseInt(s));
             studentstatusVo.setAppname(updatename);
+            studentstatusVo.setApptime(date);
             studentstatusVo.setAddtime(date);
             studentstatusVo.setApproval(1);
             studentstatusVo.setRevokeappname(null);
@@ -129,15 +130,15 @@ public class StudentstatusController {
         return  AjaxResponse.success(id);
     }
 
-    @PutMapping("/updateByApprovedStu2/{ids}/{updatename}")
-    public AjaxResponse updateByApprovedStu2(@PathVariable("ids") String ids,@PathVariable("updatename") String updatename){
+    @DeleteMapping("/updateByApprovedStu2")
+    public AjaxResponse updateByApprovedStu2(@RequestParam("ids") String ids,@RequestParam("updatename") String updatename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
             StudentstatusVo studentstatusVo = new StudentstatusVo();
             studentstatusVo.setStudentstatusId(Integer.parseInt(s));
             studentstatusVo.setAppname(null);
-            studentstatusVo.setAddtime(null);
+            studentstatusVo.setApptime(null);
             studentstatusVo.setApproval(0);
             studentstatusVo.setRevokeappname(updatename);
             studentstatusVo.setRevokeapptime(date);
@@ -149,5 +150,21 @@ public class StudentstatusController {
         return  AjaxResponse.success(id);
     }
 
+    @PostMapping("/addStudentStatus")
+    public AjaxResponse addStudentStatus(@RequestBody @Valid StudentstatusVo studentstatusVo){
+        Date date = new Date();
+        studentstatusVo.setAddtime(date);
+        studentstatusService.addStudentStatus(studentstatusVo);
+        return AjaxResponse.success(studentstatusVo);
+    }
+
+    /*
+    * 根据条件查条数
+    * */
+    @GetMapping("/selectStudentStateByStudentIdAndCouresId")
+    public AjaxResponse selectStudentStateByStudentIdAndCouresId(@RequestParam("aid")int a,@RequestParam("bid") int b){
+        int c = studentstatusService.selectStudentStateByStudentIdAndCouresId(a,b);
+        return AjaxResponse.success(c);
+    }
 
 }

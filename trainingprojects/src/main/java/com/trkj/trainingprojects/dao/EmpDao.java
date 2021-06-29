@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper
 public interface EmpDao {
 
-    int insert(EmpVo record);
 
     EmpVo selectByEmpKey(EmpVo empVo);
 
@@ -22,9 +21,10 @@ public interface EmpDao {
      */
     List<EmpVo> selectAllIncumbencyEmps();
 
-    int updateByEmpKeySelective(EmpVo record);
-
-    int updateByEmpKey(EmpVo record);
-
     public EmpVo findByUsername(String username);
+
+    /**
+     *
+     */
+    int addEmp(EmpVo empVo);
 }

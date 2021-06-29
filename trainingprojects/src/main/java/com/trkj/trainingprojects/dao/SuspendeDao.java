@@ -28,5 +28,10 @@ public interface SuspendeDao {
 
     List<SuspendeVo> selectBySuspendeKeyStudents();
 
+    int appBySuspende(SuspendeVo record);
+
+    int NoAppBySuspende(SuspendeVo record);
+
+    int updateOneBySuspendeKey(SuspendeVo record);
 
 }

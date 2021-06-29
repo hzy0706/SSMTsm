@@ -37,7 +37,7 @@ public class DropoutVo {
     /**
      * 退学办理人
      */
-    public String dropHandler;
+    public String addname;
 
     /**
      * 教务部是否审批
@@ -47,7 +47,7 @@ public class DropoutVo {
     /**
      * 教务部审核人
      */
-    public String jwAppname;
+    public String appname;
 
     /**
      * 教务部审批时间

@@ -19,7 +19,7 @@ public class RegisterController {
     @Resource
     private RegisterService registerService;
 //    查询
-    @GetMapping("/findRegister")
+    @GetMapping("/selectFindRegister")
     public PageInfo<RegisterVo> findRegister(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
 //       分页
         PageHelper.startPage(currentPage,pageSize);
@@ -56,9 +56,9 @@ public class RegisterController {
     }
 //    外键查询
     @GetMapping("/findRegisterList")
-    public List<RegisterVo> findRegisterList() {
+    public AjaxResponse findRegisterList() {
         List<RegisterVo> list = registerService.selectAllRegister();
-        return list;
+        return AjaxResponse.success(list);
     }
 //    模糊查询
     @GetMapping("/mohuRegister/{value}")

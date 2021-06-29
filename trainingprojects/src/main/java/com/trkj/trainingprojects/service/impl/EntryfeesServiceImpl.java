@@ -3,10 +3,14 @@ package com.trkj.trainingprojects.service.impl;
 import com.trkj.trainingprojects.dao.EntryfeesDao;
 import com.trkj.trainingprojects.entity.Entryfees;
 import com.trkj.trainingprojects.service.EntryfeesService;
+import com.trkj.trainingprojects.util.RandomNumber;
 import com.trkj.trainingprojects.vo.EntryfeesVo;
+import com.trkj.trainingprojects.vo.StudentoutstandingVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,8 +28,26 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     }
 
     @Override
-    public Entryfees insert(Entryfees entryfees) {
-        return null;
+    public int addEntryfees(EntryfeesVo entryfeesVo) {
+        return entryfeesDao.insert(entryfeesVo);
+    }
+
+    @Override
+    @Transactional
+    public int addEntryfees2(EntryfeesVo entryfeesVo) {
+        Date date = new Date();
+        entryfeesVo.setAddtime(date);
+        RandomNumber randomNumber = new RandomNumber();
+        entryfeesVo.setFeesNumber("CW"+randomNumber.getLocalTrmSeqNum());//缴费编号
+        //添加欠费补缴
+        StudentoutstandingVo studentoutstandingVo = new StudentoutstandingVo();
+        studentoutstandingVo.setFeesId(entryfeesVo.getFeesId());
+        studentoutstandingVo.setStudentId(entryfeesVo.getStudentId());
+        studentoutstandingVo.setOutstandingNumber("CW"+randomNumber.getLocalTrmSeqNum());
+        studentoutstandingVo.setOutstandingDate(date);
+        studentoutstandingVo.setAddname(entryfeesVo.getAddname());
+       /* studentoutstandingVo.setAlongmoney();*/
+        return entryfeesDao.insert(entryfeesVo);
     }
 
     @Override

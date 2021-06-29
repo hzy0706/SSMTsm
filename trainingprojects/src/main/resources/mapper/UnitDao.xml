@@ -49,7 +49,6 @@
         values (#{unitName}, #{unitLevel}, #{director}, #{unitAddress}, #{mailcode}, #{unitPhone},
          #{email}, #{profile}, #{remarks}, #{addname}, #{unittypeId})
     </insert>
-
     <!--通过主键修改数据-->
     <update id="updateUnit">
         update unit

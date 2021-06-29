@@ -118,4 +118,9 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     public int updateByApprovedStu(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByApprovedStu(studentstatusVo);
     }
+
+    @Override
+    public int selectStudentStateByStudentIdAndCouresId(int a,int b) {
+        return studentstatusDao.selectStudentStateByStudentIdAndCouresId(a, b);
+    }
 }

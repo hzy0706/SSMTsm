@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2021-06-01 13:56:08
  */
 public interface CourseService {
-    Course queryById(Integer courseId);
+    CourseVo selectOneBycourseId(Integer courseId);
     List<Course> queryAllByLimit(int offset, int limit);
     Course insert(Course course);
     Course update(Course course);

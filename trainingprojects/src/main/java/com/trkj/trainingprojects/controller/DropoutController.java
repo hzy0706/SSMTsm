@@ -2,7 +2,7 @@ package com.trkj.trainingprojects.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.trkj.trainingprojects.Opservice.DropoutService;
+import com.trkj.trainingprojects.service.DropoutService;
 import com.trkj.trainingprojects.vo.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,8 @@ public class DropoutController {
         return AjaxResponse.success(dropoutVo);
     }
 
-    @GetMapping("/selectByDropoutKey/{id}")
-    public DropoutVo selectByDropoutKey(@PathVariable("id") Integer id){
+    @GetMapping("/selectByDropoutKey")
+    public DropoutVo selectByDropoutKey(@RequestParam("id") Integer id){
         return dropoutService.selectByDropoutKey(id);
     }
 
@@ -41,8 +41,8 @@ public class DropoutController {
         return AjaxResponse.success(dropoutVo);
     }
 
-    @PutMapping("/deleteByDropoutKey/{id}/{deleteName}")
-    public AjaxResponse deleteByDropoutKey(@PathVariable("id") String id,@PathVariable("deleteName") String deleteName){
+    @PutMapping("/deleteByDropoutKey")
+    public AjaxResponse deleteByDropoutKey(@RequestParam("id") String id,@RequestParam("deleteName") String deleteName){
         Date date = new Date();
         String[] ids= id.split(",");
         for (String s:ids){
@@ -56,31 +56,32 @@ public class DropoutController {
         return AjaxResponse.success(ids);
     }
 
-    @PutMapping("/updateByJwApprovalDropoutKey")
-    public AjaxResponse updateByJwApprovalDropoutKey(@RequestBody @Valid DropoutVo dropoutVo){
+    @PutMapping("/appByJwApprovalDropoutKey")
+    public AjaxResponse appByJwApprovalDropoutKey(@RequestBody @Valid DropoutVo dropoutVo){
         dropoutVo.setJwApptime(new Date());
-        dropoutService.updateByJwApprovalDropoutKey(dropoutVo);
+        System.out.println(dropoutVo+"__________________________++++++++++++++++++++============");
+        dropoutService.appByJwApprovalDropoutKey(dropoutVo);
         return AjaxResponse.success(dropoutVo);
     }
 
-    @PutMapping("/updateByJwApprovalDropoutKey2")
-    public AjaxResponse updateByJwApprovalDropoutKey2(@RequestBody @Valid DropoutVo dropoutVo){
+    @PutMapping("/OnappByJwApprovalDropoutKey2")
+    public AjaxResponse OnappByJwApprovalDropoutKey2(@RequestBody @Valid DropoutVo dropoutVo){
         dropoutVo.setJwDroptimeapp(new Date());
-        dropoutService.updateByJwApprovalDropoutKey2(dropoutVo);
+        dropoutService.OnappByJwApprovalDropoutKey2(dropoutVo);
         return AjaxResponse.success(dropoutVo);
     }
 
-    @PutMapping("/updateByJwApprovalDropoutKey3")
-    public AjaxResponse updateByJwApprovalDropoutKey3(@RequestBody @Valid DropoutVo dropoutVo){
+    @PutMapping("/OnappByJwApprovalDropoutKey3")
+    public AjaxResponse OnappByJwApprovalDropoutKey3(@RequestBody @Valid DropoutVo dropoutVo){
         dropoutVo.setDropDate(new Date());
-        dropoutService.updateByJwApprovalDropoutKey3(dropoutVo);
+        dropoutService.OnappByJwApprovalDropoutKey3(dropoutVo);
         return AjaxResponse.success(dropoutVo);
     }
 
-    @PutMapping("/updateByJwApprovalDropoutKey4")
-    public AjaxResponse updateByJwApprovalDropoutKey4(@RequestBody @Valid DropoutVo dropoutVo){
+    @PutMapping("/deleteByJwApprovalDropoutKey4")
+    public AjaxResponse deleteByJwApprovalDropoutKey4(@RequestBody @Valid DropoutVo dropoutVo){
         dropoutVo.setDeletetime(new Date());
-        dropoutService.updateByJwApprovalDropoutKey4(dropoutVo);
+        dropoutService.deleteByJwApprovalDropoutKey4(dropoutVo);
         return AjaxResponse.success(dropoutVo);
     }
 

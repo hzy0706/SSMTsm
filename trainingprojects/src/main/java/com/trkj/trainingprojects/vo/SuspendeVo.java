@@ -45,7 +45,7 @@ public class SuspendeVo {
     /**
      * 停课审批人
      */
-    private String suspendeappname;
+    public String appname;
 
     /**
      * 停课审批时间
