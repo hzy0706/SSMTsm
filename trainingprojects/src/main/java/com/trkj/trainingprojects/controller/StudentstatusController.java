@@ -158,4 +158,13 @@ public class StudentstatusController {
         return AjaxResponse.success(studentstatusVo);
     }
 
+    /*
+    * 根据条件查条数
+    * */
+    @GetMapping("/selectStudentStateByStudentIdAndCouresId")
+    public AjaxResponse selectStudentStateByStudentIdAndCouresId(@RequestParam("aid")int a,@RequestParam("bid") int b){
+        int c = studentstatusService.selectStudentStateByStudentIdAndCouresId(a,b);
+        return AjaxResponse.success(c);
+    }
+
 }

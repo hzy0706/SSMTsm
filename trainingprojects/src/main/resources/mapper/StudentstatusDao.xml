@@ -461,5 +461,12 @@
         where StudentStatus_Id = #{studentstatusId}
     </update>
 
+    <!--查询满足条件的条数-->
+    <select id="selectStudentStateByStudentIdAndCouresId" resultType="int">
+        select
+          COUNT(StudentStatus_Id)
+        from tr01904.studentstatus where Course_Id = #{courseId} and Student_Id = #{studentId}
+    </select>
+
 </mapper>
 

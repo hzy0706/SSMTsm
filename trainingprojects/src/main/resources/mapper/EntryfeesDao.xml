@@ -125,10 +125,10 @@
         r.DeleteName, r.DeleteTime, r.TimeLiness, r.Source_Id, r.Course_Id,
         r.Emp_Id, em.Emp_Id, em.Emp_Name
         from entryfees e
-        inner join register r on e.Register_Id=r.Register_Id
+        left join register r on e.Register_Id=r.Register_Id
         inner join student st on e.Student_Id=st.Student_Id
         inner join course c on e.Course_Id=c.Course_Id
-        inner join emp em on r.Emp_Id=em.Emp_Id
+        left join emp em on r.Emp_Id=em.Emp_Id
         where e.TimeLiness = 0 order by e.Fees_Id DESC
     </select>
 
