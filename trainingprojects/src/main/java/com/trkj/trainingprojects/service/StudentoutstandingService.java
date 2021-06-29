@@ -17,7 +17,7 @@ public interface StudentoutstandingService {
 
     List<Studentoutstanding> queryAllByLimit(int offset, int limit);
 
-    Studentoutstanding insert(Studentoutstanding studentoutstanding);
+    int insert(StudentoutstandingVo studentoutstanding);
 
     Studentoutstanding update(Studentoutstanding studentoutstanding);
 
@@ -25,4 +25,5 @@ public interface StudentoutstandingService {
 
     public List<StudentoutstandingVo> selectAllStudentOutStanding();
     public void addStudentoutstanding(StudentoutstandingVo studentoutstandingVo);
+    int updateByStudentOutStanding(StudentoutstandingVo studentoutstandingVo);
 }

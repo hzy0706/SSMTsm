@@ -35,5 +35,6 @@ public interface EntryfeesDao {
     List<EntryfeesVo> selectAllEntryFees();
     int updateByEntryFeeState(EntryfeesVo entryfeesVo);
     int deleteByEntryFees(EntryfeesVo entryfeesVo);
+    int updateByEntryFeeStateByAccumulated(EntryfeesVo entryfeesVo);
 }
 

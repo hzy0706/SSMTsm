@@ -24,4 +24,9 @@ public interface RegisterService {
      * 修改缴费状态，并自动生成一条缴费记录
      */
     public int updateRegisterState(RegisterVo registerVo);
+
+    /*
+    * 蔡锦康 修改缴费状态
+    * */
+    int updateRegisterState3(RegisterVo registerVo);
 }
