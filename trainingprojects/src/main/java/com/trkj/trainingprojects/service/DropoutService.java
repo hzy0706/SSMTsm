@@ -1,6 +1,5 @@
-package com.trkj.trainingprojects.Opservice;
+package com.trkj.trainingprojects.service;
 
-import com.trkj.trainingprojects.vo.DeptVo;
 import com.trkj.trainingprojects.vo.DropoutVo;
 
 import java.util.List;
@@ -24,11 +23,11 @@ public interface DropoutService {
 
     List<DropoutVo> selectAllDropouts();
 
-    int updateByJwApprovalDropoutKey(DropoutVo record);
+    int appByJwApprovalDropoutKey(DropoutVo record);
 
-    int updateByJwApprovalDropoutKey2(DropoutVo record);
+    int OnappByJwApprovalDropoutKey2(DropoutVo record);
 
-    int updateByJwApprovalDropoutKey3(DropoutVo record);
+    int OnappByJwApprovalDropoutKey3(DropoutVo record);
 
-    int updateByJwApprovalDropoutKey4(DropoutVo record);
+    int deleteByJwApprovalDropoutKey4(DropoutVo record);
 }

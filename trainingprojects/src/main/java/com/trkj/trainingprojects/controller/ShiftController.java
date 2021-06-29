@@ -23,8 +23,8 @@ public class ShiftController {
         return AjaxResponse.success(shiftVo);
     }
 
-    @GetMapping("/selectByShiftKey/{id}")
-    public ShiftVo selectByShiftKey(@PathVariable("id") Integer id){
+    @GetMapping("/selectByShiftKey")
+    public ShiftVo selectByShiftKey(@RequestParam("id") Integer id){
         return shiftService.selectByShiftKey(id);
     }
 
@@ -38,12 +38,13 @@ public class ShiftController {
 
     @PutMapping("/updateByShiftKeySelective")
     public AjaxResponse updateByShiftKeySelective(@RequestBody @Valid ShiftVo shiftVo){
+        shiftVo.setUpdatetime(new Date());
         shiftService.updateByShiftKeySelective(shiftVo);
         return AjaxResponse.success(shiftVo);
     }
 
-    @PutMapping("/deleteByShiftKey/{ids}/{deletename}")
-    public AjaxResponse deleteByShiftKey(@PathVariable("ids") String ids , @PathVariable("deletename") String deletename){
+    @DeleteMapping("/deleteByShiftKey")
+    public AjaxResponse deleteByShiftKey(@RequestParam("ids") String ids , @RequestParam("deletename") String deletename){
         Date date = new Date();
         String[] id= ids.split(",");
         for (String s:id){
@@ -60,6 +61,7 @@ public class ShiftController {
     @PutMapping("/updateByTypeShiftKey2")
     public AjaxResponse updateByTypeShiftKey2(@RequestBody @Valid ShiftVo shiftVo){
         shiftVo.setJwApptime(new Date());
+        System.out.println(shiftVo);
         shiftService.appByTypeShiftKey2(shiftVo);
         return AjaxResponse.success(shiftVo);
     }

@@ -1,7 +1,7 @@
-package com.trkj.trainingprojects.Opservice;
+package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.DropoutDao;
-import com.trkj.trainingprojects.Opservice.DropoutService;
+import com.trkj.trainingprojects.service.DropoutService;
 import com.trkj.trainingprojects.vo.DropoutVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,25 +64,25 @@ public class DropoutServiceImpl implements DropoutService {
 
     @Override
     @Transactional
-    public int updateByJwApprovalDropoutKey(DropoutVo record) {
+    public int appByJwApprovalDropoutKey(DropoutVo record) {
         return dropoutDao.updateByJwApprovalDropoutKey(record);
     }
 
     @Override
     @Transactional
-    public int updateByJwApprovalDropoutKey2(DropoutVo record) {
+    public int OnappByJwApprovalDropoutKey2(DropoutVo record) {
         return dropoutDao.updateByJwApprovalDropoutKey2(record);
     }
 
     @Override
     @Transactional
-    public int updateByJwApprovalDropoutKey3(DropoutVo record) {
+    public int OnappByJwApprovalDropoutKey3(DropoutVo record) {
         return dropoutDao.updateByJwApprovalDropoutKey3(record);
     }
 
     @Override
     @Transactional
-    public int updateByJwApprovalDropoutKey4(DropoutVo record) {
+    public int deleteByJwApprovalDropoutKey4(DropoutVo record) {
         return dropoutDao.updateByJwApprovalDropoutKey4(record);
     }
 }

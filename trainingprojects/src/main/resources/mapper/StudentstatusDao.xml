@@ -420,13 +420,7 @@
         where Classes_Id = #{classesId}
     </update>
 
-    <update id="updateByClassesIdAndStudentIdOnState" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
-        update tr01904.studentstatus
-        set
-          Status = #{status}
-        where Classes_Id = #{classesId} and Student_Id = #{studentId}
-    </update>
-
+    <!--根据学员编号和班级编号修改学员班级状态以及班级转班操作（焦凡超）-->
     <update id="updateByClassesIdOnClassesId" parameterType="int">
         update tr01904.studentstatus
         set
@@ -434,6 +428,15 @@
           Status = #{status}
         where Classes_Id = #{classesId} and Student_Id = #{studentId}
     </update>
+
+    <!--根据学员编号和班级编号修改学员班级状态（焦凡超）-->
+    <update id="updateByClassesIdAndStudentIdOnState" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
+        update tr01904.studentstatus
+        set
+          Status = #{status}
+        where Classes_Id = #{classesId} and Student_Id = #{studentId}
+    </update>
+
     <select id="selectByClassesIdOnClassesId" resultMap="StudentstatusMap">
         select
         <include refid="Base_Column_List" />,sts.Classes_Id

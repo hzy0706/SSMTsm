@@ -19,6 +19,8 @@
     <result column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
     <result column="Classes_Id" jdbcType="INTEGER" property="classesId" />
     <result column="Classes_Id2" jdbcType="INTEGER" property="classesId2" />
+    <result column="UpdateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
     <association property="studentVo" javaType="com.trkj.trainingprojects.vo.StudentVo">
       <result column="Student_Name" jdbcType="VARCHAR" property="studentName"/>
     </association>
@@ -38,7 +40,7 @@
   <sql id="Base_Column_List">
     s.Shift_Id, s.Shift_Date, s.Shift_Reason, s.Shift_Handler, s.Approval, s.JW_AppName, s.JW_AppTime,
     s.JW_DropNameApp, s.JW_DropTimeApp, s.AddTime, s.DeleteName, s.DeleteTime, s.TimeLiness, s.Student_Id,
-    s.Classes_Id, s.Classes_Id2
+    s.Classes_Id, s.Classes_Id2, s.UpdateName, s.UpdateTime
   </sql>
   <select id="selectByShiftKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -114,13 +116,13 @@
       <if test="shiftReason != null">
         Shift_Reason = #{shiftReason,jdbcType=VARCHAR},
       </if>
-      <if test="shiftHandler != null">
+      <if test="addname != null">
         Shift_Handler = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="approval != null">
         Approval = #{approval,jdbcType=INTEGER},
       </if>
-      <if test="jwAppname != null">
+      <if test="appname != null">
         JW_AppName = #{appname,jdbcType=VARCHAR},
       </if>
       <if test="jwApptime != null">
@@ -153,6 +155,12 @@
       <if test="classesId2 != null">
         Classes_Id2 = #{classesId2,jdbcType=INTEGER},
       </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where Shift_Id = #{shiftId,jdbcType=INTEGER}
   </update>
@@ -167,7 +175,7 @@
   <update id="appByTypeShiftKey2" parameterType="com.trkj.trainingprojects.vo.ShiftVo">
     update shift
     set
-      JW_AppName = #{addname,jdbcType=VARCHAR},
+      JW_AppName = #{appname,jdbcType=VARCHAR},
       Approval = #{approval,jdbcType=INTEGER},
       JW_AppTime = #{jwApptime,jdbcType=TIMESTAMP}
     where Shift_Id = #{shiftId,jdbcType=INTEGER}

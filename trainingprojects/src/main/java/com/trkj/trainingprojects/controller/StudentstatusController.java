@@ -63,9 +63,9 @@ public class StudentstatusController {
     }
 
     /*
-    * 根据学员分班id修改学员分班状态
-    * 0:未分班；1：已分班；2:读书中;3：已停课；4：已复课；5：已转班；6:已退学；7：已毕业
-    * */
+     * 根据学员分班id修改学员分班状态
+     * 0:未分班；1：已分班；2:读书中;3：已停课；4：已复课；5：已转班；6:已退学；7：已毕业
+     * */
     @PutMapping("/updateByStudentStateOne")
     public AjaxResponse updateByStudentStateOne(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusService.updateByStudentStateOne(studentstatusVo);
@@ -87,8 +87,8 @@ public class StudentstatusController {
     }
 
     /*
-    * 根据班级id修改学员状态[学习中]
-    * */
+     * 根据班级id修改学员状态[学习中]
+     * */
     @PutMapping("/updateByClassesIdOnState")
     public AjaxResponse updateByClassesIdOnState(@RequestBody @Valid StudentstatusVo studentstatusVo){
         studentstatusService.updateByClassesIdOnState(studentstatusVo);
