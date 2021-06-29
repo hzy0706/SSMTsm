@@ -72,14 +72,14 @@
     where Arrange_Id = #{arrangeId,jdbcType=INTEGER}
   </delete>
   <insert id="addArrange" keyColumn="Arrange_Id" keyProperty="arrangeId" parameterType="com.trkj.trainingprojects.vo.ArrangeVo" useGeneratedKeys="true">
-    insert into arrange (Arrange_Date, Remarks, IsExamine, 
+    insert into arrange (Arrange_Date, Remarks,
       ExamineTime, ExamineName, RevokeTime, 
       RevokeName, AddName,
       UpdateName, UpdateTime, DeleteName, 
       DeleteTime, Period_Id,
       Classes_Id, ClassRoom_Id, Emp_Id, 
       CourseDetails_Id)
-    values (#{arrangeDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{isexamine,jdbcType=INTEGER}, 
+    values (#{arrangeDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR},
       #{examinetime,jdbcType=TIMESTAMP}, #{examinename,jdbcType=VARCHAR}, #{revoketime,jdbcType=TIMESTAMP}, 
       #{revokename,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, 

@@ -42,5 +42,6 @@ public interface ClassesDao {
     int deleteByOpenClasses(ClassesVo classesVo);
     int UpdateAddClassesStudentNumber(ClassesVo classesVo);
     int updateClassesIdOnClasseStudents(ClassesVo classesVo);
+    int updateCoursedetailsIdByClassesId(ClassesVo classesVo);
 }
 
