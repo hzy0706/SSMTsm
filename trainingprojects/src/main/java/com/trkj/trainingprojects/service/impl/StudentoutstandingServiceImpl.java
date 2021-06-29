@@ -44,4 +44,9 @@ public class StudentoutstandingServiceImpl implements StudentoutstandingService 
     public List<StudentoutstandingVo> selectAllStudentOutStanding() {
         return studentoutstandingDao.selectAllStudentOutStanding();
     }
+
+    @Override
+    public void addStudentoutstanding(StudentoutstandingVo studentoutstandingVo) {
+        studentoutstandingDao.insert(studentoutstandingVo);
+    }
 }

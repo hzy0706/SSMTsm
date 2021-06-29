@@ -18,6 +18,7 @@ public interface EntryfeesService {
     List<Entryfees> queryAllByLimit(int offset, int limit);
 
     int addEntryfees(EntryfeesVo entryfeesVo);
+    int addEntryfees2(EntryfeesVo entryfeesVo);
 
     Entryfees update(Entryfees entryfees);
 

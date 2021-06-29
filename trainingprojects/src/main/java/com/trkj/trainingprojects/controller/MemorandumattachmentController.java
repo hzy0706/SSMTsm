@@ -94,8 +94,8 @@ public class MemorandumattachmentController {
         }
         return AjaxResponse.success(memorandumattachmentVo);
     }
-    @PutMapping("updateZsName/{id}/{name}")
-    public AjaxResponse updateZsName(@PathVariable("id") int id,@PathVariable("name")String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+    @PutMapping("updateZsName")
+    public AjaxResponse updateZsName(@RequestParam("id") int id,@RequestParam("name")String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         Date data = new Date();
         memorandumattachmentVo.setZsexaminetime(data);
         memorandumattachmentVo.setZsexaminename(name);
@@ -104,8 +104,8 @@ public class MemorandumattachmentController {
         return AjaxResponse.success(memorandumattachmentVo);
     }
     //    撤销审核
-    @PutMapping("updateZsChName/{id}/{name}")
-    public AjaxResponse updateZsChName(@PathVariable("id") int id,@PathVariable("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+    @PutMapping("updateZsChName")
+    public AjaxResponse updateZsChName(@RequestParam("id") int id,@RequestParam("name") String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
         Date data = new Date();
         memorandumattachmentVo.setZsrevoketime(data);
         memorandumattachmentVo.setZsrevokename(name);
