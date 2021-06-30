@@ -18,11 +18,11 @@ public class SourceVo {
     private String sourceName;
     private Integer already;
     private Integer potential;
-    private String addname;
+    public String addname;
     private Date addtime;
-    private String updatename;
+    public String updatename;
     private Date updatetime;
-    private String deletename;
+    public String deletename;
     private Date deletetime;
     private Integer timeliness;
     private static final long serialVersionUID = 1L;

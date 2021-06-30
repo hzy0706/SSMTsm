@@ -313,5 +313,14 @@
         where timeliness=0 and coursesequence>=#{param2} and Course_Id=#{param1}
         order by coursesequence asc
     </select>
+
+    <!--根据班级id查询-->
+    <select id="selectAllCourseDetailsByClassesId" resultMap="CoursedetailsMap">
+        select
+        <include refid="Base_Column_List" />,cl.Classes_Name,cl.Classes_Id
+        from tr01904.coursedetails cd
+        inner join classes cl on cd.CourseDetails_Id = cl.CourseDetails_Id
+        where cd.TimeLiness = 0 and cl.Classes_Id = #{classesId}
+    </select>
 </mapper>
 

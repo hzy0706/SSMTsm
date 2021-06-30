@@ -280,7 +280,9 @@
         set
           Course_State = #{courseState},
           StopName = #{stopname},
-          StopTime = #{stoptime}
+          StopTime = #{stoptime},
+          BeginName = #{beginname},
+          BeginTime = #{begintime}
         where Course_Id = #{courseId}
     </update>
 

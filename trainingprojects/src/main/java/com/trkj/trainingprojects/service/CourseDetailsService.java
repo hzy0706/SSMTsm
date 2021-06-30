@@ -26,4 +26,5 @@ public interface CourseDetailsService {
     public List<CourseDetailsVo> selectAllCourseDetails3(Integer courseId);
     public int selectCourseDetailsDeleteOne(int courseId);
     List<CourseDetailsVo> selectArrangeInfo(int Course_Id,int coursesequence);
+    List<CourseDetailsVo> selectAllCourseDetailsByClassesId(int classesId);
 }

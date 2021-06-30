@@ -4,12 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.entity.ExamManage;
 import com.trkj.trainingprojects.service.ExamManageService;
+import com.trkj.trainingprojects.vo.AjaxResponse;
+import com.trkj.trainingprojects.vo.ClassTypeVo;
 import com.trkj.trainingprojects.vo.CourseVo;
 import com.trkj.trainingprojects.vo.ExamManageVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,4 +37,11 @@ public class ExamManageController {
         return pageInfo;
     }
 
+    @PostMapping("/addExamManage")
+    public AjaxResponse addExamManage(@RequestBody @Valid ExamManageVo examManageVo){
+        Date date = new Date();
+        examManageVo.setAddtime(date);
+        examManageService.addExamManage(examManageVo);
+        return AjaxResponse.success(examManageVo);
+    }
 }
