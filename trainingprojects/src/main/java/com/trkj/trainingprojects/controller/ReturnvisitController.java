@@ -37,12 +37,14 @@ public class ReturnvisitController {
         Date date=new Date();
         returnvisitVo.setReturnvisitdate(date);
         returnvisitVo.setTimeliness(0);
+        System.out.println("姓名==================："+returnvisitVo.getAddname());
         returnvisitService.addReturnvisit(returnvisitVo);
         return AjaxResponse.success(returnvisitVo);
     }
 //    修改
     @PutMapping("/updateReturnvisit")
     public AjaxResponse updateReturnvisit(@RequestBody @Valid ReturnvisitVo returnvisitVo){
+        System.out.println("=dx============================="+returnvisitVo);
         returnvisitVo.setTimeliness(0);
         returnvisitService.updateReturnvisit(returnvisitVo);
         return AjaxResponse.success(returnvisitVo);
@@ -67,8 +69,8 @@ public class ReturnvisitController {
     /**
      * 修改回访状态
      */
-    @PutMapping("/updateReturnVisitState/{registerId}/{attentstate}")
-    public AjaxResponse updateReturnVisitState(@PathVariable("registerId") Integer registerId,@PathVariable("attentstate") Integer attentstate){
+    @PutMapping("/updateReturnVisitState")
+    public AjaxResponse updateReturnVisitState(@RequestParam("registerId") Integer registerId,@RequestParam("attentstate") Integer attentstate){
         returnvisitService.updateReturnVisitState(registerId,attentstate);
         return AjaxResponse.success();
     }

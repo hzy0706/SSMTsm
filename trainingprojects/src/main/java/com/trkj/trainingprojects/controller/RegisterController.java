@@ -55,7 +55,7 @@ public class RegisterController {
         return AjaxResponse.success(registerVo);
     }
 //    外键查询
-    @GetMapping("/findRegisterList")
+    @GetMapping("/selectFindRegisterList")
     public AjaxResponse findRegisterList() {
         List<RegisterVo> list = registerService.selectAllRegister();
         return AjaxResponse.success(list);
