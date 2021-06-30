@@ -1,65 +1,44 @@
-package com.trkj.trainingprojects.vo;
+package com.trkj.trainingprojects.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.trkj.trainingprojects.ann.ClassMeta;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-
-import java.io.Serializable;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
- * 公告表(Announcement)实体类
+ * 规章制度表(System)实体类
  *
  * @author makejava
- * @since 2021-06-29 20:08:27
+ * @since 2021-06-30 23:12:04
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Validated
-@ClassMeta(className = "公告表")
-public class AnnouncementVo implements Serializable {
-    private static final long serialVersionUID = 106484064380758527L;
+public class System implements Serializable {
+    private static final long serialVersionUID = -34515620864332829L;
     /**
-    * 公告编号
+    * 制度编号
     */
-    private Integer announcementId;
+    private Integer systemId;
     /**
-    * 开始时间
+    * 制度主题
     */
-    private Date startTime;
+    private String systemTheme;
     /**
-    * 结束时间
+    * 制度内容
     */
-    private Date endTime;
+    private String systemContent;
     /**
-    * 公告主题
+    * 制度状态
     */
-    private String announcementTheme;
-    /**
-    * 公告内容
-    */
-    private String announcementContent;
-    /**
-    * 公告状态
-    */
-    private Integer announcementState;
+    private Integer systemState;
     /**
     * 录入人员
     */
-    public String addname;
+    private String addname;
     /**
     * 录入时间
     */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date addtime;
     /**
     * 最后修改人
     */
-    public String updatename;
+    private String updatename;
     /**
     * 最后修改时间
     */
@@ -67,7 +46,7 @@ public class AnnouncementVo implements Serializable {
     /**
     * 删除人
     */
-    public String deletename;
+    private String deletename;
     /**
     * 删除时间
     */
@@ -93,57 +72,45 @@ public class AnnouncementVo implements Serializable {
     */
     private Integer timeliness;
     /**
-    * 公告类型编号
+    * 制度类型编号
     */
-    private Integer announcementtypeId;
+    private Integer systemtypeId;
+    /**
+    * 发文单位
+    */
+    private Integer deptId;
 
 
-    public Integer getAnnouncementId() {
-        return announcementId;
+    public Integer getSystemId() {
+        return systemId;
     }
 
-    public void setAnnouncementId(Integer announcementId) {
-        this.announcementId = announcementId;
+    public void setSystemId(Integer systemId) {
+        this.systemId = systemId;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public String getSystemTheme() {
+        return systemTheme;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setSystemTheme(String systemTheme) {
+        this.systemTheme = systemTheme;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public String getSystemContent() {
+        return systemContent;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setSystemContent(String systemContent) {
+        this.systemContent = systemContent;
     }
 
-    public String getAnnouncementTheme() {
-        return announcementTheme;
+    public Integer getSystemState() {
+        return systemState;
     }
 
-    public void setAnnouncementTheme(String announcementTheme) {
-        this.announcementTheme = announcementTheme;
-    }
-
-    public String getAnnouncementContent() {
-        return announcementContent;
-    }
-
-    public void setAnnouncementContent(String announcementContent) {
-        this.announcementContent = announcementContent;
-    }
-
-    public Integer getAnnouncementState() {
-        return announcementState;
-    }
-
-    public void setAnnouncementState(Integer announcementState) {
-        this.announcementState = announcementState;
+    public void setSystemState(Integer systemState) {
+        this.systemState = systemState;
     }
 
     public String getAddname() {
@@ -234,12 +201,20 @@ public class AnnouncementVo implements Serializable {
         this.timeliness = timeliness;
     }
 
-    public Integer getAnnouncementtypeId() {
-        return announcementtypeId;
+    public Integer getSystemtypeId() {
+        return systemtypeId;
     }
 
-    public void setAnnouncementtypeId(Integer announcementtypeId) {
-        this.announcementtypeId = announcementtypeId;
+    public void setSystemtypeId(Integer systemtypeId) {
+        this.systemtypeId = systemtypeId;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
 }
