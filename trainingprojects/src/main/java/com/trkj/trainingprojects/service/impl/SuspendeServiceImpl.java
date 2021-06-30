@@ -1,16 +1,19 @@
 package com.trkj.trainingprojects.service.impl;
 
 import com.trkj.trainingprojects.dao.BackDao;
+import com.trkj.trainingprojects.dao.RefundDao;
 import com.trkj.trainingprojects.dao.StudentstatusDao;
 import com.trkj.trainingprojects.dao.SuspendeDao;
 import com.trkj.trainingprojects.service.SuspendeService;
 import com.trkj.trainingprojects.vo.BackVo;
+import com.trkj.trainingprojects.vo.RefundVo;
 import com.trkj.trainingprojects.vo.StudentstatusVo;
 import com.trkj.trainingprojects.vo.SuspendeVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,6 +24,8 @@ public class SuspendeServiceImpl implements SuspendeService {
     private StudentstatusDao studentstatusDao;
     @Resource
     private BackDao backDao;
+    @Resource
+    private RefundDao refundDao;
 
     @Transactional
     @Override
@@ -117,5 +122,16 @@ public class SuspendeServiceImpl implements SuspendeService {
         backVo.setClassesId(record.getClassesId());
         int a = backDao.addBack(backVo);
         return suspendeDao.OnUpdateBackState(record);
+    }
+
+    @Override
+    public int OnUpdateRefundState(SuspendeVo record) {
+        SuspendeVo suspendeVo = suspendeDao.selectBySuspendeId(record.getSuspendeId());
+        RefundVo refundVo = new RefundVo();
+        refundVo.setRefundtype("缺课退费");
+        BigDecimal bd=new BigDecimal(record.getDeletename());
+        refundVo.setDropMoney(bd);
+        int a = refundDao.addRefund(refundVo);
+        return suspendeDao.OnUpdateRefundState(record);
     }
 }

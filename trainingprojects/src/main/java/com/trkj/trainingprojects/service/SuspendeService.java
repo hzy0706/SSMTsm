@@ -36,4 +36,6 @@ public interface SuspendeService {
 
     int OnUpdateBackState(SuspendeVo record);
 
+    int OnUpdateRefundState(SuspendeVo record);
+
 }

@@ -224,4 +224,11 @@
         SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER}
     where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
   </update>
+
+  <update id="OnUpdateRefundState" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
+    update suspende
+    set
+        SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER}
+    where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
+  </update>
 </mapper>

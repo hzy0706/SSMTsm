@@ -9,7 +9,7 @@ import java.util.List;
 public interface RefundDao {
     int deleteByRefundKey(Integer refundId);
 
-    int insert(RefundVo record);
+    int addRefund(RefundVo record);
 
     int insertSelective(RefundVo record);
 
