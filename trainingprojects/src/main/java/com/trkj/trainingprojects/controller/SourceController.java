@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -23,6 +24,13 @@ public class SourceController {
         return sourcevo;
 
     }
+//    外键查询
+    @GetMapping("/selectfindSourceKey")
+    public List<SourceVo> findSourceKey(){
+        List<SourceVo> list = sourceService.findSourceKey();
+        return list;
+    }
+
 //    增加
     @PostMapping("/addSource")
     public AjaxResponse addSource(@RequestBody @Valid SourceVo sourceVo){

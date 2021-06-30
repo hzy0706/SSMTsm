@@ -51,4 +51,9 @@ public class SourceServiceImpl implements SourceService {
     public SourceVo mohuSource(Integer sourceId) {
         return sourceDao.mohuSource(sourceId);
     }
+
+    @Override
+    public List<SourceVo> findSourceKey() {
+        return sourceDao.findSourceKey();
+    }
 }

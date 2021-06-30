@@ -23,4 +23,6 @@ public interface SourceDao {
     List<SourceVo> findSource();
 //    模糊查询
     SourceVo mohuSource(Integer sourceId);
+//外键查询
+    List<SourceVo> findSourceKey();
 }
