@@ -102,9 +102,10 @@
     <!--查询单个-->
     <select id="queryById" resultMap="AttendanceMap">
         select
-          Attendance_Id, Attendance_Time, Status, Remarks, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Emp_Id
-        from tr01904.attendance
-        where Attendance_Id = #{attendanceId}
+        <include refid="Base_Column_List" />,st.Student_Name,LPAD(st.Student_Number,7,'0') Student_Number
+        from tr01904.attendance ate
+        inner join student st on ate.Student_Id = st.Student_Id
+        where ate.Student_Id = #{studentId} and ate.TimeLiness = 0
     </select>
 
     <!--查询指定行数据-->

@@ -27,4 +27,5 @@ public interface AttendanceService {
     int deleteByAttenDance(AttendanceVo attendanceVo);
     int updateByAttenDanceKey(AttendanceVo attendanceVo);
     int addAttenDance(AttendanceVo attendanceVo);
+    List<AttendanceVo> selectAllAttenDanceByStudentId(Integer attendanceId);
 }

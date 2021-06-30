@@ -59,4 +59,9 @@ public class AttendanceServiceImpl implements AttendanceService {
     public int addAttenDance(AttendanceVo attendanceVo) {
         return attendanceDao.insert(attendanceVo);
     }
+
+    @Override
+    public List<AttendanceVo> selectAllAttenDanceByStudentId(Integer attendanceId) {
+        return attendanceDao.queryById(attendanceId);
+    }
 }
