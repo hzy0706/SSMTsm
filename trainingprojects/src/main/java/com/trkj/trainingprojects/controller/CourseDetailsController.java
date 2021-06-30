@@ -100,4 +100,10 @@ public class CourseDetailsController {
         return AjaxResponse.success(a);
     }
 
+    @GetMapping("/selectAllCourseDetailsByClassesId")
+    public AjaxResponse selectAllCourseDetailsByClassesId(@RequestParam("classesid") int classesid){
+        List<CourseDetailsVo> list = coursedetailsService.selectAllCourseDetailsByClassesId(classesid);
+        return AjaxResponse.success(list);
+    }
+
 }

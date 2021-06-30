@@ -45,4 +45,9 @@ public class ExamManageServiceImpl implements ExamManageService {
         return examManageDao.selectAllExamManage();
     }
 
+    @Override
+    public void addExamManage(ExamManageVo examManageVo) {
+        examManageDao.insert(examManageVo);
+    }
+
 }
