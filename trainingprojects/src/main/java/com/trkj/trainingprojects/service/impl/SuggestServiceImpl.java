@@ -26,6 +26,7 @@ public class SuggestServiceImpl implements SuggestService {
     }
 
     @Override
+    @Transactional
     public int updateSuggest(SuggestVo suggestVo) {
         return dao.updateSuggest(suggestVo);
     }
@@ -37,6 +38,7 @@ public class SuggestServiceImpl implements SuggestService {
     }
 
     @Override
+    @Transactional
     public int delSuggestById(SuggestVo suggestVo) {
         return dao.delSuggestById(suggestVo);
     }
