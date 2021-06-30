@@ -41,7 +41,7 @@ public class RegisterController {
     public AjaxResponse updateRegister(@RequestBody @Valid RegisterVo registerVo){
         Date date=new Date();
         registerVo.setUpdatetime(date);
-        registerVo.setTimeliness(1);
+        registerVo.setTimeliness(0);
         registerService.updateRegister(registerVo);
         return AjaxResponse.success(registerVo);
     }
@@ -66,12 +66,13 @@ public class RegisterController {
        List<RegisterVo> list=registerService.mohuRegister(value);
         return list;
     }
-    @PutMapping("/updateShRegister/{id}/{name}")
-    public AjaxResponse updateShRegister(@PathVariable ("id") int id,@PathVariable ("name") String name,@RequestBody @Valid RegisterVo registerVo){
+    @PutMapping("/updateShRegister")
+    public AjaxResponse updateShRegister(@RequestBody @Valid RegisterVo registerVo){
         Date date=new Date();
         registerVo.setUpdatetime(date);
-        registerVo.setUpdatename(name);
+//        registerVo.setUpdatename(name);
         registerVo.setAttentstate(2);
+        registerVo.setRegisterId(registerVo.getRegisterId());
         registerService.updateShRegister(registerVo);
         return AjaxResponse.success(registerVo);
     }
