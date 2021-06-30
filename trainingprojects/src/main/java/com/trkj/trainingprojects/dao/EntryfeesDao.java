@@ -36,5 +36,8 @@ public interface EntryfeesDao {
     int updateByEntryFeeState(EntryfeesVo entryfeesVo);
     int deleteByEntryFees(EntryfeesVo entryfeesVo);
     int updateByEntryFeeStateByAccumulated(EntryfeesVo entryfeesVo);
+    int selectSumOnSheng();
+    int selectSumOnChe();
+    int selectSumOnAll();
 }
 

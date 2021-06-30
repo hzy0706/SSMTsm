@@ -95,4 +95,7 @@ public class RegisterController {
         registerService.updateRegisterState3(registerVo);
         return AjaxResponse.success(registerVo);
     }
+    /**
+     * 学员增加方法
+     */
 }
