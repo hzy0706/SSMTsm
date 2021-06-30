@@ -92,10 +92,17 @@ public class StudentController {
         studentService.updateByStudentKey(studentVo);
         return  AjaxResponse.success(studentVo);
     }
-    @GetMapping("/selectStudentCource/{sourceId}")
-    public AjaxResponse selectStudentCource(@PathVariable("sourceId") Integer sourceId){
+
+    @GetMapping("/selectStudentCource")
+    public AjaxResponse selectStudentCource(@RequestParam("sourceId") Integer sourceId){
         List<StudentVo> student=studentService.selectStudentCource(sourceId);
         return AjaxResponse.success(student);
+    }
+
+    @PutMapping("/updateByStudentImg")
+    public AjaxResponse updateByStudentImg(@RequestBody @Valid StudentVo studentVo){
+        studentService.updateByStudentImg(studentVo);
+        return  AjaxResponse.success(studentVo);
     }
 
 }

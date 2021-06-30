@@ -130,10 +130,10 @@
         co.CourseDetails_Id,co.CourseDetails_Name
         from examinationcontent e
         inner join itembank ib on e.ItemBank_Id=ib.ItemBank_Id
-        inner join examination em on e.Examination_Id=em.Examination_Id
+        left join examination em on e.Examination_Id=em.Examination_Id
         inner join exam_manage ex on e.examCode = ex.examCode
         inner join coursedetails co on ex.CourseDetails_Id = co.CourseDetails_Id
-        where e.TimeLiness = 0 and e.examCode = #{examCode}
+        where e.TimeLiness = 0 and e.examCode = #{examCode} LIMIT 1
     </select>
 
     <!--根据试卷id查询选择题-->

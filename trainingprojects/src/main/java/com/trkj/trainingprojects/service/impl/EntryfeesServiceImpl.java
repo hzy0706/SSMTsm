@@ -3,6 +3,7 @@ package com.trkj.trainingprojects.service.impl;
 import com.trkj.trainingprojects.dao.EntryfeesDao;
 import com.trkj.trainingprojects.entity.Entryfees;
 import com.trkj.trainingprojects.service.EntryfeesService;
+import com.trkj.trainingprojects.service.StudentoutstandingService;
 import com.trkj.trainingprojects.util.RandomNumber;
 import com.trkj.trainingprojects.vo.EntryfeesVo;
 import com.trkj.trainingprojects.vo.StudentoutstandingVo;
@@ -17,6 +18,8 @@ import java.util.List;
 public class EntryfeesServiceImpl implements EntryfeesService {
     @Resource
     private EntryfeesDao entryfeesDao;
+    @Resource
+    private StudentoutstandingService studentoutstandingService;
     @Override
     public Entryfees queryById(Integer feesId) {
         return null;
@@ -35,19 +38,24 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     @Override
     @Transactional
     public int addEntryfees2(EntryfeesVo entryfeesVo) {
-        Date date = new Date();
-        entryfeesVo.setAddtime(date);
         RandomNumber randomNumber = new RandomNumber();
         entryfeesVo.setFeesNumber("CW"+randomNumber.getLocalTrmSeqNum());//缴费编号
+        Date date = new Date();
+        entryfeesVo.setAddtime(date);
+        entryfeesDao.insert(entryfeesVo);
         //添加欠费补缴
         StudentoutstandingVo studentoutstandingVo = new StudentoutstandingVo();
         studentoutstandingVo.setFeesId(entryfeesVo.getFeesId());
         studentoutstandingVo.setStudentId(entryfeesVo.getStudentId());
-        studentoutstandingVo.setOutstandingNumber("CW"+randomNumber.getLocalTrmSeqNum());
+        studentoutstandingVo.setOutstandingNumber(entryfeesVo.getFeesNumber());
         studentoutstandingVo.setOutstandingDate(date);
         studentoutstandingVo.setAddname(entryfeesVo.getAddname());
-       /* studentoutstandingVo.setAlongmoney();*/
-        return entryfeesDao.insert(entryfeesVo);
+        studentoutstandingVo.setAddtime(date);
+        studentoutstandingVo.setAlongmoney(entryfeesVo.getReceipts());
+        studentoutstandingVo.setOutstandingState(0);
+        studentoutstandingVo.setTimeliness(0);
+        studentoutstandingService.insert(studentoutstandingVo);
+        return 0;
     }
 
     @Override
@@ -78,5 +86,10 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     @Override
     public int deleteByEntryFees(EntryfeesVo entryfeesVo) {
         return entryfeesDao.deleteByEntryFees(entryfeesVo);
+    }
+
+    @Override
+    public int updateByEntryFeeStateByAccumulated(EntryfeesVo entryfeesVo) {
+        return entryfeesDao.updateByEntryFeeStateByAccumulated(entryfeesVo);
     }
 }

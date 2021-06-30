@@ -33,5 +33,6 @@ public interface StudentoutstandingDao {
     int deleteById(Integer outstandingId);
 
     List<StudentoutstandingVo> selectAllStudentOutStanding();
+    int updateByStudentOutStanding(StudentoutstandingVo studentoutstandingVo);
 }
 

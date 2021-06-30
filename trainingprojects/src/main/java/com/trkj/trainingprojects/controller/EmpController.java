@@ -30,18 +30,6 @@ public class EmpController {
     }
     @PostMapping("/addEmp")
     public AjaxResponse addUnitALL(@RequestBody @Valid  EmpVo empVo){
-//        char i = empVo.getBirthday().toString().charAt(9);
-//        System.out.println(i+"............");
-//        int num = Integer.parseInt(String.valueOf(i));
-//        System.out.println("-----------"+num);
-//        num=num+1;
-//        String as=String.valueOf(num);
-//        StringBuilder sb=new StringBuilder(as);
-//        String time=empVo.getBirthday().toString().substring(0,9);
-//        System.out.println("--------------"+time);
-//        sb.insert(0,time);
-//        time=sb.toString();
-//        empVo.setBirthday(new Date(time));
         empService.addEmp(empVo);
         return AjaxResponse.success(empVo);
     }
