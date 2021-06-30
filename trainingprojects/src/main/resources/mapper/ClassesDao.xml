@@ -394,6 +394,13 @@
         where Classes_Id = #{classesId} and TimeLiness = 0
     </update>
 
+    <update id="updateCoursedetailsIdByClassesId" parameterType="com.trkj.trainingprojects.entity.Classes">
+        update tr01904.classes
+        set
+          CourseDetails_Id = #{coursedetailsId}
+        where Classes_Id = #{classesId} and TimeLiness = 0
+    </update>
+
 
 </mapper>
 

@@ -26,9 +26,11 @@ import javax.servlet.http.HttpServletResponse;
 public class UserAuthenticationEntryPointHandler implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws JsonProcessingException {
-        log.info("没有登录，无法访问");
-        AjaxResponse ajaxResponse= AjaxResponse.error(new CustomError(CustomErrorType.ACCOUNT_ERROR,"未登录"));
+        //log.info("没有登录，无法访问");
+        AjaxResponse ajaxResponse=AjaxResponse.error(new CustomError(CustomErrorType.ACCOUNT_ERROR,"账户过期，请重新登入！"));
         ObjectMapper om=new ObjectMapper();
+        log.debug("------------------");
+        log.debug(om.writeValueAsString(ajaxResponse));
         ServletUtil.responseJson(response, om.writeValueAsString(ajaxResponse));
     }
 }

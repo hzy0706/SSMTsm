@@ -49,5 +49,6 @@ public interface StudentstatusDao {
     int OnupdateByClassesIdAndStudentIdOnState(@Param("classesId") Integer classesId,@Param("studentId") Integer studentId, @Param("status") Integer status );
     List<StudentstatusVo> selectStudentAllotType();
     int updateByApprovedStu(StudentstatusVo studentstatusVo);
+    int selectStudentStateByStudentIdAndCouresId(@Param("courseId") int a,@Param("studentId") int b);
 }
 

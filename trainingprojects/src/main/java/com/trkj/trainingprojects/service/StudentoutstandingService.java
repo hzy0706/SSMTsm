@@ -17,11 +17,13 @@ public interface StudentoutstandingService {
 
     List<Studentoutstanding> queryAllByLimit(int offset, int limit);
 
-    Studentoutstanding insert(Studentoutstanding studentoutstanding);
+    int insert(StudentoutstandingVo studentoutstanding);
 
     Studentoutstanding update(Studentoutstanding studentoutstanding);
 
     boolean deleteById(Integer outstandingId);
 
     public List<StudentoutstandingVo> selectAllStudentOutStanding();
+    public void addStudentoutstanding(StudentoutstandingVo studentoutstandingVo);
+    int updateByStudentOutStanding(StudentoutstandingVo studentoutstandingVo);
 }

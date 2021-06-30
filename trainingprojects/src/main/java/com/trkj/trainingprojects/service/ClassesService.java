@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ClassesService {
 
-    Classes queryById(Integer classesId);
+    ClassesVo queryById(Integer classesId);
 
     List<Classes> queryAllByLimit(int offset, int limit);
 
@@ -34,4 +34,5 @@ public interface ClassesService {
     public List<ClassesVo> selectClassesById(Integer courseId);
     public ClassesVo selectClassesNumber(Integer classesId);
     public int UpdateAddClassesStudentNumber(ClassesVo classesVo);
+    int updateCoursedetailsIdByClassesId(ClassesVo classesVo);
 }

@@ -17,8 +17,8 @@ public class ClassesServiceImpl implements ClassesService {
     @Resource
     private ClassesDao classesDao;
     @Override
-    public Classes queryById(Integer classesId) {
-        return null;
+    public ClassesVo queryById(Integer classesId) {
+        return classesDao.queryById2(classesId);
     }
 
     @Override
@@ -102,5 +102,10 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     public int UpdateAddClassesStudentNumber(ClassesVo classesVo) {
         return classesDao.UpdateAddClassesStudentNumber(classesVo);
+    }
+
+    @Override
+    public int updateCoursedetailsIdByClassesId(ClassesVo classesVo) {
+        return classesDao.updateCoursedetailsIdByClassesId(classesVo);
     }
 }

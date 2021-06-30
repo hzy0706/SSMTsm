@@ -33,4 +33,6 @@ public interface RegisterDao {
     int updateRegisterState(RegisterVo registerVo);
 
     RegisterVo queryById(Integer registerId);
+
+    int updateRegisterState3(RegisterVo registerVo);
 }

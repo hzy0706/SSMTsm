@@ -41,7 +41,7 @@ public class RegisterController {
     public AjaxResponse updateRegister(@RequestBody @Valid RegisterVo registerVo){
         Date date=new Date();
         registerVo.setUpdatetime(date);
-        registerVo.setTimeliness(1);
+        registerVo.setTimeliness(0);
         registerService.updateRegister(registerVo);
         return AjaxResponse.success(registerVo);
     }
@@ -66,12 +66,13 @@ public class RegisterController {
        List<RegisterVo> list=registerService.mohuRegister(value);
         return list;
     }
-    @PutMapping("/updateShRegister/{id}/{name}")
-    public AjaxResponse updateShRegister(@PathVariable ("id") int id,@PathVariable ("name") String name,@RequestBody @Valid RegisterVo registerVo){
+    @PutMapping("/updateShRegister")
+    public AjaxResponse updateShRegister(@RequestBody @Valid RegisterVo registerVo){
         Date date=new Date();
         registerVo.setUpdatetime(date);
-        registerVo.setUpdatename(name);
+//        registerVo.setUpdatename(name);
         registerVo.setAttentstate(2);
+        registerVo.setRegisterId(registerVo.getRegisterId());
         registerService.updateShRegister(registerVo);
         return AjaxResponse.success(registerVo);
     }
@@ -81,6 +82,17 @@ public class RegisterController {
     @PutMapping("/updateRegisterState")
     public AjaxResponse updateRegisterState(@RequestBody @Valid RegisterVo registerVo){
         registerService.updateRegisterState(registerVo);
+        return AjaxResponse.success(registerVo);
+    }
+
+    /**
+     * 修改缴费状态，蔡锦康的方法
+     */
+    @PutMapping("/updateRegisterState3")
+    public AjaxResponse updateRegisterState3(@RequestBody @Valid RegisterVo registerVo){
+        Date date = new Date();
+        registerVo.setUpdatetime(date);
+        registerService.updateRegisterState3(registerVo);
         return AjaxResponse.success(registerVo);
     }
 }

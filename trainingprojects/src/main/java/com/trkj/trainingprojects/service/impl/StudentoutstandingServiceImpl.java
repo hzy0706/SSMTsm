@@ -26,8 +26,8 @@ public class StudentoutstandingServiceImpl implements StudentoutstandingService 
     }
 
     @Override
-    public Studentoutstanding insert(Studentoutstanding studentoutstanding) {
-        return null;
+    public int insert(StudentoutstandingVo studentoutstandingVo) {
+        return studentoutstandingDao.insert(studentoutstandingVo);
     }
 
     @Override
@@ -43,5 +43,15 @@ public class StudentoutstandingServiceImpl implements StudentoutstandingService 
     @Override
     public List<StudentoutstandingVo> selectAllStudentOutStanding() {
         return studentoutstandingDao.selectAllStudentOutStanding();
+    }
+
+    @Override
+    public void addStudentoutstanding(StudentoutstandingVo studentoutstandingVo) {
+        studentoutstandingDao.insert(studentoutstandingVo);
+    }
+
+    @Override
+    public int updateByStudentOutStanding(StudentoutstandingVo studentoutstandingVo) {
+        return studentoutstandingDao.updateByStudentOutStanding(studentoutstandingVo);
     }
 }

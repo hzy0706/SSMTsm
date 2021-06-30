@@ -37,5 +37,7 @@ public interface CourseDetailsDao {
     List<CourseDetailsVo> selectAllCourseDetails2();
     List<CourseDetailsVo> selectAllCourseDetails3(Integer courseId);
     int selectCourseDetailsDeleteOne(int courseId);
+
+    List<CourseDetailsVo> selectArrangeInfo(int Course_Id,int coursesequence);
 }
 

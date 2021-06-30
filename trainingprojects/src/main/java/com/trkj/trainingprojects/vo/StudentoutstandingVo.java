@@ -1,5 +1,6 @@
 package com.trkj.trainingprojects.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trkj.trainingprojects.ann.ClassMeta;
 import com.trkj.trainingprojects.vo.EntryfeesVo;
 import com.trkj.trainingprojects.vo.RegisterVo;
@@ -34,6 +35,7 @@ public class StudentoutstandingVo {
     /**
      * 补缴日期
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date outstandingDate;
     /**
      * 最后修改人
@@ -50,6 +52,7 @@ public class StudentoutstandingVo {
     /**
      * 增加时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date addtime;
     /**
      * 删除人
@@ -70,6 +73,7 @@ public class StudentoutstandingVo {
     /**
      * 财务部审核时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date approvaltime;
     /**
      * 财务部审核人
@@ -78,6 +82,7 @@ public class StudentoutstandingVo {
     /**
      * 财务部撤销审核时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date revokeapptime;
     /**
      * 财务部撤销审核人

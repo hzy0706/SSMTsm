@@ -28,7 +28,7 @@ public class Shift implements Serializable {
     /**
      * 转班办理人
      */
-    private String shiftHandler;
+    private String addname;
 
     /**
      * 操作审批

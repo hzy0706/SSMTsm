@@ -41,4 +41,5 @@ public interface StudentstatusService {
     List<StudentstatusVo> selectStudentAllotType();
 
     int updateByApprovedStu(StudentstatusVo studentstatusVo);
+    int selectStudentStateByStudentIdAndCouresId(int a,int b);
 }

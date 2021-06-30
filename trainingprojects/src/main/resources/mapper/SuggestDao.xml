@@ -32,48 +32,24 @@
         where s.TimeLiness=0
     </select>
     <!--新增所有列-->
-    <insert id="addSuggest" keyProperty="suggestId" useGeneratedKeys="true">
-        insert into tr01904.suggest(Suggest_Name, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, Dept_Id)
-        values (#{suggestName}, #{addname}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{deptId})
+    <insert id="addSuggest">
+        insert into suggest(Suggest_Name, AddName, Dept_Id)
+        values (#{suggestName}, #{addname},#{deptId})
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update">
-        update tr01904.suggest
-        <set>
-            <if test="suggestName != null and suggestName != ''">
+    <update id="updateSuggest">
+        update suggest
+        set
                 Suggest_Name = #{suggestName},
-            </if>
-            <if test="addname != null and addname != ''">
-                AddName = #{addname},
-            </if>
-            <if test="addtime != null">
-                AddTime = #{addtime},
-            </if>
-            <if test="updatename != null and updatename != ''">
                 UpdateName = #{updatename},
-            </if>
-            <if test="updatetime != null">
-                UpdateTime = #{updatetime},
-            </if>
-            <if test="deletename != null and deletename != ''">
-                DeleteName = #{deletename},
-            </if>
-            <if test="deletetime != null">
-                DeleteTime = #{deletetime},
-            </if>
-            <if test="timeliness != null">
-                TimeLiness = #{timeliness},
-            </if>
-            <if test="deptId != null">
-                Dept_Id = #{deptId},
-            </if>
-        </set>
+                UpdateTime = CURRENT_TIMESTAMP,
+                Dept_Id = #{deptId}
         where Suggest_Id = #{suggestId}
     </update>
     <!--通过主键删除数据-->
     <update id="delSuggestById">
-        update tr01904.suggest set DeleteTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
-        where Session_Id=#{semesterId}
+        update suggest set DeleteTime=CURRENT_TIMESTAMP,DeleteName=#{deletename},TimeLiness=1
+        where Suggest_Id = #{suggestId}
     </update>
 </mapper>

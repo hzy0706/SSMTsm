@@ -27,7 +27,7 @@ public class UserAuthAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws JsonProcessingException {
         log.info("没有授权，无法访问");
-        AjaxResponse ajaxResponse= AjaxResponse.error(new CustomError(CustomErrorType.ACCOUNT_ERROR,"未授权"));
+        AjaxResponse ajaxResponse=AjaxResponse.error(new CustomError(CustomErrorType.ACCOUNT_ERROR1,"账号未授权当前操作授权，请联系管理员增加权限！"));
         ObjectMapper om=new ObjectMapper();
         ServletUtil.responseJson(response, om.writeValueAsString(ajaxResponse));
     }

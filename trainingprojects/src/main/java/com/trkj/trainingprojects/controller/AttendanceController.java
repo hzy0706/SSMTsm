@@ -7,6 +7,7 @@ import com.trkj.trainingprojects.service.AttendanceService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.AttendanceVo;
 import com.trkj.trainingprojects.vo.ClassTypeVo;
+import com.trkj.trainingprojects.vo.StudentstatusVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,6 +64,14 @@ public class AttendanceController {
         attendanceVo.setTimeliness(1);
         attendanceService.deleteByAttenDance(attendanceVo);
         return AjaxResponse.success(attendanceVo);
+    }
+
+    @GetMapping("/selectAllAttenDanceByStudentId")
+    public PageInfo<AttendanceVo> selectAllAttenDanceByStudentId(@RequestParam("id") int id, @RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        List<AttendanceVo> list = attendanceService.selectAllAttenDanceByStudentId(id);
+        PageInfo<AttendanceVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
 }
