@@ -16,10 +16,10 @@ public interface SuggestService {
     /**
      * 通过ID查询单条数据
      *
-     * @param suggestId 主键
+     * @param
      * @return 实例对象
      */
-    SuggestVo addSuggest(Integer suggestId);
+    void addSuggest(SuggestVo suggestVo);
 
 
     /**
@@ -36,7 +36,7 @@ public interface SuggestService {
      * @param suggestVo 实例对象
      * @return 实例对象
      */
-    SuggestVo update(SuggestVo suggestVo);
+    int updateSuggest(SuggestVo suggestVo);
 
 
     /**

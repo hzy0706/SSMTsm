@@ -55,6 +55,11 @@ public class AdvancearrangeController {
             teacherIds.add(classesVo.getTeacherId());
             courseCount+=classesVo.getManylessons();
         }
+        System.out.println(courseCount+"----------------所有上课总数------------------");
+        System.out.println(classIds.size()+"----------------需要排课的班级数量------------------");
+        for (Integer integer:teacherIds){
+            System.out.println(integer+"-----------老师编号------------");
+        }
         Map<Integer,ArrayList<Integer>> saveMap=new LinkedHashMap<Integer,ArrayList<Integer>>();
         for (int i = 0; i < teacherIds.size(); i++)
         {
@@ -81,6 +86,8 @@ public class AdvancearrangeController {
         }
         Map<String,ArrayList<Integer>> saveMap2=new LinkedHashMap<String,ArrayList<Integer>>();
         for (Map.Entry entry : saveMap.entrySet()) {
+            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
+            System.out.println("----");
             String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
             String [] strs = str.split(",");
             ArrayList<Integer> list=new ArrayList<Integer>();
@@ -89,20 +96,25 @@ public class AdvancearrangeController {
             }
             saveMap2.put(entry.getKey().toString(), list);
         }
+        System.out.println("----------------------");
         for (Map.Entry entry : saveMap2.entrySet()) {
             System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
             String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
             String [] strs = str.split(",");
             for (String st:strs){
                 int c=1;
+                System.out.println(st+"----当前班级编号");
                 ClassesVo classesVo = classesService.queryById(Integer.parseInt(st.trim()));
                 int count = classesVo.getManylessons();
                 System.out.println(Integer.parseInt(st.trim())+"------------一周可上课时-----------"+count);
                 int step = 1;
                 if(courseCount!=count){
-                    step=arrangeFormVoList.size()/(courseCount-count);//排课时循环步长
+                    step=arrangeFormVoList.size()/(courseCount-count);
                 }
+
+                System.out.println(step+"-----------排课时循环步长--------");
                 for (int i = 0;i<arrangeFormVoList.size();){
+                    System.out.println(i+"---------------------------------当前循环id-");
                     ArrangeFormVo arrangeFormVo = new ArrangeFormVo();
                     arrangeFormVo.setPeriodId(arrangeFormVoList.get(i).getPeriodId());
                     arrangeFormVo.setClassRoomId(arrangeFormVoList.get(i).getClassRoomId());
@@ -117,11 +129,14 @@ public class AdvancearrangeController {
                         break;
                     }
                     c++;
+                    System.out.println(c+"===========");
                     i+=step;
                 }
+                System.out.println(arrangeFormVoList.size()+"-----------------当前可排课集合数量----------------");
             }
         }
         for (Map.Entry entry : saveMap2.entrySet()) {
+            System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
             String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
             String [] strs = str.split(",");
             List<ArrangeFormVo> arrangeFormVoList2 = new ArrayList<>();
@@ -132,9 +147,11 @@ public class AdvancearrangeController {
                     }
                 }
             }
+            System.out.println(arrangeFormVoList2.size()+"--------------to-----------");
             for (int h=0;h<arrangeFormVoList2.size();h++){
                 int pid = arrangeFormVoList2.get(h).getPeriodId();
                 String date = arrangeFormVoList2.get(h).getDate();
+                System.out.println(pid+"----异常数据-----"+date);
                 for (int k=h+1;k<arrangeFormVoList2.size();k++){
                     if(pid==arrangeFormVoList2.get(k).getPeriodId()
                             && date.equals(arrangeFormVoList2.get(k).getDate())){

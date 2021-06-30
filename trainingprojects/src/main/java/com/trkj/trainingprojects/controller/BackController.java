@@ -57,6 +57,6 @@ public class BackController {
             backVo.setBackId(Integer.parseInt(s));
             backService.deleteByBackKey(backVo);
         }
-        return AjaxResponse.success(id);
+        return AjaxResponse.success("成功删除");
     }
 }

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.AnnouncementDao">
+
+    <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.Announcement">
+        <!--@Table announcement-->
+        <result property="announcementId" column="Announcement_Id" jdbcType="INTEGER"/>
+        <result property="startTime" column="Start_Time" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="End_Time" jdbcType="TIMESTAMP"/>
+        <result property="announcementTheme" column="Announcement_Theme" jdbcType="VARCHAR"/>
+        <result property="announcementContent" column="Announcement_Content" jdbcType="VARCHAR"/>
+        <result property="announcementState" column="Announcement_State" jdbcType="INTEGER"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="publishnmae" column="PublishNmae" jdbcType="VARCHAR"/>
+        <result property="publishtime" column="PublishTime" jdbcType="TIMESTAMP"/>
+        <result property="suspendname" column="SuspendName" jdbcType="VARCHAR"/>
+        <result property="suspendtime" column="SuspendTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="announcementtypeId" column="AnnouncementType_Id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          Announcement_Id, Start_Time, End_Time, Announcement_Theme, Announcement_Content, Announcement_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, AnnouncementType_Id
+        from tr01904.announcement
+        where Announcement_Id = #{announcementId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          Announcement_Id, Start_Time, End_Time, Announcement_Theme, Announcement_Content, Announcement_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, AnnouncementType_Id
+        from tr01904.announcement
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          Announcement_Id, Start_Time, End_Time, Announcement_Theme, Announcement_Content, Announcement_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, AnnouncementType_Id
+        from tr01904.announcement
+        <where>
+            <if test="announcementId != null">
+                and Announcement_Id = #{announcementId}
+            </if>
+            <if test="startTime != null">
+                and Start_Time = #{startTime}
+            </if>
+            <if test="endTime != null">
+                and End_Time = #{endTime}
+            </if>
+            <if test="announcementTheme != null and announcementTheme != ''">
+                and Announcement_Theme = #{announcementTheme}
+            </if>
+            <if test="announcementContent != null and announcementContent != ''">
+                and Announcement_Content = #{announcementContent}
+            </if>
+            <if test="announcementState != null">
+                and Announcement_State = #{announcementState}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and AddTime = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="publishnmae != null and publishnmae != ''">
+                and PublishNmae = #{publishnmae}
+            </if>
+            <if test="publishtime != null">
+                and PublishTime = #{publishtime}
+            </if>
+            <if test="suspendname != null and suspendname != ''">
+                and SuspendName = #{suspendname}
+            </if>
+            <if test="suspendtime != null">
+                and SuspendTime = #{suspendtime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="announcementtypeId != null">
+                and AnnouncementType_Id = #{announcementtypeId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="announcementId" useGeneratedKeys="true">
+        insert into tr01904.announcement(Start_Time, End_Time, Announcement_Theme, Announcement_Content, Announcement_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, AnnouncementType_Id)
+        values (#{startTime}, #{endTime}, #{announcementTheme}, #{announcementContent}, #{announcementState}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{publishnmae}, #{publishtime}, #{suspendname}, #{suspendtime}, #{timeliness}, #{announcementtypeId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tr01904.announcement
+        <set>
+            <if test="startTime != null">
+                Start_Time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                End_Time = #{endTime},
+            </if>
+            <if test="announcementTheme != null and announcementTheme != ''">
+                Announcement_Theme = #{announcementTheme},
+            </if>
+            <if test="announcementContent != null and announcementContent != ''">
+                Announcement_Content = #{announcementContent},
+            </if>
+            <if test="announcementState != null">
+                Announcement_State = #{announcementState},
+            </if>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                AddTime = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="publishnmae != null and publishnmae != ''">
+                PublishNmae = #{publishnmae},
+            </if>
+            <if test="publishtime != null">
+                PublishTime = #{publishtime},
+            </if>
+            <if test="suspendname != null and suspendname != ''">
+                SuspendName = #{suspendname},
+            </if>
+            <if test="suspendtime != null">
+                SuspendTime = #{suspendtime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="announcementtypeId != null">
+                AnnouncementType_Id = #{announcementtypeId},
+            </if>
+        </set>
+        where Announcement_Id = #{announcementId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.announcement where Announcement_Id = #{announcementId}
+    </delete>
+
+</mapper>

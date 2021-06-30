@@ -20,7 +20,7 @@ public class ReturnvisitController {
 //    查询
     private ReturnvisitService returnvisitService;
 
-    @GetMapping("/findReturnvisit")
+    @GetMapping("/selectFindReturnvisit")
     public PageInfo<ReturnvisitVo> findReturnvisit(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
         PageHelper.startPage(currentPage,pageSize);
         List<ReturnvisitVo> list = returnvisitService.selectAllReturnvisit();
@@ -43,7 +43,7 @@ public class ReturnvisitController {
 //    修改
     @PutMapping("/updateReturnvisit")
     public AjaxResponse updateReturnvisit(@RequestBody @Valid ReturnvisitVo returnvisitVo){
-        returnvisitVo.setTimeliness(1);
+        returnvisitVo.setTimeliness(0);
         returnvisitService.updateReturnvisit(returnvisitVo);
         return AjaxResponse.success(returnvisitVo);
     }

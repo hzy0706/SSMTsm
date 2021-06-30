@@ -12,12 +12,12 @@
   <sql id="Base_Column_List">
     LoginJournal_Id, LoginTime, Emp_Id
   </sql>
-  <select id="selectAllLoginjournals" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectAllLoginjournals" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />,e.Emp_Name
     from loginjournal l
-    inner join emp e e.Emp_Id=l.Emp_Id
-    where 1=1 order by l.LoginTime desc
+    inner join emp e on e.Emp_Id=l.Emp_Id
+    where e.Emp_Name like #{value} order by l.LoginTime desc
   </select>
   <insert id="addLoginjournal" keyColumn="LoginJournal_Id" keyProperty="loginjournalId" parameterType="com.trkj.trainingprojects.vo.LoginjournalVo" useGeneratedKeys="true">
     insert into loginjournal (Emp_Id)
