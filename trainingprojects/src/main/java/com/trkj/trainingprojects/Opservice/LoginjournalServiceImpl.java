@@ -18,7 +18,7 @@ public class LoginjournalServiceImpl implements LoginjournalService {
     }
 
     @Override
-    public List<LoginjournalVo> selectAllLoginjournals() {
-        return loginjournalDao.selectAllLoginjournals();
+    public List<LoginjournalVo> selectAllLoginjournals(String value) {
+        return loginjournalDao.selectAllLoginjournals(value);
     }
 }

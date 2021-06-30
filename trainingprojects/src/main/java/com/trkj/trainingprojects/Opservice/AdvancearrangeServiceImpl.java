@@ -9,6 +9,7 @@ import com.trkj.trainingprojects.vo.AdvancearrangeVo;
 import com.trkj.trainingprojects.vo.ArrangeVo;
 import com.trkj.trainingprojects.vo.ClassesVo;
 import com.trkj.trainingprojects.vo.CourseDetailsVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 @Service
+@Slf4j
 public class AdvancearrangeServiceImpl implements AdvancearrangeService {
     @Resource
     private AdvancearrangeDao advancearrangeDao;
@@ -54,6 +56,7 @@ public class AdvancearrangeServiceImpl implements AdvancearrangeService {
     @Override
     @Transactional
     public void appArrange(List<AdvancearrangeVo> arrangeFormVoList) {
+
         List<Integer> classIds = new ArrayList<>();
         for (int i = 0;i<arrangeFormVoList.size();i++){
             classIds.add(arrangeFormVoList.get(i).getClassesId());
@@ -75,7 +78,7 @@ public class AdvancearrangeServiceImpl implements AdvancearrangeService {
             List<CourseDetailsVo> courseDetailsVoList =courseDetailsDao.selectArrangeInfo(courseDetailsVo.getCourseId(),courseDetailsVo.getCoursesequence());
             if(courseDetailsVoList.size()!=1){  //courseDetailsVoList.size()==1表示已经排到了最后一个课程详细
                 int isEnd=0;//判断是不是这次就可以排完
-                if(advancearrangeVos.size()>courseDetailsVoList.size()){
+                if(advancearrangeVos.size()>=courseDetailsVoList.size()){
                     classesVo.setManylessons(courseDetailsVoList.size());
                     isEnd=1;
                 }
@@ -112,6 +115,7 @@ public class AdvancearrangeServiceImpl implements AdvancearrangeService {
             arrangeVo.setCoursedetailsId(advancearrangeVo.getCoursedetailsId());
             arrangeDao.addArrange(arrangeVo);
         }
+        log.debug("--------------------------------------------------------------");
         advancearrangeDao.clearArrange();
     }
 }

@@ -9,5 +9,5 @@ import java.util.List;
 public interface LoginjournalDao {
     int addLoginjournal(LoginjournalVo record);
 
-    List<LoginjournalVo> selectAllLoginjournals();
+    List<LoginjournalVo> selectAllLoginjournals(String value);
 }
