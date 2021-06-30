@@ -89,5 +89,11 @@ public class SuspendeController {
         return AjaxResponse.success(suspendeVo);
     }
 
+    //改变状态为4
+    @PutMapping("/OnUpdateRefundState")
+    public AjaxResponse OnUpdateRefundState(@RequestBody @Valid SuspendeVo suspendeVo){
+        suspendeService.OnUpdateRefundState(suspendeVo);
+        return AjaxResponse.success(suspendeVo);
+    }
 
 }

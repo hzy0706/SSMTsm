@@ -75,7 +75,7 @@
 
 
 
-  <insert id="insert" keyColumn="Refund_Id" keyProperty="refundId" parameterType="com.trkj.trainingprojects.vo.RefundVo" useGeneratedKeys="true">
+  <insert id="addRefund" keyColumn="Refund_Id" keyProperty="refundId" parameterType="com.trkj.trainingprojects.vo.RefundVo" useGeneratedKeys="true">
     insert into Refund (RefundType, Drop_Money, CW_Approval, 
       CW_AppTime, CW_AppName, CW_DropAppTime, 
       CW_DropAppName, AddName, AddTime, 

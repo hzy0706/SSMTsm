@@ -38,4 +38,6 @@ public interface SuspendeDao {
 
     int OnUpdateBackState(SuspendeVo record);
 
+    int OnUpdateRefundState(SuspendeVo record);
+
 }
