@@ -24,7 +24,7 @@ public class MenuUtil {
         one.forEach(o->{
             List<SysMenuVo>  two=menus.stream().filter(u -> u.getMenuPid()==o.getId()).collect(Collectors.toList());
             two.forEach(o2->{
-                List<SysMenuVo>  three=menus.stream().filter(u -> u.getMenuPid()==o2.getId()).collect(Collectors.toList());
+                List<SysMenuVo>  three=menus.stream().filter(u -> u.getMenuPid().equals(o2.getId())).collect(Collectors.toList());
                 o2.setAsideChildren(three);
             });
             o.setAsideChildren(two);
