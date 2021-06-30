@@ -61,8 +61,8 @@ public class RegisterController {
         return AjaxResponse.success(list);
     }
 //    模糊查询
-    @GetMapping("/mohuRegister/{value}")
-    public List<RegisterVo> mohuRegister(@PathVariable("value") String value){
+    @GetMapping("/selectMohuRegister")
+    public List<RegisterVo> mohuRegister(@RequestParam("value") String value){
        List<RegisterVo> list=registerService.mohuRegister(value);
         return list;
     }
