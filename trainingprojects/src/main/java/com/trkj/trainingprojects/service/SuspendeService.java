@@ -26,10 +26,14 @@ public interface SuspendeService {
 
     List<SuspendeVo> selectBySuspendeKeyStudents();
 
+    SuspendeVo selectBySuspendeId(Integer suspendeId);
+
     int appBySuspende(SuspendeVo record);
 
     int NoAppBySuspende(SuspendeVo record);
 
     int deleteOneBySuspendeKey(SuspendeVo record);
+
+    int OnUpdateBackState(SuspendeVo record);
 
 }

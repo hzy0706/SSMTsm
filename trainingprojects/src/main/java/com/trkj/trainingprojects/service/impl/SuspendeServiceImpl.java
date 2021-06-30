@@ -1,8 +1,10 @@
 package com.trkj.trainingprojects.service.impl;
 
+import com.trkj.trainingprojects.dao.BackDao;
 import com.trkj.trainingprojects.dao.StudentstatusDao;
 import com.trkj.trainingprojects.dao.SuspendeDao;
 import com.trkj.trainingprojects.service.SuspendeService;
+import com.trkj.trainingprojects.vo.BackVo;
 import com.trkj.trainingprojects.vo.StudentstatusVo;
 import com.trkj.trainingprojects.vo.SuspendeVo;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ public class SuspendeServiceImpl implements SuspendeService {
     private SuspendeDao suspendeDao;
     @Resource
     private StudentstatusDao studentstatusDao;
+    @Resource
+    private BackDao backDao;
 
     @Transactional
     @Override
@@ -74,11 +78,16 @@ public class SuspendeServiceImpl implements SuspendeService {
         return suspendeDao.selectBySuspendeKeyStudents();
     }
 
+    @Override
+    public SuspendeVo selectBySuspendeId(Integer suspendeId) {
+        return suspendeDao.selectBySuspendeId(suspendeId);
+    }
+
     @Transactional
     @Override
     public int appBySuspende(SuspendeVo record) {
         StudentstatusVo studentstatusVo=studentstatusDao.selectByClassesIdOnClassesId(record.getClassesId(),record.getStudentId());
-        int a = studentstatusDao.OnupdateByClassesIdAndStudentIdOnState(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),3);
+        int a = studentstatusDao.OnupdateByClassesIdAndStudentIdOnState(record.getClassesId(),record.getStudentId(),3);
         return suspendeDao.appBySuspende(record);
     }
 
@@ -88,8 +97,25 @@ public class SuspendeServiceImpl implements SuspendeService {
         return suspendeDao.NoAppBySuspende(record);
     }
 
+    @Transactional
     @Override
     public int deleteOneBySuspendeKey(SuspendeVo record) {
         return suspendeDao.updateOneBySuspendeKey(record);
+    }
+
+    @Transactional
+    @Override
+    public int OnUpdateBackState(SuspendeVo record) {
+        SuspendeVo suspendeVo = suspendeDao.selectBySuspendeId(record.getSuspendeId());
+        BackVo backVo = new BackVo();
+        backVo.setAbsent(1);
+        backVo.setClassalreadyon(20);
+        backVo.setAddname(record.getAddname());
+        backVo.setBackTime(record.getDeletetime());
+        backVo.setStudentId(record.getStudentId());
+        backVo.setSuspendeId(record.getSuspendeId());
+        backVo.setClassesId(record.getClassesId());
+        int a = backDao.addBack(backVo);
+        return suspendeDao.OnUpdateBackState(record);
     }
 }

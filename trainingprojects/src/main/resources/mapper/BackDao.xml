@@ -35,9 +35,8 @@
     </association>
     <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
       <result column="Course_Name" jdbcType="VARCHAR" property="courseName"/>
-    </association>
-    <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
-      <result column="Coursedetails_Name" jdbcType="VARCHAR" property="coursedetailsName"/>
+      <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
+      <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
     </association>
   </resultMap>
   <sql id="Base_Column_List">
@@ -48,88 +47,74 @@
   </sql>
   <select id="selectByBackKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
-    from suspende b
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name
+    from back b
     inner join classes cl on cl.Classes_Id=b.Classes_Id
     inner join student st on st.Student_Id=b.Student_Id
-    inner join course co on co.Course_Id=b.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende su on su.Suspende_Id=b.Suspende_Id
-    where b.Back_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+    left join course co on co.Course_Id=b.Course_Id
+    left join suspende su on su.Suspende_Id=b.Suspende_Id
+    where b.Back_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by b.AddTime desc
   </select>
   <select id="selectByBackKeyClasses" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
-    from suspende b
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name
+    from back b
     inner join classes cl on cl.Classes_Id=b.Classes_Id
     inner join student st on st.Student_Id=b.Student_Id
-    inner join course co on co.Course_Id=b.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende su on su.Suspende_Id=b.Suspende_Id
-    where b.Classes_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+    left join course co on co.Course_Id=b.Course_Id
+    left join suspende su on su.Suspende_Id=b.Suspende_Id
+    where b.Classes_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by b.AddTime desc
   </select>
   <select id="selectByBackKeyStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
-    from suspende b
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name
+    from back b
     inner join classes cl on cl.Classes_Id=b.Classes_Id
     inner join student st on st.Student_Id=b.Student_Id
-    inner join course co on co.Course_Id=b.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende su on su.Suspende_Id=b.Suspende_Id
-    where s.Student_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+    left join course co on co.Course_Id=b.Course_Id
+    left join suspende su on su.Suspende_Id=b.Suspende_Id
+    where s.Student_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by b.AddTime desc
   </select>
   <select id="selectByBackKeyCourse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
-    from suspende b
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name
+    from back b
     inner join classes cl on cl.Classes_Id=b.Classes_Id
     inner join student st on st.Student_Id=b.Student_Id
-    inner join course co on co.Course_Id=b.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende su on su.Suspende_Id=b.Suspende_Id
-    where s.Course_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+    left join course co on co.Course_Id=b.Course_Id
+    left join suspende su on su.Suspende_Id=b.Suspende_Id
+    where s.Course_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by b.AddTime desc
   </select>
   <select id="selectByBackKeyCoursedetails" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
-    from suspende b
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name
+    from back b
     inner join classes cl on cl.Classes_Id=b.Classes_Id
-    inner join student st on st.Student_Id=b.Student_Id
-    inner join course co on co.Course_Id=b.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende su on su.Suspende_Id=b.Suspende_Id
-    where b.Coursedetails_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+    inner join student st on st.Student_Id=b.Student_Idz
+    left join course co on co.Course_Id=b.Course_Id
+    left join suspende su on su.Suspende_Id=b.Suspende_Id
+    where b.Coursedetails_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by b.AddTime desc
   </select>
   <select id="selectByBackKeySuspende" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
-    from suspende b
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name
+    from back b
     inner join classes cl on cl.Classes_Id=b.Classes_Id
     inner join student st on st.Student_Id=b.Student_Id
-    inner join course co on co.Course_Id=b.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende su on su.Suspende_Id=b.Suspende_Id
-    where b.Suspende_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by s.AddTime desc
+    left join course co on co.Course_Id=b.Course_Id
+    left join suspende su on su.Suspende_Id=b.Suspende_Id
+    where b.Suspende_Id = #{backId,jdbcType=INTEGER} and b.TimeLiness=0 order by b.AddTime desc
   </select>
   <!--分页查询-->
   <select id="selectAllBacks" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
-    from suspende b
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name
+    from back b
     inner join classes cl on cl.Classes_Id=b.Classes_Id
     inner join student st on st.Student_Id=b.Student_Id
-    inner join course co on co.Course_Id=b.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=b.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=b.StudentStatus_Id
-    inner join suspende su on su.Suspende_Id=b.Suspende_Id
-    where b.TimeLiness=0 order by s.AddTime desc
+    left join course co on co.Course_Id=b.Course_Id
+    left join suspende su on su.Suspende_Id=b.Suspende_Id
+    where b.TimeLiness=0 order by b.AddTime desc
   </select>
 
   <insert id="addBack" keyColumn="Back_Id" keyProperty="backId" parameterType="com.trkj.trainingprojects.vo.BackVo" useGeneratedKeys="true">
@@ -143,7 +128,7 @@
       Classes_Id)
     values (#{classalreadyon,jdbcType=INTEGER}, #{absent,jdbcType=INTEGER}, #{backTime,jdbcType=TIMESTAMP}, 
       #{ispay,jdbcType=INTEGER}, #{intention,jdbcType=INTEGER}, #{addname,jdbcType=VARCHAR},
-      #{appname,jdbcType=VARCHAR},#{revokeappname,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP},
+      #{appname,jdbcType=VARCHAR},#{backapptime,jdbcType=TIMESTAMP},#{revokeappname,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP},
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
       #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{studentId,jdbcType=INTEGER},
       #{suspendeId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{coursedetailsId,jdbcType=INTEGER}, 

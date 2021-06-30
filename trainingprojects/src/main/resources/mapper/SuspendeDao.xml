@@ -32,14 +32,8 @@
       <result column="Classes_Name" jdbcType="VARCHAR" property="classesName"/>
     </association>
     <association property="courseVo" javaType="com.trkj.trainingprojects.vo.CourseVo">
-      <result column="Course_Name" jdbcType="VARCHAR" property="courseName"/>
-    </association>
-    <association property="courseDetailsVo" javaType="com.trkj.trainingprojects.vo.CourseDetailsVo">
-      <result column="Coursedetails_Name" jdbcType="VARCHAR" property="coursedetailsName"/>
-    </association>
-    <association property="studentstatusVo" javaType="com.trkj.trainingprojects.vo.StudentstatusVo">
-      <id column="StudentStatus_Id" jdbcType="INTEGER" property="studentstatusId" />
-      <result column="Status" jdbcType="INTEGER" property="status"/>
+      <result property="classhours" column="Classhours" jdbcType="INTEGER"/>
+      <result property="courseMoney" column="Course_Money" jdbcType="NUMERIC"/>
     </association>
   </resultMap>
   <sql id="Base_Column_List">
@@ -50,90 +44,77 @@
   </sql>
   <select id="selectBySuspendeKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone
     from suspende s
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join student st on st.Student_Id=s.Student_Id
-    inner join course co on co.Course_Id=s.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
     where s.Suspende_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
   <select id="selectBySuspendeKeyClasses" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone
     from suspende s
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join student st on st.Student_Id=s.Student_Id
-    inner join course co on co.Course_Id=s.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
     where s.Classes_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
   <select id="selectBySuspendeKeyStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone
     from suspende s
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join student st on st.Student_Id=s.Student_Id
-    inner join course co on co.Course_Id=s.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
     where s.Student_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
   <select id="selectBySuspendeKeyCourse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone
     from suspende s
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join student st on st.Student_Id=s.Student_Id
-    inner join course co on co.Course_Id=s.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
     where s.Course_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
   <select id="selectBySuspendeKeyCoursedetails" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone
     from suspende s
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join student st on st.Student_Id=s.Student_Id
-    inner join course co on co.Course_Id=s.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
     where s.Coursedetails_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
   <select id="selectBySuspendeKeyStudentStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone
     from suspende s
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join student st on st.Student_Id=s.Student_Id
-    inner join course co on co.Course_Id=s.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
     where s.StudentStatus_Id = #{suspendeId,jdbcType=INTEGER} and s.TimeLiness=0
   </select>
   <!--分页查询-->
   <select id="selectBySuspendeKeyStudents" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Course_Name,cou.Coursedetails_Name
+    <include refid="Base_Column_List" />,cl.Classes_Name,st.Student_Name,st.Sex,st.Student_Phone,co.Classhours,co.Course_Money
     from suspende s
     inner join classes cl on cl.Classes_Id=s.Classes_Id
     inner join student st on st.Student_Id=s.Student_Id
-    inner join course co on co.Course_Id=s.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=s.Coursedetails_Id
-    inner join studentstatus stu on stu.StudentStatus_Id=s.StudentStatus_Id
-    where s.TimeLiness=0
+    left join course co on co.Course_Id=s.Course_Id
+    where s.TimeLiness=0 order by s.AddTime desc
+  </select>
+
+  <select id="selectBySuspendeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from suspende s
+    where TimeLiness=0 and Suspende_Id =#{suspendeId,jdbcType=INTEGER}
   </select>
 
   <insert id="addSuspende" keyColumn="Suspende_Id" keyProperty="suspendeId" parameterType="com.trkj.trainingprojects.vo.SuspendeVo" useGeneratedKeys="true">
-    insert into suspende (AlreadyOn, Suspende_Time, Suspende_Reason, 
+    insert into suspende (AlreadyOn, Suspende_Time, Suspende_Reason,
       Suspende_Handler, SuspendeAppName,
       SuspendeAppTime, RevokeAppName, RevokeAppTime,UpdateName, UpdateTime,
       DeleteName, DeleteTime,Student_Id, Course_Id, CourseDetails_Id,
       Classes_Id)
-    values (#{alreadyon,jdbcType=VARCHAR}, #{suspendeTime,jdbcType=TIMESTAMP}, #{suspendeReason,jdbcType=VARCHAR}, 
+    values (#{alreadyon,jdbcType=VARCHAR}, #{suspendeTime,jdbcType=TIMESTAMP}, #{suspendeReason,jdbcType=VARCHAR},
       #{addname,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR},
       #{suspendeapptime,jdbcType=TIMESTAMP}, #{revokeappname,jdbcType=VARCHAR}, #{revokeapptime,jdbcType=TIMESTAMP}, 
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
@@ -234,6 +215,13 @@
     set DeleteName = #{deletename,jdbcType=VARCHAR},
       DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
       TimeLiness = #{timeliness,jdbcType=INTEGER}
+    where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
+  </update>
+
+  <update id="OnUpdateBackState" parameterType="com.trkj.trainingprojects.vo.SuspendeVo">
+    update suspende
+    set
+        SuspendeApproval = #{suspendeapproval,jdbcType=INTEGER}
     where Suspende_Id = #{suspendeId,jdbcType=INTEGER}
   </update>
 </mapper>

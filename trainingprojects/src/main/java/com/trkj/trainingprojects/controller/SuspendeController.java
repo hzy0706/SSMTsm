@@ -21,6 +21,8 @@ public class SuspendeController {
     @PostMapping("/addSuspende")
     public AjaxResponse addSuspende(@RequestBody @Valid SuspendeVo suspendeVo){
         suspendeService.addSuspende(suspendeVo);
+        System.out.println("_-----------+++++++=我在这");
+        System.out.println(suspendeVo.toString());
         return AjaxResponse.success(suspendeVo);
     }
 
@@ -61,8 +63,7 @@ public class SuspendeController {
     @PutMapping("/appBySuspende")
     public AjaxResponse appBySuspende(@RequestBody @Valid SuspendeVo suspendeVo){
         suspendeVo.setSuspendeapptime(new Date());
-        System.out.println(suspendeVo+"-------------+++++++=");
-        suspendeService.appBySuspende(suspendeVo);
+        suspendeService.appBySuspende(suspendeVo );
         return AjaxResponse.success(suspendeVo);
     }
     //驳回审批停课
@@ -81,6 +82,12 @@ public class SuspendeController {
         return AjaxResponse.success(suspendeVo);
     }
 
+    //改变状态为3
+    @PutMapping("/OnUpdateBackState")
+    public AjaxResponse OnUpdateBackState(@RequestBody @Valid SuspendeVo suspendeVo){
+        suspendeService.OnUpdateBackState(suspendeVo);
+        return AjaxResponse.success(suspendeVo);
+    }
 
 
 }
