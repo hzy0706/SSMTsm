@@ -79,4 +79,10 @@ public class SessionController {
         return AjaxResponse.success(sessionVo);
     }
 
+    @GetMapping("selectAllByAll")
+    public AjaxResponse selectAllByAll() {
+        List<SessionVo> list=this.sessionService.selectAllSession();
+        return AjaxResponse.success(list);
+    }
+
 }

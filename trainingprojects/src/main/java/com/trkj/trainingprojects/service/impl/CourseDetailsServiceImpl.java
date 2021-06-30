@@ -65,7 +65,6 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
     @Override
     @Transactional
     public int deleteByCourseDetails(CourseDetailsVo coursedetailsVo) {
-
         return coursedetailsDao.deleteByCourseDetails(coursedetailsVo);
     }
 

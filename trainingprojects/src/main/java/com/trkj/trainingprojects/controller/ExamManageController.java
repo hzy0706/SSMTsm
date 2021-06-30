@@ -32,4 +32,5 @@ public class ExamManageController {
         PageInfo<ExamManageVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+
 }

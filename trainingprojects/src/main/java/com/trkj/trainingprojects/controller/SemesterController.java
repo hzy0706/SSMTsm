@@ -80,8 +80,13 @@ public class SemesterController {
      */
     @PutMapping("/delSemesterById")
     public AjaxResponse delSemesterById(@RequestBody @Valid SemesterVo semesterVo){
-
         semesterService.delSemesterById(semesterVo);
         return AjaxResponse.success(semesterVo);
+    }
+
+    @GetMapping("/selectAllSemesterByAll")
+    public AjaxResponse selectAllSemesterByAll(){
+        List<SemesterVo> list=this.semesterService.selectALL();
+        return AjaxResponse.success(list);
     }
 }
