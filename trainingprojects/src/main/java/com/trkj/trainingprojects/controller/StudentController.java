@@ -37,9 +37,9 @@ public class StudentController {
     }
 
     @GetMapping("/SelectStudentByClassId2")
-    public List<StudentVo> SelectStudentByClassId2(@RequestParam("id") int id){
+    public AjaxResponse SelectStudentByClassId2(@RequestParam("id") int id){
         List<StudentVo> list = studentService.SelectStudentByClassId(id);
-        return list;
+        return AjaxResponse.success(id);
     }
 
     @GetMapping("/SelectStudentByState")
