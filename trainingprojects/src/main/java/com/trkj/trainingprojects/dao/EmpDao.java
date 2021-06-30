@@ -20,6 +20,7 @@ public interface EmpDao {
      * @return
      */
     List<EmpVo> selectAllIncumbencyEmps();
+    List<EmpVo> selectAllEmpByName(String value);
 
     public EmpVo findByUsername(String username);
 

@@ -38,7 +38,7 @@
     e.Emp_Id, e.JobNumber, e.Emp_Name, e.UserImg, e.IndividualImg, e.Emp_Sex, e.Emp_Phone, e.E_mail,
     e.Birthday, e.Remarks, e.Address, e.WorkersState, e.`Password`, e.LoginState, e.Education, e.Graduate,
     e.AddName, e.AddTime, e.UpdateName, e.UpdateTime, e.SeparationName, e.SeparationTime, e.SeparationDate,
-    e.Dept_Id,e.account_non_expired, e.account_non_locked, e.credentials_non_expired,enabled
+    e.Dept_Id,e.account_non_expired, e.account_non_locked, e.credentials_non_expired,e.enabled
   </sql>
   <select id="selectByEmpKey" parameterType="com.trkj.trainingprojects.vo.EmpVo" resultMap="BaseResultMap">
     select 
@@ -61,6 +61,15 @@
     <include refid="Base_Column_List" />,d.Dept_Name
     from emp e
     inner join dept d on d.Dept_Id=e.Dept_Id
+  </select>
+
+  <select id="selectAllEmpByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,d.Dept_Name
+    from emp e
+    inner join dept d on d.Dept_Id=e.Dept_Id
+    where e.Emp_Name like #{value} or d.Dept_Name like #{value} or e.JobNumber like #{value}
+    order by e.Dept_Id asc
   </select>
 
   <select id="selectAllIncumbencyEmps" resultMap="BaseResultMap">

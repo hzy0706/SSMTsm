@@ -16,9 +16,9 @@
     <result column="DeleteTime" jdbcType="TIMESTAMP" property="deletetime" />
     <result column="TimeLiness" jdbcType="INTEGER" property="timeliness" />
     <result column="Dept_Id" jdbcType="INTEGER" property="deptId" />
-  </resultMap>
+   </resultMap>
   <sql id="Base_Column_List">
-    id, role_name, role_desc, role_code, sort, `status`, AddTime,UpdateName,AddName,UpdateTime,DeleteName,DeleteTime
+    id, role_name, role_desc, role_code, sort, `status`, AddTime,UpdateName,AddName,UpdateTime,DeleteName,DeleteTime,Dept_Id
   </sql>
   <select id="findRoleByUserName" resultType="java.lang.String" parameterType="string">
     SELECT r.role_code  FROM sys_role r
@@ -26,7 +26,7 @@
     LEFT JOIN emp u ON u.Emp_Id = ur.user_id
     WHERE u.JobNumber = #{JobNumber}
   </select>
-  <select id="selectAllRole" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectAllRole" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sys_role
@@ -43,10 +43,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.trkj.trainingprojects.vo.SysRoleVo" useGeneratedKeys="true">
     insert into sys_role (role_name, role_desc, role_code,
-      sort, `status`,AddName
+      sort, `status`,AddName,Dept_Id
       )
     values (#{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR},
-      #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},#{addname,jdbcType=VARCHAR}
+      #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},#{addname,jdbcType=VARCHAR},#{deptId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.trkj.trainingprojects.vo.SysRoleVo" useGeneratedKeys="true">
@@ -110,8 +110,17 @@
       <if test="status != null">
         `status` = #{status,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
+      <if test="addtime != null">
         AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptId != null">
+        Dept_Id = #{deptId,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

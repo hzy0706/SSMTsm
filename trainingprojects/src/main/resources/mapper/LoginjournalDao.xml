@@ -10,7 +10,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    LoginJournal_Id, LoginTime, Emp_Id
+    l.LoginJournal_Id, l.LoginTime, l.Emp_Id
   </sql>
   <select id="selectAllLoginjournals" resultMap="BaseResultMap">
     select 
