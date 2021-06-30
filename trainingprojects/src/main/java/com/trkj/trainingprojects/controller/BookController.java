@@ -45,6 +45,13 @@ public class BookController {
         List<BookVo> list = bookService.selectAllBooks2();
         return list;
     }
+
+    @GetMapping("/selectAllBook3")
+    public List<BookVo> selectAllBook3(){
+        List<BookVo> list = bookService.selectAllBooks3();
+        return list;
+    }
+
     @GetMapping("/selectByBookKey")
     public BookVo selectByBookKey(@RequestParam("id") int id){
         return bookService.selectByBookKey(id);

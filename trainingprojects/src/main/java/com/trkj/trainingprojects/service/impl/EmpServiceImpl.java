@@ -33,6 +33,11 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
+    public List<EmpVo> selectAllEmpByName(String value) {
+        return empDao.selectAllEmpByName(value);
+    }
+
+    @Override
     public EmpVo findByUsername(String username) {
         EmpVo empVo=empDao.findByUsername(username);
         return empVo;

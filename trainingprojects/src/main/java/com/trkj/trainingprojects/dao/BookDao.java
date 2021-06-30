@@ -19,6 +19,8 @@ public interface BookDao {
 
     List<BookVo> selectAllBooks2();
 
+    List<BookVo> selectAllBooks3();
+
     int updateByBookKeySelective(BookVo record);
 
     int updateByBookKey(BookVo record);

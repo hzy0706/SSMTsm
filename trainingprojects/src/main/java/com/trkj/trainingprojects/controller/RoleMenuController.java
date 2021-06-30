@@ -41,6 +41,10 @@ public class RoleMenuController {
     @GetMapping("/selectMenuByroleid")
     public AjaxResponse selectMenuByroleid(@RequestParam("roleid") int roleid) {
         List<SysMenuVo>  sysMenus= menuService.findMenusByRoleid(roleid);
+        for (SysMenuVo sysMenuVo:sysMenus){
+            System.out.println("------------------");
+            System.out.println(sysMenuVo.toString());
+        }
         return AjaxResponse.success(sysMenus);
     }
     @GetMapping("/selectMenus")

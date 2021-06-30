@@ -29,6 +29,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookVo> selectAllBooks3() {
+        return bookDao.selectAllBooks3();
+    }
+
+    @Override
     public List<BookVo> selectAllBooksByCourseId(String value, Integer courseId) {
         return bookDao.selectAllBooksByCourseId("%"+value+"%",courseId);
     }

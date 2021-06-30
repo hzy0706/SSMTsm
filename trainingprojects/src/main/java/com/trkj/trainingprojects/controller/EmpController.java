@@ -28,6 +28,16 @@ public class EmpController {
         PageInfo<EmpVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
+
+    @GetMapping("/selectAllEmpByName")
+    public PageInfo<EmpVo> selectAllEmpByName(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize,
+                                                @RequestParam("value")String value) {
+        PageHelper.startPage(currentPage,pageSize);
+        List<EmpVo> list=empService.selectAllEmpByName("%"+value+"%");
+        PageInfo<EmpVo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
     @PostMapping("/addEmp")
     public AjaxResponse addUnitALL(@RequestBody @Valid  EmpVo empVo){
         empService.addEmp(empVo);
