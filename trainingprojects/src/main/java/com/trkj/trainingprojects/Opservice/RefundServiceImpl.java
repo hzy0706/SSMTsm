@@ -21,7 +21,7 @@ public class RefundServiceImpl implements RefundService {
     @Override
     @Transactional
     public void addRefund(RefundVo refundVo) {
-        refundDao.insert(refundVo);
+        refundDao.addRefund(refundVo);
 }
 
     @Override

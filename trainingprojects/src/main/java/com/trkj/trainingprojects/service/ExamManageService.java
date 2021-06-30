@@ -24,4 +24,5 @@ public interface ExamManageService {
     boolean deleteById(Integer examcode);
 
     public List<ExamManageVo> selectAllExamManage();
+    public void addExamManage(ExamManageVo examManageVo);
 }

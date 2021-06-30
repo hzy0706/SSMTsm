@@ -22,7 +22,7 @@ public interface ExamManageDao {
 
     List<ExamManage> queryAll(ExamManage examManage);
 
-    int insert(ExamManage examManage);
+    int insert(ExamManageVo examManageVo);
 
     int insertBatch(@Param("entities") List<ExamManage> entities);
 

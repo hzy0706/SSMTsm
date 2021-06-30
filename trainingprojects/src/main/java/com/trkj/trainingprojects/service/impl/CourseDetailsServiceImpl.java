@@ -65,7 +65,6 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
     @Override
     @Transactional
     public int deleteByCourseDetails(CourseDetailsVo coursedetailsVo) {
-
         return coursedetailsDao.deleteByCourseDetails(coursedetailsVo);
     }
 
@@ -87,5 +86,10 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
     @Override
     public List<CourseDetailsVo> selectArrangeInfo(int Course_Id, int coursesequence) {
         return coursedetailsDao.selectArrangeInfo(Course_Id,coursesequence);
+    }
+
+    @Override
+    public List<CourseDetailsVo> selectAllCourseDetailsByClassesId(int classesId) {
+        return coursedetailsDao.selectAllCourseDetailsByClassesId(classesId);
     }
 }

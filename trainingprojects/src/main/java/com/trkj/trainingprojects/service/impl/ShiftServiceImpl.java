@@ -30,8 +30,7 @@ public class ShiftServiceImpl implements ShiftService {
     @Transactional
     public int addShift(ShiftVo record) {
         StudentstatusVo studentstatusVo=studentstatusDao.selectByClassesIdOnClassesId(record.getClassesId(),record.getStudentId());
-        int b=studentstatusDao.updateByClassesIdAndStudentIdOnState(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),5);
-
+        int b=studentstatusDao.OnupdateByClassesIdAndStudentIdOnState(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),5);
         return shiftDao.addShift(record);
     }
 

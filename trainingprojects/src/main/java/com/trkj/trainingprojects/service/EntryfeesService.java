@@ -29,4 +29,7 @@ public interface EntryfeesService {
     public int updateByEntryFeeState(EntryfeesVo entryfeesVo);
     public int deleteByEntryFees(EntryfeesVo entryfeesVo);
     int updateByEntryFeeStateByAccumulated(EntryfeesVo entryfeesVo);
+    int selectSumOnSheng();
+    int selectSumOnChe();
+    int selectSumOnAll();
 }

@@ -430,7 +430,7 @@
     </update>
 
     <!--根据学员编号和班级编号修改学员班级状态（焦凡超）-->
-    <update id="updateByClassesIdAndStudentIdOnState" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
+    <update id="OnupdateByClassesIdAndStudentIdOnState" parameterType="com.trkj.trainingprojects.entity.Studentstatus">
         update tr01904.studentstatus
         set
           Status = #{status}

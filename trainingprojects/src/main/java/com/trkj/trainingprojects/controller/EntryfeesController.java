@@ -100,4 +100,31 @@ public class EntryfeesController {
         return  AjaxResponse.success(entryfeesVo);
     }
 
+    /*
+    * 查询已经审核的缴费金额
+    * */
+    @GetMapping("/selectSumOnSheng")
+    public AjaxResponse selectSumOnSheng(){
+        int a = entryfeesService.selectSumOnSheng();
+        return AjaxResponse.success(a);
+    }
+
+    /*
+     * 查询还没有审核的缴费金额
+     * */
+    @GetMapping("/selectSumOnChe")
+    public AjaxResponse selectSumOnChe(){
+        int a = entryfeesService.selectSumOnChe();
+        return AjaxResponse.success(a);
+    }
+
+    /*
+     * 查询所有缴费金额
+     * */
+    @GetMapping("/selectSumOnAll")
+    public AjaxResponse selectSumOnAll(){
+        int a = entryfeesService.selectSumOnAll();
+        return AjaxResponse.success(a);
+    }
+
 }

@@ -92,4 +92,19 @@ public class EntryfeesServiceImpl implements EntryfeesService {
     public int updateByEntryFeeStateByAccumulated(EntryfeesVo entryfeesVo) {
         return entryfeesDao.updateByEntryFeeStateByAccumulated(entryfeesVo);
     }
+
+    @Override
+    public int selectSumOnSheng() {
+        return entryfeesDao.selectSumOnSheng();
+    }
+
+    @Override
+    public int selectSumOnChe() {
+        return entryfeesDao.selectSumOnChe();
+    }
+
+    @Override
+    public int selectSumOnAll() {
+        return entryfeesDao.selectSumOnAll();
+    }
 }

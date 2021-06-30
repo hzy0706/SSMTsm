@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.SystemDao">
+
+    <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.entity.System">
+        <!--@Table system-->
+        <result property="systemId" column="System_Id" jdbcType="INTEGER"/>
+        <result property="systemTheme" column="System_Theme" jdbcType="VARCHAR"/>
+        <result property="systemContent" column="System_Content" jdbcType="VARCHAR"/>
+        <result property="systemState" column="System_State" jdbcType="INTEGER"/>
+        <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+        <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+        <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+        <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+        <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+        <result property="publishnmae" column="PublishNmae" jdbcType="VARCHAR"/>
+        <result property="publishtime" column="PublishTime" jdbcType="TIMESTAMP"/>
+        <result property="suspendname" column="SuspendName" jdbcType="VARCHAR"/>
+        <result property="suspendtime" column="SuspendTime" jdbcType="TIMESTAMP"/>
+        <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+        <result property="systemtypeId" column="SystemType_Id" jdbcType="INTEGER"/>
+        <result property="deptId" column="Dept_Id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          System_Id, System_Theme, System_Content, System_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, SystemType_Id, Dept_Id
+        from tr01904.system
+        where System_Id = #{systemId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          System_Id, System_Theme, System_Content, System_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, SystemType_Id, Dept_Id
+        from tr01904.system
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          System_Id, System_Theme, System_Content, System_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, SystemType_Id, Dept_Id
+        from tr01904.system
+        <where>
+            <if test="systemId != null">
+                and System_Id = #{systemId}
+            </if>
+            <if test="systemTheme != null and systemTheme != ''">
+                and System_Theme = #{systemTheme}
+            </if>
+            <if test="systemContent != null and systemContent != ''">
+                and System_Content = #{systemContent}
+            </if>
+            <if test="systemState != null">
+                and System_State = #{systemState}
+            </if>
+            <if test="addname != null and addname != ''">
+                and AddName = #{addname}
+            </if>
+            <if test="addtime != null">
+                and AddTime = #{addtime}
+            </if>
+            <if test="updatename != null and updatename != ''">
+                and UpdateName = #{updatename}
+            </if>
+            <if test="updatetime != null">
+                and UpdateTime = #{updatetime}
+            </if>
+            <if test="deletename != null and deletename != ''">
+                and DeleteName = #{deletename}
+            </if>
+            <if test="deletetime != null">
+                and DeleteTime = #{deletetime}
+            </if>
+            <if test="publishnmae != null and publishnmae != ''">
+                and PublishNmae = #{publishnmae}
+            </if>
+            <if test="publishtime != null">
+                and PublishTime = #{publishtime}
+            </if>
+            <if test="suspendname != null and suspendname != ''">
+                and SuspendName = #{suspendname}
+            </if>
+            <if test="suspendtime != null">
+                and SuspendTime = #{suspendtime}
+            </if>
+            <if test="timeliness != null">
+                and TimeLiness = #{timeliness}
+            </if>
+            <if test="systemtypeId != null">
+                and SystemType_Id = #{systemtypeId}
+            </if>
+            <if test="deptId != null">
+                and Dept_Id = #{deptId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="systemId" useGeneratedKeys="true">
+        insert into tr01904.system(System_Theme, System_Content, System_State, AddName, AddTime, UpdateName, UpdateTime, DeleteName, DeleteTime, PublishNmae, PublishTime, SuspendName, SuspendTime, TimeLiness, SystemType_Id, Dept_Id)
+        values (#{systemTheme}, #{systemContent}, #{systemState}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{publishnmae}, #{publishtime}, #{suspendname}, #{suspendtime}, #{timeliness}, #{systemtypeId}, #{deptId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tr01904.system
+        <set>
+            <if test="systemTheme != null and systemTheme != ''">
+                System_Theme = #{systemTheme},
+            </if>
+            <if test="systemContent != null and systemContent != ''">
+                System_Content = #{systemContent},
+            </if>
+            <if test="systemState != null">
+                System_State = #{systemState},
+            </if>
+            <if test="addname != null and addname != ''">
+                AddName = #{addname},
+            </if>
+            <if test="addtime != null">
+                AddTime = #{addtime},
+            </if>
+            <if test="updatename != null and updatename != ''">
+                UpdateName = #{updatename},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="deletename != null and deletename != ''">
+                DeleteName = #{deletename},
+            </if>
+            <if test="deletetime != null">
+                DeleteTime = #{deletetime},
+            </if>
+            <if test="publishnmae != null and publishnmae != ''">
+                PublishNmae = #{publishnmae},
+            </if>
+            <if test="publishtime != null">
+                PublishTime = #{publishtime},
+            </if>
+            <if test="suspendname != null and suspendname != ''">
+                SuspendName = #{suspendname},
+            </if>
+            <if test="suspendtime != null">
+                SuspendTime = #{suspendtime},
+            </if>
+            <if test="timeliness != null">
+                TimeLiness = #{timeliness},
+            </if>
+            <if test="systemtypeId != null">
+                SystemType_Id = #{systemtypeId},
+            </if>
+            <if test="deptId != null">
+                Dept_Id = #{deptId},
+            </if>
+        </set>
+        where System_Id = #{systemId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tr01904.system where System_Id = #{systemId}
+    </delete>
+
+</mapper>

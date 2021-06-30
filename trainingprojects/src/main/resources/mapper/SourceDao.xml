@@ -31,6 +31,13 @@
   from source
   where Timeliness=0
 </select>
+<!--  外键查询-->
+  <select id="findSourceKey" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from source
+  where Timeliness=0
+  </select>
 <!--  模糊查询-->
 <select id="mohuSource" resultMap="BaseResultMap">
   select

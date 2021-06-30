@@ -39,5 +39,6 @@ public interface CourseDetailsDao {
     int selectCourseDetailsDeleteOne(int courseId);
 
     List<CourseDetailsVo> selectArrangeInfo(int Course_Id,int coursesequence);
+    List<CourseDetailsVo> selectAllCourseDetailsByClassesId(int classesId);
 }
 

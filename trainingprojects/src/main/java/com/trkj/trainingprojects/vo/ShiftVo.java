@@ -64,6 +64,17 @@ public class ShiftVo {
     private Date jwDroptimeapp;
 
     /**
+     * 转班修改人
+     */
+    public String updatename;
+
+    /**
+     * 转班修改时间
+     */
+    private Date updatetime;
+
+
+    /**
      * 增加日期
      */
     private Date addtime;
@@ -107,11 +118,6 @@ public class ShiftVo {
      */
     private Integer classesId2;
     private ClassesVo classesVo2;
-
-    public String updatename;
-
-    private Date updatetime;
-
 
     private static final long serialVersionUID = 1L;
 }

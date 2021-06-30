@@ -105,8 +105,8 @@ public class StudentstatusServiceImpl implements StudentstatusService {
 
     @Transactional
     @Override
-    public int updateByClassesIdAndStudentIdOnState(Integer classesId, Integer studentId,Integer status) {
-        return studentstatusDao.updateByClassesIdAndStudentIdOnState(classesId,studentId,status);
+    public int OnupdateByClassesIdAndStudentIdOnState(Integer classesId, Integer studentId,Integer status) {
+        return studentstatusDao.OnupdateByClassesIdAndStudentIdOnState(classesId,studentId,status);
     }
 
     @Override

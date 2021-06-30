@@ -75,8 +75,14 @@ public class CourseController {
         if (courseVo.getStoptime()!=null){
             Date date = new Date();
             courseVo.setStoptime(date);
+            courseVo.setBegintime(null);
+            courseVo.setBeginname(null);
             courseService.updateByCoursePel(courseVo);
         } else if (courseVo.getStoptime()==null){
+            Date date = new Date();
+            courseVo.setBegintime(date);
+            courseVo.setStoptime(null);
+            courseVo.setStopname(null);
             courseService.updateByCoursePel(courseVo);
         }
         return  AjaxResponse.success(courseVo);

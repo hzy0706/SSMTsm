@@ -186,11 +186,11 @@
       <if test="returnvisitback != null">
         ReturnVisitBack = #{returnvisitback,jdbcType=VARCHAR},
       </if>
-      <if test="addname != null">
+      <if test="addname != null and addname!=''">
         AddName = #{addname,jdbcType=VARCHAR},
       </if>
       <if test="addtime != null">
-        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
       </if>
       <if test="deletename != null">
         DeleteName = #{deletename,jdbcType=VARCHAR},

@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface AttendanceDao {
 
-    Attendance queryById(Integer attendanceId);
+    List<AttendanceVo> queryById(Integer attendanceId);
 
     List<Attendance> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 

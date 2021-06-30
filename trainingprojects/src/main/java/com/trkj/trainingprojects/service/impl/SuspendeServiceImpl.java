@@ -1,14 +1,19 @@
 package com.trkj.trainingprojects.service.impl;
 
+import com.trkj.trainingprojects.dao.BackDao;
+import com.trkj.trainingprojects.dao.RefundDao;
 import com.trkj.trainingprojects.dao.StudentstatusDao;
 import com.trkj.trainingprojects.dao.SuspendeDao;
 import com.trkj.trainingprojects.service.SuspendeService;
+import com.trkj.trainingprojects.vo.BackVo;
+import com.trkj.trainingprojects.vo.RefundVo;
 import com.trkj.trainingprojects.vo.StudentstatusVo;
 import com.trkj.trainingprojects.vo.SuspendeVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -17,6 +22,10 @@ public class SuspendeServiceImpl implements SuspendeService {
     private SuspendeDao suspendeDao;
     @Resource
     private StudentstatusDao studentstatusDao;
+    @Resource
+    private BackDao backDao;
+    @Resource
+    private RefundDao refundDao;
 
     @Transactional
     @Override
@@ -74,11 +83,16 @@ public class SuspendeServiceImpl implements SuspendeService {
         return suspendeDao.selectBySuspendeKeyStudents();
     }
 
+    @Override
+    public SuspendeVo selectBySuspendeId(Integer suspendeId) {
+        return suspendeDao.selectBySuspendeId(suspendeId);
+    }
+
     @Transactional
     @Override
     public int appBySuspende(SuspendeVo record) {
         StudentstatusVo studentstatusVo=studentstatusDao.selectByClassesIdOnClassesId(record.getClassesId(),record.getStudentId());
-        int a = studentstatusDao.updateByClassesIdAndStudentIdOnState(studentstatusVo.getClassesId(),studentstatusVo.getStudentId(),3);
+        int a = studentstatusDao.OnupdateByClassesIdAndStudentIdOnState(record.getClassesId(),record.getStudentId(),3);
         return suspendeDao.appBySuspende(record);
     }
 
@@ -88,8 +102,36 @@ public class SuspendeServiceImpl implements SuspendeService {
         return suspendeDao.NoAppBySuspende(record);
     }
 
+    @Transactional
     @Override
     public int deleteOneBySuspendeKey(SuspendeVo record) {
         return suspendeDao.updateOneBySuspendeKey(record);
+    }
+
+    @Transactional
+    @Override
+    public int OnUpdateBackState(SuspendeVo record) {
+        SuspendeVo suspendeVo = suspendeDao.selectBySuspendeId(record.getSuspendeId());
+        BackVo backVo = new BackVo();
+        backVo.setAbsent(1);
+        backVo.setClassalreadyon(20);
+        backVo.setAddname(record.getAddname());
+        backVo.setBackTime(record.getDeletetime());
+        backVo.setStudentId(record.getStudentId());
+        backVo.setSuspendeId(record.getSuspendeId());
+        backVo.setClassesId(record.getClassesId());
+        int a = backDao.addBack(backVo);
+        return suspendeDao.OnUpdateBackState(record);
+    }
+
+    @Override
+    public int OnUpdateRefundState(SuspendeVo record) {
+        SuspendeVo suspendeVo = suspendeDao.selectBySuspendeId(record.getSuspendeId());
+        RefundVo refundVo = new RefundVo();
+        refundVo.setRefundtype("缺课退费");
+        BigDecimal bd=new BigDecimal(record.getDeletename());
+        refundVo.setDropMoney(bd);
+        int a = refundDao.addRefund(refundVo);
+        return suspendeDao.OnUpdateRefundState(record);
     }
 }
