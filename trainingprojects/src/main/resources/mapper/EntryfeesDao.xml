@@ -376,5 +376,16 @@
         where Fees_Id = #{feesId}
     </update>
 
+    <select id="selectSumOnSheng" resultType="int" parameterType="int">
+        SELECT SUM(Receipts) FROM entryfees WHERE Fees_State=1 and TimeLiness = 0
+    </select>
+
+    <select id="selectSumOnChe" resultType="int" parameterType="int">
+        SELECT SUM(Receipts) FROM entryfees WHERE Fees_State=0 and TimeLiness = 0
+    </select>
+
+    <select id="selectSumOnAll" resultType="int" parameterType="int">
+        SELECT SUM(Receipts) FROM entryfees WHERE TimeLiness = 0
+    </select>
 </mapper>
 
