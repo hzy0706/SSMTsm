@@ -18,6 +18,18 @@ public class LoginjournalServiceImpl implements LoginjournalService {
     }
 
     @Override
+    @Transactional
+    public int deleteAllLoginjournal() {
+        return loginjournalDao.deleteAllLoginjournal();
+    }
+
+    @Override
+    @Transactional
+    public int deleteLoginjournalByTime(String time) {
+        return loginjournalDao.deleteLoginjournalByTime(time);
+    }
+
+    @Override
     public List<LoginjournalVo> selectAllLoginjournals(String value) {
         return loginjournalDao.selectAllLoginjournals(value);
     }

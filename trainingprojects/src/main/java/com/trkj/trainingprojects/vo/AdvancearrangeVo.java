@@ -20,7 +20,7 @@ public class AdvancearrangeVo {
     /**
      * 排课日期
      */
-    private Date arrangeDate;
+    private String arrangeDate;
 
     /**
      * 备注

@@ -177,10 +177,9 @@ public class AdvancearrangeController {
                 }
             }
         }
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (ArrangeFormVo arrangeFormVo:arrangeFormVoList1){
             AdvancearrangeVo advancearrangeVo = new AdvancearrangeVo();
-            advancearrangeVo.setArrangeDate(dateFormat.parse(arrangeFormVo.getDate()));
+            advancearrangeVo.setArrangeDate(arrangeFormVo.getDate());
             advancearrangeVo.setAddname(arrangeFormVo.getAddname());
             advancearrangeVo.setClassesId(arrangeFormVo.getNewClassesId());
             advancearrangeVo.setClassroomId(arrangeFormVo.getClassRoomId());

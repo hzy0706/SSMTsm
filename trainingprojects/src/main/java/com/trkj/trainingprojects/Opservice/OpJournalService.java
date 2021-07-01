@@ -10,4 +10,6 @@ public interface OpJournalService {
     public List<OpjournalVo> selectAllOpjournal();
     public List<OpjournalVo> selectAllOpjournalByType(String choice);
     List<OpjournalVo> selectAllOpjournalByType2(String choice,String type);
+    int deleteAllOpjournal();
+    int deleteOpjournalByTime(String time);
 }

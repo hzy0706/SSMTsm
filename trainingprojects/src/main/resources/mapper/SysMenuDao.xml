@@ -31,6 +31,7 @@
         #{roleCode}
       </foreach>
     </trim>
+    order by m.sort asc
   </select>
 
   <select id="findMenus" resultMap="BaseResultMap">

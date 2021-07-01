@@ -3,7 +3,7 @@
 <mapper namespace="com.trkj.trainingprojects.dao.ArrangeDao">
   <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.ArrangeVo">
     <id column="Arrange_Id" jdbcType="INTEGER" property="arrangeId" />
-    <result column="Arrange_Date" jdbcType="TIMESTAMP" property="arrangeDate" />
+    <result column="Arrange_Date" jdbcType="VARCHAR" property="arrangeDate" />
     <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="IsExamine" jdbcType="INTEGER" property="isexamine" />
     <result column="ExamineTime" jdbcType="TIMESTAMP" property="examinetime" />
@@ -79,7 +79,7 @@
       DeleteTime, Period_Id,
       Classes_Id, ClassRoom_Id, Emp_Id, 
       CourseDetails_Id)
-    values (#{arrangeDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR},
+    values (#{arrangeDate,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
       #{examinetime,jdbcType=TIMESTAMP}, #{examinename,jdbcType=VARCHAR}, #{revoketime,jdbcType=TIMESTAMP}, 
       #{revokename,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
       #{updatename,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{deletename,jdbcType=VARCHAR}, 
@@ -150,7 +150,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="arrangeDate != null">
-        #{arrangeDate,jdbcType=TIMESTAMP},
+        #{arrangeDate,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
@@ -212,7 +212,7 @@
     update arrange
     <set>
       <if test="arrangeDate != null">
-        Arrange_Date = #{arrangeDate,jdbcType=TIMESTAMP},
+        Arrange_Date = #{arrangeDate,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
         Remarks = #{remarks,jdbcType=VARCHAR},
@@ -273,7 +273,7 @@
   </update>
   <update id="updateByArrangeKey" parameterType="com.trkj.trainingprojects.vo.ArrangeVo">
     update arrange
-    set Arrange_Date = #{arrangeDate,jdbcType=TIMESTAMP},
+    set Arrange_Date = #{arrangeDate,jdbcType=VARCHAR},
       Remarks = #{remarks,jdbcType=VARCHAR},
       IsExamine = #{isexamine,jdbcType=INTEGER},
       ExamineTime = #{examinetime,jdbcType=TIMESTAMP},

@@ -19,10 +19,10 @@ public class MenuUtil {
         return one;
     }
     public static List<SysMenuVo>  assemberMenus2(List<SysMenuVo>  menus){
-        List<SysMenuVo>  one=menus.stream().filter(u -> u.getMenuPid()==0).collect(Collectors.toList());
+        List<SysMenuVo>  one=menus.stream().filter(u -> u.getMenuPid().equals(0)).collect(Collectors.toList());
         log.debug(one.toString());
         one.forEach(o->{
-            List<SysMenuVo>  two=menus.stream().filter(u -> u.getMenuPid()==o.getId()).collect(Collectors.toList());
+            List<SysMenuVo>  two=menus.stream().filter(u -> u.getMenuPid().equals(o.getId())).collect(Collectors.toList());
             two.forEach(o2->{
                 List<SysMenuVo>  three=menus.stream().filter(u -> u.getMenuPid().equals(o2.getId())).collect(Collectors.toList());
                 o2.setAsideChildren(three);
