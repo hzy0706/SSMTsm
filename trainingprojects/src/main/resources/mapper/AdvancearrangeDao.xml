@@ -3,7 +3,7 @@
 <mapper namespace="com.trkj.trainingprojects.dao.AdvancearrangeDao">
   <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.AdvancearrangeVo">
     <id column="Arrange_Id" jdbcType="INTEGER" property="arrangeId" />
-    <result column="Arrange_Date" jdbcType="TIMESTAMP" property="arrangeDate" />
+    <result column="Arrange_Date" jdbcType="VARCHAR" property="arrangeDate" />
     <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="IsExamine" jdbcType="INTEGER" property="isexamine" />
     <result column="AddName" jdbcType="VARCHAR" property="addname" />
@@ -33,7 +33,7 @@
     insert into advancearrange (Arrange_Date, Remarks,
       AddName, Period_Id, Classes_Id, 
       ClassRoom_Id, Emp_Id)
-    values (#{arrangeDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR},
+    values (#{arrangeDate,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
       #{addname,jdbcType=VARCHAR}, #{periodId,jdbcType=INTEGER}, #{classesId,jdbcType=INTEGER}, 
       #{classroomId,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER})
   </insert>
@@ -49,7 +49,7 @@
   </select>
   <update id="updateByAdvancearrangeKey" parameterType="com.trkj.trainingprojects.entity.Advancearrange">
     update advancearrange
-    set Arrange_Date = #{arrangeDate,jdbcType=TIMESTAMP},
+    set Arrange_Date = #{arrangeDate,jdbcType=VARCHAR},
       Remarks = #{remarks,jdbcType=VARCHAR},
       IsExamine = #{isexamine,jdbcType=INTEGER},
       AddName = #{addname,jdbcType=VARCHAR},

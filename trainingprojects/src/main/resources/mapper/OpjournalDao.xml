@@ -33,6 +33,15 @@
     delete from opjournal
     where OpJournal_Id = #{opjournalId,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteAllOpjournal">
+    Truncate Table opjournal
+  </delete>
+
+  <delete id="deleteOpjournalByTime">
+    delete from opjournal where OpTime &lt; #{time}
+  </delete>
+
   <insert id="insert" keyColumn="OpJournal_Id" keyProperty="opjournalId" parameterType="com.trkj.trainingprojects.entity.Opjournal" useGeneratedKeys="true">
     insert into opjournal (OpContent, Emp_Name
       )

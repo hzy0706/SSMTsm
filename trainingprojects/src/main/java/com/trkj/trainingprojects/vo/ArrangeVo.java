@@ -21,7 +21,7 @@ public class ArrangeVo {
     /**
      * 排课日期
      */
-    private Date arrangeDate;
+    private String arrangeDate;
 
     /**
      * 备注

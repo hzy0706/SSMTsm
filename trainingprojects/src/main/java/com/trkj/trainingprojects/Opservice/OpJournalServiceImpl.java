@@ -35,4 +35,16 @@ public class OpJournalServiceImpl implements OpJournalService {
     public List<OpjournalVo> selectAllOpjournalByType2(String value, String type) {
         return opjournalDao.selectAllOpjournalByType2(value,type);
     }
+
+    @Override
+    @Transactional
+    public int deleteAllOpjournal() {
+        return opjournalDao.deleteAllOpjournal();
+    }
+
+    @Override
+    @Transactional
+    public int deleteOpjournalByTime(String time) {
+        return opjournalDao.deleteOpjournalByTime(time);
+    }
 }
