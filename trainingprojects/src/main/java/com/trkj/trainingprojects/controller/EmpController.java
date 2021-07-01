@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.EmpService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.EmpVo;
+import com.trkj.trainingprojects.vo.ShiftVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,6 +22,12 @@ public class EmpController {
         List<EmpVo> list = empService.selectAllIncumbencyEmps();
         return list;
     }
+
+    @GetMapping("/selectEmpByEmpId")
+    public EmpVo selectEmpByEmpId(@RequestParam("id") Integer id){
+        return empService.selectEmpByEmpId(id);
+    }
+
     @GetMapping("/selectAllEmp")
     public PageInfo<EmpVo> selectAllUnit(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize) {
         PageHelper.startPage(currentPage,pageSize);

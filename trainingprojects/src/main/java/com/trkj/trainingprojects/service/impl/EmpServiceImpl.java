@@ -21,6 +21,11 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
+    public EmpVo selectEmpByEmpId(Integer empId) {
+        return empDao.selectEmpByEmpId(empId);
+    }
+
+    @Override
     public List<EmpVo> selectAllEmps() {
         return empDao.selectAllEmps();
     }

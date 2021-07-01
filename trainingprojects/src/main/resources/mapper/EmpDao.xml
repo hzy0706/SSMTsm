@@ -72,6 +72,14 @@
     order by e.Dept_Id asc
   </select>
 
+  <select id="selectEmpByEmpId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,d.Dept_Name
+    from emp e
+    inner join dept d on d.Dept_Id=e.Dept_Id
+    where e.Emp_Id = #{empId,jdbcType=INTEGER}
+  </select>
+
   <select id="selectAllIncumbencyEmps" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />,d.Dept_Name

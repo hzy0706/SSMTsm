@@ -9,6 +9,8 @@ public interface EmpService {
 
     EmpVo selectByEmpKey(EmpVo empVo);
 
+    EmpVo selectEmpByEmpId(Integer empId);
+
     List<EmpVo> selectAllEmps();
 
     List<EmpVo> selectAllIncumbencyEmps();
