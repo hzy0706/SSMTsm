@@ -27,4 +27,8 @@ public interface ItemBankService {
     public void addItemBank(ItemBankVo itemBankVo);
     public int updateByItemBankKey(ItemBankVo itemBankVo);
     public int deleteByItemBank(ItemBankVo itemBankVo);
+    public int selectSumOnXuan();
+    public int selectSumPan();
+    public int selectSumOnWen();
+    public int selectSumOnAll();
 }

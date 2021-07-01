@@ -32,6 +32,6 @@ public interface ExamManageDao {
 
     int deleteById(Integer examcode);
 
-    List<ExamManageVo> selectAllExamManage();
+    List<ExamManageVo> selectAllExamManage(String choice);
 }
 

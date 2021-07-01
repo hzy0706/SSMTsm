@@ -260,7 +260,7 @@
   <!--  根据id修改-->
   <update id="updateZsName" parameterType="com.trkj.trainingprojects.vo.MemorandumattachmentVo">
     update memorandumattachment
-    set ZSIsExamine = #{zsisexamine,jdbcType=INTEGER},
+    set ZSIsExamine = 1,
       ZSExamineTime = #{zsexaminetime,jdbcType=TIMESTAMP},
       ZSExamineName = #{zsexaminename,jdbcType=VARCHAR}
        where MemorandumAttachment_Id = #{memorandumattachmentId,jdbcType=INTEGER}

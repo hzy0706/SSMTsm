@@ -53,16 +53,19 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     }
 
     @Override
+    @Transactional
     public int updateByStudentStatus(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByStudentStatus(studentstatusVo);
     }
 
     @Override
+    @Transactional
     public int updateByStudentRemarks(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByStudentRemarks(studentstatusVo);
     }
 
     @Override
+    @Transactional
     public int updateByStudentStateOne(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByStudentStateOne(studentstatusVo);
     }
@@ -84,6 +87,7 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     }
 
     @Override
+    @Transactional
     public int updateByClassesIdOnState(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByClassesIdOnState(studentstatusVo);
     }
@@ -115,6 +119,7 @@ public class StudentstatusServiceImpl implements StudentstatusService {
     }
 
     @Override
+    @Transactional
     public int updateByApprovedStu(StudentstatusVo studentstatusVo) {
         return studentstatusDao.updateByApprovedStu(studentstatusVo);
     }

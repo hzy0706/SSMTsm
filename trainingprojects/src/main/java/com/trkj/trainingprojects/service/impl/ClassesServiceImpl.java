@@ -75,9 +75,10 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
-    public List<ClassesVo> selectAllClassesByNumber() {
-        return classesDao.selectAllClassesByNumber();
+    public List<ClassesVo> selectAllClassesByNumber(Integer classesId) {
+        return classesDao.selectAllClassesByNumber(classesId);
     }
+
 
     @Override
     public List<ClassesVo> selectAllClassesByState2() {
@@ -100,11 +101,13 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
+    @Transactional
     public int UpdateAddClassesStudentNumber(ClassesVo classesVo) {
         return classesDao.UpdateAddClassesStudentNumber(classesVo);
     }
 
     @Override
+    @Transactional
     public int updateCoursedetailsIdByClassesId(ClassesVo classesVo) {
         return classesDao.updateCoursedetailsIdByClassesId(classesVo);
     }

@@ -45,7 +45,7 @@
     inner join student s on s.Student_Id=d.Student_Id
     inner join classes cl on cl.Classes_Id=d.Classes_Id
     inner join course co on co.Course_Id=d.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
+    left join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
     where d.Drop_Id = #{dropId,jdbcType=INTEGER} and d.TimeLiness=0
   </select>
 
@@ -56,7 +56,7 @@
     inner join student s on s.Student_Id=d.Student_Id
     inner join classes cl on cl.Classes_Id=d.Classes_Id
     inner join course co on co.Course_Id=d.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
+    left join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
     where d.Student_Id = #{studentId,jdbcType=INTEGER} and d.TimeLiness=0
   </select>
 
@@ -67,7 +67,7 @@
     inner join student s on s.Student_Id=d.Student_Id
     inner join classes cl on cl.Classes_Id=d.Classes_Id
     inner join course co on co.Course_Id=d.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
+    left join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
     where d.Classes_Id = #{classId,jdbcType=INTEGER} and d.TimeLiness=0
   </select>
 
@@ -78,7 +78,7 @@
     inner join student s on s.Student_Id=d.Student_Id
     inner join classes cl on cl.Classes_Id=d.Classes_Id
     inner join course co on co.Course_Id=d.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
+    left join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
     where d.Course_Id = #{courseId,jdbcType=INTEGER} and d.TimeLiness=0
   </select>
 
@@ -89,7 +89,7 @@
     inner join student s on s.Student_Id=d.Student_Id
     inner join classes cl on cl.Classes_Id=d.Classes_Id
     inner join course co on co.Course_Id=d.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
+    left join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
     where d.Coursedetails_Id = #{coursedetailsId,jdbcType=INTEGER} and d.TimeLiness=0
   </select>
 
@@ -100,7 +100,7 @@
     inner join student s on s.Student_Id=d.Student_Id
     inner join classes cl on cl.Classes_Id=d.Classes_Id
     inner join course co on co.Course_Id=d.Course_Id
-    inner join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
+    left join coursedetails cou on cou.Coursedetails_Id=d.Coursedetails_Id
     where d.TimeLiness=0
   </select>
 

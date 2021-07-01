@@ -30,9 +30,9 @@ public class ExamManageController {
     private ExamManageService examManageService;
 
     @GetMapping("/selectAllExamManage")
-    public PageInfo<ExamManageVo> selectAllExamManage(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    public PageInfo<ExamManageVo> selectAllExamManage(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize, @RequestParam("value")String value){
         PageHelper.startPage(currentPage,pageSize);
-        List<ExamManageVo> list = examManageService.selectAllExamManage();
+        List<ExamManageVo> list = examManageService.selectAllExamManage("%"+value+"%");
         PageInfo<ExamManageVo> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }

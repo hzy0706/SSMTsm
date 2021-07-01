@@ -85,7 +85,8 @@
     <!--查询所有-->
     <select id="selectAllExaminationScore" resultMap="ExaminationscoreMap">
         select
-        <include refid="Base_Column_List" />,s.Student_Name,s.Student_Id
+        <include refid="Base_Column_List" />,s.Student_Name,s.Student_Id,ex.examCode,ex.ExaminationName,
+        ex.examdate,ex.totaltime,ex.totalscore
         from examinationscore ec
         inner join student s on ec.Student_Id =s.Student_Id
         left join examination e on ec.Examination_Id=e.Examination_Id
@@ -157,8 +158,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="examinationscoreId" useGeneratedKeys="true">
-        insert into tr01904.examinationscore(Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id)
-        values (#{score}, #{examinationstatus}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{examinationId})
+        insert into tr01904.examinationscore(Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id, examCode)
+        values (#{score}, #{examinationstatus}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{examinationId}, #{examCode})
     </insert>
 
     <insert id="insertBatch" keyProperty="examinationscoreId" useGeneratedKeys="true">

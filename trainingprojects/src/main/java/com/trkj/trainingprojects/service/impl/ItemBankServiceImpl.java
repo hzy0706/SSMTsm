@@ -63,4 +63,24 @@ public class ItemBankServiceImpl implements ItemBankService {
     public int deleteByItemBank(ItemBankVo itemBankVo) {
         return itemBankDao.deleteByItemBank(itemBankVo);
     }
+
+    @Override
+    public int selectSumOnXuan() {
+        return itemBankDao.selectSumOnXuan();
+    }
+
+    @Override
+    public int selectSumPan() {
+        return itemBankDao.selectSumPan();
+    }
+
+    @Override
+    public int selectSumOnWen() {
+        return itemBankDao.selectSumOnWen();
+    }
+
+    @Override
+    public int selectSumOnAll() {
+        return itemBankDao.selectSumOnAll();
+    }
 }

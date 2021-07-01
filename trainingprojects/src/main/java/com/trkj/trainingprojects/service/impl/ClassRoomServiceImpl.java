@@ -70,6 +70,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     }
 
     @Override
+    @Transactional
     public int updateClassRoomState(ClassRoomVo classRoomVo) {
         return classroomDao.updateClassRoomState(classRoomVo);
     }

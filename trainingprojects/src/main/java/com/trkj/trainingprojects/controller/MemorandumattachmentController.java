@@ -94,12 +94,11 @@ public class MemorandumattachmentController {
         }
         return AjaxResponse.success(memorandumattachmentVo);
     }
-    @PutMapping("updateZsName")
-    public AjaxResponse updateZsName(@RequestParam("id") int id,@RequestParam("name")String name,@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
-        Date data = new Date();
-        memorandumattachmentVo.setZsexaminetime(data);
-        memorandumattachmentVo.setZsexaminename(name);
-        memorandumattachmentVo.setZsisexamine(1);
+    @PutMapping("/updateZsName")
+    public AjaxResponse updateZsName(@RequestBody @Valid MemorandumattachmentVo memorandumattachmentVo){
+        log.debug(memorandumattachmentVo.toString()+"con============================");
+        memorandumattachmentVo.setZsexaminetime(new Date());
+//        memorandumattachmentVo.setZsexaminename("name");
         memorandumattachmentService.updateZsName(memorandumattachmentVo);
         return AjaxResponse.success(memorandumattachmentVo);
     }

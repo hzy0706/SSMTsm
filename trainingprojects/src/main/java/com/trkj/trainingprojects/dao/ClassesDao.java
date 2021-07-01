@@ -37,7 +37,7 @@ public interface ClassesDao {
     List<ClassesVo> selectAllClasses();
     int deleteByClasses(ClassesVo classesVo);
     List<ClassesVo> selectAllClassesByState();
-    List<ClassesVo> selectAllClassesByNumber();
+    List<ClassesVo> selectAllClassesByNumber(Integer classesId);
     List<ClassesVo> selectAllClassesByState2();
     int deleteByOpenClasses(ClassesVo classesVo);
     int UpdateAddClassesStudentNumber(ClassesVo classesVo);
