@@ -49,4 +49,22 @@ public class EmpServiceImpl implements EmpService {
        System.out.println(empVo.getEMail()+"1323123123123");
         return empDao.addEmp(empVo);
     }
+
+    @Override
+    @Transactional
+    public int updateEmp(EmpVo empVo) {
+        return empDao.updateEmp(empVo);
+    }
+
+    @Override
+    @Transactional
+    public int updateWorkersState(EmpVo empVo) {
+        return empDao.updateWorkersState(empVo);
+    }
+
+    @Override
+    @Transactional
+    public int updateWorkersStatebyid(EmpVo empVo) {
+        return empDao.updateWorkersStatebyid(empVo);
+    }
 }
