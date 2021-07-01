@@ -22,7 +22,7 @@
     m.icon, m.icon_color, m.sort, m.level, m.status
   </sql>
   <select id="findMenusByRoleCodes" parameterType="collection" resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List"/>
+    SELECT distinct <include refid="Base_Column_List"/>
     FROM sys_menu m
     LEFT JOIN sys_role_menu rm ON m.id = rm.menu_id
     LEFT JOIN sys_role r ON r.id = rm.role_id

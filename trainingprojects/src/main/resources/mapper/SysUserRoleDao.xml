@@ -15,9 +15,37 @@
     from sys_user_role
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+  <select id="selectAllRoleByEmpId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user_role
+    where user_id = #{empId,jdbcType=INTEGER}
+  </select>
+
+  <insert id="addUserRoleSelectives">
+    insert into sys_user_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        role_id,
+      user_id
+    </trim>
+    <trim prefix="values" suffixOverrides=",">
+      <foreach collection='Authors' item='Authorid' >
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="Authorid != null">
+            #{Authorid,jdbcType=INTEGER},
+          </if>
+          <if test="userId != null">
+            #{userId,jdbcType=INTEGER},
+          </if>
+        </trim>,
+      </foreach>
+    </trim>
+  </insert>
+
+  <delete id="deleteByUserIdKey" parameterType="java.lang.Integer">
     delete from sys_user_role
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{empId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.trkj.trainingprojects.vo.SysUserRoleVo" useGeneratedKeys="true">
     insert into sys_user_role (role_id, user_id)

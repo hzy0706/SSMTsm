@@ -13,7 +13,15 @@ public interface EmpService {
 
     List<EmpVo> selectAllIncumbencyEmps();
 
+    List<EmpVo> selectAllEmpByName(String value);
+
     public EmpVo findByUsername(String username);
 
     int addEmp(EmpVo empVo);
+
+    int updateEmp(EmpVo empVo);
+
+    int updateWorkersState(EmpVo empVo);
+
+    int updateWorkersStatebyid(EmpVo empVo);
 }

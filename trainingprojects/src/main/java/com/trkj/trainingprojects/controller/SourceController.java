@@ -37,6 +37,8 @@ public class SourceController {
         sourceVo.setTimeliness(0);
         Date date= new Date();
         sourceVo.setAddtime(date);
+        sourceVo.setAlready(0);
+        sourceVo.setPotential(0);
         sourceService.addSource(sourceVo);
         return AjaxResponse.success();
     }

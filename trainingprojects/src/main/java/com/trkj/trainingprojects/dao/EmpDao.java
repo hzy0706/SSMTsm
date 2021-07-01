@@ -20,6 +20,7 @@ public interface EmpDao {
      * @return
      */
     List<EmpVo> selectAllIncumbencyEmps();
+    List<EmpVo> selectAllEmpByName(String value);
 
     public EmpVo findByUsername(String username);
 
@@ -27,4 +28,10 @@ public interface EmpDao {
      *
      */
     int addEmp(EmpVo empVo);
+
+    int updateEmp(EmpVo empVo);
+
+    int updateWorkersState(EmpVo empVo);
+    int updateWorkersStatebyid(EmpVo empVo);
+
 }

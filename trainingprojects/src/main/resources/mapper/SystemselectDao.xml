@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.trainingprojects.dao.SystemselectDao">
+
+    <resultMap id="BaseResultMap" type="com.trkj.trainingprojects.vo.SystemselectVo">
+        <!--@Table systemselect-->
+        <result property="systemselectId" column="SystemSelect_Id" jdbcType="INTEGER"/>
+        <result property="readstate" column="ReadState" jdbcType="INTEGER"/>
+        <result property="readtime" column="ReadTime" jdbcType="TIMESTAMP"/>
+        <result property="systemId" column="System_Id" jdbcType="INTEGER"/>
+        <result property="empId" column="Emp_Id" jdbcType="INTEGER"/>
+        <association property="systemVo" javaType="com.trkj.trainingprojects.vo.SystemVo">
+            <result property="systemId" column="System_Id" jdbcType="INTEGER"/>
+            <result property="systemTheme" column="System_Theme" jdbcType="VARCHAR"/>
+            <result property="systemContent" column="System_Content" jdbcType="VARCHAR"/>
+            <result property="systemState" column="System_State" jdbcType="INTEGER"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="AddTime" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="publishnmae" column="PublishNmae" jdbcType="VARCHAR"/>
+            <result property="publishtime" column="PublishTime" jdbcType="TIMESTAMP"/>
+            <result property="suspendname" column="SuspendName" jdbcType="VARCHAR"/>
+            <result property="suspendtime" column="SuspendTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="systemtypeId" column="SystemType_Id" jdbcType="INTEGER"/>
+            <result property="deptId" column="Dept_Id" jdbcType="INTEGER"/>
+        </association>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="selectSystemById" resultMap="BaseResultMap">
+        select s.System_Id,sy.System_Theme,sy.System_Content,sy.addtime
+        from systemselect s left join `system` sy on s.System_Id=sy.System_Id
+        where s.Emp_Id=#{empId}
+        order by s.System_Id desc limit 3
+    </select>
+
+
+    <!--通过主键删除-->
+
+
+</mapper>
