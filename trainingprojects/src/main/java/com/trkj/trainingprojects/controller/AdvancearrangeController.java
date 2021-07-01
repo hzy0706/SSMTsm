@@ -186,16 +186,18 @@ public class AdvancearrangeController {
                                     arrangeFormVoList1.get(f).getDate().equals(date2)){
                                 //如果排课记录里面的数据有和异常数据匹配删除
                                 arrangeFormVoList1.remove(f--);
+
+                                //加一条排课记录（时段不同）
+                                for (int v=0;v<arrangeFormVoList.size();v++){
+                                    if(pid2!=arrangeFormVoList.get(v).getPeriodId()){
+                                        arrangeFormVoList1.add(arrangeFormVoList.get(v));
+                                        arrangeFormVoList.remove(v--);
+                                        break;
+                                    }
+                                }
                             }
                         }
-                        //加一条排课记录（时段不同）
-                        for (int v=0;v<arrangeFormVoList.size();v++){
-                            if(pid2!=arrangeFormVoList.get(v).getPeriodId()){
-                                arrangeFormVoList1.add(arrangeFormVoList.get(v));
-                                arrangeFormVoList.remove(v--);
-                                break;
-                            }
-                        }
+
                     }
                 }
             }
