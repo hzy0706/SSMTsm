@@ -181,7 +181,7 @@
         inner join emp e2 on cl.Teacher_Id=e2.Emp_Id
         inner join course co on cl.Course_Id=co.Course_Id
         inner join coursedetails cs on cl.CourseDetails_Id =cs.CourseDetails_Id
-        where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1) and cl.Classe_Students &lt; cl.Classe_CountStudents
+        where cl.TimeLiness = 0 and (cl.Classes_Open = 0 or cl.Classes_Open = 1) and cl.Classe_Students &lt; cl.Classe_CountStudents and Classes_Id != #{classesId}
     </select>
 
     <!--查询所有开办状态为1的班级信息（胡志远）-->
