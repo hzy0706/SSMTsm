@@ -63,25 +63,25 @@ public class ItemBankController {
         return AjaxResponse.success(list);
     }
 
-    @GetMapping("/selectSumOnXuan")
+    @GetMapping("/selectSumOnXuan1")
     public AjaxResponse selectSumOnXuan(){
         int a = itembankService.selectSumOnXuan();
         return AjaxResponse.success(a);
     }
 
-    @GetMapping("/selectSumPan")
+    @GetMapping("/selectSumPan2")
     public AjaxResponse selectSumPan(){
         int a = itembankService.selectSumPan();
         return AjaxResponse.success(a);
     }
 
-    @GetMapping("/selectSumOnWen")
+    @GetMapping("/selectSumOnWen3")
     public AjaxResponse selectSumOnWen(){
         int a = itembankService.selectSumOnWen();
         return AjaxResponse.success(a);
     }
 
-    @GetMapping("/selectSumOnAll")
+    @GetMapping("/selectSumOnAll4")
     public AjaxResponse selectSumOnAll(){
         int a = itembankService.selectSumOnAll();
         return AjaxResponse.success(a);
