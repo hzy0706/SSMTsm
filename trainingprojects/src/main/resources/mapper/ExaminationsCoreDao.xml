@@ -85,7 +85,8 @@
     <!--查询所有-->
     <select id="selectAllExaminationScore" resultMap="ExaminationscoreMap">
         select
-        <include refid="Base_Column_List" />,s.Student_Name,s.Student_Id
+        <include refid="Base_Column_List" />,s.Student_Name,s.Student_Id,ex.examCode,ex.ExaminationName,
+        ex.examdate,ex.totaltime,ex.totalscore
         from examinationscore ec
         inner join student s on ec.Student_Id =s.Student_Id
         left join examination e on ec.Examination_Id=e.Examination_Id

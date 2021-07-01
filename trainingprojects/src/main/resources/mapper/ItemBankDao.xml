@@ -216,5 +216,21 @@
         where ItemBank_Id = #{itembankId}
     </update>
 
+    <select id="selectSumOnXuan" resultType="int" parameterType="int">
+        SELECT COUNT(ItemBank_Id) FROM itembank WHERE ItemBank_Type='选择题' and TimeLiness = 0
+    </select>
+
+    <select id="selectSumPan" resultType="int" parameterType="int">
+        SELECT COUNT(ItemBank_Id) FROM itembank WHERE ItemBank_Type='判断题' and TimeLiness = 0
+    </select>
+
+    <select id="selectSumOnWen" resultType="int" parameterType="int">
+        SELECT COUNT(ItemBank_Id) FROM itembank WHERE ItemBank_Type='问答题' and TimeLiness = 0
+    </select>
+
+    <select id="selectSumOnAll" resultType="int" parameterType="int">
+        SELECT COUNT(ItemBank_Id) FROM itembank WHERE TimeLiness = 0
+    </select>
+
 </mapper>
 

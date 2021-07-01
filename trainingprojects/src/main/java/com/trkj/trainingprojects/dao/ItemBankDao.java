@@ -34,5 +34,9 @@ public interface ItemBankDao {
 
     List<ItemBankVo> selectAllItemBanks();
     int deleteByItemBank(ItemBankVo itemBankVo);
+    int selectSumOnXuan();
+    int selectSumPan();
+    int selectSumOnWen();
+    int selectSumOnAll();
 }
 
