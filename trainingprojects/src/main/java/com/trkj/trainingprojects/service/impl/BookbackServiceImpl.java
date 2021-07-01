@@ -20,8 +20,8 @@ public class BookbackServiceImpl implements BookbackService {
 
     @Override
     @Transactional
-    public int addBookback(BookbackVo record) {
-        return bookbackDao.insert(record);
+    public void addBookback(BookbackVo record) {
+        bookbackDao.insert(record);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class BookbackServiceImpl implements BookbackService {
 
     @Override
     @Transactional
-    public int updateByBookbackKeySelective(BookbackVo record) {
-        return bookbackDao.updateByBookbackKeySelective(record);
+    public void updateByBookbackKeySelective(BookbackVo record) {
+        bookbackDao.updateByBookbackKeySelective(record);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class BookbackServiceImpl implements BookbackService {
 
     @Override
     @Transactional
-    public int deleteByBookbackKey(BookbackVo record) {
-        return bookbackDao.updateByBookbackKey(record);
+    public void deleteByBookbackKey(BookbackVo record) {
+        bookbackDao.updateByBookbackKey(record);
     }
 }

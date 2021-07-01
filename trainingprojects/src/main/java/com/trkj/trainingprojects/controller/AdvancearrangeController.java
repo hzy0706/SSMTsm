@@ -27,6 +27,10 @@ public class AdvancearrangeController {
     @Resource
     private ClassesService classesService;
 
+    /**
+     * 查询所有预排课记录
+     * @return
+     */
     @GetMapping("/selectAllAdvancearrange")
     public List<AdvancearrangeVo> selectAllAdvancearrange(){
         List<AdvancearrangeVo> advancearrangeVoList = advancearrangeService.selectAllAdvancearrange();
@@ -36,6 +40,11 @@ public class AdvancearrangeController {
         return advancearrangeVoList;
     }
 
+    /**
+     * 审核预排课记录
+     * @param arrangeFormVoList
+     * @return
+     */
     @PutMapping("/appArrange")
     public AjaxResponse appArrange(@RequestBody @Valid List<AdvancearrangeVo> arrangeFormVoList){
         advancearrangeService.appArrange(arrangeFormVoList);
@@ -46,9 +55,11 @@ public class AdvancearrangeController {
     public AjaxResponse checkedArrange(@RequestBody @Valid List<ArrangeFormVo> arrangeFormVoList) throws ParseException {
         //获得选择排课的班级id
         List<ArrangeFormVo> arrangeFormVoList1 = new ArrayList<>();
-
+        //选择排课的班级集合
         List<Integer> classIds = arrangeFormVoList.get(0).getClassesId();
+        //班级对应的老师集合（一一对应）
         List<Integer> teacherIds = new ArrayList<>();
+        //所选班级一周总共需要排课的次数
         int courseCount = 0;
         for (Integer integer:classIds){
             ClassesVo classesVo = classesService.queryById(integer);
@@ -60,6 +71,7 @@ public class AdvancearrangeController {
         for (Integer integer:teacherIds){
             System.out.println(integer+"-----------老师编号------------");
         }
+        //key:教师id  value:同一个教师对应班级数组的下标
         Map<Integer,ArrayList<Integer>> saveMap=new LinkedHashMap<Integer,ArrayList<Integer>>();
         for (int i = 0; i < teacherIds.size(); i++)
         {
@@ -84,6 +96,7 @@ public class AdvancearrangeController {
                 saveMap.put(id, list);
             }
         }
+        //key:教师id  value:同一个教师对应班级编号
         Map<String,ArrayList<Integer>> saveMap2=new LinkedHashMap<String,ArrayList<Integer>>();
         for (Map.Entry entry : saveMap.entrySet()) {
             System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
@@ -102,16 +115,17 @@ public class AdvancearrangeController {
             String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
             String [] strs = str.split(",");
             for (String st:strs){
+                //判断该班级是否已经排够一周最大次数的排课数量
                 int c=1;
                 System.out.println(st+"----当前班级编号");
                 ClassesVo classesVo = classesService.queryById(Integer.parseInt(st.trim()));
+                //一周设置的排课次数
                 int count = classesVo.getManylessons();
                 System.out.println(Integer.parseInt(st.trim())+"------------一周可上课时-----------"+count);
                 int step = 1;
                 if(courseCount!=count){
                     step=arrangeFormVoList.size()/(courseCount-count);
                 }
-
                 System.out.println(step+"-----------排课时循环步长--------");
                 for (int i = 0;i<arrangeFormVoList.size();){
                     System.out.println(i+"---------------------------------当前循环id-");
@@ -123,6 +137,7 @@ public class AdvancearrangeController {
                     arrangeFormVo.setDate(stri[0].trim());
                     arrangeFormVo.setTercherId(Integer.parseInt(entry.getKey().toString()));
                     arrangeFormVo.setAddname(arrangeFormVoList.get(i).getAddname());
+                    System.out.println("-------------添加可以排课的记录------------"+arrangeFormVo.toString());
                     arrangeFormVoList1.add(arrangeFormVo);
                     arrangeFormVoList.remove(i--);
                     if(count==c){
@@ -139,6 +154,7 @@ public class AdvancearrangeController {
             System.out.println("key = " + entry.getKey() + ", value = " + entry.getValue());
             String  str = entry.getValue().toString().substring(1, entry.getValue().toString().length()-1);
             String [] strs = str.split(",");
+            //异常数据集合
             List<ArrangeFormVo> arrangeFormVoList2 = new ArrayList<>();
             for(int i=0;i<strs.length;i++){
                 for (int j=0;j<arrangeFormVoList1.size();j++){
@@ -155,28 +171,36 @@ public class AdvancearrangeController {
                 for (int k=h+1;k<arrangeFormVoList2.size();k++){
                     if(pid==arrangeFormVoList2.get(k).getPeriodId()
                             && date.equals(arrangeFormVoList2.get(k).getDate())){
+                        //异常数据的时段id
                         int pid2 = arrangeFormVoList2.get(k).getPeriodId();
+                        //异常数据的日期
                         String date2 = arrangeFormVoList2.get(k).getDate();
+                        //异常数据的班级id
                         int cls2 = arrangeFormVoList2.get(k).getNewClassesId();
+                        //异常数据的教室id
                         int clar2 = arrangeFormVoList2.get(k).getClassRoomId();
                         for (int f=0;f<arrangeFormVoList1.size();f++){
                             if(arrangeFormVoList1.get(f).getPeriodId()==pid2 &&
                                     arrangeFormVoList1.get(f).getClassRoomId()==clar2 &&
                                     arrangeFormVoList1.get(f).getNewClassesId()==cls2 &&
                                     arrangeFormVoList1.get(f).getDate().equals(date2)){
+                                //如果排课记录里面的数据有和异常数据匹配删除
                                 arrangeFormVoList1.remove(f--);
                             }
                         }
+                        //加一条排课记录（时段不同）
                         for (int v=0;v<arrangeFormVoList.size();v++){
                             if(pid2!=arrangeFormVoList.get(v).getPeriodId()){
                                 arrangeFormVoList1.add(arrangeFormVoList.get(v));
                                 arrangeFormVoList.remove(v--);
+                                break;
                             }
                         }
                     }
                 }
             }
         }
+        //最终添加预排课记录
         for (ArrangeFormVo arrangeFormVo:arrangeFormVoList1){
             AdvancearrangeVo advancearrangeVo = new AdvancearrangeVo();
             advancearrangeVo.setArrangeDate(arrangeFormVo.getDate());

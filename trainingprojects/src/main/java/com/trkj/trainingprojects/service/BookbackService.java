@@ -5,7 +5,7 @@ import com.trkj.trainingprojects.vo.BookbackVo;
 import java.util.List;
 
 public interface BookbackService {
-    int addBookback(BookbackVo record);
+    void addBookback(BookbackVo record);
 
     BookbackVo selectByBookbackKey(Integer bookbackId);
 
@@ -13,9 +13,9 @@ public interface BookbackService {
 
     List<BookbackVo> selectAllBookBackByFind(Integer status,String value);
 
-    int updateByBookbackKeySelective(BookbackVo record);
+    void updateByBookbackKeySelective(BookbackVo record);
 
     void appBookback(BookbackVo record);
 
-    int deleteByBookbackKey(BookbackVo record);
+    void deleteByBookbackKey(BookbackVo record);
 }

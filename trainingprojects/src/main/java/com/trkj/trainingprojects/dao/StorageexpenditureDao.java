@@ -8,15 +8,15 @@ import java.util.List;
 @Mapper
 public interface StorageexpenditureDao {
 
-    int addStorageexpenditure(StorageexpenditureVo record);
+    void addStorageexpenditure(StorageexpenditureVo record);
 
     StorageexpenditureVo selectByStorageexpenditureKey(Integer storageexpenditureId);
 
     List<StorageexpenditureVo> selectByStorageexpenditureApproval(Integer approval);
 
-    int updateByStorageexpenditureKeySelective(StorageexpenditureVo record);
+    void updateByStorageexpenditureKeySelective(StorageexpenditureVo record);
 
-    int updateByStorageexpenditureKey(StorageexpenditureVo record);
+    void updateByStorageexpenditureKey(StorageexpenditureVo record);
 
-    int updateByStorageexpenditureAppKey(StorageexpenditureVo record);
+    void updateByStorageexpenditureAppKey(StorageexpenditureVo record);
 }

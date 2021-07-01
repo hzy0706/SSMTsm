@@ -6,11 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 @Mapper
 public interface BookDao {
-    int deleteByBookKey(Integer bookId);
+    void deleteByBookKey(Integer bookId);
 
-    int insert(BookVo record);
+    void insert(BookVo record);
 
-    int insertSelective(BookVo record);
+    void insertSelective(BookVo record);
 
     BookVo selectByBookKey(Integer bookId);
 
@@ -21,9 +21,9 @@ public interface BookDao {
 
     List<BookVo> selectAllBooks3();
 
-    int updateByBookKeySelective(BookVo record);
+    void updateByBookKeySelective(BookVo record);
 
-    int updateByBookKey(BookVo record);
+    void updateByBookKey(BookVo record);
 
-    int updateBookCount(BookVo record);
+    void updateBookCount(BookVo record);
 }

@@ -14,14 +14,14 @@ public class ArrangeServiceImpl implements ArrangeService {
     private ArrangeDao arrangeDao;
     @Override
     @Transactional
-    public int deleteByArrangeKey(Integer arrangeId) {
-        return arrangeDao.deleteByArrangeKey(arrangeId);
+    public void deleteByArrangeKey(Integer arrangeId) {
+        arrangeDao.deleteByArrangeKey(arrangeId);
     }
 
     @Override
     @Transactional
-    public int addArrange(ArrangeVo record) {
-        return arrangeDao.addArrange(record);
+    public void addArrange(ArrangeVo record) {
+        arrangeDao.addArrange(record);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class ArrangeServiceImpl implements ArrangeService {
 
     @Override
     @Transactional
-    public int insertSelective(ArrangeVo record) {
-        return arrangeDao.insertSelective(record);
+    public void insertSelective(ArrangeVo record) {
+        arrangeDao.insertSelective(record);
     }
 
     @Override
@@ -42,13 +42,13 @@ public class ArrangeServiceImpl implements ArrangeService {
 
     @Override
     @Transactional
-    public int updateByArrangeKeySelective(ArrangeVo record) {
-        return arrangeDao.updateByArrangeKeySelective(record);
+    public void updateByArrangeKeySelective(ArrangeVo record) {
+        arrangeDao.updateByArrangeKeySelective(record);
     }
 
     @Override
     @Transactional
-    public int updateByArrangeKey(ArrangeVo record) {
-        return arrangeDao.updateByArrangeKey(record);
+    public void updateByArrangeKey(ArrangeVo record) {
+        arrangeDao.updateByArrangeKey(record);
     }
 }

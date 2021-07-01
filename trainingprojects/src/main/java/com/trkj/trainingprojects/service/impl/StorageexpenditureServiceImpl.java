@@ -30,8 +30,8 @@ public class StorageexpenditureServiceImpl implements StorageexpenditureService 
 
     @Override
     @Transactional
-    public int addStorageexpenditure(StorageexpenditureVo record) {
-        return storageexpenditureDao.addStorageexpenditure(record);
+    public void addStorageexpenditure(StorageexpenditureVo record) {
+        storageexpenditureDao.addStorageexpenditure(record);
     }
 
     @Override
@@ -46,14 +46,14 @@ public class StorageexpenditureServiceImpl implements StorageexpenditureService 
 
     @Override
     @Transactional
-    public int updateByStorageexpenditureKeySelective(StorageexpenditureVo record) {
-        return storageexpenditureDao.updateByStorageexpenditureKeySelective(record);
+    public void updateByStorageexpenditureKeySelective(StorageexpenditureVo record) {
+        storageexpenditureDao.updateByStorageexpenditureKeySelective(record);
     }
 
     @Override
     @Transactional
-    public int deleteByStorageexpenditureKey(StorageexpenditureVo record) {
-        return storageexpenditureDao.updateByStorageexpenditureKey(record);
+    public void deleteByStorageexpenditureKey(StorageexpenditureVo record) {
+        storageexpenditureDao.updateByStorageexpenditureKey(record);
     }
 
     @Override

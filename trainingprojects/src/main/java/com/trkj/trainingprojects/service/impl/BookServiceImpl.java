@@ -14,8 +14,8 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
     @Override
     @Transactional
-    public int addBook(BookVo record) {
-        return bookDao.insert(record);
+    public void addBook(BookVo record) {
+        bookDao.insert(record);
     }
 
     @Override
@@ -45,13 +45,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public int updateByBookKeySelective(BookVo record) {
-        return bookDao.updateByBookKeySelective(record);
+    public void updateByBookKeySelective(BookVo record) {
+        bookDao.updateByBookKeySelective(record);
     }
 
     @Override
     @Transactional
-    public int deleteByBookKey(BookVo record) {
-        return bookDao.updateByBookKey(record);
+    public void deleteByBookKey(BookVo record) {
+        bookDao.updateByBookKey(record);
     }
 }

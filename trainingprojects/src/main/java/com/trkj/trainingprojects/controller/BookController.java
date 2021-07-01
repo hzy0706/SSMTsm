@@ -69,7 +69,7 @@ public class BookController {
         Date date = new Date();
         bookVo.setDeletetime(date);
         bookVo.setTimeliness(1);
-        int i =bookService.deleteByBookKey(bookVo);
+        bookService.deleteByBookKey(bookVo);
         return AjaxResponse.success(bookVo);
 
     }

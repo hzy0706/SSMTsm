@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.trkj.trainingprojects.service.StorageexpenditureService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.StorageexpenditureVo;
+import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,10 @@ public class StorageexpenditureController {
     @Resource
     private StorageexpenditureService storageexpenditureService;
     @PostMapping("/addStorageexpenditure")
-    public int addStorageexpenditure(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo) {
+    public AjaxResponse addStorageexpenditure(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo) {
         storageexpenditureVo.setAddtime(new Date());
-        return storageexpenditureService.addStorageexpenditure(storageexpenditureVo);
+        storageexpenditureService.addStorageexpenditure(storageexpenditureVo);
+        return AjaxResponse.success();
     }
 
     @GetMapping("/selectByStorageexpenditureKey/{storageexpenditureId}")
@@ -37,15 +39,17 @@ public class StorageexpenditureController {
     }
 
     @PutMapping("/updateByStorageexpenditureKeySelective")
-    public int updateByStorageexpenditureKeySelective(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo) {
+    public AjaxResponse updateByStorageexpenditureKeySelective(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo) {
         storageexpenditureVo.setUpdatetime(new Date());
-        return storageexpenditureService.updateByStorageexpenditureKeySelective(storageexpenditureVo);
+        storageexpenditureService.updateByStorageexpenditureKeySelective(storageexpenditureVo);
+        return AjaxResponse.success();
     }
 
     @PutMapping("/deleteByStorageexpenditureKey")
-    public int deleteByStorageexpenditureKey(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo) {
+    public AjaxResponse deleteByStorageexpenditureKey(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo) {
         storageexpenditureVo.setDeletetime(new Date());
-        return storageexpenditureService.deleteByStorageexpenditureKey(storageexpenditureVo);
+        storageexpenditureService.deleteByStorageexpenditureKey(storageexpenditureVo);
+        return AjaxResponse.success();
     }
     @PutMapping("/appStorageexpenditure")
     public AjaxResponse appStorageexpenditure(@RequestBody @Valid StorageexpenditureVo storageexpenditureVo){

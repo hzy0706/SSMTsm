@@ -13,11 +13,11 @@ public interface BookdeliveryService {
 
     List<BookdeliveryVo> selectAllBookdeliverysByState(Integer state,String value);
 
-    int updateByBookdeliveryKeySelective(BookdeliveryVo record);
+    void updateByBookdeliveryKeySelective(BookdeliveryVo record);
 
-    int deleteByBookdeliveryKey(BookdeliveryVo record);
+    void deleteByBookdeliveryKey(BookdeliveryVo record);
 
-    int appBookdelivery(BookdeliveryVo bookdeliveryVo);
+    void appBookdelivery(BookdeliveryVo bookdeliveryVo);
 
-    int updateBookdeliveryApp(BookdeliveryVo bookdeliveryVo);
+    void updateBookdeliveryApp(BookdeliveryVo bookdeliveryVo);
 }

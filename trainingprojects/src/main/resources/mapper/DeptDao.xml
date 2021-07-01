@@ -30,6 +30,7 @@
     <include refid="Base_Column_List" />
     from dept
     where TimeLiness=0
+    order by AddTime desc
   </select>
   <delete id="deleteByDeptKey" parameterType="java.lang.Integer">
     delete from dept

@@ -7,9 +7,9 @@ import java.util.List;
 @Mapper
 public interface BookstorageDao {
 
-    int insert(BookstorageVo record);
+    void insert(BookstorageVo record);
 
-    int insertSelective(BookstorageVo record);
+    void insertSelective(BookstorageVo record);
 
     BookstorageVo selectByBookstorageKey(Integer bookstorageId);
 
@@ -17,11 +17,11 @@ public interface BookstorageDao {
 
     List<BookstorageVo> selectAllBookstoragesByStatus(Integer approval,Integer cwapproval,String value);
 
-    int updateByBookstorageKeySelective(BookstorageVo record);
+    void updateByBookstorageKeySelective(BookstorageVo record);
 
-    int appBookstorage(BookstorageVo record);
+    void appBookstorage(BookstorageVo record);
 
-    int updateByBookstorageKey(BookstorageVo record);
+    void updateByBookstorageKey(BookstorageVo record);
 
     int updateByBookstorageApp(BookstorageVo record);
 }

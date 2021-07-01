@@ -7,7 +7,7 @@ import java.util.List;
 @Mapper
 public interface BookbackDao {
 
-    int insert(BookbackVo record);
+    void insert(BookbackVo record);
 
     BookbackVo selectByBookbackKey(Integer bookbackId);
 
@@ -15,9 +15,9 @@ public interface BookbackDao {
 
     List<BookbackVo> selectAllBookBackByFind(Integer status,String value);
 
-    int updateByBookbackKeySelective(BookbackVo record);
+    void updateByBookbackKeySelective(BookbackVo record);
 
-    int appBookback(BookbackVo record);
+    void appBookback(BookbackVo record);
 
-    int updateByBookbackKey(BookbackVo record);
+    void updateByBookbackKey(BookbackVo record);
 }

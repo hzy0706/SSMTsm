@@ -59,23 +59,22 @@ public class BookdeliveryServiceImpl implements BookdeliveryService {
 
     @Override
     @Transactional
-    public int updateByBookdeliveryKeySelective(BookdeliveryVo record) {
-        return bookdeliveryDao.updateByBookdeliveryKeySelective(record);
+    public void updateByBookdeliveryKeySelective(BookdeliveryVo record) {
+        bookdeliveryDao.updateByBookdeliveryKeySelective(record);
     }
 
     @Override
     @Transactional
-    public int deleteByBookdeliveryKey(BookdeliveryVo record) {
+    public void deleteByBookdeliveryKey(BookdeliveryVo record) {
         //删除出库总表
         bookdeliveryDao.updateByBookdeliveryKey(record);
         //删除出库详细表
         deliveryddetailsDao.deleteByDeliveryddetailsKey(record.getBookdeliveryId());
-        return 0;
     }
 
     @Override
     @Transactional
-    public int appBookdelivery(BookdeliveryVo bookdeliveryVo) {
+    public void appBookdelivery(BookdeliveryVo bookdeliveryVo) {
         //审核出库总表数据
         bookdeliveryDao.appBookdelivery(bookdeliveryVo);
 
@@ -87,12 +86,11 @@ public class BookdeliveryServiceImpl implements BookdeliveryService {
         bookstockVo.setAddname(bookdeliveryVo.getAddname());
         bookstockVo.setTotalmoney(bookdeliveryVo.getTotal());
         bookstockDao.addBookstock(bookstockVo);
-        return 0;
     }
 
     @Override
     @Transactional
-    public int updateBookdeliveryApp(BookdeliveryVo bookdeliveryVo) {
-        return bookdeliveryDao.updateBookdeliveryApp(bookdeliveryVo);
+    public void updateBookdeliveryApp(BookdeliveryVo bookdeliveryVo) {
+        bookdeliveryDao.updateBookdeliveryApp(bookdeliveryVo);
     }
 }

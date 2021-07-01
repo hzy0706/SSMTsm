@@ -8,15 +8,15 @@ import java.util.List;
 @Mapper
 public interface BookstockDao {
 
-    int addBookstock(BookstockVo record);
+    void addBookstock(BookstockVo record);
 
     BookstockVo selectByBookstockKey(Integer stockId);
 
     List<BookstockVo> selectByBookstockCheckedBy(Integer checkedBy);
 
-    int updateByBookstockKeySelective(BookstockVo record);
+    void updateByBookstockKeySelective(BookstockVo record);
 
-    int updateByBookstockKey(BookstockVo record);
+    void updateByBookstockKey(BookstockVo record);
 
-    int appByBookstockKey(BookstockVo bookstockVo);
+    void appByBookstockKey(BookstockVo bookstockVo);
 }

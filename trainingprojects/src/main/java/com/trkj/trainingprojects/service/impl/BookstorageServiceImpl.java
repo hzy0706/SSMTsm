@@ -29,8 +29,8 @@ public class BookstorageServiceImpl implements BookstorageService {
 
     @Override
     @Transactional
-    public int addBookstorage(BookstorageVo record) {
-        return bookstorageDao.insert(record);
+    public void addBookstorage(BookstorageVo record) {
+        bookstorageDao.insert(record);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class BookstorageServiceImpl implements BookstorageService {
 
     @Override
     @Transactional
-    public int updateByBookstorageKeySelective(BookstorageVo record) {
-        return bookstorageDao.updateByBookstorageKeySelective(record);
+    public void updateByBookstorageKeySelective(BookstorageVo record) {
+        bookstorageDao.updateByBookstorageKeySelective(record);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class BookstorageServiceImpl implements BookstorageService {
 
     @Override
     @Transactional
-    public int deleteByBookstorageKey(BookstorageVo record) {
-        return bookstorageDao.updateByBookstorageKey(record);
+    public void deleteByBookstorageKey(BookstorageVo record) {
+        bookstorageDao.updateByBookstorageKey(record);
     }
 }

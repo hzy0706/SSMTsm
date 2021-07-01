@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface DeptService {
     List<DeptVo> selectAllDepts();
-    int addDept(DeptVo record);
-    int deleteByDeptKey(DeptVo deptVo);
+    void addDept(DeptVo record);
+    void deleteByDeptKey(DeptVo deptVo);
     DeptVo selectByDeptKey(Integer deptId);
-    int updateByDeptKeySelective(DeptVo record);
+    void updateByDeptKeySelective(DeptVo record);
 }

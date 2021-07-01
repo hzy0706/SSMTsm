@@ -5,15 +5,15 @@ import com.trkj.trainingprojects.vo.StorageexpenditureVo;
 import java.util.List;
 
 public interface StorageexpenditureService {
-    int addStorageexpenditure(StorageexpenditureVo record);
+    void addStorageexpenditure(StorageexpenditureVo record);
 
     StorageexpenditureVo selectByStorageexpenditureKey(Integer storageexpenditureId);
 
     List<StorageexpenditureVo> selectByStorageexpenditureApproval(Integer approval);
 
-    int updateByStorageexpenditureKeySelective(StorageexpenditureVo record);
+    void updateByStorageexpenditureKeySelective(StorageexpenditureVo record);
 
-    int deleteByStorageexpenditureKey(StorageexpenditureVo record);
+    void deleteByStorageexpenditureKey(StorageexpenditureVo record);
 
     void appStorageexpenditure(StorageexpenditureVo record);
 }

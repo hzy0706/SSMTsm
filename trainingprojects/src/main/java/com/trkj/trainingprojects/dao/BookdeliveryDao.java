@@ -16,11 +16,11 @@ public interface BookdeliveryDao {
 
     List<BookdeliveryVo> selectAllBookdeliverysByState(Integer Approval,Integer CWApproval,String value);
 
-    int updateByBookdeliveryKeySelective(BookdeliveryVo record);
+    void updateByBookdeliveryKeySelective(BookdeliveryVo record);
 
-    int updateByBookdeliveryKey(BookdeliveryVo record);
+    void updateByBookdeliveryKey(BookdeliveryVo record);
 
-    int appBookdelivery(BookdeliveryVo bookdeliveryVo);
+    void appBookdelivery(BookdeliveryVo bookdeliveryVo);
 
-    int updateBookdeliveryApp(BookdeliveryVo bookdeliveryVo);
+    void updateBookdeliveryApp(BookdeliveryVo bookdeliveryVo);
 }

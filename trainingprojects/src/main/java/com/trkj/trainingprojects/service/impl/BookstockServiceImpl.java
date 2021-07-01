@@ -26,8 +26,8 @@ public class BookstockServiceImpl implements BookstockService {
 
     @Override
     @Transactional
-    public int addBookstock(BookstockVo record) {
-        return bookstockDao.addBookstock(record);
+    public void addBookstock(BookstockVo record) {
+        bookstockDao.addBookstock(record);
     }
 
     @Override
@@ -42,14 +42,14 @@ public class BookstockServiceImpl implements BookstockService {
 
     @Override
     @Transactional
-    public int updateByBookstockKeySelective(BookstockVo record) {
-        return bookstockDao.updateByBookstockKeySelective(record);
+    public void updateByBookstockKeySelective(BookstockVo record) {
+        bookstockDao.updateByBookstockKeySelective(record);
     }
 
     @Override
     @Transactional
-    public int deleteByBookstockKey(BookstockVo record) {
-        return bookstockDao.updateByBookstockKey(record);
+    public void deleteByBookstockKey(BookstockVo record) {
+        bookstockDao.updateByBookstockKey(record);
     }
 
     @Override

@@ -6,17 +6,17 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 @Mapper
 public interface DeptDao {
-    int deleteByDeptKey(Integer deptId);
+    void deleteByDeptKey(Integer deptId);
 
-    int insert(DeptVo record);
+    void insert(DeptVo record);
 
-    int insertSelective(DeptVo record);
+    void insertSelective(DeptVo record);
 
     List<DeptVo> selectAllDepts();
 
     DeptVo selectByDeptKey(Integer deptId);
 
-    int updateByDeptKeySelective(DeptVo record);
+    void updateByDeptKeySelective(DeptVo record);
 
-    int updateByDeptKey(DeptVo deptVo);
+    void updateByDeptKey(DeptVo deptVo);
 }

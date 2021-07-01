@@ -54,6 +54,7 @@
     inner join book b on b.Book_Id=cd.Book_Id
     inner join classes c on c.Classes_Id=cd.Classes_Id
     where cd.TimeLiness=0 and cd.Approval=#{param1} and (e.Emp_Name like #{param2} or b.BookName like #{param2} or c.Classes_Name like #{param2})
+    order by cd.DeliveryTime desc
   </select>
   <insert id="addClassesdelivery" keyColumn="ClassesDelivery_Id" keyProperty="classesdeliveryId" parameterType="com.trkj.trainingprojects.vo.ClassesdeliveryVo" useGeneratedKeys="true">
     insert into classesdelivery (SaleNumber, Total,

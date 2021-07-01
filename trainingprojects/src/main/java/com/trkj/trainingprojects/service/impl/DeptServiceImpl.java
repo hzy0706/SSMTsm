@@ -20,14 +20,14 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     @Transactional
-    public int addDept(DeptVo deptVo) {
-        return deptDao.insert(deptVo);
+    public void addDept(DeptVo deptVo) {
+        deptDao.insert(deptVo);
     }
 
     @Override
     @Transactional
-    public int deleteByDeptKey(DeptVo deptVo) {
-        return deptDao.updateByDeptKey(deptVo);
+    public void deleteByDeptKey(DeptVo deptVo) {
+        deptDao.updateByDeptKey(deptVo);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     @Transactional
-    public int updateByDeptKeySelective(DeptVo deptVo) {
-        return deptDao.updateByDeptKeySelective(deptVo);
+    public void updateByDeptKeySelective(DeptVo deptVo) {
+        deptDao.updateByDeptKeySelective(deptVo);
     }
 }
