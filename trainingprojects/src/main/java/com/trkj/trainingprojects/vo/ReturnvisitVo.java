@@ -25,6 +25,8 @@ public class ReturnvisitVo {
     private String returnvisitback;
     public String addname;
     private Date addtime;
+    public String updatename;
+    private Date updatetime;
     public String deletename;
     private Date deletetime;
     private Integer timeliness;

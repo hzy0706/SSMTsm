@@ -21,7 +21,7 @@ public class ExamManage implements Serializable {
     /**
      * 考试编号
      */
-    private Integer examcode;
+    private Integer examCode;
     /**
      * 考试名称
      */

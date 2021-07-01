@@ -13,6 +13,8 @@ public interface EmpDao {
 
     EmpVo selectByEmpKey(EmpVo empVo);
 
+    EmpVo selectEmpByEmpId(Integer empId);
+
     List<EmpVo> selectAllEmps();
 
     /**
@@ -28,4 +30,10 @@ public interface EmpDao {
      *
      */
     int addEmp(EmpVo empVo);
+
+    int updateEmp(EmpVo empVo);
+
+    int updateWorkersState(EmpVo empVo);
+    int updateWorkersStatebyid(EmpVo empVo);
+
 }

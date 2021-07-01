@@ -118,7 +118,7 @@
     </set>
     where DailLog_Id = #{daillogId,jdbcType=INTEGER}
   </update>
-  <update id="updateByDaillogKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
+  <update id="deleteByDaillogKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
     update daillog
     set
       DeleteName = #{deletename,jdbcType=VARCHAR},
@@ -126,14 +126,14 @@
       TimeLiness = #{timeliness,jdbcType=INTEGER}
     where DailLog_Id = #{daillogId,jdbcType=INTEGER}
   </update>
-  <update id="updateStateByKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
+  <update id="OnUpdateStateByKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
     update daillog
     set
       State = #{state,jdbcType=INTEGER},
       EndTime = #{endtime,jdbcType=TIMESTAMP}
     where DailLog_Id = #{daillogId,jdbcType=INTEGER}
   </update>
-  <update id="updateConductTypeByKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
+  <update id="OnUpdateConductTypeByKey" parameterType="com.trkj.trainingprojects.vo.DaillogVo">
     update daillog
     set
       ConductType = #{conductType,jdbcType=INTEGER},

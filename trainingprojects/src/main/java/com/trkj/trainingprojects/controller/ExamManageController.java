@@ -39,8 +39,8 @@ public class ExamManageController {
 
     @PostMapping("/addExamManage")
     public AjaxResponse addExamManage(@RequestBody @Valid ExamManageVo examManageVo){
-        Date date = new Date();
-        examManageVo.setAddtime(date);
+        /*Date date = new Date();
+        examManageVo.setAddtime(date);*/
         examManageService.addExamManage(examManageVo);
         return AjaxResponse.success(examManageVo);
     }

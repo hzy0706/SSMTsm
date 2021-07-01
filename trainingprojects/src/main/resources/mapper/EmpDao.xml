@@ -72,6 +72,14 @@
     order by e.Dept_Id asc
   </select>
 
+  <select id="selectEmpByEmpId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,d.Dept_Name
+    from emp e
+    inner join dept d on d.Dept_Id=e.Dept_Id
+    where e.Emp_Id = #{empId,jdbcType=INTEGER}
+  </select>
+
   <select id="selectAllIncumbencyEmps" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />,d.Dept_Name
@@ -85,4 +93,32 @@
     Birthday,Remarks,Address,Education,Graduate,AddName,Dept_Id)
     values(#{jobnumber},#{empName},#{empSex},#{empPhone},#{eMail},#{birthday},#{remarks},#{address},#{education},#{graduate},#{addname},#{deptId})
   </insert>
+
+  <update id="updateEmp">
+    update emp
+       set
+          JobNumber=#{jobnumber},
+          Emp_Name=#{empName},
+          Emp_Sex=#{empSex},
+          Emp_Phone=#{empPhone},
+          E_mail=#{eMail},
+          Birthday=#{birthday},
+          Remarks=#{remarks},
+          Address=#{address},
+          Education=#{education},
+          Graduate=#{graduate},
+          UpdateName = #{updatename},
+          UpdateTime = CURRENT_TIMESTAMP,
+          Dept_Id=#{deptId}
+       where Emp_Id=#{empId}
+  </update>
+  <update id="updateWorkersState">
+         update emp set SeparationTime=CURRENT_TIMESTAMP,SeparationName=#{separationname},WorkersState=1
+         where Emp_Id=#{empId}
+    </update>
+  <update id="updateWorkersStatebyid">
+         update emp set UpdateName = #{updatename},
+          UpdateTime = CURRENT_TIMESTAMP,WorkersState=0
+         where Emp_Id=#{empId}
+    </update>
 </mapper>
