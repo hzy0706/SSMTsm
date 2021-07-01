@@ -192,7 +192,12 @@
       <if test="addtime != null">
         AddTime = #{addtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="deletename != null">
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>      <if test="deletename != null">
         DeleteName = #{deletename,jdbcType=VARCHAR},
       </if>
       <if test="deletetime != null">
