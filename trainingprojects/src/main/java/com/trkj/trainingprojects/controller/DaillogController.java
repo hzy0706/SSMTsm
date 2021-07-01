@@ -24,8 +24,8 @@ public class DaillogController {
        return AjaxResponse.success(daillogVo);
    }
 
-    @GetMapping("/selectByDaillogKey/{id}")
-    public DaillogVo selectByDaillogKey(@PathVariable("id") Integer id){
+    @GetMapping("/selectByDaillogKey")
+    public DaillogVo selectByDaillogKey(@RequestParam("id") Integer id){
         return daillogService.selectByDaillogKey(id);
     }
 
@@ -45,8 +45,8 @@ public class DaillogController {
         return AjaxResponse.success(daillogVo);
     }
 
-    @PutMapping("/deleteByDaillogKey/{id}/{deleteName}")
-    public AjaxResponse deleteByDaillogKey(@PathVariable("id") String id,@PathVariable("deleteName") String deleteName){
+    @PutMapping("/deleteByDaillogKey")
+    public AjaxResponse deleteByDaillogKey(@RequestParam("id") String id,@RequestParam("deleteName") String deleteName){
         Date date = new Date();
         String[] ids= id.split(",");
         for (String s:ids){
@@ -60,17 +60,17 @@ public class DaillogController {
         return AjaxResponse.success(ids);
     }
 
-    @PutMapping("/updateStateByKey")
-    public AjaxResponse updateStateByKey(@RequestBody @Valid DaillogVo daillogVo){
+    @PutMapping("/OnUpdateStateByKey")
+    public AjaxResponse OnUpdateStateByKey(@RequestBody @Valid DaillogVo daillogVo){
        daillogVo.setEndtime(new Date());
-        daillogService.updateStateByKey(daillogVo);
+        daillogService.OnUpdateStateByKey(daillogVo);
         return AjaxResponse.success(daillogVo);
     }
 
-    @PutMapping("/updateConductTypeByKey")
-    public AjaxResponse updateConductTypeByKey(@RequestBody @Valid DaillogVo daillogVo){
+    @PutMapping("/OnUpdateConductTypeByKey")
+    public AjaxResponse OnUpdateConductTypeByKey(@RequestBody @Valid DaillogVo daillogVo){
         daillogVo.setBegintime(new Date());
-        daillogService.updateConductTypeByKey(daillogVo);
+        daillogService.OnUpdateConductTypeByKey(daillogVo);
         return AjaxResponse.success(daillogVo);
     }
 }

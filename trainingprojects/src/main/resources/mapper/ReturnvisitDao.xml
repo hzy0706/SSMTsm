@@ -88,12 +88,12 @@
   </delete>
   <insert id="insert" keyColumn="ReturnVisit_Id" keyProperty="returnvisitId" parameterType="com.trkj.trainingprojects.entity.Returnvisit" useGeneratedKeys="true">
     insert into returnVisit (ReturnVisitMode, ReturnVisitDate,
-      ReturnContent, ReturnVisitBack, AddName, 
+      ReturnContent, ReturnVisitBack, AddName,
       DeleteName, DeleteTime,
       Register_Id, Emp_Id
       )
     values (#{returnvisitmode,jdbcType=VARCHAR}, #{returnvisitdate,jdbcType=TIMESTAMP}, 
-      #{returncontent,jdbcType=VARCHAR}, #{returnvisitback,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR}, 
+      #{returncontent,jdbcType=VARCHAR}, #{returnvisitback,jdbcType=VARCHAR}, #{addname,jdbcType=VARCHAR},
       #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP},
       #{registerId,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}
       )
@@ -192,7 +192,12 @@
       <if test="addtime != null">
         AddTime = #{addtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="deletename != null">
+      <if test="updatename != null">
+        UpdateName = #{updatename,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>      <if test="deletename != null">
         DeleteName = #{deletename,jdbcType=VARCHAR},
       </if>
       <if test="deletetime != null">

@@ -33,19 +33,19 @@ public class DaillogServiceImpl implements DaillogService {
     @Override
     @Transactional
     public int deleteByDaillogKey(DaillogVo record) {
-        return daillogDao.updateByDaillogKey(record);
+        return daillogDao.deleteByDaillogKey(record);
     }
 
     @Override
     @Transactional
-    public int updateStateByKey(DaillogVo record) {
-        return daillogDao.updateStateByKey(record);
+    public int OnUpdateStateByKey(DaillogVo record) {
+        return daillogDao.OnUpdateStateByKey(record);
     }
 
     @Override
     @Transactional
-    public int updateConductTypeByKey(DaillogVo record) {
-        return daillogDao.updateConductTypeByKey(record);
+    public int OnUpdateConductTypeByKey(DaillogVo record) {
+        return daillogDao.OnUpdateConductTypeByKey(record);
     }
 
     @Override

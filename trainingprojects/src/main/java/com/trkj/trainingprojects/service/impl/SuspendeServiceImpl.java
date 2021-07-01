@@ -112,6 +112,7 @@ public class SuspendeServiceImpl implements SuspendeService {
     @Override
     public int OnUpdateBackState(SuspendeVo record) {
         SuspendeVo suspendeVo = suspendeDao.selectBySuspendeId(record.getSuspendeId());
+        suspendeDao.OnUpdateBackState(record);
         BackVo backVo = new BackVo();
         backVo.setAbsent(1);
         backVo.setClassalreadyon(20);
@@ -121,17 +122,18 @@ public class SuspendeServiceImpl implements SuspendeService {
         backVo.setSuspendeId(record.getSuspendeId());
         backVo.setClassesId(record.getClassesId());
         int a = backDao.addBack(backVo);
-        return suspendeDao.OnUpdateBackState(record);
+        return 0;
     }
 
     @Override
     public int OnUpdateRefundState(SuspendeVo record) {
         SuspendeVo suspendeVo = suspendeDao.selectBySuspendeId(record.getSuspendeId());
+        suspendeDao.OnUpdateRefundState(record);
         RefundVo refundVo = new RefundVo();
         refundVo.setRefundtype("缺课退费");
         BigDecimal bd=new BigDecimal(record.getDeletename());
         refundVo.setDropMoney(bd);
         int a = refundDao.addRefund(refundVo);
-        return suspendeDao.OnUpdateRefundState(record);
+        return 0;
     }
 }

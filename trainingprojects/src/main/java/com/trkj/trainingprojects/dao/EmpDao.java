@@ -13,6 +13,8 @@ public interface EmpDao {
 
     EmpVo selectByEmpKey(EmpVo empVo);
 
+    EmpVo selectEmpByEmpId(Integer empId);
+
     List<EmpVo> selectAllEmps();
 
     /**
