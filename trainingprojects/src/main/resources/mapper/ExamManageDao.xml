@@ -166,9 +166,9 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="examcode" useGeneratedKeys="true">
-        insert into tr01904.exam_manage(ExaminationName, description, paperId, examDate, totalTime, totalScore, studenttype, tips, Session_Id, Semester_Id, Classes_Id, CourseDetails_Id)
-        values (#{examinationname}, #{description}, #{paperid}, #{examdate}, #{totaltime}, #{totalscore}, #{studenttype}, #{tips}, #{sessionId}, #{semesterId}, #{classesId}, #{coursedetailsId})
+    <insert id="insert" keyProperty="examCode" useGeneratedKeys="true" keyColumn="examCode">
+        insert into tr01904.exam_manage(ExaminationName, description, paperId, examDate, totalTime, totalScore, studenttype, tips, AddName, ADDTIME, Session_Id, Semester_Id, Classes_Id, CourseDetails_Id)
+        values (#{examinationname}, #{description}, (select max(paperId)+1 from exam_manage paperId), #{examdate}, #{totaltime}, #{totalscore}, #{studenttype}, #{tips}, #{addname}, #{addtime}, #{sessionId}, #{semesterId}, #{classesId}, #{coursedetailsId})
     </insert>
 
     <insert id="insertBatch" keyProperty="examcode" useGeneratedKeys="true">

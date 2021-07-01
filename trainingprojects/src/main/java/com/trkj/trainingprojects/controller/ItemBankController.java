@@ -57,4 +57,10 @@ public class ItemBankController {
         return AjaxResponse.success(itemBankVo);
     }
 
+    @GetMapping("/selectAllItemBankList")
+    public AjaxResponse selectAllItemBankList(){
+        List<ItemBankVo> list = itembankService.selectAllItemBanks();
+        return AjaxResponse.success(list);
+    }
+
 }

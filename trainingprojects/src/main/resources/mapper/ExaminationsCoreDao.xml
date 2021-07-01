@@ -52,6 +52,28 @@
             <result property="sourceId" column="Source_Id" jdbcType="INTEGER"/>
             <result property="registerId" column="Register_Id" jdbcType="INTEGER"/>
         </association>
+        <association property="examManageVo" javaType="com.trkj.trainingprojects.vo.ExamManageVo">
+            <id property="examCode" column="examCode" jdbcType="INTEGER"/>
+            <result property="examinationname" column="ExaminationName" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="paperid" column="paperId" jdbcType="INTEGER"/>
+            <result property="examdate" column="examDate" jdbcType="TIMESTAMP"/>
+            <result property="totaltime" column="totalTime" jdbcType="INTEGER"/>
+            <result property="totalscore" column="totalScore" jdbcType="INTEGER"/>
+            <result property="studenttype" column="studenttype" jdbcType="VARCHAR"/>
+            <result property="tips" column="tips" jdbcType="VARCHAR"/>
+            <result property="addname" column="AddName" jdbcType="VARCHAR"/>
+            <result property="addtime" column="ADDTIME" jdbcType="TIMESTAMP"/>
+            <result property="updatename" column="UpdateName" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="UpdateTime" jdbcType="TIMESTAMP"/>
+            <result property="deletename" column="DeleteName" jdbcType="VARCHAR"/>
+            <result property="deletetime" column="DeleteTime" jdbcType="TIMESTAMP"/>
+            <result property="timeliness" column="TimeLiness" jdbcType="INTEGER"/>
+            <result property="sessionId" column="Session_Id" jdbcType="INTEGER"/>
+            <result property="semesterId" column="Semester_Id" jdbcType="INTEGER"/>
+            <result property="classesId" column="Classes_Id" jdbcType="INTEGER"/>
+            <result property="coursedetailsId" column="CourseDetails_Id" jdbcType="INTEGER"/>
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -63,11 +85,11 @@
     <!--查询所有-->
     <select id="selectAllExaminationScore" resultMap="ExaminationscoreMap">
         select
-        <include refid="Base_Column_List" />,s.Student_Name,s.Student_Id,
-        e.ExaminationName,e.Average,e.HighestScore,e.LowestScore
+        <include refid="Base_Column_List" />,s.Student_Name,s.Student_Id
         from examinationscore ec
         inner join student s on ec.Student_Id =s.Student_Id
-        inner join examination e on ec.Examination_Id=e.Examination_Id
+        left join examination e on ec.Examination_Id=e.Examination_Id
+        inner join exam_manage ex on ec.examCode=ex.examCode
         where ec.TimeLiness = 0
     </select>
 
