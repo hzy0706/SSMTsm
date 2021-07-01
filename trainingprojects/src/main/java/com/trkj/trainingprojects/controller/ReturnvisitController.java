@@ -45,6 +45,8 @@ public class ReturnvisitController {
     @PutMapping("/updateReturnvisit")
     public AjaxResponse updateReturnvisit(@RequestBody @Valid ReturnvisitVo returnvisitVo){
         System.out.println("=dx============================="+returnvisitVo);
+        Date date=new Date();
+        returnvisitVo.setUpdatetime(date);
         returnvisitVo.setTimeliness(0);
         returnvisitService.updateReturnvisit(returnvisitVo);
         return AjaxResponse.success(returnvisitVo);

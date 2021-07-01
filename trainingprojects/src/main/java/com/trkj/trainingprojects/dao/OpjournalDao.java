@@ -10,6 +10,10 @@ import java.util.List;
 public interface OpjournalDao {
     int deleteByPrimaryKey(Integer opjournalId);
 
+    int deleteAllOpjournal();
+
+    int deleteOpjournalByTime(String time);
+
     int insert(Opjournal record);
 
     int insertSelective(Opjournal record);

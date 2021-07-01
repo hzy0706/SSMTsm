@@ -97,7 +97,8 @@
         inner join semester sm on ex.Semester_Id = sm.Semester_Id
         inner join classes cl on ex.Classes_Id = cl.Classes_Id
         inner join coursedetails co on ex.CourseDetails_Id = co.CourseDetails_Id
-        where ex.TimeLiness = 0 order by ex.examCode DESC
+        where ex.TimeLiness = 0 and ex.ExaminationName like #{choice}
+        order by ex.examCode DESC
     </select>
 
     <!--查询单个-->

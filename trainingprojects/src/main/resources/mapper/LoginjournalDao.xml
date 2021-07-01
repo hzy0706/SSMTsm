@@ -12,6 +12,15 @@
   <sql id="Base_Column_List">
     l.LoginJournal_Id, l.LoginTime, l.Emp_Id
   </sql>
+
+  <delete id="deleteAllLoginjournal">
+    Truncate Table loginjournal
+  </delete>
+
+  <delete id="deleteLoginjournalByTime">
+    delete from loginjournal where LoginTime &lt; #{time}
+  </delete>
+
   <select id="selectAllLoginjournals" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />,e.Emp_Name
