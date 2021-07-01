@@ -63,11 +63,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public int updateByStudent(StudentVo studentVo) {
         return studentDao.updateByStudent(studentVo);
     }
 
     @Override
+    @Transactional
     public int updateByStudentKey(StudentVo studentVo) {
         return studentDao.updateByStudentKey(studentVo);
     }
@@ -97,6 +99,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public int updateByStudentImg(StudentVo studentVo) {
         return studentDao.updateByStudentImg(studentVo);
     }

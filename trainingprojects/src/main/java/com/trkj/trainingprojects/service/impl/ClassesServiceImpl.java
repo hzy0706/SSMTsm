@@ -101,11 +101,13 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
+    @Transactional
     public int UpdateAddClassesStudentNumber(ClassesVo classesVo) {
         return classesDao.UpdateAddClassesStudentNumber(classesVo);
     }
 
     @Override
+    @Transactional
     public int updateCoursedetailsIdByClassesId(ClassesVo classesVo) {
         return classesDao.updateCoursedetailsIdByClassesId(classesVo);
     }

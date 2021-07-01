@@ -6,6 +6,7 @@ import com.trkj.trainingprojects.service.AwardsService;
 import com.trkj.trainingprojects.vo.AwardsVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,6 +28,7 @@ public class AwardsServiceImpl implements AwardsService {
     }
 
     @Override
+    @Transactional
     public Awards insert(Awards awards) {
         return null;
     }
@@ -47,16 +49,19 @@ public class AwardsServiceImpl implements AwardsService {
     }
 
     @Override
+    @Transactional
     public void addAwards(AwardsVo awardsVo) {
         awardsDao.insert(awardsVo);
     }
 
     @Override
+    @Transactional
     public int updateByAwardsKey(AwardsVo awardsVo) {
         return awardsDao.updateByAwardsKey(awardsVo);
     }
 
     @Override
+    @Transactional
     public int deleteByAwards(AwardsVo awardsVo) {
         return awardsDao.deleteByAwards(awardsVo);
     }

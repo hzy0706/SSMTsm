@@ -65,6 +65,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public int updateByCoursePel(CourseVo courseVo) {
         return courseDao.updateByCoursePel(courseVo);
     }
@@ -75,11 +76,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public int updateByCourseHouse(CourseVo courseVo) {
         return courseDao.updateByCourseHouse(courseVo);
     }
 
     @Override
+    @Transactional
     public int updateByCourseHouse2(CourseVo courseVo) {
         return courseDao.updateByCourseHouse2(courseVo);
     }
@@ -90,6 +93,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public int updateByCourseHouse3(int courseid) {
         return courseDao.updateByCourseHouse3(courseid);
     }
