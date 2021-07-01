@@ -48,8 +48,8 @@ public class ExamManageServiceImpl implements ExamManageService {
     }
 
     @Override
-    public List<ExamManageVo> selectAllExamManage() {
-        return examManageDao.selectAllExamManage();
+    public List<ExamManageVo> selectAllExamManage(String choice) {
+        return examManageDao.selectAllExamManage(choice);
     }
 
     @Override
