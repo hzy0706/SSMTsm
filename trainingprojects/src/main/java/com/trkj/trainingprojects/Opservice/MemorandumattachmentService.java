@@ -18,7 +18,7 @@ public interface MemorandumattachmentService {
     //撤销审核
     int updateJwChName(MemorandumattachmentVo memorandumattachmentVo);
 
-    public int updateZsName(MemorandumattachmentVo memorandumattachmentVo);
+    MemorandumattachmentVo updateZsName(MemorandumattachmentVo memorandumattachmentVo);
     //撤销审核
     public int updateZsChName(MemorandumattachmentVo memorandumattachmentVo);
 

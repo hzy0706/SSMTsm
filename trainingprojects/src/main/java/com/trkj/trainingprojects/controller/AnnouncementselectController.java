@@ -37,7 +37,6 @@ public class AnnouncementselectController {
     public List<AnnouncementselectVo> selectByEmpId(int empId){
         System.out.println(empId+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
        List<AnnouncementselectVo> list=announcementselectService.selectByEmpId(empId);
-
        return list;
     }
 }

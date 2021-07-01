@@ -40,7 +40,7 @@
 
 
     <!--新增所有列-->
-    <insert id="addOther" keyProperty="otherId" useGeneratedKeys="true">
+    <insert id="addOther">
         insert into other(Other_Name, Other_Purpose, Other_time, Other_Money, Other_Mode, Other_Remarks, Unit_Id)
         values (#{otherName}, #{otherPurpose}, #{otherTime}, #{otherMoney}, #{otherMode}, #{otherRemarks}, #{unitId})
     </insert>
