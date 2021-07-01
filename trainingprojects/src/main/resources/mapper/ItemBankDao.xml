@@ -225,7 +225,7 @@
     </select>
 
     <select id="selectSumOnWen" resultType="int" parameterType="int">
-        SELECT COUNT(ItemBank_Id) FROM itembank WHERE ItemBank_Type='问答题' and TimeLiness = 0
+        SELECT COUNT(ItemBank_Id) FROM itembank WHERE ItemBank_Type='填空题' and TimeLiness = 0
     </select>
 
     <select id="selectSumOnAll" resultType="int" parameterType="int">
