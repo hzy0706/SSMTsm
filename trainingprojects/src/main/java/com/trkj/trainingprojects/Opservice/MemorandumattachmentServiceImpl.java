@@ -2,6 +2,7 @@ package com.trkj.trainingprojects.Opservice;
 
 import com.trkj.trainingprojects.dao.MemorandumattachmentDao;
 import com.trkj.trainingprojects.vo.MemorandumattachmentVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Slf4j
 public class MemorandumattachmentServiceImpl implements MemorandumattachmentService {
     @Resource
     private MemorandumattachmentDao memorandumattachmentDao;
@@ -52,8 +54,10 @@ public class MemorandumattachmentServiceImpl implements MemorandumattachmentServ
     }
     @Override
     @Transactional
-    public int updateZsName(MemorandumattachmentVo memorandumattachmentVo) {
-        return memorandumattachmentDao.updateZsName(memorandumattachmentVo);
+    public MemorandumattachmentVo updateZsName(MemorandumattachmentVo memorandumattachmentVo) {
+        log.debug(memorandumattachmentVo.toString()+"impi==========================");
+        memorandumattachmentDao.updateZsName(memorandumattachmentVo);
+        return memorandumattachmentVo;
     }
     //    撤销审核
     @Override
