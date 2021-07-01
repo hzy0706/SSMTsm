@@ -36,6 +36,8 @@ public class ExaminationsCoreController {
 
     @PostMapping("/addExaminationScore")
     public AjaxResponse addExaminationScore(@RequestBody @Valid ExaminationScoreVo examinationScoreVo){
+        Date date = new Date();
+        examinationScoreVo.setAddtime(date);
         examinationscoreService.addExaminationScore(examinationScoreVo);
         return AjaxResponse.success(examinationScoreVo);
     }

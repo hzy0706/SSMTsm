@@ -157,8 +157,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="examinationscoreId" useGeneratedKeys="true">
-        insert into tr01904.examinationscore(Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id)
-        values (#{score}, #{examinationstatus}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{examinationId})
+        insert into tr01904.examinationscore(Score, ExaminationStatus, AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, Student_Id, Examination_Id, examCode)
+        values (#{score}, #{examinationstatus}, #{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{studentId}, #{examinationId}, #{examCode})
     </insert>
 
     <insert id="insertBatch" keyProperty="examinationscoreId" useGeneratedKeys="true">
