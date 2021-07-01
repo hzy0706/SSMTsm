@@ -224,8 +224,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="examinationcId" useGeneratedKeys="true">
-        insert into tr01904.examinationcontent(AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, ItemBank_Id, Examination_Id)
-        values (#{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{itembankId}, #{examinationId})
+        insert into tr01904.examinationcontent(AddName, ADDTIME, UpdateName, UpdateTime, DeleteName, DeleteTime, TimeLiness, ItemBank_Id, Examination_Id, examCode)
+        values (#{addname}, #{addtime}, #{updatename}, #{updatetime}, #{deletename}, #{deletetime}, #{timeliness}, #{itembankId}, #{examinationId}, #{examCode})
     </insert>
 
     <insert id="insertBatch" keyProperty="examinationcId" useGeneratedKeys="true">

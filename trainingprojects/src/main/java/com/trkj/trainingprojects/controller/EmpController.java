@@ -6,6 +6,7 @@ import com.trkj.trainingprojects.service.EmpService;
 import com.trkj.trainingprojects.vo.AjaxResponse;
 import com.trkj.trainingprojects.vo.EmpVo;
 import com.trkj.trainingprojects.vo.ShiftVo;
+import com.trkj.trainingprojects.vo.UnitVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -51,4 +52,19 @@ public class EmpController {
         return AjaxResponse.success(empVo);
     }
 
+    @PutMapping("/updateEmpById")
+    public  AjaxResponse updateEmp(@RequestBody @Valid EmpVo empVo){
+        empService.updateEmp(empVo);
+        return AjaxResponse.success(empVo);
+    }
+    @PutMapping("/updateWorkersState")
+    public  AjaxResponse updateWorkersState(@RequestBody @Valid EmpVo empVo){
+        empService.updateWorkersState(empVo);
+        return AjaxResponse.success(empVo);
+    }
+    @PutMapping("/updateWorkersStatebyid")
+    public  AjaxResponse updateWorkersStatebyid(@RequestBody @Valid EmpVo empVo){
+        empService.updateWorkersStatebyid(empVo);
+        return AjaxResponse.success(empVo);
+    }
 }

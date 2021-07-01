@@ -26,8 +26,8 @@ public class ExaminationsCoreController {
     @Resource
     private ExaminationsCoreService examinationscoreService;
 
-    @GetMapping("/examinationscoreService")
-    public PageInfo<ExaminationScoreVo> examinationscoreService(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
+    @GetMapping("/selectAllExaminationScore")
+    public PageInfo<ExaminationScoreVo> selectAllExaminationScore(@RequestParam("currentPage")int currentPage, @RequestParam("pagesize")int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<ExaminationScoreVo> list = examinationscoreService.selectAllExaminationScore();
         PageInfo<ExaminationScoreVo> pageInfo = new PageInfo<>(list);
